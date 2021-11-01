@@ -1,0 +1,168 @@
+{
+"helloWorld": "مرحبا يا عالم",
+
+
+  "search": "بحث",
+  "cart": "عربة التسوق",
+  "profile": "الملف الشخصي",
+
+  "home": "الصفحة الرئيسية",
+  "login": "تسجيل الدخول",
+  "all_categories": "جميع الفئات",
+  "notification_settings": "إعدادات الإشعار",
+  "language": "لغة",
+  "logout":"تسجيل خروج",
+  "logout_message": "هل تريد حقًا تسجيل الخروج؟",
+  "cancel": "إلغاء",
+  "make_suggestion": "قدم اقتراح",
+
+
+  "ad_not_available" : "لا يوجد إعلانات",
+  "categorie_not_avaiable": "لا توجد فئة متاحة",
+  "product_not_available" : "لا يوجد منتوج متاح",
+  "categories": "فئات",
+  "trending": "الشائع",
+  "latest": "الأحدث",
+  "promotion":"المنتجات المخفضة",
+  "see_all": "اظهار الكل",
+  "see_more": "رؤية المزيد",
+
+
+  "product": "منتج",
+  "detail": "التفاصيل",
+  "review": "المراجعات",
+  "select_size": "أختر الحجم (US)",
+  "select_color": "إختر لون",
+  "add_to_cart": "أضف إلى السلة",
+  "brand": "ماركة",
+  "description": "وصف",
+  "no_reviews": "لم يتم تقديم تعليقات",
+
+
+  "search_something": "ابحث عن شيء ما",
+  "recommended": "موصى به",
+  "refresh": "تحديث",
+  "best_match": "أفضل تطابق",
+  "top_rated": "أعلى التقييمات",
+  "low_high_profile": "مستوى مرتفع منخفض",
+  "prix": "سعر",
+
+  "none": "لا شيء",
+
+  "cart_empty": "عربة التسوق فارغة",
+  "remove": "حذف",
+  "check_out": "الدفع",
+  "added_to_cart": "تمت الإضافة إلى عربة التسوق",
+  "size": "مقاس",
+  "colors": "الألوان",
+  "total": "مجموع",
+  "choose_or_add_address": "اختر أو أضف عنوان",
+  "add_shipping_address": "أضف عنوان شحن",
+  "address_name": "اسم عنوان",
+  "buyer_name": "اسم المشتري",
+  "phone": "هاتف",
+  "wilaya": "ولاية",
+  "province":"بلدية",
+  "address": "عنوان",
+  "shipping_type": "نوع الشحن",
+  "add_address": "اضف عنوان",
+  "edit": "تعديل",
+  "choose_address": "اختر العنوان",
+  "update": "تحديث",
+  "update_address": "تحديث العنوان",
+
+  "domicile": "منزل",
+  "bureau": "عمل",
+  "shipping_address": "عنوان الشحن",
+  "empty_product_or_address": "منتجات فارغة أو لم يتم اختيار أي عنوان",
+
+  "place_order": "قم بالطلب",
+  "order_placed": "تم الطلب !",
+  "order_success_message": "تم تقديم طلبك بنجاح ، لمزيد من التفاصيل ، تحقق من صفحة كل طلباتي ضمن ملفك الشخصي",
+
+
+  "login_or_register": "تسجيل الدخول أو الإشتراك",
+
+  "edit_profile": "تعديل الملف الشخصي",
+  "all_my_orders": "كل طلباتي",
+  "pending_orders":"الطلبات المعلقة",
+  "pending_payment": "في انتظار الدفع",
+  "finished_orders": "الطلبات المنتهية",
+  "validated": "ساري المفعول",
+
+
+  "no_orders": "لا توجد طلبات",
+  "order_time": "وقت الطلب",
+  "order_id": "رقم التعريف الخاص بالطلب",
+  "for_": "ل",
+  "by": "بواسطة",
+  "shipping_cost":"تكلفة الشحن",
+  "state": "حالة",
+  "pending": "قيد الانتظار",
+  "total_price": "السعر الإجمالي",
+
+
+  "email": "بريد إلكتروني",
+  "username": "اسم المستخدم",
+  "password": "كلمه السر",
+  "new_password": "كلمة السر الجديدة",
+  "confirm_password": "تأكيد كلمة السر",
+  "update_your_profile": "تحديث ملفك الشخصي",
+  "save_modification": "حفظ التعديل",
+
+  "sign_up": "اشتراك",
+  "connect_with": "سجل الدخول ب",
+  "or": "أو",
+  "forgot_password": "هل نسيت كلمة السر ؟",
+  "privacy_policy_first_text": "من خلال إنشاء حساب ، فإنك توافق على",
+  "and": "و",
+  "terms_of_service": "شروط الخدمة",
+  "privacy_policy": "سياسة الخصوصية",
+  "register": "تسجيل",
+
+  "forgot_password_text": "أدخل عنوان البريد الإلكتروني الذي استخدمته لإنشاء حسابك وسنرسل إليك رمزًا عبر البريد الإلكتروني لإعادة تعيين كلمة السر",
+  "send_email": "ارسل بريد الكتروني",
+  "confirm_code_text": "أدخل الرمز السري المرسل إلى بريدك الإلكتروني",
+  "reset_password": "إعادة تعيين كلمة المرور",
+  "send": "أرسل",
+
+  "password_reset_success_message": "إعادة تعيين كلمة المرور بنجاح",
+
+  "orders": "طلبات",
+  "quantity": "كمية",
+  "leave_review":"أترك رأيك",
+  "leave_comment": "أترك تعليق",
+  "leave_rating": "أترك تقييم",
+  "send_review": "أرسل التقييم",
+
+  "livraison_must_not_be_null": "يجب ألا يكون الشحن فارغًا",
+  "wilaya_must_be_chosen": "يجب اختيار الولاية" ,
+  "address_must_not_be_empty": "يجب ألا يكون العنوان فارغًا" ,
+  "address_must_be_graduate": "يجب أن يكون العنوان أكبر من 5 أحرف" ,
+  "buyer_name_must_not_be_empty": "يجب ألا يكون اسم المشتري فارغًا" ,
+  "write_a_valid_name": "اكتب اسمًا صالحًا" ,
+  "phone_number_cannot_empty": "رقم الهاتف لا يمكن أن يكون فارغاً" ,
+  "please_enter_valid_phone": "الرجاء إدخال رقم هاتف صالح" ,
+  "password_must_not_be_empty": "كلمة المرور يجب ألا تكون فارغة" ,
+  "password_do_not_match": "كلمة المرور غير متطابقة" ,
+  "password_must_be_graduate": "يجب أن تكون كلمة المرور أكبر من 8 أحرف" ,
+  "username_cannot_be_empty": "اسم المستخدم لا يمكن أن يكون فارغًا" ,
+  "username_must_be_graduate": "يجب أن يكون اسم المستخدم أكبر من 7 أحرف" ,
+  "please_enter_valid_username": "الرجاء إدخال اسم مستخدم صالح" ,
+  "email_cannot_be_empty": "البريد الإلكتروني لا يمكن أن يكون فارغًا" ,
+  "please_correct_email_format": "الرجاء تصحيح تنسيق البريد الإلكتروني",
+  "comment_must_not_be_empty": "يجب ألا يكون التعليق فارغًا" ,
+  "subject_must_not_be_empty": "يجب ألا يكون الموضوع فارغًا" ,
+  "missing": "ناقص",
+  "subject": "Subject",
+  "send_suggestion": "إرسال اقتراح",
+  "tracking": "تتبع",
+  "dzd": "دج",
+
+
+  "connectivity": "اتصال" ,
+  "no_connection_available": "لا يوجد اتصال متاح ، تحقق من WIFI أو بيانات شبكة الجوّال",
+
+
+  "false_credentials": "معلومات الحساب ، تحقق من كلمة المرور أو البريد الإلكتروني"
+}
