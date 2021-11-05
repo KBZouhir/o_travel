@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/login_screen.dart';
 
 class ChoosePage extends StatelessWidget {
@@ -8,11 +9,11 @@ class ChoosePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
       ),
       body: Container(
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         padding: const EdgeInsets.all(20),
         child: Center(
           child: SingleChildScrollView(
@@ -21,34 +22,69 @@ class ChoosePage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(company:true)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen(company: false)));
                   },
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    height: 200,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Center(child: Image.asset('assets/images/logo.png'),),
-                  ),
+                  child: Column(children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 30),
+
+                      padding: EdgeInsets.all(20),
+                      height: 200,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                      child: Center(
+                        child: Image.asset('assets/images/individuals.png'),
+                      ),
+                    ),SizedBox(
+                      height: 20,
+                    ),  Text(
+                      'Individuals',
+                      style: TextStyle(
+                          fontSize: 35,
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],),
                 ),
                 SizedBox(
                   height: 40,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(company: false,)));
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    height: 200,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Center(child: Image.asset('assets/images/user.png'),),
-                  ),
-                ),
-
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen(company: true)));
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          margin: EdgeInsets.symmetric(horizontal: 30),
+                          height: 200,
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50))),
+                          child: Center(
+                            child: Image.asset('assets/images/companies.png'),
+                          ),
+                        ),SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Companies',
+                          style: TextStyle(
+                              fontSize:  35,
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    )),
               ],
             ),
           ),

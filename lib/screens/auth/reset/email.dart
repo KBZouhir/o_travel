@@ -24,11 +24,11 @@ class _EmailPageState extends State<EmailPage> {
                 Container(
                   height: size.height / 2.5,
                   width: size.width,
-                  color: Colors.blue,
+                  color: Theme.of(context).primaryColor,
                 ),Container(
                   height: size.height -(size.height / 2.5),
                   width: size.width,
-                  color: Colors.white,
+                  color: Theme.of(context).backgroundColor,
                 )
               ],
             ),
@@ -88,12 +88,13 @@ class _EmailPageState extends State<EmailPage> {
                                 'Email',
                                 style: TextStyle(
                                     fontSize: 25,
-                                    color: Colors.blue,
+                                    color:  Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold),
                               ),SizedBox(
                                 height: 40,
                               ),
                               TextField(
+
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -120,7 +121,7 @@ class _EmailPageState extends State<EmailPage> {
                           ),
                           child: MaterialButton(
                             onPressed: () =>   Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyPage())),
-                            color: Colors.blue,
+                            color:  Theme.of(context).primaryColor,
                             child: Text(
                               'Send Code',
                               style: TextStyle(

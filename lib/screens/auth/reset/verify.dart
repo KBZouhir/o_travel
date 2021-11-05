@@ -23,11 +23,11 @@ class _VerifyPageState extends State<VerifyPage> {
                 Container(
                   height: size.height / 2.5,
                   width: size.width,
-                  color: Colors.blue,
+                  color:  Theme.of(context).primaryColor,
                 ),Container(
                   height: size.height -(size.height / 2.5),
                   width: size.width,
-                  color: Colors.white,
+                  color: Theme.of(context).backgroundColor,
                 )
               ],
             ),
@@ -60,7 +60,7 @@ class _VerifyPageState extends State<VerifyPage> {
                         ),
                         Text(
                           '''Please Enter the Code You \nReceive on you're Email''',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20, color:  Theme.of(context).accentColor),
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(
@@ -87,7 +87,7 @@ class _VerifyPageState extends State<VerifyPage> {
                                 'Code',
                                 style: TextStyle(
                                     fontSize: 25,
-                                    color: Colors.blue,
+                                    color:  Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold),
                               ),SizedBox(
                                 height: 40,
@@ -99,8 +99,6 @@ class _VerifyPageState extends State<VerifyPage> {
                                     fontSize: 25.0,
                                     color: Colors.black87),
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                ),
                               )
                             ],
                           ),
@@ -110,7 +108,7 @@ class _VerifyPageState extends State<VerifyPage> {
                         ),
                         Text(
                           '''Didn't receive any code? ''',
-                          style: TextStyle(fontSize: 20, color: Colors.black87),
+                          style: TextStyle(fontSize: 20, color:  Theme.of(context).accentColor),
                           textAlign: TextAlign.center,
                         ),
 
@@ -121,7 +119,7 @@ class _VerifyPageState extends State<VerifyPage> {
                             },
                             child:Text(
                               'Resend Code',
-                              style: TextStyle(fontSize: 20, color: Colors.blue),
+                              style: TextStyle(fontSize: 20, color:  Theme.of(context).primaryColor),
                               textAlign: TextAlign.center,
                             )),
                         SizedBox(
@@ -136,7 +134,7 @@ class _VerifyPageState extends State<VerifyPage> {
                           ),
                           child: MaterialButton(
                             onPressed: () =>  Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPage())),
-                            color: Colors.blue,
+                            color:  Theme.of(context).primaryColor,
                             child: Text(
                               'Done',
                               style: TextStyle(

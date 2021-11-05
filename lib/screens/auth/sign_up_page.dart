@@ -15,12 +15,12 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 140,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0,
           title: Center(
               child: Text(
             'Create an account',
-            style: TextStyle(fontSize: 25, color: Colors.blue),
+            style: TextStyle(fontSize: 25, color: Theme.of(context).primaryColor),
           )),
           leading: IconButton(
               icon: Icon(
@@ -35,16 +35,16 @@ class _SignUpPageState extends State<SignUpPage> {
             )
           ],
           bottom: TabBar(
-            unselectedLabelColor: Colors.blue,
+            unselectedLabelColor:Theme.of(context).primaryColor,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(50), color: Colors.blue),
+                borderRadius: BorderRadius.circular(50), color:Theme.of(context).primaryColor),
             tabs: [
               Tab(
                 child: Container(
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text("Individuals"),
+                    child: Text("Individuals",style: TextStyle(fontSize: 22),),
                   ),
                 ),
               ),
@@ -52,7 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Container(
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text("Companies"),
+                    child: Text("Companies",style: TextStyle(fontSize: 22)),
                   ),
                 ),
               ),
@@ -84,7 +84,7 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Center(
             child: SingleChildScrollView(
@@ -100,7 +100,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -109,7 +109,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'Email Address',
@@ -129,7 +129,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -138,7 +138,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'Email Address',
@@ -158,7 +158,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -167,7 +167,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: showPassword,
               decoration: InputDecoration(
                 hintText: 'Password',
@@ -190,7 +190,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -199,7 +199,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: showConfirmPassword,
               decoration: InputDecoration(
                 hintText: 'Confirm password',
@@ -223,7 +223,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -232,7 +232,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: false,
               decoration: InputDecoration(
                 hintText: 'Phone number',
@@ -253,7 +253,7 @@ class _UserPageState extends State<UserPage> {
               ),
               child: MaterialButton(
                 onPressed: () => print("Create an account"),
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   'Create account',
                   style: TextStyle(
@@ -272,7 +272,7 @@ class _UserPageState extends State<UserPage> {
                 Text(
                   '''I have already an account ''',
                   style: TextStyle(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Theme.of(context).accentColor.withOpacity(0.5),
                     fontSize: 16.0,
                   ),
                 ),
@@ -282,12 +282,14 @@ class _UserPageState extends State<UserPage> {
                   },
                   child: Text('Login',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.0,
                       )),
                 )
               ],
+            ),  SizedBox(
+              height: 30,
             ),
           ],
         )))));
@@ -308,7 +310,7 @@ class _CompanyPageState extends State<CompanyPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
+        color: Theme.of(context).backgroundColor,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Center(
             child: SingleChildScrollView(
@@ -324,7 +326,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -333,7 +335,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'Email Address',
@@ -353,7 +355,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -362,7 +364,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'Email Address',
@@ -382,7 +384,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -391,7 +393,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: showPassword,
               decoration: InputDecoration(
                 hintText: 'Password',
@@ -414,7 +416,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -423,7 +425,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: showConfirmPassword,
               decoration: InputDecoration(
                 hintText: 'Confirm password',
@@ -447,7 +449,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -456,7 +458,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: false,
               decoration: InputDecoration(
                 hintText: 'Choose area',
@@ -472,7 +474,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -481,7 +483,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: false,
               decoration: InputDecoration(
                 hintText: 'Phone number',
@@ -498,7 +500,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
             ),
             SizedBox(
               height: 15,
@@ -507,7 +509,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Colors.black87),
+                  color: Theme.of(context).accentColor),
               obscureText: false,
               decoration: InputDecoration(
                 hintText: 'Field',
@@ -528,7 +530,7 @@ class _CompanyPageState extends State<CompanyPage> {
               ),
               child: MaterialButton(
                 onPressed: () => print("Create an account"),
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   'Create account',
                   style: TextStyle(
@@ -547,7 +549,7 @@ class _CompanyPageState extends State<CompanyPage> {
                 Text(
                   '''I have already an account ''',
                   style: TextStyle(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Theme.of(context).accentColor.withOpacity(0.5),
                     fontSize: 16.0,
                   ),
                 ),
@@ -557,12 +559,15 @@ class _CompanyPageState extends State<CompanyPage> {
                   },
                   child: Text('Login',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.0,
                       )),
                 )
               ],
+            ),
+            SizedBox(
+              height: 30,
             ),
           ],
         )))));

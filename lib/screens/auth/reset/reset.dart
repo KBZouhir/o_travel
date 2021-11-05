@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
+import 'package:o_travel/screens/home/home.dart';
 
 class ResetPage extends StatefulWidget {
   const ResetPage({Key? key}) : super(key: key);
@@ -23,11 +24,11 @@ class _ResetPageState extends State<ResetPage> {
                 Container(
                   height: size.height / 4.5,
                   width: size.width,
-                  color: Colors.blue,
+                  color:Theme.of(context).primaryColor,
                 ),Container(
                   height: size.height -(size.height / 4.5),
                   width: size.width,
-                  color: Colors.white,
+                  color: Theme.of(context).backgroundColor,
                 )
               ],
             ),
@@ -65,7 +66,7 @@ class _ResetPageState extends State<ResetPage> {
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 20.0,
-                              color: Colors.black87),
+                              color:  Theme.of(context).accentColor),
                         ),
                           SizedBox(
                             height: 15,
@@ -74,7 +75,7 @@ class _ResetPageState extends State<ResetPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20.0,
-                                color: Colors.black87),
+                                color:  Theme.of(context).accentColor),
                             obscureText: showPassword,
                             decoration: InputDecoration(
                               hintText: 'Password',
@@ -97,7 +98,7 @@ class _ResetPageState extends State<ResetPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20.0,
-                                color: Colors.black87),
+                                color:  Theme.of(context).accentColor),
                           ),
                           SizedBox(
                             height: 15,
@@ -105,7 +106,7 @@ class _ResetPageState extends State<ResetPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20.0,
-                                color: Colors.black87),
+                                color:  Theme.of(context).accentColor),
                             obscureText: showConfirmPassword,
                             decoration: InputDecoration(
                               hintText: 'Confirm new password',
@@ -126,7 +127,7 @@ class _ResetPageState extends State<ResetPage> {
                         ),
                         Text(
                           '''Didn't receive any code? ''',
-                          style: TextStyle(fontSize: 20, color: Colors.black87),
+                          style: TextStyle(fontSize: 20, color:  Theme.of(context).accentColor),
                           textAlign: TextAlign.center,
                         ),
 
@@ -137,7 +138,7 @@ class _ResetPageState extends State<ResetPage> {
                             },
                             child:Text(
                               'Resend Code',
-                              style: TextStyle(fontSize: 20, color: Colors.blue),
+                              style: TextStyle(fontSize: 20, color:Theme.of(context).primaryColor),
                               textAlign: TextAlign.center,
                             )),
                         SizedBox(
@@ -151,8 +152,11 @@ class _ResetPageState extends State<ResetPage> {
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: MaterialButton(
-                            onPressed: () => print("Successful Login."),
-                            color: Colors.blue,
+                            onPressed: () =>  Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen())),
+                            color:Theme.of(context).primaryColor,
                             child: Text(
                               'Done',
                               style: TextStyle(

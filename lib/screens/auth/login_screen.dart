@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
+import 'package:o_travel/screens/home/home.dart';
 class LoginScreen extends StatefulWidget {
   final bool company;
   const LoginScreen({Key? key,required this.company}) : super(key: key);
@@ -18,15 +19,15 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         toolbarHeight: 100,
 
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
         title: Center(
             child: Text(
           'LOGIN',
-          style: TextStyle(fontSize: 25, color: Colors.blue),
+          style: TextStyle(fontSize: 25, color:Theme.of(context).primaryColor),
         )),
         leading: IconButton(
-          icon: Icon(Icons.language_outlined,color: Colors.blueGrey,size: 25,),
+          icon: Icon(Icons.language_outlined,color: Colors.blueGrey,size: 30,),
           onPressed: () =>
               setState(() => showPassword = !showPassword),
         ),
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       ),
       body: Container(
-        color: Colors.white,
+        color:Theme.of(context).backgroundColor,
         padding: const EdgeInsets.all(20),
         child: Center(
           child: SingleChildScrollView(
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Colors.black87),
+                      color: Theme.of(context).accentColor),
                 ),
                 SizedBox(
                   height: 15,
@@ -61,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Colors.black87),
+                      color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: 'Email Address',
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Colors.black87),
+                      color: Theme.of(context).accentColor),
                 ),
                 SizedBox(
                   height: 15,
@@ -89,8 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextField(
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
-                      color: Colors.black87),
+                      fontSize: 20.0,color: Theme.of(context).accentColor),
                   obscureText: showPassword,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         'Forgot Password?',
                         style: TextStyle(
-                          color: Colors.black.withOpacity(0.4),
+                          color: Theme.of(context).accentColor.withOpacity(0.7),
                           fontSize: 14.0,
                         ),
                       ),
@@ -135,8 +135,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: MaterialButton(
-                    onPressed: () => print("Successful Login."),
-                    color: Colors.blue,
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomeScreen())),
+                    color: Theme.of(context).primaryColor,
                     child: Text(
                       'LOGIN',
                       style: TextStyle(
@@ -153,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                  'Sign in with',
                  style: TextStyle(
                    fontWeight: FontWeight.w500,
-                   color: Colors.black87,
+                   color: Theme.of(context).accentColor,
                    fontSize: 16.0,
                  ),),),
                  SizedBox(
@@ -181,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       '''Don't have an account? ''',
                       style: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Theme.of(context).accentColor.withOpacity(0.8),
                         fontSize: 16.0,
                       ),
                     ),
@@ -191,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       },
                       child: Text('Sign Up',style: TextStyle(
-                        color: Colors.black,
+                        color:Theme.of(context).accentColor,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.0,
                       )),
