@@ -14,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool showPassword = true;
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,45 +30,51 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Stack(
             children: [
-              SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    StorisWidget(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 3,
-                      decoration: BoxDecoration(
-                          color:
-                              Theme.of(context).accentColor.withOpacity(0.05),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SearchWidget(size: size),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CarouselWidget(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FilterWidget(size: size),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    AdsContainer(),
-                    AdsContainer(),
-                    AdsContainer(),
-                    AdsContainer(),
-                    AdsContainer(),
-                    SizedBox(
-                      height: 80,
-                    ),
-                  ],
+              RefreshIndicator(
+                color: Theme.of(context).primaryColor,
+                key: _refreshIndicatorKey,
+                onRefresh: _refresh,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      StorisWidget(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 3,
+                        decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).accentColor.withOpacity(0.05),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SearchWidget(size: size),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      CarouselWidget(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FilterWidget(size: size),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      AdsContainer(),
+                      AdsContainer(),
+                      AdsContainer(),
+                      AdsContainer(),
+                      AdsContainer(),
+                      SizedBox(
+                        height: 80,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Positioned(
@@ -119,6 +127,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
+  Future<void> _refresh() async {
+    setState(() {});
+  }
 }
 
 class AdsContainer extends StatelessWidget {
@@ -134,7 +146,7 @@ class AdsContainer extends StatelessWidget {
               height: MediaQuery.of(context).size.width * 0.6,
               width: MediaQuery.of(context).size.width * 0.45,
               decoration: BoxDecoration(
-                color: Colors.white,
+                  color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               margin: EdgeInsets.symmetric(horizontal: 5.0),
               child: Stack(
@@ -147,7 +159,10 @@ class AdsContainer extends StatelessWidget {
                       placeholder: (context, url) => Container(
                           width: 50,
                           height: 50,
-                          child: Center(child: CircularProgressIndicator())),
+                          child: Center(
+                              child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                          ))),
                       errorWidget: (context, url, error) =>
                           new Icon(Icons.error),
                       fit: BoxFit.cover,
@@ -176,7 +191,7 @@ class AdsContainer extends StatelessWidget {
               height: MediaQuery.of(context).size.width * 0.6,
               width: MediaQuery.of(context).size.width * 0.45,
               decoration: BoxDecoration(
-                color: Colors.white,
+                  color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               margin: EdgeInsets.symmetric(horizontal: 5.0),
               child: Stack(
@@ -187,7 +202,10 @@ class AdsContainer extends StatelessWidget {
                       placeholder: (context, url) => Container(
                           width: 50,
                           height: 50,
-                          child: Center(child: CircularProgressIndicator())),
+                          child: Center(
+                              child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                          ))),
                       errorWidget: (context, url, error) =>
                           new Icon(Icons.error),
                       imageUrl:
@@ -233,7 +251,10 @@ class AdsContainer extends StatelessWidget {
                   placeholder: (context, url) => Container(
                       width: 50,
                       height: 50,
-                      child: Center(child: CircularProgressIndicator())),
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      ))),
                   errorWidget: (context, url, error) => new Icon(Icons.error),
                   imageUrl:
                       'https://khamsat.hsoubcdn.com/images/services/1616636/3827d4c05f73317bf7016a631aff41fd.jpg',
@@ -297,20 +318,20 @@ class _CarouselWidgetState extends State<CarouselWidget> {
     return Column(children: <Widget>[
       CarouselSlider(
         options: CarouselOptions(
-          height: 200,
-          viewportFraction: 0.8,
-          initialPage: 0,
-          enableInfiniteScroll: true,
-          reverse: false,
-          autoPlayInterval: Duration(seconds: 3),
-          autoPlayAnimationDuration: Duration(milliseconds: 800),
-          autoPlayCurve: Curves.fastOutSlowIn,
-          scrollDirection: Axis.horizontal,
-        onPageChanged: (index, reason) {
-          setState(() {
-            _current = index;
-          });
-        }),
+            height: 200,
+            viewportFraction: 0.8,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            scrollDirection: Axis.horizontal,
+            onPageChanged: (index, reason) {
+              setState(() {
+                _current = index;
+              });
+            }),
         items: imgList.map((i) {
           return Builder(
             builder: (BuildContext context) {
@@ -331,7 +352,10 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                         placeholder: (context, url) => Container(
                             width: 50,
                             height: 50,
-                            child: Center(child: CircularProgressIndicator())),
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                            ))),
                         errorWidget: (context, url, error) =>
                             new Icon(Icons.error),
                       ),
@@ -366,7 +390,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
               height: 8.0,
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   color:
                       _current == index ? primaryColorDark : primaryColorLite),
             );
@@ -617,23 +641,25 @@ class StoryItemWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(
-              color: Theme.of(context).primaryColor.withOpacity(0.4),
-              width: 4),
+              color: Theme.of(context).primaryColor.withOpacity(0.4), width: 4),
           borderRadius: BorderRadius.all(Radius.circular(50))),
       child: Center(
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(20)),
           child: CachedNetworkImage(
-            imageUrl: 'https://mostaql.hsoubcdn.com/uploads/503400-UxZT3-1579267418-5e21b55a3e4b6.jpg',
+            imageUrl:
+                'https://mostaql.hsoubcdn.com/uploads/503400-UxZT3-1579267418-5e21b55a3e4b6.jpg',
             fit: BoxFit.cover,
             width: 1000,
             height: 1000,
             placeholder: (context, url) => Center(
-
-                child: Container( width: 10,
-                    height: 10, child: CircularProgressIndicator())),
-            errorWidget: (context, url, error) =>
-            new Icon(Icons.error),
+                child: Container(
+                    width: 10,
+                    height: 10,
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor,
+                    ))),
+            errorWidget: (context, url, error) => new Icon(Icons.error),
           ),
         ),
       ),
@@ -685,7 +711,10 @@ class MyDrawer extends StatelessWidget {
                         placeholder: (context, url) => Container(
                             width: 50,
                             height: 50,
-                            child: Center(child: CircularProgressIndicator())),
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                            ))),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
