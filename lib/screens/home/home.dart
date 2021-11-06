@@ -84,19 +84,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   width: double.infinity,
                   height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: MaterialButton(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: primaryColorDark,
+                    ),
                     onPressed: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeScreen())),
-                    color: Theme.of(context).primaryColor,
-                    child: Text(
-                      'LOGIN',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
+                    child: Row(
+                      children: [
+                        Spacer(),
+                        Text(
+                          'Add New Ad',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: 5,),
+                        Icon(
+                          Icons.add_box_outlined,
+                          color: Colors.white,
+                        ),
+                        Spacer(),
+                      ],
                     ),
                   ),
                 ),
