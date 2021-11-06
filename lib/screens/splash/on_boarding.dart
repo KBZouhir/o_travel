@@ -41,7 +41,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
     return IntroductionScreen(
       key: introKey,
-     globalBackgroundColor: Theme.of(context).backgroundColor,
+      globalBackgroundColor: Theme.of(context).backgroundColor,
       globalHeader: Align(
         alignment: Alignment.topRight,
         child: SafeArea(
@@ -105,7 +105,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         width: 90,
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
         child: Text('Start',style: TextStyle(fontSize: 19.0,color: Colors.white),),
       ),

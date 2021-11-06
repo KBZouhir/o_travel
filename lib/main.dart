@@ -11,7 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   static final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.light);
+  ValueNotifier(ThemeMode.light);
 
   // This widget is the root of your application.
   @override
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
             return const MaterialApp(
                 debugShowCheckedModeBanner: false, home: Splash());
           } else {
-           return ValueListenableBuilder<ThemeMode>(
+            return ValueListenableBuilder<ThemeMode>(
                 valueListenable: themeNotifier,
                 builder: (_, ThemeMode currentMode, __) {
                   return MaterialApp(
@@ -70,11 +70,11 @@ class Splash extends StatelessWidget {
       backgroundColor:Theme.of(context).brightness==Brightness.dark?Colors.white:Color.fromRGBO(25, 25, 25, 1),
       body: Center(
           child:  Image.asset(
-                  'assets/images/logo.png',
-                  height: screenHeight / 4,
-                  width: screenHeight / 4,
-                )
-              ),
+            'assets/images/logo.png',
+            height: screenHeight / 4,
+            width: screenHeight / 4,
+          )
+      ),
     );
   }
 }
