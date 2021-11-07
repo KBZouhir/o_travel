@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/splash/on_boarding.dart';
 
 void main() {
@@ -11,7 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   static final ValueNotifier<ThemeMode> themeNotifier =
-  ValueNotifier(ThemeMode.light);
+      ValueNotifier(ThemeMode.light);
 
   // This widget is the root of your application.
   @override
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
                     title: 'Flutter Demo',
-                    darkTheme:ThemeData(
+                    darkTheme: ThemeData(
                       primarySwatch: Colors.grey,
                       primaryColor: primaryColorDark,
                       brightness: Brightness.dark,
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
                       iconTheme: IconThemeData(color: Colors.white),
                     ),
                     themeMode: currentMode,
-                    theme:ThemeData(
+                    theme: ThemeData(
                       primarySwatch: Colors.grey,
                       primaryColor: primaryColorDark,
                       brightness: Brightness.light,
@@ -50,7 +49,6 @@ class MyApp extends StatelessWidget {
                       accentIconTheme: IconThemeData(color: Colors.white),
                       dividerColor: Colors.white54,
                       iconTheme: IconThemeData(color: Colors.black87),
-
                     ),
                     home: OnBoardingPage(),
                   );
@@ -67,14 +65,15 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor:Theme.of(context).brightness==Brightness.dark?Colors.white:Color.fromRGBO(25, 25, 25, 1),
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.white
+          : Color.fromRGBO(25, 25, 25, 1),
       body: Center(
-          child:  Image.asset(
-            'assets/images/logo.png',
-            height: screenHeight / 4,
-            width: screenHeight / 4,
-          )
-      ),
+          child: Image.asset(
+        'assets/images/logo.png',
+        height: screenHeight / 4,
+        width: screenHeight / 4,
+      )),
     );
   }
 }

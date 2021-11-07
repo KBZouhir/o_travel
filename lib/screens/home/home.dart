@@ -100,7 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(width: 5,),
+                        SizedBox(
+                          width: 5,
+                        ),
                         Icon(
                           Icons.add_box_outlined,
                           color: Colors.white,
@@ -314,7 +316,6 @@ class _CarouselWidgetState extends State<CarouselWidget> {
       'https://mir-s3-cdn-cf.behance.net/projects/404/998f63122135473.Y3JvcCwxMjM3LDk2NywwLDk.png',
       'https://scontent.fczl1-2.fna.fbcdn.net/v/t1.6435-9/186913311_841269306598087_4984690488485274619_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeFbfYWc9rSG4qx3LixIsAKNvpNmB0ybLfK-k2YHTJst8udnil_YCVt5qZIOmfquRG0hcvj6CZumn4BRZbst_Ika&_nc_ohc=jpZptMgpt0QAX9ZCcbT&_nc_ht=scontent.fczl1-2.fna&oh=58a3a93a97c4bc0b48f39d323cfea0a9&oe=61AC50C9',
     ];
-    CarouselController buttonCarouselController = CarouselController();
 
     List<T> map<T>(List list, Function handler) {
       List<T> result = [];
@@ -382,6 +383,18 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                       bottom: 0.2,
                       right: 0,
                       left: 0,
+                    ),
+                    Positioned(
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.7),
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20))),
+                      ),
+                      top: 10,
+                      left: 10,
                     )
                   ],
                 ),
@@ -583,7 +596,8 @@ class SearchWidget extends StatelessWidget {
             child: Text(
               'Companies\nGuide',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor, fontSize: 12),
             ),
           ),
         ),
@@ -692,7 +706,8 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           Container(
-              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
+              padding:
+                  EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
               height: size.height * 0.31,
               decoration: BoxDecoration(
                 borderRadius:
@@ -715,8 +730,8 @@ class MyDrawer extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl:
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt0gx9N5aOyDbSKsuvfJBHC1glECMt7U_VhA&usqp=CAU",
-                        height: 95,
-                        width: 95,
+                        height: size.height * 0.1,
+                        width: size.height * 0.1,
                         fit: BoxFit.cover,
                         placeholder: (context, url) => Container(
                             width: 50,
@@ -737,9 +752,9 @@ class MyDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                         Spacer(),
-                        Text('Home',
+                        Text('UserName ',
                             style: TextStyle(
-                                fontSize: 28,
+                                fontSize: 25,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
                         Icon(

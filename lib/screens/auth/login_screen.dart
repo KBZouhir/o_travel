@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
+
 class LoginScreen extends StatefulWidget {
   final bool company;
-  const LoginScreen({Key? key,required this.company}) : super(key: key);
+  const LoginScreen({Key? key, required this.company}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -18,24 +19,29 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
         title: Center(
             child: Text(
           'LOGIN',
-          style: TextStyle(fontSize: 25, color:Theme.of(context).primaryColor),
+          style: TextStyle(fontSize: 25, color: Theme.of(context).primaryColor),
         )),
         leading: IconButton(
-          icon: Icon(Icons.language_outlined,color: Colors.blueGrey,size: 30,),
-          onPressed: () =>
-              setState(() => showPassword = !showPassword),
+          icon: Icon(
+            Icons.language_outlined,
+            color: Colors.blueGrey,
+            size: 30,
+          ),
+          onPressed: () => setState(() => showPassword = !showPassword),
         ),
-        actions: [SizedBox(width: 55,)],
-
+        actions: [
+          SizedBox(
+            width: 55,
+          )
+        ],
       ),
       body: Container(
-        color:Theme.of(context).backgroundColor,
+        color: Theme.of(context).backgroundColor,
         padding: const EdgeInsets.all(20),
         child: Center(
           child: SingleChildScrollView(
@@ -90,7 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextField(
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,color: Theme.of(context).accentColor),
+                      fontSize: 20.0,
+                      color: Theme.of(context).accentColor),
                   obscureText: showPassword,
                   decoration: InputDecoration(
                     hintText: 'Password',
@@ -111,8 +118,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => EmailPage()));
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EmailPage()));
                       },
                       child: Text(
                         'Forgot Password?',
@@ -135,10 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: MaterialButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeScreen())),
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen())),
                     color: Theme.of(context).primaryColor,
                     child: Text(
                       'LOGIN',
@@ -152,32 +159,41 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 30,
                 ),
-                widget.company?Center() : Column(children: [ Center(child:  Text(
-                 'Sign in with',
-                 style: TextStyle(
-                   fontWeight: FontWeight.w500,
-                   color: Theme.of(context).accentColor,
-                   fontSize: 16.0,
-                 ),),),
-                 SizedBox(
-                   height: 15,
-                 ),
-                 Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     IconButton(
-                       icon: Image.asset('assets/images/google-plus.png'),
-                       iconSize: 50,
-                       onPressed: () {},
-                     ),
-                     IconButton(
-                       icon: Image.asset('assets/images/facebook.png'),
-                       iconSize: 50,
-                       onPressed: () {},
-                     ),
-
-                   ],
-                 ),],),
+                widget.company
+                    ? Center()
+                    : Column(
+                        children: [
+                          Center(
+                            child: Text(
+                              'Sign in with',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).accentColor,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                icon: Image.asset(
+                                    'assets/images/google-plus.png'),
+                                iconSize: 50,
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                icon: Image.asset('assets/images/facebook.png'),
+                                iconSize: 50,
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -190,14 +206,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()));
                       },
-                      child: Text('Sign Up',style: TextStyle(
-                        color:Theme.of(context).accentColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16.0,
-                      )),
+                      child: Text('Sign Up',
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.0,
+                          )),
                     )
                   ],
                 ),

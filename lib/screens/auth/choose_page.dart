@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/login_screen.dart';
 
 class ChoosePage extends StatelessWidget {
@@ -27,28 +26,32 @@ class ChoosePage extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => LoginScreen(company: false)));
                   },
-                  child: Column(children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
-
-                      padding: EdgeInsets.all(20),
-                      height: 200,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
-                      child: Center(
-                        child: Image.asset('assets/images/individuals.png'),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 30),
+                        padding: EdgeInsets.all(20),
+                        height: 200,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                        child: Center(
+                          child: Image.asset('assets/images/individuals.png'),
+                        ),
                       ),
-                    ),SizedBox(
-                      height: 20,
-                    ),  Text(
-                      'Individuals',
-                      style: TextStyle(
-                          fontSize: 35,
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Individuals',
+                        style: TextStyle(
+                            fontSize: 35,
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 40,
@@ -58,7 +61,8 @@ class ChoosePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LoginScreen(company: true)));
+                              builder: (context) =>
+                                  LoginScreen(company: true)));
                     },
                     child: Column(
                       children: [
@@ -73,13 +77,14 @@ class ChoosePage extends StatelessWidget {
                           child: Center(
                             child: Image.asset('assets/images/companies.png'),
                           ),
-                        ),SizedBox(
+                        ),
+                        SizedBox(
                           height: 20,
                         ),
                         Text(
                           'Companies',
                           style: TextStyle(
-                              fontSize:  35,
+                              fontSize: 35,
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold),
                         ),
