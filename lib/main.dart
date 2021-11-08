@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/splash/on_boarding.dart';
 
 void main() {

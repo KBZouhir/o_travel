@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showPassword = true;
+  double _KRaduice=15.0;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Theme.of(context).accentColor),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 8,
                 ),
                 TextFormField(
                   style: TextStyle(
@@ -73,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     hintText: 'Email Address',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                        borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                     prefixIcon: Icon(
                       Icons.perm_identity,
                       size: 30,
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 35,
+                  height: 25,
                 ),
                 Text(
                   'Password',
@@ -91,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Theme.of(context).accentColor),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 8,
                 ),
                 TextField(
                   style: TextStyle(
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     hintText: 'Password',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                        borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: showPassword
@@ -134,14 +135,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 8,
                 ),
                 Container(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   width: double.infinity,
                   height: 60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(_KRaduice),
                   ),
                   child: MaterialButton(
                     onPressed: () => Navigator.push(context,
@@ -174,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 8,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

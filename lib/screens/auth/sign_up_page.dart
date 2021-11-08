@@ -8,6 +8,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  double _KRaduice=15.0;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -38,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
             unselectedLabelColor:Theme.of(context).primaryColor,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(50), color:Theme.of(context).primaryColor),
+                borderRadius: BorderRadius.circular(_KRaduice), color:Theme.of(context).primaryColor),
             tabs: [
               Tab(
                 child: Container(
@@ -80,6 +82,7 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
+  double _KRaduice=15.0;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +96,7 @@ class _UserPageState extends State<UserPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Username or email',
@@ -103,7 +106,7 @@ class _UserPageState extends State<UserPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextFormField(
               style: TextStyle(
@@ -114,7 +117,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -122,7 +125,7 @@ class _UserPageState extends State<UserPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Username or email',
@@ -132,7 +135,7 @@ class _UserPageState extends State<UserPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextFormField(
               style: TextStyle(
@@ -143,7 +146,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -151,7 +154,7 @@ class _UserPageState extends State<UserPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Password',
@@ -161,7 +164,7 @@ class _UserPageState extends State<UserPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -172,7 +175,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -183,7 +186,7 @@ class _UserPageState extends State<UserPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Confirm password',
@@ -193,7 +196,7 @@ class _UserPageState extends State<UserPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -204,7 +207,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Confirm password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -216,7 +219,7 @@ class _UserPageState extends State<UserPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Phone number',
@@ -226,7 +229,7 @@ class _UserPageState extends State<UserPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -237,7 +240,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Phone number',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(Icons.phone),
               ),
             ),
@@ -249,7 +252,7 @@ class _UserPageState extends State<UserPage> {
               width: double.infinity,
               height: 60,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: BorderRadius.circular(_KRaduice),
               ),
               child: MaterialButton(
                 onPressed: () => print("Create an account"),
@@ -305,7 +308,8 @@ class CompanyPage extends StatefulWidget {
 
 class _CompanyPageState extends State<CompanyPage> {
   bool showPassword = true;
-  bool showConfirmPassword = true;
+  bool showConfirmPassword = true;  double _KRaduice=15.0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -319,7 +323,7 @@ class _CompanyPageState extends State<CompanyPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Username or email',
@@ -329,7 +333,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextFormField(
               style: TextStyle(
@@ -340,7 +344,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -348,7 +352,7 @@ class _CompanyPageState extends State<CompanyPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Username or email',
@@ -358,7 +362,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextFormField(
               style: TextStyle(
@@ -369,7 +373,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -377,7 +381,7 @@ class _CompanyPageState extends State<CompanyPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Password',
@@ -387,7 +391,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -398,7 +402,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -409,7 +413,7 @@ class _CompanyPageState extends State<CompanyPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Confirm password',
@@ -419,7 +423,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -430,7 +434,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Confirm password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -442,7 +446,7 @@ class _CompanyPageState extends State<CompanyPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Area',
@@ -452,7 +456,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -463,11 +467,11 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Choose area',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Phone number',
@@ -477,7 +481,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -488,12 +492,12 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Phone number',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
                 prefixIcon: Icon(Icons.phone),
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Text(
               'Field',
@@ -503,7 +507,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
             ),
             SizedBox(
-              height: 15,
+              height: 8,
             ),
             TextField(
               style: TextStyle(
@@ -514,7 +518,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Field',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
 
               ),
             ),
@@ -526,7 +530,7 @@ class _CompanyPageState extends State<CompanyPage> {
               width: double.infinity,
               height: 60,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: BorderRadius.circular(_KRaduice),
               ),
               child: MaterialButton(
                 onPressed: () => print("Create an account"),

@@ -3,6 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/companies/companies_guide.dart';
+import 'package:o_travel/screens/home/components/Ads_widget.dart';
+import 'package:o_travel/screens/home/components/carousel_widget.dart';
 import 'package:o_travel/screens/settings/settings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showPassword = true;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
-
+  double _KRaduice = 15.0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -84,6 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   width: double.infinity,
                   height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(_KRaduice),
+                  ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: primaryColorDark,
@@ -142,285 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _refresh() async {
     setState(() {});
-  }
-}
-
-class AdsContainer extends StatelessWidget {
-  const AdsContainer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.width * 0.6,
-              width: MediaQuery.of(context).size.width * 0.45,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'https://mostaql.hsoubcdn.com/uploads/412357-7gSAh-1518364669-%D8%AA%D8%A3%D8%B4%D9%8A%D8%B1%D8%A9-%D8%AF%D8%A8%D9%8A.jpg',
-                      placeholder: (context, url) => Container(
-                          width: 50,
-                          height: 50,
-                          child: Center(
-                              child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor,
-                          ))),
-                      errorWidget: (context, url, error) =>
-                          new Icon(Icons.error),
-                      fit: BoxFit.cover,
-                      width: 1000,
-                      height: 1000,
-                    ),
-                  ),
-                  Positioned(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.7),
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20))),
-                    ),
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                  )
-                ],
-              ),
-            ),
-            Spacer(),
-            Container(
-              height: MediaQuery.of(context).size.width * 0.6,
-              width: MediaQuery.of(context).size.width * 0.45,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    child: CachedNetworkImage(
-                      placeholder: (context, url) => Container(
-                          width: 50,
-                          height: 50,
-                          child: Center(
-                              child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor,
-                          ))),
-                      errorWidget: (context, url, error) =>
-                          new Icon(Icons.error),
-                      imageUrl:
-                          'https://mostaql.hsoubcdn.com/uploads/409279-0vIu0-1594228860-5f06007cb1409.png',
-                      fit: BoxFit.cover,
-                      width: 1000,
-                      height: 1000,
-                    ),
-                  ),
-                  Positioned(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.7),
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20))),
-                    ),
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: 220,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          margin: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                child: CachedNetworkImage(
-                  placeholder: (context, url) => Container(
-                      width: 50,
-                      height: 50,
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                      ))),
-                  errorWidget: (context, url, error) => new Icon(Icons.error),
-                  imageUrl:
-                      'https://khamsat.hsoubcdn.com/images/services/1616636/3827d4c05f73317bf7016a631aff41fd.jpg',
-                  fit: BoxFit.cover,
-                  width: 1000,
-                  height: 1000,
-                ),
-              ),
-              Positioned(
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.7),
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20))),
-                ),
-                bottom: 0,
-                right: 0,
-                left: 0,
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-      ],
-    );
-  }
-}
-
-class CarouselWidget extends StatefulWidget {
-  const CarouselWidget({Key? key}) : super(key: key);
-
-  @override
-  _CarouselWidgetState createState() => _CarouselWidgetState();
-}
-
-class _CarouselWidgetState extends State<CarouselWidget> {
-  int _current = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    final List<String> imgList = [
-      'https://s3.amazonaws.com/tasmeemme.project.mi.thumbnails/resize_805x9000/480/347480.jpg',
-      'https://mir-s3-cdn-cf.behance.net/projects/404/998f63122135473.Y3JvcCwxMjM3LDk2NywwLDk.png',
-      'https://scontent.fczl1-2.fna.fbcdn.net/v/t1.6435-9/186913311_841269306598087_4984690488485274619_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeFbfYWc9rSG4qx3LixIsAKNvpNmB0ybLfK-k2YHTJst8udnil_YCVt5qZIOmfquRG0hcvj6CZumn4BRZbst_Ika&_nc_ohc=jpZptMgpt0QAX9ZCcbT&_nc_ht=scontent.fczl1-2.fna&oh=58a3a93a97c4bc0b48f39d323cfea0a9&oe=61AC50C9',
-    ];
-
-    List<T> map<T>(List list, Function handler) {
-      List<T> result = [];
-      for (var i = 0; i < list.length; i++) {
-        result.add(handler(i, list[i]));
-      }
-
-      return result;
-    }
-
-    return Column(children: <Widget>[
-      CarouselSlider(
-        options: CarouselOptions(
-            height: 200,
-            viewportFraction: 0.8,
-            initialPage: 0,
-            enableInfiniteScroll: true,
-            reverse: false,
-            autoPlayInterval: Duration(seconds: 3),
-            autoPlayAnimationDuration: Duration(milliseconds: 800),
-            autoPlayCurve: Curves.fastOutSlowIn,
-            scrollDirection: Axis.horizontal,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _current = index;
-              });
-            }),
-        items: imgList.map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      child: CachedNetworkImage(
-                        imageUrl: i,
-                        fit: BoxFit.cover,
-                        width: 1000,
-                        height: 1000,
-                        placeholder: (context, url) => Container(
-                            width: 50,
-                            height: 50,
-                            child: Center(
-                                child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                            ))),
-                        errorWidget: (context, url, error) =>
-                            new Icon(Icons.error),
-                      ),
-                    ),
-                    Positioned(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.7),
-                            borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(20),
-                                bottomLeft: Radius.circular(20))),
-                      ),
-                      bottom: 0.2,
-                      right: 0,
-                      left: 0,
-                    ),
-                    Positioned(
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.7),
-                            borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(20),
-                                bottomLeft: Radius.circular(20))),
-                      ),
-                      top: 10,
-                      left: 10,
-                    )
-                  ],
-                ),
-              );
-            },
-          );
-        }).toList(),
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: map<Widget>(
-          imgList,
-          (index, url) {
-            return Container(
-              width: _current == index ? 20 : 8,
-              height: 8.0,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color:
-                      _current == index ? primaryColorDark : primaryColorLite),
-            );
-          },
-        ),
-      ),
-    ]);
   }
 }
 
@@ -586,18 +313,26 @@ class SearchWidget extends StatelessWidget {
         SizedBox(
           width: 5,
         ),
-        Container(
-          height: 50,
-          width: size.width * 0.2,
-          decoration: BoxDecoration(
-              color: Theme.of(context).accentColor.withOpacity(0.05),
-              borderRadius: BorderRadius.all(Radius.circular(15))),
-          child: Center(
-            child: Text(
-              'Companies\nGuide',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor, fontSize: 12),
+        GestureDetector(
+          onTap: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CompaniesGuideScreen()));
+          },
+          child: Container(
+            height: 50,
+            width: size.width * 0.2,
+            decoration: BoxDecoration(
+                color: Theme.of(context).accentColor.withOpacity(0.05),
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            child: Center(
+              child: Text(
+                'Companies\nGuide',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontSize: 12),
+              ),
             ),
           ),
         ),
