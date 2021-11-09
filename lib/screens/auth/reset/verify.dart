@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/reset.dart';
 
 class VerifyPage extends StatefulWidget {
@@ -65,7 +66,7 @@ class _VerifyPageState extends State<VerifyPage> {
                     Text(
                       '''Please Enter the Code You \nReceive on you're Email''',
                       style: TextStyle(
-                          fontSize: 20, color: Theme.of(context).accentColor),
+                          fontSize: 20, color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
@@ -73,9 +74,9 @@ class _VerifyPageState extends State<VerifyPage> {
                     ),
                     Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+                      EdgeInsets.symmetric(horizontal: 30,vertical: 40),
                       width: size.width * 0.9,
-                      height: size.height * 0.30,
+                      height: 250,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -138,7 +139,7 @@ class _VerifyPageState extends State<VerifyPage> {
                       width: double.infinity,
                       height: 60,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(raduice),
                       ),
                       child: MaterialButton(
                         onPressed: () => Navigator.push(
@@ -154,6 +155,9 @@ class _VerifyPageState extends State<VerifyPage> {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                   ],
                 )))

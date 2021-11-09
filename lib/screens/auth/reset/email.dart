@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/verify.dart';
 
 class EmailPage extends StatefulWidget {
@@ -72,9 +73,9 @@ class _EmailPageState extends State<EmailPage> {
                       ),
                       Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+                            EdgeInsets.symmetric(horizontal: 30,vertical: 40),
                         width: size.width * 0.9,
-                        height: size.height * 0.30,
+                        height: 250,
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -121,7 +122,7 @@ class _EmailPageState extends State<EmailPage> {
                         width: double.infinity,
                         height: 60,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
+                          borderRadius: BorderRadius.circular(raduice),
                         ),
                         child: MaterialButton(
                           onPressed: () => Navigator.push(
@@ -137,6 +138,9 @@ class _EmailPageState extends State<EmailPage> {
                             ),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                     ],
                   )))

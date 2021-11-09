@@ -9,4 +9,5 @@ const gray216 = Color.fromRGBO(216, 216, 216, 1);
 const gray148 = Color.fromRGBO(148, 148, 148, 1);
 const gray70 = Color.fromRGBO(112, 112, 112, 1);
 const gray48 = Color.fromRGBO(72, 72, 72, 1);
-const _kRaduice =15.0;
+
+const raduice =15.0;

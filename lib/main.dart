@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/splash/on_boarding.dart';
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
                       dividerColor: Colors.white54,
                       iconTheme: IconThemeData(color: Colors.black87),
                     ),
-                    home: OnBoardingPage(),
+                    home: EmailPage(),
                   );
                 });
           }

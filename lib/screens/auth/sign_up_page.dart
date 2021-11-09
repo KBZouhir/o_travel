@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:o_travel/constants.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  double _KRaduice=15.0;
+  double raduice=15.0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
             unselectedLabelColor:Theme.of(context).primaryColor,
             indicatorSize: TabBarIndicatorSize.label,
             indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(_KRaduice), color:Theme.of(context).primaryColor),
+                borderRadius: BorderRadius.circular(raduice), color:Theme.of(context).primaryColor),
             tabs: [
               Tab(
                 child: Container(
@@ -82,7 +83,6 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
-  double _KRaduice=15.0;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -146,7 +146,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -175,7 +175,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -207,7 +207,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Confirm password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -240,7 +240,7 @@ class _UserPageState extends State<UserPage> {
               decoration: InputDecoration(
                 hintText: 'Phone number',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.phone),
               ),
             ),
@@ -252,7 +252,7 @@ class _UserPageState extends State<UserPage> {
               width: double.infinity,
               height: 60,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(_KRaduice),
+                borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
                 onPressed: () => print("Create an account"),
@@ -308,7 +308,7 @@ class CompanyPage extends StatefulWidget {
 
 class _CompanyPageState extends State<CompanyPage> {
   bool showPassword = true;
-  bool showConfirmPassword = true;  double _KRaduice=15.0;
+  bool showConfirmPassword = true;  double raduice=15.0;
 
 
   @override
@@ -344,7 +344,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -373,7 +373,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(
                   Icons.perm_identity,
                   size: 30,
@@ -402,7 +402,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -434,7 +434,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Confirm password',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
                   icon: showPassword
@@ -467,7 +467,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Choose area',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
               ),
             ),
             SizedBox(
@@ -492,7 +492,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Phone number',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.phone),
               ),
             ),
@@ -518,7 +518,7 @@ class _CompanyPageState extends State<CompanyPage> {
               decoration: InputDecoration(
                 hintText: 'Field',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
               ),
             ),
@@ -530,7 +530,7 @@ class _CompanyPageState extends State<CompanyPage> {
               width: double.infinity,
               height: 60,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(_KRaduice),
+                borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
                 onPressed: () => print("Create an account"),

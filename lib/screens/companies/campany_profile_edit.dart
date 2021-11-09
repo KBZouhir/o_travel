@@ -11,7 +11,6 @@ class CompanyProfileEdit extends StatefulWidget {
 }
 
 class _CompanyProfileEditState extends State<CompanyProfileEdit> {
- double _KRaduice=15.0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery
@@ -27,7 +26,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                 height: 250,
                 decoration: BoxDecoration(
                   borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(_KRaduice)),
+                  BorderRadius.only(bottomLeft: Radius.circular(raduice)),
                   color: primaryColorDark,
                 ),
                 child: Column(
@@ -102,7 +101,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Company name',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(
                           Icons.perm_identity,
                           size: 30,
@@ -136,7 +135,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                         contentPadding: EdgeInsets.all(10),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(_KRaduice))),
+                            BorderRadius.all(Radius.circular(raduice))),
                       ),
                       style: TextStyle(
                         height: 1.6,
@@ -167,7 +166,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Location GPS',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.location_on),
                       ),
                     ),
@@ -193,7 +192,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Email',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.email_outlined),
                       ),
                     ),
@@ -220,7 +219,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Phone number',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.phone),
                       ),
                     ),
@@ -246,7 +245,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Field',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
                       ),
                     ),
@@ -272,7 +271,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Field',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
                       ),
                     ),
@@ -298,7 +297,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Field',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
                       ),
                     ),
@@ -324,7 +323,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: 'Field',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
                       ),
                     ),
@@ -336,7 +335,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       width: double.infinity,
                       height: 60,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(_KRaduice),
+                        borderRadius: BorderRadius.circular(raduice),
                       ),
                       child: MaterialButton(
                         onPressed: () => print("save"),

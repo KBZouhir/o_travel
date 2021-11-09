@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
-import 'package:o_travel/screens/home/home.dart';
 
 class ResetPage extends StatefulWidget {
   const ResetPage({Key? key}) : super(key: key);
@@ -80,7 +80,7 @@ class _ResetPageState extends State<ResetPage> {
                             decoration: InputDecoration(
                               hintText: 'Password',
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
                               prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 icon: showPassword
@@ -111,7 +111,7 @@ class _ResetPageState extends State<ResetPage> {
                             decoration: InputDecoration(
                               hintText: 'Confirm new password',
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(50))),
+                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
                               prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 icon: showPassword
@@ -122,40 +122,19 @@ class _ResetPageState extends State<ResetPage> {
                               ),
                             ),
                           ),],),),
-                    SizedBox(
-                          height: 40,
-                        ),
-                        Text(
-                          '''Didn't receive any code? ''',
-                          style: TextStyle(fontSize: 20, color:  Theme.of(context).accentColor),
-                          textAlign: TextAlign.center,
-                        ),
 
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
-
-                            },
-                            child:Text(
-                              'Resend Code',
-                              style: TextStyle(fontSize: 20, color:Theme.of(context).primaryColor),
-                              textAlign: TextAlign.center,
-                            )),
                         SizedBox(
-                          height:35,
+                          height:85,
                         ),
                         Container(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           width: double.infinity,
                           height: 60,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
+                            borderRadius: BorderRadius.circular(raduice),
                           ),
                           child: MaterialButton(
-                            onPressed: () =>  Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen())),
+                            onPressed: () => print("Successful Login."),
                             color:Theme.of(context).primaryColor,
                             child: Text(
                               'Done',

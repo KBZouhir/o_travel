@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
@@ -13,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showPassword = true;
-  double _KRaduice=15.0;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     hintText: 'Email Address',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                        borderRadius: BorderRadius.all(Radius.circular(raduice))),
                     prefixIcon: Icon(
                       Icons.perm_identity,
                       size: 30,
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     hintText: 'Password',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(_KRaduice))),
+                        borderRadius: BorderRadius.all(Radius.circular(raduice))),
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: showPassword
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(_KRaduice),
+                    borderRadius: BorderRadius.circular(raduice),
                   ),
                   child: MaterialButton(
                     onPressed: () => Navigator.push(context,
