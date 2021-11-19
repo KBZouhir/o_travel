@@ -1,94 +1,326 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
+import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/searche/result.dart';
 
-class SearcheScreen extends StatefulWidget {
-  const SearcheScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  _SearcheScreenState createState() => _SearcheScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearcheScreenState extends State<SearcheScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   String? selectEvent;
-  List<String> listEvent = ['listCat','listCat','listCat','listCat',];
+  List<String> listEvent = [
+    'listCat',
+    'listCat',
+    'listCat',
+    'listCat',
+  ];
+  bool _value = false;
+  int val = 1;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: Text("Flutter GridView Demo"),
+          title: Text("Search"),
         ),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
-                child: Container(
-                  height: 60,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor.withOpacity(0.05),
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
-                  child: Center(
-                    child: TextField(
-                      maxLines: 1,
-                      style: TextStyle(fontSize: 20),
-                      textAlignVertical: TextAlignVertical.center,
-                      decoration: InputDecoration(
-                        filled: true,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Theme.of(context).iconTheme.color,
-                          size: 25,
+        body:SingleChildScrollView(
+          child:  Container(
+            height: MediaQuery.of(context).size.height*1.3,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
+                  child: Container(
+                    height: 60,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor.withOpacity(0.05),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    child: Center(
+                      child: TextField(
+                        maxLines: 1,
+                        style: TextStyle(fontSize: 20),
+                        textAlignVertical: TextAlignVertical.center,
+                        decoration: InputDecoration(
+                          filled: true,
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 25,
+                          ),
+                          border: OutlineInputBorder(borderSide: BorderSide.none),
+                          fillColor:
+                          Theme.of(context).backgroundColor.withOpacity(0),
+                          contentPadding: EdgeInsets.zero,
+                          hintText: 'Search',
                         ),
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        fillColor:
-                        Theme.of(context).backgroundColor.withOpacity(0),
-                        contentPadding: EdgeInsets.zero,
-                        hintText: 'Search',
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20,),
-              Container(
-                height: 60,
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: DropdownButtonHideUnderline(
-                  child: GFDropdown(
-                    value: selectEvent,
-                    padding: const EdgeInsets.all(15),
-                    borderRadius: BorderRadius.circular(10),
-                    border: const BorderSide(
-                        color: Colors.black12, width: 1),
-                    dropdownButtonColor: Colors.white,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectEvent = 'newValue as Event?';
-                      });
-                    },
-                    items: listEvent
-                        .map((value) => DropdownMenuItem(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ))
-                        .toList(),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Campany ',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).accentColor),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: DropdownButtonHideUnderline(
+                    child: GFDropdown(
+                      value: selectEvent,
+                      padding: const EdgeInsets.all(15),
+                      borderRadius: BorderRadius.circular(10),
+                      border: const BorderSide(color: Colors.black12, width: 1),
+                      dropdownButtonColor: Colors.white,
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectEvent =newValue as String;
+                        });
+                      },
+                      items: listEvent
+                          .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ))
+                          .toList(),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20,),
-              SizedBox(height: 20,),
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Month ',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).accentColor),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: DropdownButtonHideUnderline(
+                    child: GFDropdown(
+                      value: selectEvent,
+                      padding: const EdgeInsets.all(15),
+                      borderRadius: BorderRadius.circular(10),
+                      border: const BorderSide(color: Colors.black12, width: 1),
+                      dropdownButtonColor: Colors.white,
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectEvent = 'newValue as Event?';
+                        });
+                      },
+                      items: listEvent
+                          .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ))
+                          .toList(),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Service Type ',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).accentColor),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: DropdownButtonHideUnderline(
+                    child: GFDropdown(
+                      value: selectEvent,
+                      padding: const EdgeInsets.all(15),
+                      borderRadius: BorderRadius.circular(10),
+                      border: const BorderSide(color: Colors.black12, width: 1),
+                      dropdownButtonColor: Colors.white,
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectEvent = 'newValue as Event?';
+                        });
+                      },
+                      items: listEvent
+                          .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ))
+                          .toList(),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Price',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).accentColor),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Radio(
+                          value: 1,
+                          groupValue: val,
+                          onChanged: (value) {
+                            setState(() {
+                              val = value as int;
+                            });
+                          },
+                          activeColor: Theme.of(context).primaryColor,
+                        ),SizedBox(width: 8,),
+                        Text(
+                            'Default Order',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).accentColor,
+                            )
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 2,
+                          groupValue: val,
+                          onChanged: (value) {
+                            setState(() {
+                              val = value as int;
+                            });
+                          },
+                          activeColor: Theme.of(context).primaryColor,
+                        ),SizedBox(width: 8,),
+                        Text(
+                            'By latest',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).accentColor,
+                            )
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 3,
+                          groupValue: val,
+                          onChanged: (value) {
+                            setState(() {
+                              val = value as int;
+                            });
+                          },
+                          activeColor: Theme.of(context).primaryColor,
+                        ),SizedBox(width: 8,),
+                        Text(
+                            'Lowest price to highest',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).accentColor,
+                            )
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: 4,
+                          groupValue: val,
+                          onChanged: (value) {
+                            setState(() {
+                              val = value as int;
+                            });
+                          },
+                          activeColor: Theme.of(context).primaryColor,
+                        ),SizedBox(width: 8,),
+                        Text(
+                            'Default Order',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).accentColor,
+                            )
+                        )
+                      ],
+                    ),
+
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  width: double.infinity,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(raduice),
+                  ),
+                  child: MaterialButton(
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ResultScreen())),
+                    color: Theme.of(context).primaryColor,
+                    child: Text(
+                      'Search',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+              ],
+            ),
           ),
-        ));
+        ) );
   }
 }

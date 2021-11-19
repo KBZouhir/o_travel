@@ -6,6 +6,7 @@ import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';
+import 'package:o_travel/screens/searche/searche.dart';
 import 'package:o_travel/screens/settings/settings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -306,7 +307,13 @@ class SearchWidget extends StatelessWidget {
                 size: 25,
                 color: Theme.of(context).primaryColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchScreen()));
+
+              },
             ),
           ),
         ),
