@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
+import 'package:o_travel/screens/favories/favories.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';
 import 'package:o_travel/screens/searche/searche.dart';
@@ -532,10 +533,12 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
               Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FavoriesScreen()));
+
             },
           ),
           Divider(
