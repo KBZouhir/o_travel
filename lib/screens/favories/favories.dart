@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/home.dart';
 
 class FavoriesScreen extends StatefulWidget {
@@ -11,52 +13,91 @@ class FavoriesScreen extends StatefulWidget {
 }
 
 class _FavoriesScreenState extends State<FavoriesScreen> {
+  List<String> list = [
+    'listCat',
+    'listCat',
+    'listCat',
+    'listCat',
+  ];
+  int i = 1;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    int i = 1;
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Favories"),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-            height: MediaQuery.of(context).size.height * 1.3,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Builder(
-              builder: (context) {
-                if (bool == 1)
-                  return Container(
-                    padding: EdgeInsets.all(10),
-                    width: size.width,
-                    height: size.height * 1.1,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor.withOpacity(0.05),
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      body: Builder(builder: (context){
+        if(i==1){
+          return Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 10,bottom: 60,right: 10,left: 10),
+                width: size.width,
+                height: size.height,
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: MediaQuery.of(context).size.width /
+                        (MediaQuery.of(context).size.height / 1.1),
+                  ),
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    return AdWidget(
+                      full: false,
+                    );
+                  },
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                left: 10,
+                right: 10,
+                child: Container(
+                  width: double.infinity,
+                  height:40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(raduice),
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        i=0;
+                      });
+                    },
+                    child: Row(
                       children: [
+                        Spacer(),
                         Text(
-                          'Campany ',
+                          'Delete all',
                           style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16.0,
-                              color: Theme.of(context).accentColor),
+                            fontSize: 16,
+                            color: Colors.black87,
+                          ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        Spacer(),
                       ],
                     ),
-                  );
-                else
-                  return NoFavoritesWidget(size: size);
-              },
-            )),
-      ),
+                  ),
+                ),
+              )
+            ],
+          );
+        }else{
+          return NoFavoritesWidget(size: size);
+        }
+      })
     );
   }
 }
+
+
 
 class NoFavoritesWidget extends StatelessWidget {
   const NoFavoritesWidget({
@@ -108,10 +149,8 @@ class NoFavoritesWidget extends StatelessWidget {
             child: MaterialButton(
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
               },
               color: Theme.of(context).primaryColor,
               child: Text(

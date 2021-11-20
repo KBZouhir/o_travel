@@ -4,6 +4,7 @@ import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/favories/favories.dart';
 import 'package:o_travel/screens/home/home.dart';
+import 'package:o_travel/screens/notifications/notification.dart';
 import 'package:o_travel/screens/searche/result.dart';
 import 'package:o_travel/screens/searche/searche.dart';
 import 'package:o_travel/screens/splash/on_boarding.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
                       dividerColor: Colors.white54,
                       iconTheme: IconThemeData(color: Colors.black87),
                     ),
-                    home: FavoriesScreen(),
+                    home: HomeScreen(),
                   );
                 });
           }
