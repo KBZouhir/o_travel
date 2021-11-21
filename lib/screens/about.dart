@@ -22,7 +22,7 @@ class _AboutScreenState extends State<AboutScreen> {
         ),
         body:SingleChildScrollView(
           child:  Container(
-            height: MediaQuery.of(context).size.height*1.2,
+            height: 700,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

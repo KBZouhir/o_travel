@@ -4,6 +4,7 @@
         android:label="O Travel"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:requestLegacyExternalStorage="true"
             android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:launchMode="singleTop"

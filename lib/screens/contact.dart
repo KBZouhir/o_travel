@@ -22,7 +22,7 @@ class _ContactScreenState extends State<ContactScreen> {
         ),
         body:SingleChildScrollView(
           child:  Container(
-            height: MediaQuery.of(context).size.height*1.2,
+            height: 800,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
