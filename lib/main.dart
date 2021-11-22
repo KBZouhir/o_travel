@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
+import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/favories/favories.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/notifications/notification.dart';

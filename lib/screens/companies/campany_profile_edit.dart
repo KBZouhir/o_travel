@@ -18,6 +18,8 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
         .size;
     return Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+
         child: Column(
           children: [
             Container(
