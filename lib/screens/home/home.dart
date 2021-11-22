@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
+import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
 import 'package:o_travel/screens/contact.dart';
@@ -406,7 +407,13 @@ class StoryItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(onTap: (){
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ShowAd()));
+    },
+    child: Container(
       margin: EdgeInsets.only(right: 15),
       width: 50.0,
       height: 50.0,
@@ -420,7 +427,7 @@ class StoryItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(20)),
           child: CachedNetworkImage(
             imageUrl:
-                'https://mostaql.hsoubcdn.com/uploads/503400-UxZT3-1579267418-5e21b55a3e4b6.jpg',
+            'https://i.pinimg.com/originals/6d/da/c4/6ddac42ba8f9b79fa5ddd86f4e051e2d.jpg',
             fit: BoxFit.cover,
             width: 1000,
             height: 1000,
@@ -435,7 +442,7 @@ class StoryItemWidget extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ),);
   }
 }
 
