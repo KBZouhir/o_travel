@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -36,6 +38,7 @@ dependencies:
   carousel_slider: ^4.0.0
   getwidget: ^2.0.4
   image_picker: ^0.8.4+1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +73,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - lang/ar.json
+    - lang/en.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

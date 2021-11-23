@@ -24,21 +24,18 @@ class _ShowAdState extends State<ShowAd> {
       body: Stack(
         children: [
           Expanded(
-            child: Center(
-                child: CachedNetworkImage(
-              imageUrl:
-                  'https://i.pinimg.com/originals/6d/da/c4/6ddac42ba8f9b79fa5ddd86f4e051e2d.jpg',
-
-              placeholder: (context, url) => Center(
-                  child: Container(
-                      width: 10,
-                      height: 10,
-                      child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                      ))),
-              errorWidget: (context, url, error) => new Icon(Icons.error),
-            )),
-          ),
+              child: CachedNetworkImage(
+            imageUrl:
+                'https://i.pinimg.com/originals/6d/da/c4/6ddac42ba8f9b79fa5ddd86f4e051e2d.jpg',
+            placeholder: (context, url) => Center(
+                child: Container(
+                    width: 10,
+                    height: 10,
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor,
+                    ))),
+            errorWidget: (context, url, error) => new Icon(Icons.error),
+          )),
           if (!show)
             Align(
               alignment: Alignment.bottomCenter,
@@ -54,7 +51,7 @@ class _ShowAdState extends State<ShowAd> {
                   child: Center(
                     child: Text(
                       'More Details',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
                 ),
@@ -87,11 +84,91 @@ class _ShowAdState extends State<ShowAd> {
                             'Less Details',
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
-                                fontSize: 16),
+                                fontSize: 18),
                           ),
                         ),
                       ),
                     ),
+                    SingleChildScrollView(
+                        padding: EdgeInsets.only(right: 20,left: 20),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'The Sultanate\'s flights',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .accentColor
+                                            .withOpacity(.8),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                ),
+                                Text(
+                                  'Tourism',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(0.6),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Grid view',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .accentColor
+                                            .withOpacity(.8),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                ),
+                                Text(
+                                  '500\$',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(1),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'The Sultanate\'s flights',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .accentColor
+                                            .withOpacity(.8),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                ),
+                                Text(
+                                  'Tourism',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(0.6),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                )
+                              ],
+                            ),
+                          ],
+                        ))
                   ],
                 ),
               ),

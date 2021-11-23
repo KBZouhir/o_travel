@@ -92,37 +92,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 bottom: 10,
                 left: 10,
                 right: 10,
-                child: Container(
+                child:
+                Container(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   width: double.infinity,
                   height: 60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(_KRaduice),
+                    borderRadius: BorderRadius.circular(raduice),
                   ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: primaryColorDark,
-                    ),
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen())),
-                    child: Row(
-                      children: [
-                        Spacer(),
-                        Text(
-                          'Add New Ad',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Icon(
-                          Icons.add_box_outlined,
-                          color: Colors.white,
-                        ),
-                        Spacer(),
-                      ],
+                  child: MaterialButton(
+                    onPressed: () {},
+                    color: Theme.of(context).primaryColor,
+                    child: Text(
+                      'AddNew  add',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

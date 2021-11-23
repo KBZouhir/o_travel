@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/main.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -11,12 +12,22 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _isDark = false;
+  String _lang = 'en';
   @override
   // ignore: must_call_super
   void initState() {
     _isDark = MyApp.themeNotifier.value == ThemeMode.dark;
+    getLocale().then((locale) {
+     setState(() {
+       if(locale.languageCode=='en')this._lang='ar';
+       else this._lang='en';
+     });
+    });
   }
-
+  void _changeLanguage(code) async {
+    Locale _locale = await setLocale(code);
+    MyApp.setLocale(context, _locale);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +39,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             ListTile(
               leading: Icon(Icons.language_outlined),
-              title: const Text(
-                'Language',
+              title: Text(
+                getTranslated(context,'language'),
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
+                _changeLanguage(this._lang);
                 Navigator.pop(context);
               },
             ),
@@ -45,8 +54,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             ListTile(
               leading: Icon(Icons.notifications),
-              title: const Text(
-                'Notifications',
+              title:  Text(
+                getTranslated(context,'notification_settings'),
+
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {
@@ -65,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: Row(
                 children: [
                   Text(
-                    'Night Mode',
+                    getTranslated(context,'night_mode'),
                     style: TextStyle(fontSize: 20),
                   ),
                   Spacer(),
@@ -75,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       setState(() {
                         _isDark = value;
                         MyApp.themeNotifier.value =
-                            value ? ThemeMode.dark : ThemeMode.light;
+                        value ? ThemeMode.dark : ThemeMode.light;
                       });
                     },
                   ),
@@ -86,9 +96,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _isDark = !_isDark;
                 });
                 MyApp.themeNotifier.value =
-                    MyApp.themeNotifier.value == ThemeMode.light
-                        ? ThemeMode.dark
-                        : ThemeMode.light;
+                MyApp.themeNotifier.value == ThemeMode.light
+                    ? ThemeMode.dark
+                    : ThemeMode.light;
               },
             ),
             Divider(
@@ -97,8 +107,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             ListTile(
               leading: Icon(Icons.logout),
-              title: const Text(
-                'Sign out',
+              title:  Text(
+                getTranslated(context,'logout'),
+
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {
@@ -114,7 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             ListTile(
               leading: Icon(Icons.share),
-              title: const Text(
+              title:  Text(
                 'Share App',
                 style: TextStyle(fontSize: 20),
               ),
@@ -127,7 +138,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             ListTile(
               title:
-                  Center(child: Image.asset('assets/images/social_icons.png')),
+              Center(child: Image.asset('assets/images/social_icons.png')),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -154,10 +165,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           )),
       title: Center(
           child: Text(
-        'Settings',
-        style: TextStyle(
-            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-      )),
+            'Settings',
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
       actions: [
         SizedBox(
           width: 55,

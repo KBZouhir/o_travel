@@ -92,7 +92,6 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -101,7 +100,7 @@ class _ChatScreenState extends State<ChatScreen> {
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 16),
               physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
+               itemBuilder: (context, index) {
                 return ConversationItem(user: chatUsers[index],
                   isMessageRead: (index == 0 || index == 3) ? true : false,
                 );

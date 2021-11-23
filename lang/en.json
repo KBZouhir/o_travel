@@ -1,16 +1,9 @@
 {
-"helloWorld" :"Hello World!",
-"@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
-    },
-
-
-  "search": "Search",
-  "cart": "Cart",
-  "profile": "Profile",
-
-  "home": "home",
-  "login": "login",
+  "search":         "Search",
+  "cart":           "Cart",
+  "profile":        "Profile",
+  "home":           "home",
+  "login":          "login",
   "all_categories": "All Categories",
   "notification_settings": "Notification Settings",
   "language": "Language",
@@ -160,5 +153,6 @@
   "no_connection_available": "No Connection available, check your WIFI or your Cellular data",
 
 
-  "false_credentials": "false credentials, check your password or email"
+  "false_credentials": "false credentials, check your password or email",
+  "night_mode": "Night Mode"
 }

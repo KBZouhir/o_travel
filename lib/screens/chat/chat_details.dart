@@ -88,6 +88,7 @@ class _ChatDetailsState extends State<ChatDetails> {
           ListView.builder(
             itemCount: messages.length,
             shrinkWrap: true,
+            reverse: true,
             padding: EdgeInsets.only(top: 10, bottom: 50),
             itemBuilder: (context, index) {
               return Container(
