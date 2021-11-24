@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/screens/companies/compay_profile.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class CompaniesGuideScreen extends StatefulWidget {
   const CompaniesGuideScreen({Key? key}) : super(key: key);
@@ -90,9 +91,7 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Company Guide"),
-        ),
+        appBar:buildAppBar( context),
         body: Container(
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -122,7 +121,7 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
                         fillColor:
                             Theme.of(context).backgroundColor.withOpacity(0),
                         contentPadding: EdgeInsets.zero,
-                        hintText: 'Search',
+                        hintText: getTranslated(context, 'search'),
                       ),
                     ),
                   ),
@@ -144,6 +143,33 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
           ),
         ));
   }
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
+      toolbarHeight: 50,
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 0,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
+      title: Center(
+          child: Text(getTranslated(context, 'guide'),
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+      actions: [
+        SizedBox(
+          width: 55,
+        )
+      ],
+    );
+  }
+
 }
 
 class Company {

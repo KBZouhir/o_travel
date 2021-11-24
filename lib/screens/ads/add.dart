@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class AddNewAdScreen extends StatefulWidget {
   const AddNewAdScreen({Key? key}) : super(key: key);
@@ -30,12 +31,10 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Add New Ad"),
-        ),
+        appBar: buildAppBar(context),
         body: SingleChildScrollView(
           child: Container(
-            height: 1200,
+            height: 1300,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +43,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   height: 15,
                 ),
                 Text(
-                  'Select the Ad Photo',
+                  getTranslated(context, 'select_photo'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -129,7 +128,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Ad Name',
+                  getTranslated(context, 'ad_name'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -143,7 +142,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    hintText: 'ad name',
+                    hintText: getTranslated(context, 'ad_name'),
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(raduice))),
@@ -151,7 +150,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Details',
+                  getTranslated(context, 'details'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -180,7 +179,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Main Section',
+                  getTranslated(context, 'main_section'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -194,7 +193,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    hintText: 'ad name',
+                    hintText:'',
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(raduice))),
@@ -203,7 +202,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
 
                 SizedBox(height: 16),
                 Text(
-                  'Country',
+                  getTranslated(context, 'country'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -217,7 +216,6 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    hintText: 'ad name',
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(raduice))),
@@ -226,7 +224,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
 
                 SizedBox(height: 16),
                 Text(
-                  'Month',
+                  getTranslated(context, 'month'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -240,7 +238,6 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    hintText: 'ad name',
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(raduice))),
@@ -250,7 +247,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
 
                 //----Price-------------------------------------
                 Text(
-                  'Price',
+                  getTranslated(context, 'price'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -264,7 +261,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    hintText: 'Price',
+                    hintText: getTranslated(context, 'price'),
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(raduice))),
@@ -284,7 +281,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                     onPressed: () {},
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                      'Send',
+                      getTranslated(context, 'save'),
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -297,4 +294,31 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
           ),
         ));
   }
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
+      toolbarHeight: 50,
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 0,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
+      title: Center(
+          child: Text(getTranslated(context, 'add_new_ad'),
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+      actions: [
+        SizedBox(
+          width: 55,
+        )
+      ],
+    );
+  }
+
 }

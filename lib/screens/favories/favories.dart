@@ -4,6 +4,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/home.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class FavoriesScreen extends StatefulWidget {
   const FavoriesScreen({Key? key}) : super(key: key);
@@ -25,9 +26,7 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
     Size size = MediaQuery.of(context).size;
     
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Favories"),
-      ),
+      appBar: buildAppBar( context),
       body: Builder(builder: (context){
         if(i==1){
           return Stack(
@@ -75,7 +74,8 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
                       children: [
                         Spacer(),
                         Text(
-                          'Delete all',
+                          getTranslated(context, 'delete_all')
+                          ,
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black87,
@@ -95,6 +95,33 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
       })
     );
   }
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
+      toolbarHeight: 50,
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 0,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
+      title: Center(
+          child: Text(getTranslated(context, 'favorites'),
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+      actions: [
+        SizedBox(
+          width: 55,
+        )
+      ],
+    );
+  }
+
 }
 
 
@@ -129,7 +156,8 @@ class NoFavoritesWidget extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'No Favoriess',
+              getTranslated(context, 'no_favorites')
+              ,
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 18.0,
@@ -154,7 +182,7 @@ class NoFavoritesWidget extends StatelessWidget {
               },
               color: Theme.of(context).primaryColor,
               child: Text(
-                'Go back home',
+                getTranslated(context, 'go_home'),
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,

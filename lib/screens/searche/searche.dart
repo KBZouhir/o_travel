@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/searche/result.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -14,10 +15,10 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   String? selectEvent;
   List<String> listEvent = [
-    'listCat',
-    'listCat',
-    'listCat',
-    'listCat',
+    'listCat1',
+    'listCat2',
+    'listCat3',
+    'listCat4',
   ];
   bool _value = false;
   int val = 1;
@@ -26,9 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Search"),
-        ),
+        appBar: buildAppBar(context),
         body:SingleChildScrollView(
           child:  Container(
             height: MediaQuery.of(context).size.height*1.3,
@@ -60,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           fillColor:
                           Theme.of(context).backgroundColor.withOpacity(0),
                           contentPadding: EdgeInsets.zero,
-                          hintText: 'Search',
+                          hintText: getTranslated(context, 'search'),
                         ),
                       ),
                     ),
@@ -70,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 20,
                 ),
                 Text(
-                  'Campany ',
+                  getTranslated(context, 'company'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -111,7 +110,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 10,
                 ),
                 Text(
-                  'Month ',
+                    getTranslated(context, 'month'),
+
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -133,7 +133,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       dropdownButtonColor: Colors.white,
                       onChanged: (newValue) {
                         setState(() {
-                          selectEvent = 'newValue as Event?';
+                          selectEvent = newValue as String;
                         });
                       },
                       items: listEvent
@@ -152,7 +152,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 10,
                 ),
                 Text(
-                  'Service Type ',
+                  getTranslated(context, 'service_type'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -322,5 +322,31 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
         ) );
+  }
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
+      toolbarHeight: 50,
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 0,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
+      title: Center(
+          child: Text(getTranslated(context, 'search'),
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+      actions: [
+        SizedBox(
+          width: 55,
+        )
+      ],
+    );
   }
 }

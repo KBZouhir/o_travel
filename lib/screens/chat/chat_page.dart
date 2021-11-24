@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/screens/chat/ChatUser.dart';
 import 'package:o_travel/screens/chat/conversation_list.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -88,7 +89,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        title: Text(getTranslated(context, 'chat')),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),

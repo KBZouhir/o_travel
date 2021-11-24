@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/home.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class ResultScreen extends StatefulWidget {
   const ResultScreen({Key? key}) : super(key: key);
@@ -16,9 +17,7 @@ class _ResultScreenState extends State<ResultScreen> {
     Size size = MediaQuery.of(context).size;
     int i = 1;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Search result"),
-        ),
+        appBar: buildAppBar(context) ,
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height * 1.3,
@@ -147,5 +146,31 @@ class _ResultScreenState extends State<ResultScreen> {
             ),
           ),
         ));
+  }
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
+      toolbarHeight: 50,
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 0,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
+      title: Center(
+          child: Text(getTranslated(context, 'search'),
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+      actions: [
+        SizedBox(
+          width: 55,
+        )
+      ],
+    );
   }
 }

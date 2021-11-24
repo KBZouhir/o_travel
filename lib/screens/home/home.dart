@@ -12,6 +12,7 @@ import 'package:o_travel/screens/contact.dart';
 import 'package:o_travel/screens/favories/favories.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';
+import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/notifications/notification.dart';
 import 'package:o_travel/screens/searche/searche.dart';
 import 'package:o_travel/screens/settings/settings.dart';
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
   double _KRaduice = 15.0;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -92,8 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 bottom: 10,
                 left: 10,
                 right: 10,
-                child:
-                Container(
+                child: Container(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   width: double.infinity,
                   height: 60,
@@ -104,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {},
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                      'AddNew  add',
+                      getTranslated(context,'add_new_ad'),
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -178,7 +179,7 @@ class FilterWidget extends StatelessWidget {
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 fillColor: Theme.of(context).backgroundColor.withOpacity(0),
                 contentPadding: EdgeInsets.zero,
-                hintText: 'Trip Type ',
+                hintText: getTranslated(context,'trip_type'),
               ),
             ),
           ),
@@ -207,7 +208,7 @@ class FilterWidget extends StatelessWidget {
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 fillColor: Theme.of(context).backgroundColor.withOpacity(0),
                 contentPadding: EdgeInsets.zero,
-                hintText: 'Country',
+                hintText: getTranslated(context,'country') ,
               ),
             ),
           ),
@@ -236,7 +237,7 @@ class FilterWidget extends StatelessWidget {
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 fillColor: Theme.of(context).backgroundColor.withOpacity(0),
                 contentPadding: EdgeInsets.zero,
-                hintText: 'Month',
+                hintText:  getTranslated(context,'month')  ,
               ),
             ),
           ),
@@ -279,7 +280,7 @@ class SearchWidget extends StatelessWidget {
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 fillColor: Theme.of(context).backgroundColor.withOpacity(0),
                 contentPadding: EdgeInsets.zero,
-                hintText: 'Search',
+                hintText: getTranslated(context, 'search'),
               ),
             ),
           ),
@@ -301,11 +302,8 @@ class SearchWidget extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SearchScreen()));
-
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchScreen()));
               },
             ),
           ),
@@ -314,7 +312,7 @@ class SearchWidget extends StatelessWidget {
           width: 5,
         ),
         GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -328,7 +326,7 @@ class SearchWidget extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(15))),
             child: Center(
               child: Text(
-                'Companies\nGuide',
+                getTranslated(context, 'guide'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Theme.of(context).primaryColor, fontSize: 12),
@@ -393,42 +391,43 @@ class StoryItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(onTap: (){
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ShowAd()));
-    },
-    child: Container(
-      margin: EdgeInsets.only(right: 15),
-      width: 50.0,
-      height: 50.0,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-              color: Theme.of(context).primaryColor.withOpacity(0.4), width: 4),
-          borderRadius: BorderRadius.all(Radius.circular(50))),
-      child: Center(
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          child: CachedNetworkImage(
-            imageUrl:
-            'https://i.pinimg.com/originals/6d/da/c4/6ddac42ba8f9b79fa5ddd86f4e051e2d.jpg',
-            fit: BoxFit.cover,
-            width: 1000,
-            height: 1000,
-            placeholder: (context, url) => Center(
-                child: Container(
-                    width: 10,
-                    height: 10,
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                    ))),
-            errorWidget: (context, url, error) => new Icon(Icons.error),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ShowAd()));
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 15),
+        width: 50.0,
+        height: 50.0,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(
+                color: Theme.of(context).primaryColor.withOpacity(0.4),
+                width: 4),
+            borderRadius: BorderRadius.all(Radius.circular(50))),
+        child: Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            child: CachedNetworkImage(
+              imageUrl:
+                  'https://i.pinimg.com/originals/6d/da/c4/6ddac42ba8f9b79fa5ddd86f4e051e2d.jpg',
+              fit: BoxFit.cover,
+              width: 1000,
+              height: 1000,
+              placeholder: (context, url) => Center(
+                  child: Container(
+                      width: 10,
+                      height: 10,
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      ))),
+              errorWidget: (context, url, error) => new Icon(Icons.error),
+            ),
           ),
         ),
       ),
-    ),);
+    );
   }
 }
 
@@ -493,7 +492,7 @@ class MyDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                         Spacer(),
-                        Text('UserName ',
+                        Text(getTranslated(context, 'username'),
                             style: TextStyle(
                                 fontSize: 25,
                                 color: Colors.white,
@@ -509,8 +508,8 @@ class MyDrawer extends StatelessWidget {
               )),
           ListTile(
             leading: Icon(Icons.home_filled),
-            title: const Text(
-              'Home',
+            title: Text(
+              getTranslated(context, 'home'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
@@ -526,17 +525,14 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.favorite_border),
-            title: const Text(
-              'Favorites',
+            title: Text(
+              getTranslated(context, 'favorites'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => FavoriesScreen()));
-
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => FavoriesScreen()));
             },
           ),
           Divider(
@@ -545,8 +541,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.notifications),
-            title: const Text(
-              'Notifications',
+            title: Text(
+              getTranslated(context, 'notifications'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
@@ -563,8 +559,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.chat),
-            title: const Text(
-              'Chat',
+            title: Text(
+              getTranslated(context, 'chat'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
@@ -579,8 +575,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.list),
-            title: const Text(
-              'Add New Ad',
+            title:  Text(
+    getTranslated(context,'add_new_ad_page'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
@@ -595,16 +591,14 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.help_outline_sharp),
-            title: const Text(
-              'About Us',
+            title:  Text(
+              getTranslated(context,'about'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AboutScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AboutScreen()));
             },
           ),
           Divider(
@@ -613,16 +607,14 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.phone),
-            title: const Text(
-              'Contact Us',
+            title:  Text(
+              getTranslated(context,'contact_us'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ContactScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ContactScreen()));
             },
           ),
           Divider(
@@ -631,8 +623,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: const Text(
-              'Settings',
+            title:  Text(
+              getTranslated(context,'settings')  ,
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {

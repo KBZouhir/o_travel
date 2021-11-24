@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/companies/compay_profile.dart';
-import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/home.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({Key? key}) : super(key: key);
@@ -96,9 +95,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Notifications"),
-        ),
+        appBar: buildAppBar(context),
         body: Builder(builder: (context) {
           if (i == 1) {
             return Stack(
@@ -137,7 +134,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         children: [
                           Spacer(),
                           Text(
-                            'Delete all',
+                            getTranslated(context, 'delete_all'),
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black87,
@@ -155,6 +152,34 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             return NoFavoritesWidget(size: size);
           }
         }));
+  }
+
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
+      toolbarHeight: 50,
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 0,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
+      title: Center(
+          child: Text(getTranslated(context, 'notifications'),
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+      actions: [
+        SizedBox(
+          width: 55,
+        )
+      ],
+    );
   }
 }
 
@@ -188,7 +213,7 @@ class NoFavoritesWidget extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'No Notificationss',
+              getTranslated(context, 'no_notifications'),
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 18.0,
@@ -213,7 +238,7 @@ class NoFavoritesWidget extends StatelessWidget {
               },
               color: Theme.of(context).primaryColor,
               child: Text(
-                'Go back home',
+                getTranslated(context, 'go_home'),
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
@@ -311,15 +336,20 @@ class SelectCard extends StatelessWidget {
                 )),
             Positioned(
               top: 10,
-              right: 10,
-              width: 30,
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.close,
-                  size: 18,
-                ),
-              ),
+              right: 5,
+              left: 5,
+              child: Row(
+                children: [
+                  Expanded(child: Center()),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.close,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              )
             )
           ],
         ));

@@ -126,7 +126,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
               leading: Icon(Icons.share),
               title:  Text(
-                'Share App',
+                getTranslated(context,'share'),
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {
@@ -164,8 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Colors.white,
           )),
       title: Center(
-          child: Text(
-            'Settings',
+          child: Text(getTranslated(context, 'settings'),
             style: TextStyle(
                 fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
           )),

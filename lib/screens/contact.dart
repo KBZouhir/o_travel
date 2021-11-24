@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/home.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({Key? key}) : super(key: key);
@@ -17,9 +18,7 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Contact"),
-        ),
+        appBar: buildAppBar(context),
         body:SingleChildScrollView(
           child:  Container(
             height: 800,
@@ -39,7 +38,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     height: 16
                 ),
                 Text(
-                  'Eamil',
+                  getTranslated(context, 'email'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -68,7 +67,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     height: 16
                 ),
                 Text(
-                  'Subject',
+                  getTranslated(context, 'subject'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -116,7 +115,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     onPressed: () {},
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                      'Send',
+                      getTranslated(context, 'send'),
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -129,4 +128,31 @@ class _ContactScreenState extends State<ContactScreen> {
           ),
         ) );
   }
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      iconTheme: Theme.of(context).iconTheme,
+      toolbarHeight: 50,
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 0,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          )),
+      title: Center(
+          child: Text(getTranslated(context, 'contact_us'),
+            style: TextStyle(
+                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+          )),
+      actions: [
+        SizedBox(
+          width: 55,
+        )
+      ],
+    );
+  }
+
 }

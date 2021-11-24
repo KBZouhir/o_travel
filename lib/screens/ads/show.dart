@@ -23,8 +23,7 @@ class _ShowAdState extends State<ShowAd> {
       ),
       body: Stack(
         children: [
-          Expanded(
-              child: CachedNetworkImage(
+         CachedNetworkImage(
             imageUrl:
                 'https://i.pinimg.com/originals/6d/da/c4/6ddac42ba8f9b79fa5ddd86f4e051e2d.jpg',
             placeholder: (context, url) => Center(
@@ -35,7 +34,7 @@ class _ShowAdState extends State<ShowAd> {
                       color: Theme.of(context).primaryColor,
                     ))),
             errorWidget: (context, url, error) => new Icon(Icons.error),
-          )),
+          ),
           if (!show)
             Align(
               alignment: Alignment.bottomCenter,

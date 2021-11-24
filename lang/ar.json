@@ -3,7 +3,7 @@
   "search": "بحث",
   "cart": "عربة التسوق",
   "profile": "الملف الشخصي",
-  "home": "الصفحة الرئيسية",
+  "home": " الرئيسية",
   "login": "تسجيل الدخول",
   "all_categories": "جميع الفئات",
   "notification_settings": "إعدادات الإشعار",
@@ -99,7 +99,7 @@
   "total_price": "السعر الإجمالي",
 
 
-  "email": "بريد إلكتروني",
+  "email": "البريد إلكتروني",
   "username": "اسم المستخدم",
   "password": "كلمه السر",
   "new_password": "كلمة السر الجديدة",
@@ -151,7 +151,7 @@
   "comment_must_not_be_empty": "يجب ألا يكون التعليق فارغًا" ,
   "subject_must_not_be_empty": "يجب ألا يكون الموضوع فارغًا" ,
   "missing": "ناقص",
-  "subject": "Subject",
+  "subject": "الموضوع",
   "send_suggestion": "إرسال اقتراح",
   "tracking": "تتبع",
   "dzd": "دج",
@@ -162,6 +162,37 @@
 
 
   "false_credentials": "معلومات الحساب ، تحقق من كلمة المرور أو البريد الإلكتروني",
-  "night_mode": "الوضع الليلي"
+
+
+
+  "night_mode": "الوضع الليلي",
+  "share": "شارك التطبيق",
+  "guide": "دليل الشركات",
+  "favorites": "المفضلة",
+  "notifications": "الاشعارات",
+  "chat": "الدردشة",
+  "add_new_ad_page": "أعلن لدينا",
+  "add_new_ad": "إضافة إعلان جديد",
+  "about": "من نحن",
+  "contact_us": "اتصل بنا",
+  "settings": "الإعدادات",
+
+  "trip_type": "نوع الرحلة",
+  "country": "الدولة",
+  "month": "الشهر",
+
+
+  "delete_all": "حذف الكل",
+  "no_favorites": "المفضلة فارغة",
+  "no_notifications": "لا يوجد إِشعارات",
+  "go_home": "العودة إلى الرئيسية",
+
+  "select_photo": "اختر صورة الإعلان",
+  "ad_name": "اسم الإعلان",
+  "details": "التفاصيل",
+  "main_section": "القسم الرئيسي",
+  "price": "السعر",
+  "save": "حفظ"
+
 
 }
