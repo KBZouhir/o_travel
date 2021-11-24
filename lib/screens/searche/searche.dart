@@ -13,12 +13,12 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  String? selectEvent;
+  String? selectEvent="item1";
   List<String> listEvent = [
-    'listCat1',
-    'listCat2',
-    'listCat3',
-    'listCat4',
+    'item1',
+    'item2',
+    'item3',
+    'item4',
   ];
   bool _value = false;
   int val = 1;
@@ -69,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 20,
                 ),
                 Text(
-                  getTranslated(context, 'company'),
+                  getTranslated(context, 'country'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,

@@ -161,7 +161,17 @@
   "details": "Details",
   "main_section": "Main section",
   "price": "Price",
-  "save": "Save"
+  "save": "Save",
+  
+  "skip": "Skip",
+  "start": "Start now",
+  "start_from_here": "Start from here ",
+  "start_from_here_desc": "Are you looking for travel offers?And you don't know where to find tourist office discounts.I have the solution for you.",
+  "book": "Book your trip",
+  "book_desc": " Otravel We have the solution in this application. You get all the discounts and tourist offers to the offices in a unit platform, and you can easily choose what you want.\n",
+  "end_here": " Great! you are here",
+  "end_here_desc": "What are you waiting for so far? Enter the app, choose what you want with strong offers and travel where you like at the best prices and without what you look for from company to company."
+
 
 
 
