@@ -48,7 +48,7 @@
   "add_shipping_address": "Add a shipping address",
   "address_name": "Address name",
   "buyer_name": "Buyer name",
-  "phone": "phone",
+  "phone": "Phone number",
   "wilaya": "Wilaya",
   "province": "township",
   "address": "address",
@@ -89,7 +89,11 @@
   "update_your_profile": "Update your profile",
   "save_modification": "Save Modification",
   "sign_up": "Sign Up",
-  "connect_with": "Connect With",
+  "create_account": "Create account",
+  "you_do_not_have_account": "you don't have account ?",
+  "i_have_account": "I have already an account",
+
+  "connect_with": "Login With",
   "or": "OR",
   "forgot_password": "Forgot password ?",
   "privacy_policy_first_text": "By creating an account, you agree to our",
@@ -170,9 +174,10 @@
   "book": "Book your trip",
   "book_desc": " Otravel We have the solution in this application. You get all the discounts and tourist offers to the offices in a unit platform, and you can easily choose what you want.\n",
   "end_here": " Great! you are here",
-  "end_here_desc": "What are you waiting for so far? Enter the app, choose what you want with strong offers and travel where you like at the best prices and without what you look for from company to company."
+  "end_here_desc": "What are you waiting for so far? Enter the app, choose what you want with strong offers and travel where you like at the best prices and without what you look for from company to company.",
 
-
+  "individuals":"Individuals",
+  "companies":"Companies"
 
 
 }

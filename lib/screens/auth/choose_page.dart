@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:o_travel/screens/auth/login_screen.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class ChoosePage extends StatelessWidget {
   const ChoosePage({Key? key}) : super(key: key);
@@ -7,10 +8,7 @@ class ChoosePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        elevation: 0,
-      ),
+
       body: Container(
         color: Theme.of(context).backgroundColor,
         padding: const EdgeInsets.all(20),
@@ -35,7 +33,7 @@ class ChoosePage extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Theme.of(context).primaryColor,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(50))),
+                            BorderRadius.all(Radius.circular(50))),
                         child: Center(
                           child: Image.asset('assets/images/individuals.png'),
                         ),
@@ -44,7 +42,7 @@ class ChoosePage extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        'Individuals',
+                        getTranslated(context, 'individuals') ,
                         style: TextStyle(
                             fontSize: 35,
                             color: Theme.of(context).primaryColor,
@@ -73,7 +71,7 @@ class ChoosePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: Theme.of(context).primaryColor,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(50))),
+                              BorderRadius.all(Radius.circular(50))),
                           child: Center(
                             child: Image.asset('assets/images/companies.png'),
                           ),
@@ -82,7 +80,7 @@ class ChoosePage extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                          'Companies',
+                          getTranslated(context, 'companies') ,
                           style: TextStyle(
                               fontSize: 35,
                               color: Theme.of(context).primaryColor,

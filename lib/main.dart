@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/ads/show.dart';
+import 'package:o_travel/screens/auth/login_screen.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
+import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/favories/favories.dart';
 import 'package:o_travel/screens/home/home.dart';
@@ -107,7 +109,7 @@ class _MyAppState extends State<MyApp> {
                         }
                         return supportedLocales.first;
                       },
-                      home: OnBoardingPage());
+                      home: EmailPage());
                 });
           }
         });

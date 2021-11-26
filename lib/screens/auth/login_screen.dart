@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool company;
@@ -14,7 +16,20 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showPassword = true;
-
+  String _lang = 'en';
+  @override
+  void initState() {
+    getLocale().then((locale) {
+      setState(() {
+        if(locale.languageCode=='en')this._lang='ar';
+        else this._lang='en';
+      });
+    });
+  }
+  void _changeLanguage() async {
+    Locale _locale = await setLocale(_lang);
+    MyApp.setLocale(context, _locale);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
         elevation: 0,
         title: Center(
             child: Text(
-          'LOGIN',
+              getTranslated(context, 'login'),
           style: TextStyle(fontSize: 25, color: Theme.of(context).primaryColor),
         )),
         leading: IconButton(
@@ -33,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             color: Colors.blueGrey,
             size: 30,
           ),
-          onPressed: () => setState(() => showPassword = !showPassword),
+          onPressed: () => _changeLanguage(),
         ),
         actions: [
           SizedBox(
@@ -56,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 40,
                 ),
                 Text(
-                  'Username or email',
+                  getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -72,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    hintText: 'Email Address',
+                    hintText: getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(raduice))),
                     prefixIcon: Icon(
@@ -85,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 25,
                 ),
                 Text(
-                  'Password',
+                  getTranslated(context, 'password'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -101,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Theme.of(context).accentColor),
                   obscureText: showPassword,
                   decoration: InputDecoration(
-                    hintText: 'Password',
+                    hintText: getTranslated(context, 'password'),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(raduice))),
                     prefixIcon: Icon(Icons.lock),
@@ -125,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 builder: (context) => EmailPage()));
                       },
                       child: Text(
-                        'Forgot Password?',
+                        getTranslated(context, 'forgot_password'),
                         style: TextStyle(
                           color: Theme.of(context).accentColor.withOpacity(0.7),
                           fontSize: 14.0,
@@ -149,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialPageRoute(builder: (context) => HomeScreen())),
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                      'LOGIN',
+                      getTranslated(context, 'login'),
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -166,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Sign in with',
+                              getTranslated(context, 'connect_with'),
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 color: Theme.of(context).accentColor,
@@ -199,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '''Don't have an account? ''',
+                      getTranslated(context, 'you_do_not_have_account'),
                       style: TextStyle(
                         color: Theme.of(context).accentColor.withOpacity(0.8),
                         fontSize: 16.0,
@@ -212,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialPageRoute(
                                 builder: (context) => SignUpPage()));
                       },
-                      child: Text('Sign Up',
+                      child: Text(getTranslated(context, 'sign_up'),
                           style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontWeight: FontWeight.w700,
