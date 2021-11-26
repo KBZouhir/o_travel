@@ -33,7 +33,15 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration:
-        BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20))),
+        BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)), boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 4,
+            offset: Offset(0, 2), // changes position of shadow
+          ),
+        ],
+        ),
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         child: Stack(
           children: [

@@ -41,6 +41,14 @@ class _AdWidgetState extends State<AdWidget> {
           minHeight: 120.0,
         ),
         decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 4,
+                offset: Offset(0, 2), // changes position of shadow
+              ),
+            ],
             color: Colors.grey,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Stack(

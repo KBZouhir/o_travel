@@ -38,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
           width: size.width,
           height: size.height,
           color: Theme.of(context).backgroundColor,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Stack(
             children: [
               RefreshIndicator(
@@ -47,6 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 onRefresh: _refresh,
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 5),
+                  margin: EdgeInsets.all( 5),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   width: double.infinity,
                   height: 60,
