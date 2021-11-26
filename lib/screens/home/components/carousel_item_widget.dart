@@ -1,6 +1,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/screens/ads/show.dart';
 
 class CarouselItemWidget extends StatefulWidget {
   final String item;
@@ -20,6 +21,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ShowAd(image:widget.item)));
+      },
       onDoubleTap: () {
         setState(() {
           favorite = !favorite;
@@ -32,7 +37,9 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         child: Stack(
           children: [
-            ClipRRect(
+        Hero(
+        tag: 'ad_image'+widget.item,
+          child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: CachedNetworkImage(
                 imageUrl: widget.item,
@@ -48,7 +55,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                         ))),
                 errorWidget: (context, url, error) => new Icon(Icons.error),
               ),
-            ),
+            ),),
             Positioned(
               child: Container(
                 height: 50,

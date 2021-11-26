@@ -1,21 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
-import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
 import 'package:o_travel/screens/contact.dart';
 import 'package:o_travel/screens/favories/favories.dart';
-import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/notifications/notification.dart';
 import 'package:o_travel/screens/searche/searche.dart';
 import 'package:o_travel/screens/settings/settings.dart';
+import 'components/ads_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showPassword = true;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
-  double _KRaduice = 15.0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 key: _refreshIndicatorKey,
                 onRefresh: _refresh,
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -78,23 +77,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 20,
                       ),
-                      AdsContainer(),
-                      AdsContainer(),
-                      AdsContainer(),
-                      AdsContainer(),
-                      AdsContainer(),
+
+                      AdsList(adsList:images),
                       SizedBox(
                         height: 80,
                       ),
+
                     ],
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 10,
-                left: 10,
-                right: 10,
+              Align(
+                alignment: Alignment.bottomCenter,
                 child: Container(
+                  margin: EdgeInsets.only(bottom: 5),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   width: double.infinity,
                   height: 60,
@@ -102,10 +98,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(raduice),
                   ),
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AddNewAdScreen()));
+                    },
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                      getTranslated(context,'add_new_ad'),
+                      getTranslated(context, 'add_new_ad'),
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -146,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+
 class FilterWidget extends StatelessWidget {
   const FilterWidget({
     Key? key,
@@ -179,7 +179,7 @@ class FilterWidget extends StatelessWidget {
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 fillColor: Theme.of(context).backgroundColor.withOpacity(0),
                 contentPadding: EdgeInsets.zero,
-                hintText: getTranslated(context,'trip_type'),
+                hintText: getTranslated(context, 'trip_type'),
               ),
             ),
           ),
@@ -208,7 +208,7 @@ class FilterWidget extends StatelessWidget {
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 fillColor: Theme.of(context).backgroundColor.withOpacity(0),
                 contentPadding: EdgeInsets.zero,
-                hintText: getTranslated(context,'country') ,
+                hintText: getTranslated(context, 'country'),
               ),
             ),
           ),
@@ -237,7 +237,7 @@ class FilterWidget extends StatelessWidget {
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 fillColor: Theme.of(context).backgroundColor.withOpacity(0),
                 contentPadding: EdgeInsets.zero,
-                hintText:  getTranslated(context,'month')  ,
+                hintText: getTranslated(context, 'month'),
               ),
             ),
           ),
@@ -388,13 +388,15 @@ class StoryItemWidget extends StatelessWidget {
   const StoryItemWidget({
     Key? key,
   }) : super(key: key);
-
+  final _momentCount = 5;
+  final _momentDuration = const Duration(seconds: 5);
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ShowAd()));
+
       },
       child: Container(
         margin: EdgeInsets.only(right: 15),
@@ -575,8 +577,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.list),
-            title:  Text(
-    getTranslated(context,'add_new_ad_page'),
+            title: Text(
+              getTranslated(context, 'add_new_ad_page'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
@@ -591,8 +593,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.help_outline_sharp),
-            title:  Text(
-              getTranslated(context,'about'),
+            title: Text(
+              getTranslated(context, 'about'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
@@ -607,8 +609,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.phone),
-            title:  Text(
-              getTranslated(context,'contact_us'),
+            title: Text(
+              getTranslated(context, 'contact_us'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
@@ -623,8 +625,8 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title:  Text(
-              getTranslated(context,'settings')  ,
+            title: Text(
+              getTranslated(context, 'settings'),
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {

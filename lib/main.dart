@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/companies/campany_profile_edit.dart';
 import 'package:o_travel/screens/companies/compay_profile.dart';
+import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/home.dart';
 
 import 'package:o_travel/screens/localization/const.dart';
@@ -17,7 +19,8 @@ void main() {
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+  static final ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(ThemeMode.light);
 
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
@@ -30,6 +33,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late Locale _locale;
+
   setLocale(Locale locale) {
     setState(() {
       _locale = locale;
@@ -46,6 +50,8 @@ class _MyAppState extends State<MyApp> {
     super.didChangeDependencies();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -60,50 +66,52 @@ class _MyAppState extends State<MyApp> {
                 valueListenable: MyApp.themeNotifier,
                 builder: (_, ThemeMode currentMode, __) {
                   return MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      title: 'Flutter Demo',
-                      darkTheme: ThemeData(
-                        primarySwatch: Colors.grey,
-                        primaryColor: primaryColorDark,
-                        brightness: Brightness.dark,
-                        backgroundColor: Color.fromRGBO(25, 25, 25, 1),
-                        accentColor: whiteColor,
-                        accentIconTheme: IconThemeData(color: gray148),
-                        dividerColor: gray70,
-                        iconTheme: IconThemeData(color: Colors.white),
-                      ),
-                      themeMode: currentMode,
-                      theme: ThemeData(
-                        primarySwatch: Colors.grey,
-                        primaryColor: primaryColorDark,
-                        brightness: Brightness.light,
-                        backgroundColor: Colors.white,
-                        accentColor: Colors.black54,
-                        accentIconTheme: IconThemeData(color: Colors.white),
-                        dividerColor: Colors.white54,
-                        iconTheme: IconThemeData(color: Colors.black87),
-                      ),
-                      localizationsDelegates: [
-                        DemoLocalization.delegate,
-                        GlobalMaterialLocalizations.delegate,
-                        GlobalWidgetsLocalizations.delegate,
-                        GlobalCupertinoLocalizations.delegate,
-                      ],
-                      locale: _locale,
-                      supportedLocales: [
-                        Locale('en', 'US'), // English, no country code
-                        Locale('ar', 'SA'), // Spanish, no country code
-                      ],
-                      localeResolutionCallback: (locale, supportedLocales) {
-                        for (var supportedLocale in supportedLocales) {
-                          if (supportedLocale.languageCode == locale!.languageCode &&
-                              supportedLocale.countryCode == locale.countryCode) {
-                            return supportedLocale;
-                          }
+                    debugShowCheckedModeBanner: false,
+                    title: 'O travel',
+                    darkTheme: ThemeData(
+                      primarySwatch: Colors.grey,
+                      primaryColor: primaryColorDark,
+                      brightness: Brightness.dark,
+                      backgroundColor: Color.fromRGBO(25, 25, 25, 1),
+                      accentColor: whiteColor,
+                      accentIconTheme: IconThemeData(color: gray148),
+                      dividerColor: gray70,
+                      iconTheme: IconThemeData(color: Colors.white),
+                    ),
+                    themeMode: currentMode,
+                    theme: ThemeData(
+                      primarySwatch: Colors.grey,
+                      primaryColor: primaryColorDark,
+                      brightness: Brightness.light,
+                      backgroundColor: Colors.white,
+                      accentColor: Colors.black54,
+                      accentIconTheme: IconThemeData(color: Colors.white),
+                      dividerColor: Colors.white54,
+                      iconTheme: IconThemeData(color: Colors.black87),
+                    ),
+                    localizationsDelegates: [
+                      DemoLocalization.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    locale: _locale,
+                    supportedLocales: [
+                      Locale('en', 'US'), // English, no country code
+                      Locale('ar', 'SA'), // Spanish, no country code
+                    ],
+                    localeResolutionCallback: (locale, supportedLocales) {
+                      for (var supportedLocale in supportedLocales) {
+                        if (supportedLocale.languageCode ==
+                                locale!.languageCode &&
+                            supportedLocale.countryCode == locale.countryCode) {
+                          return supportedLocale;
                         }
-                        return supportedLocales.first;
-                      },
-                      home: HomeScreen());
+                      }
+                      return supportedLocales.first;
+                    },
+                    home: HomeScreen(),
+                  );
                 });
           }
         });

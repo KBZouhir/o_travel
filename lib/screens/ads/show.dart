@@ -7,7 +7,9 @@ import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class ShowAd extends StatefulWidget {
-  const ShowAd({Key? key}) : super(key: key);
+  final String image;
+
+  const ShowAd({Key? key, required this.image}) : super(key: key);
 
   @override
   _ShowAdState createState() => _ShowAdState();
@@ -23,17 +25,31 @@ class _ShowAdState extends State<ShowAd> {
       appBar: buildAppBar(context),
       body: Stack(
         children: [
-          CachedNetworkImage(
-            imageUrl:
-                'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/tourism-and-spa-retreat-magazine-ad-design-template-995fd9fa2768402717ab5156e373cd2b_screen.jpg?ts=1584446948',
-            placeholder: (context, url) => Center(
-                child: Container(
-                    width: 10,
-                    height: 10,
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                    ))),
-            errorWidget: (context, url, error) => new Icon(Icons.error),
+          Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Hero(
+                    tag: 'ad_image' + widget.image,
+                    child: CachedNetworkImage(
+                      imageUrl: widget.image,
+                      placeholder: (context, url) => Center(
+                          child: Container(
+                              width: 10,
+                              height: 10,
+                              child: CircularProgressIndicator(
+                                color: Theme.of(context).primaryColor,
+                              ))),
+                      errorWidget: (context, url, error) => new Icon(Icons.error),
+                      width: size.width,
+                      fit: BoxFit.fitWidth,
+                    ),
+                  )
+                  ,SizedBox(height: 60,)
+                ],
+              ),
+            ),
           ),
           if (!show)
             Align(
@@ -258,20 +274,17 @@ class _ShowAdState extends State<ShowAd> {
                               borderRadius: BorderRadius.circular(100),
                               child: CachedNetworkImage(
                                 imageUrl:
-                                "https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png",
+                                    "https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png",
                                 height: size.height * 0.13,
                                 width: size.height * 0.13,
                                 fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    Container(
-                                        width: 50,
-                                        height: 50,
-                                        child: Center(
-                                            child: CircularProgressIndicator(
-                                              color: Theme
-                                                  .of(context)
-                                                  .primaryColor,
-                                            ))),
+                                placeholder: (context, url) => Container(
+                                    width: 50,
+                                    height: 50,
+                                    child: Center(
+                                        child: CircularProgressIndicator(
+                                      color: Theme.of(context).primaryColor,
+                                    ))),
                                 errorWidget: (context, url, error) =>
                                     Icon(Icons.error),
                               ),
@@ -284,27 +297,27 @@ class _ShowAdState extends State<ShowAd> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text('Jannat Asia ',
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            color: Theme.of(context).accentColor,
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text('Tourism\Sultanate of Oman',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color:Theme.of(context).accentColor,
-                                            fontWeight: FontWeight.w300)),
-                                    SizedBox(
-                                      height: 50,
-                                    ),
-                                    Image.asset('assets/images/social_icons.png'),
-                                    SizedBox(
-                                      height: 50,
-                                    ),
-                                  ]))
+                                Text('Jannat Asia ',
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        color: Theme.of(context).accentColor,
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text('Tourism\Sultanate of Oman',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Theme.of(context).accentColor,
+                                        fontWeight: FontWeight.w300)),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                Image.asset('assets/images/social_icons.png'),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                              ]))
                         ],
                       ))),
             ),

@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/chat/ChatUser.dart';
 import 'package:o_travel/screens/chat/Chat_message.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatDetails extends StatefulWidget {
   final ChatUser user;
@@ -81,7 +82,9 @@ class _ChatDetailsState extends State<ChatDetails> {
             ],
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.phone_outlined))
+            IconButton(onPressed: () {
+              launch("tel://${widget.user.phone}");
+            }, icon: Icon(Icons.phone_outlined))
           ],
         ),
         body: Stack(children: <Widget>[
@@ -192,4 +195,5 @@ class _ChatDetailsState extends State<ChatDetails> {
               ))
         ]));
   }
+
 }

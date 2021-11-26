@@ -8,31 +8,14 @@ class AdsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            AdWidget(full: false),
-            Spacer(),
-            AdWidget(full: false),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        AdWidget(full: true),
-        SizedBox(
-          height: 20,
-        ),
-      ],
-    );
+    return Center();
   }
 }
 
 class AdWidget extends StatefulWidget {
-  final bool full;
+  final String image;
 
-  const AdWidget({Key? key, required this.full}) : super(key: key);
+  const AdWidget({Key? key, required this.image}) : super(key: key);
 
   @override
   _AdWidgetState createState() => _AdWidgetState();
@@ -46,7 +29,7 @@ class _AdWidgetState extends State<AdWidget> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ShowAd()));
+            context, MaterialPageRoute(builder: (context) => ShowAd(image:widget.image)));
       },
       onDoubleTap: () {
         setState(() {
@@ -54,35 +37,33 @@ class _AdWidgetState extends State<AdWidget> {
         });
       },
       child: Container(
-        height: MediaQuery.of(context).size.width * 0.6,
-        width: widget.full
-            ? MediaQuery.of(context).size.width
-            : MediaQuery.of(context).size.width * 0.45,
+        constraints: new BoxConstraints(
+          minHeight: 120.0,
+        ),
         decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.all(Radius.circular(20))),
-        margin: widget.full
-            ? EdgeInsets.symmetric(horizontal: 20.0)
-            : EdgeInsets.symmetric(horizontal: 0.0),
         child: Stack(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              child: CachedNetworkImage(
-                imageUrl:
-                    'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/tourism-and-spa-retreat-magazine-ad-design-template-995fd9fa2768402717ab5156e373cd2b_screen.jpg?ts=1584446948',
-                placeholder: (context, url) => Container(
-                    width: 50,
-                    height: 50,
-                    child: Center(
-                        child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                    ))),
-                errorWidget: (context, url, error) => new Icon(Icons.error),
-                fit: BoxFit.cover,
-                width: 1000,
-                height: 1000,
-              ),
+            Hero(
+              tag: 'ad_image'+widget.image,
+              child:
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                child: CachedNetworkImage(
+                  imageUrl: widget.image,
+                  placeholder: (context, url) => Container(
+                      width: 50,
+                      height: 50,
+                      child: Center(
+                          child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                          ))),
+                  errorWidget: (context, url, error) => new Icon(Icons.error),
+                  fit: BoxFit.cover,
+                  width: 1000,
+                ),
+              )
             ),
             Positioned(
               child: Center(

@@ -14,75 +14,12 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   List<ChatUser> chatUsers = [
     ChatUser(
-        name: "Jane Russel",
-        messageText: "Awesome Setup",
-        imageURL: "https://www.freecodecamp.org/news/content/images/size/w100/2021/05/krissanawat-gravatar.jpeg",
+        name: "Zeou",
+        messageText: 'Hello',
+        imageURL: "https://lh3.googleusercontent.com/ogw/ADea4I4lUkNl3YkeKn0doOPO4In1EgYplXG1jBkYAG9S1Q=s83-c-mo",
+        phone:'0657112980',
         time: "Now"),
-    ChatUser(
-        name: "Glady's Murphy",
-        messageText: "That's Great",
-        imageURL: "images/userImage2.jpeg",
-        time: "Yesterday"),
-    ChatUser(
-        name: "Jorge Henry",
-        messageText: "Hey where are you?",
-        imageURL: "images/userImage3.jpeg",
-        time: "31 Mar"),
-    ChatUser(
-        name: "Philip Fox",
-        messageText: "Busy! Call me in 20 mins",
-        imageURL: "images/userImage4.jpeg",
-        time: "28 Mar"),
-    ChatUser(
-        name: "Debra Hawkins",
-        messageText: "Thankyou, It's awesome",
-        imageURL: "images/userImage5.jpeg",
-        time: "23 Mar"),
-    ChatUser(
-        name: "Jacob Pena",
-        messageText: "will update you in evening",
-        imageURL: "images/userImage6.jpeg",
-        time: "17 Mar"),
-    ChatUser(
-        name: "Andrey Jones",
-        messageText: "Can you please share the file?",
-        imageURL: "images/userImage7.jpeg",
-        time: "24 Feb"),
-    ChatUser(
-        name: "John Wick",
-        messageText: "How are you?",
-        imageURL: "images/userImage8.jpeg",
-        time: "18 Feb"),
-    ChatUser(
-        name: "Andrey Jones",
-        messageText: "Can you please share the file?",
-        imageURL: "images/userImage7.jpeg",
-        time: "24 Feb"),
-    ChatUser(
-        name: "John Wick",
-        messageText: "How are you?",
-        imageURL: "images/userImage8.jpeg",
-        time: "18 Feb"),
-    ChatUser(
-        name: "Andrey Jones",
-        messageText: "Can you please share the file?",
-        imageURL: "images/userImage7.jpeg",
-        time: "24 Feb"),
-    ChatUser(
-        name: "John Wick",
-        messageText: "How are you?",
-        imageURL: "images/userImage8.jpeg",
-        time: "18 Feb"),
-    ChatUser(
-        name: "Andrey Jones",
-        messageText: "Can you please share the file?",
-        imageURL: "images/userImage7.jpeg",
-        time: "24 Feb"),
-    ChatUser(
-        name: "John Wick",
-        messageText: "How are you?",
-        imageURL: "images/userImage8.jpeg",
-        time: "18 Feb"),
+
   ];
 
   @override

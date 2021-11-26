@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/companies/campany_profile_edit.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
+import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class CompanyProfile extends StatefulWidget {
@@ -214,13 +216,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     SizedBox(height: 16,),
 
-                    AdsContainer(),
-                    AdsContainer(),
-                    AdsContainer(),
-                    AdsContainer(),
+
                   ],
                 )
             ),
+            AdsList(adsList:images),
+
           ],
         ),
       ),
