@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:o_travel/constants.dart';
-
+import 'package:o_travel/screens/ads/show.dart';
+import 'package:o_travel/screens/companies/campany_profile_edit.dart';
+import 'package:o_travel/screens/companies/compay_profile.dart';
 import 'package:o_travel/screens/home/home.dart';
+
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/localization/demo_localisation.dart';
-import 'package:o_travel/screens/splash/on_boarding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -101,7 +103,7 @@ class _MyAppState extends State<MyApp> {
                         }
                         return supportedLocales.first;
                       },
-                      home: OnBoardingPage());
+                      home: HomeScreen());
                 });
           }
         });

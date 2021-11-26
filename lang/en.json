@@ -174,7 +174,7 @@
   "save": "Save",
   
   "skip": "Skip",
-  "start": "Start now",
+  "start": "Start",
   "start_from_here": "Start from here ",
   "start_from_here_desc": "Are you looking for travel offers?And you don't know where to find tourist office discounts.I have the solution for you.",
   "book": "Book your trip",
@@ -183,7 +183,27 @@
   "end_here_desc": "What are you waiting for so far? Enter the app, choose what you want with strong offers and travel where you like at the best prices and without what you look for from company to company.",
 
   "individuals":"Individuals",
-  "companies":"Companies"
+  "companies":"Companies",
+
+  "company_name": "Company name",
+  "about_company": "About company",
+  "location_gps": "Location GPS",
+  "area": "Area",
+  "field": "Field",
+  "commercial_register": "Commercial Register",
+  "snapchat": "Snapchat account",
+  "instagram": "Instagram account",
+  "Social_Media_Accounts": "Social Media Accounts",
+  "added_ads": "Added ads",
+  "more_details": "More Details",
+  "less_details": "Less Details",
+  "ad_details": "Ad Details",
+  "publish_date": "Publish Date",
+  "contact_company": "Contact the company",
+
+  "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+
 
 
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/companies/campany_profile_edit.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class CompanyProfile extends StatefulWidget {
   const CompanyProfile({Key? key}) : super(key: key);
@@ -34,26 +35,26 @@ class _CompanyProfileState extends State<CompanyProfile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                   Row(
-                     children: [
-                       IconButton(
-                           icon: Icon(
-                             Icons.arrow_back_ios,
-                             color: Colors.white,
-                             size: 25,
-                           ),
-                           onPressed: () => Navigator.pop(context)),
-                       Spacer(),
-                       IconButton(
-                           icon: Icon(
-                             Icons.edit,
-                             color: Colors.white,
-                             size: 25,
-                           ),
-                           onPressed: () =>    Navigator.push(context,
-                               MaterialPageRoute(builder: (context) => CompanyProfileEdit()))),
-                     ],
-                   ),
+                    Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                            onPressed: () => Navigator.pop(context)),
+                        Spacer(),
+                        IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                            onPressed: () =>    Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => CompanyProfileEdit()))),
+                      ],
+                    ),
                     Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
@@ -107,12 +108,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy'
-                          ' eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. '
-                          'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,'
-                          ' no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,'
-                          ' consetetur sadipscing elitr, sed diam nonumy.',
-                      style: TextStyle(fontSize: 14),
+                      getTranslated(context, 'lorem'),
+                      style: TextStyle(fontSize: 16,height: 1.5),
                     ),
                     SizedBox(height: 16,),
                     Divider(
@@ -126,12 +123,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     Row(
                       children: [
                         Text(
-                        'Area',
-                        style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
-                      ),
+                          getTranslated(context, "area"),
+                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+                        ),
                         Spacer(),
                         Text(
-                          'olor ',
+                          '----',
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
@@ -148,13 +145,13 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     Row(
                       children: [
                         Text(
-                          'Email',
+                          getTranslated(context, "email"),
                           style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
                         ),
                         Spacer(),
 
                         Text(
-                          'olor ',
+                          '----',
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
@@ -171,13 +168,13 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     Row(
                       children: [
                         Text(
-                          'Phone',
+                      getTranslated(context, 'phone'),
                           style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
                         ),
                         Spacer(),
 
                         Text(
-                          'olor ',
+                          '----',
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
@@ -193,10 +190,10 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     SizedBox(height: 16,),
 
                     Text(
-                      'Social Media Accounts',
+                      getTranslated(context, 'Social_Media_Accounts'),
                       style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
                     ),
-                       Text(
+                    Text(
                       'Social Media Accounts',
                       style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
                     ),
@@ -212,7 +209,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     SizedBox(height: 16,),
 
                     Text(
-                      'Added Ad',
+                      getTranslated(context,  "added_ads"),
                       style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
                     ),
                     SizedBox(height: 16,),
@@ -224,7 +221,6 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   ],
                 )
             ),
-
           ],
         ),
       ),

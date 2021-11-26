@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class CompanyProfileEdit extends StatefulWidget {
   const CompanyProfileEdit({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                             ),
                             onPressed: () => Navigator.pop(context)),
                         Spacer(),
-                        Text('Edit Profile',style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                        Text(getTranslated(context, 'edit_profile'),style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
                         Spacer(),
                         SizedBox(width: 55)
                       ],
@@ -85,7 +86,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Company name',
+                      getTranslated(context, 'company_name'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -101,7 +102,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        hintText: 'Company name',
+                        hintText: getTranslated(context, 'company_name'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(
@@ -114,7 +115,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'About Company',
+                      getTranslated(context, 'about_company'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -149,7 +150,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Location GPS',
+                      getTranslated(context, 'location_gps'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -166,7 +167,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       obscureText: false,
 
                       decoration: InputDecoration(
-                        hintText: 'Location GPS',
+                        hintText: getTranslated(context, 'location_gps'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.location_on),
@@ -176,7 +177,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Email',
+                      getTranslated(context, 'email'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -192,7 +193,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Email',
+                        hintText:getTranslated(context, 'email'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.email_outlined),
@@ -203,7 +204,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Phone number',
+                      getTranslated(context, 'phone'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -219,7 +220,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Phone number',
+                        hintText: getTranslated(context, 'phone'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.phone),
@@ -229,7 +230,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Field',
+                      getTranslated(context, 'area'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -245,7 +246,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Field',
+
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
@@ -255,7 +256,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Field',
+                      getTranslated(context, 'field'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -271,7 +272,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Field',
+
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
@@ -281,7 +282,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Field',
+                      getTranslated(context, 'commercial_register'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -297,7 +298,8 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Field',
+                        prefixIcon: Icon(Icons.add_photo_alternate),
+                        hintText: getTranslated(context, 'commercial_register'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
@@ -307,7 +309,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 16
                     ),
                     Text(
-                      'Field',
+                      getTranslated(context, 'snapchat'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -323,7 +325,33 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Field',
+                        hintText: getTranslated(context, 'snapchat'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
+
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16
+                    ),
+                    Text(
+                      getTranslated(context, 'instagram'),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20.0,
+                          color: Theme.of(context).accentColor),
+                    ),
+                    SizedBox(
+                      height: 8
+                    ),
+                    TextField(
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20.0,
+                          color: Theme.of(context).accentColor),
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        hintText: getTranslated(context, 'instagram'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(raduice))),
 
@@ -343,7 +371,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                         onPressed: () => print("save"),
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                          'Save',
+                          getTranslated(context, 'save'),
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

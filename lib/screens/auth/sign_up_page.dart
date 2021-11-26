@@ -51,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 color: Colors.blueGrey,
                 size: 30,
               ),
-              onPressed: () {}),
+              onPressed: () {_changeLanguage();}),
           actions: [
             SizedBox(
               width: 55,

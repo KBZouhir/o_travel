@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/screens/ads/show.dart';
 
 class AdsContainer extends StatelessWidget {
   const AdsContainer({Key? key}) : super(key: key);
@@ -43,6 +44,10 @@ class _AdWidgetState extends State<AdWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ShowAd()));
+      },
       onDoubleTap: () {
         setState(() {
           favorite = true;
