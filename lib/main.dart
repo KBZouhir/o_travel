@@ -2,18 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/ads/show.dart';
-import 'package:o_travel/screens/auth/login_screen.dart';
-import 'package:o_travel/screens/auth/reset/email.dart';
-import 'package:o_travel/screens/auth/sign_up_page.dart';
-import 'package:o_travel/screens/chat/chat_page.dart';
-import 'package:o_travel/screens/favories/favories.dart';
+
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/localization/demo_localisation.dart';
-import 'package:o_travel/screens/notifications/notification.dart';
-import 'package:o_travel/screens/searche/result.dart';
-import 'package:o_travel/screens/searche/searche.dart';
 import 'package:o_travel/screens/splash/on_boarding.dart';
 
 void main() {
@@ -109,7 +101,7 @@ class _MyAppState extends State<MyApp> {
                         }
                         return supportedLocales.first;
                       },
-                      home: EmailPage());
+                      home: OnBoardingPage());
                 });
           }
         });
@@ -125,7 +117,7 @@ class Splash extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.dark
           ? Colors.white
-          : Color.fromRGBO(25, 25, 25, 1),
+          : Color.fromRGBO(49, 47, 47, 1.0),
       body: Center(
           child: Image.asset(
         'assets/images/logo.png',

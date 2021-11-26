@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/reset.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class VerifyPage extends StatefulWidget {
   const VerifyPage({Key? key}) : super(key: key);
@@ -42,29 +43,33 @@ class _VerifyPageState extends State<VerifyPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Align(
-                      child: Icon(
-                        Icons.chevron_left,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      alignment: Alignment.topLeft,
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.chevron_left,
+                              color: Colors.white,
+                              size: 40,
+                            )),                          Spacer(),
+
+                      ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+
                     Text(
-                      'Forgot Your Password?',
+                      getTranslated(context, 'forgot_password'),
                       style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text(
-                      '''Please Enter the Code You \nReceive on you're Email''',
+                      getTranslated(context, 'confirm_code_text'),
                       style: TextStyle(
                           fontSize: 20, color: Colors.white),
                       textAlign: TextAlign.center,
@@ -93,7 +98,7 @@ class _VerifyPageState extends State<VerifyPage> {
                             height: 20,
                           ),
                           Text(
-                            'Code',
+                            getTranslated(context, 'code'),
                             style: TextStyle(
                                 fontSize: 25,
                                 color: Theme.of(context).primaryColor,
@@ -117,7 +122,7 @@ class _VerifyPageState extends State<VerifyPage> {
                       height: 40,
                     ),
                     Text(
-                      '''Didn't receive any code? ''',
+                      getTranslated(context, 'didnt_receive_code'),
                       style: TextStyle(
                           fontSize: 20, color: Theme.of(context).accentColor),
                       textAlign: TextAlign.center,
@@ -125,7 +130,7 @@ class _VerifyPageState extends State<VerifyPage> {
                     TextButton(
                         onPressed: () {},
                         child: Text(
-                          'Resend Code',
+                          getTranslated(context, 'resend_code'),
                           style: TextStyle(
                               fontSize: 20,
                               color: Theme.of(context).primaryColor),
@@ -148,7 +153,7 @@ class _VerifyPageState extends State<VerifyPage> {
                                 builder: (context) => ResetPage())),
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                          'Done',
+                          getTranslated(context, 'done'),
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,

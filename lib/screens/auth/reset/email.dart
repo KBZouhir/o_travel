@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/verify.dart';
+import 'package:o_travel/screens/localization/const.dart';
 
 class EmailPage extends StatefulWidget {
   const EmailPage({Key? key}) : super(key: key);
@@ -42,19 +43,25 @@ class _EmailPageState extends State<EmailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        child: Icon(
-                          Icons.chevron_left,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                        alignment: Alignment.topLeft,
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.chevron_left,
+                                color: Colors.white,
+                                size: 40,
+                              )),                          Spacer(),
+
+                        ],
                       ),
                       SizedBox(
                         height: 10,
                       ),
                       Text(
-                        'Forgot Your Password?',
+                        getTranslated(context, 'forgot_password'),
                         style: TextStyle(
                             fontSize: 30,
                             color: Colors.white,
@@ -64,7 +71,7 @@ class _EmailPageState extends State<EmailPage> {
                         height: 20,
                       ),
                       Text(
-                        'Enter your Email to send\na code for you',
+                        getTranslated(context, 'forgot_password_text'),
                         style: TextStyle(fontSize: 20, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -73,7 +80,7 @@ class _EmailPageState extends State<EmailPage> {
                       ),
                       Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 30,vertical: 40),
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 40),
                         width: size.width * 0.9,
                         height: 250,
                         decoration: BoxDecoration(
@@ -93,7 +100,7 @@ class _EmailPageState extends State<EmailPage> {
                               height: 20,
                             ),
                             Text(
-                              'Email',
+                              getTranslated(context, 'email'),
                               style: TextStyle(
                                   fontSize: 25,
                                   color: Theme.of(context).primaryColor,
@@ -131,7 +138,7 @@ class _EmailPageState extends State<EmailPage> {
                                   builder: (context) => VerifyPage())),
                           color: Theme.of(context).primaryColor,
                           child: Text(
-                            'Send Code',
+                            getTranslated(context, 'send_code'),
                             style: TextStyle(
                               fontSize: 18,
                               color: Colors.white,
