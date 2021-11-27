@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/auth/reset/verify.dart';
+import 'package:o_travel/screens/home/home.dart';
 
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/localization/demo_localisation.dart';
@@ -65,6 +67,7 @@ class _MyAppState extends State<MyApp> {
                     debugShowCheckedModeBanner: false,
                     title: 'O travel',
                     darkTheme: ThemeData(
+                      fontFamily: 'Tajawal',
                       primarySwatch: Colors.grey,
                       primaryColor: primaryColorDark,
                       brightness: Brightness.dark,
@@ -76,6 +79,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     themeMode: currentMode,
                     theme: ThemeData(
+                      fontFamily: 'Tajawal',
                       primarySwatch: Colors.grey,
                       primaryColor: primaryColorDark,
                       brightness: Brightness.light,

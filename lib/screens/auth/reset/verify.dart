@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/reset.dart';
 import 'package:o_travel/screens/localization/const.dart';
@@ -107,14 +108,7 @@ class _VerifyPageState extends State<VerifyPage> {
                           SizedBox(
                             height: 40,
                           ),
-                          TextField(
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 25.0,
-                                color: Colors.black87),
-                            keyboardType: TextInputType.emailAddress,
-                          )
+                          ConfirmationCodeWidget()
                         ],
                       ),
                     ),
@@ -170,3 +164,74 @@ class _VerifyPageState extends State<VerifyPage> {
     )));
   }
 }
+class ConfirmationCodeWidget extends StatefulWidget {
+  @override
+  _ConfirmationCodeWidgetState createState() => _ConfirmationCodeWidgetState();
+
+  final _formKey = GlobalKey<FormState>();
+
+  final List<TextEditingController> controllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
+
+  String getEnteredCode() {
+    if (_formKey.currentState!.validate()) {
+      String code = "";
+
+      controllers.forEach((element) {
+        code += element.text;
+      });
+
+      print(code);
+      return code;
+    } else
+      return "0";
+  }
+}
+
+class _ConfirmationCodeWidgetState extends State<ConfirmationCodeWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: widget._formKey,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          confirmationCodeField(widget.controllers.elementAt(0)),
+          confirmationCodeField(widget.controllers.elementAt(1)),
+          confirmationCodeField(widget.controllers.elementAt(2)),
+          confirmationCodeField(widget.controllers.elementAt(3)),
+        ],
+      ),
+    );
+  }
+
+  Widget confirmationCodeField(TextEditingController controller) {
+    return Container(
+      height: 60,width: 60,
+          child: TextFormField(
+            controller: controller,
+            maxLength: 1,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            decoration: InputDecoration(
+              hintText: '*',
+              filled: true,
+              fillColor: Colors.grey.withOpacity(0.08),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),borderSide: BorderSide.none),
+              counterText: "",
+            ),
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            textAlign: TextAlign.center,
+
+          ));
+
+  }
+}
+
