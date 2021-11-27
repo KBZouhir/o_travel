@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
 import 'package:o_travel/screens/chat/chat_page.dart';
@@ -146,100 +149,112 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+class FilterWidget extends StatefulWidget {
 
-class FilterWidget extends StatelessWidget {
   const FilterWidget({
     Key? key,
     required this.size,
   }) : super(key: key);
-
   final Size size;
+  @override
+  _FilterWidgetState createState() => _FilterWidgetState();
+}
 
+class _FilterWidgetState extends State<FilterWidget> {
+
+  late String? selectEvent = "item1";
+  late List<String> listEvent = [
+    'item1',
+    'item2',
+    'item3',
+    'item4',
+  ];
   @override
   Widget build(BuildContext context) {
+
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
           height: 50,
-          width: size.width * 0.29,
-          decoration: BoxDecoration(
-              color: Theme.of(context).accentColor.withOpacity(0.05),
-              borderRadius: BorderRadius.all(Radius.circular(15))),
-          child: Center(
-            child: TextField(
-              maxLines: 1,
-              style: TextStyle(fontSize: 16),
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                filled: true,
-                prefixIcon: Icon(
-                  Icons.arrow_drop_down_sharp,
-                  color: Theme.of(context).iconTheme.color,
-                  size: 25,
+          width: widget.size.width * 0.29,
+
+          child: DropdownButtonHideUnderline(
+            child: GFDropdown(
+              value: selectEvent,
+              padding: const EdgeInsets.all(15),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              dropdownButtonColor: Theme.of(context).accentColor.withOpacity(0.05),
+              onChanged: (newValue) {
+                setState(() {
+                  selectEvent = newValue as String;
+                });
+              },
+              items: listEvent
+                  .map((value) => DropdownMenuItem(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(fontSize: 18),
                 ),
-                border: OutlineInputBorder(borderSide: BorderSide.none),
-                fillColor: Theme.of(context).backgroundColor.withOpacity(0),
-                contentPadding: EdgeInsets.zero,
-                hintText: getTranslated(context, 'trip_type'),
-              ),
+              ))
+                  .toList(),
             ),
           ),
         ),
-        SizedBox(
-          width: size.width * 0.03,
-        ),
+
         Container(
           height: 50,
-          width: size.width * 0.3,
-          decoration: BoxDecoration(
-              color: Theme.of(context).accentColor.withOpacity(0.05),
-              borderRadius: BorderRadius.all(Radius.circular(15))),
-          child: Center(
-            child: TextField(
-              maxLines: 1,
-              style: TextStyle(fontSize: 16),
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                filled: true,
-                prefixIcon: Icon(
-                  Icons.arrow_drop_down_sharp,
-                  color: Theme.of(context).iconTheme.color,
-                  size: 25,
+          width: widget.size.width * 0.29,
+
+          child: DropdownButtonHideUnderline(
+            child: GFDropdown(
+              value: selectEvent,
+              padding: const EdgeInsets.all(15),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              dropdownButtonColor: Theme.of(context).accentColor.withOpacity(0.05),
+              onChanged: (newValue) {
+                setState(() {
+                  selectEvent = newValue as String;
+                });
+              },
+              items: listEvent
+                  .map((value) => DropdownMenuItem(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(fontSize: 18),
                 ),
-                border: OutlineInputBorder(borderSide: BorderSide.none),
-                fillColor: Theme.of(context).backgroundColor.withOpacity(0),
-                contentPadding: EdgeInsets.zero,
-                hintText: getTranslated(context, 'country'),
-              ),
+              ))
+                  .toList(),
             ),
           ),
         ),
-        SizedBox(
-          width: size.width * 0.03,
-        ),
+
         Container(
           height: 50,
-          width: size.width * 0.29,
-          decoration: BoxDecoration(
-              color: Theme.of(context).accentColor.withOpacity(0.05),
-              borderRadius: BorderRadius.all(Radius.circular(15))),
-          child: Center(
-            child: TextField(
-              maxLines: 1,
-              style: TextStyle(fontSize: 16),
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                filled: true,
-                prefixIcon: Icon(
-                  Icons.arrow_drop_down_sharp,
-                  color: Theme.of(context).iconTheme.color,
-                  size: 25,
+          width: widget.size.width * 0.29,
+
+          child: DropdownButtonHideUnderline(
+            child: GFDropdown(
+              value: selectEvent,
+              padding: const EdgeInsets.all(15),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              dropdownButtonColor: Theme.of(context).accentColor.withOpacity(0.05),
+              onChanged: (newValue) {
+                setState(() {
+                  selectEvent = newValue as String;
+                });
+              },
+              items: listEvent
+                  .map((value) => DropdownMenuItem(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(fontSize: 18),
                 ),
-                border: OutlineInputBorder(borderSide: BorderSide.none),
-                fillColor: Theme.of(context).backgroundColor.withOpacity(0),
-                contentPadding: EdgeInsets.zero,
-                hintText: getTranslated(context, 'month'),
-              ),
+              ))
+                  .toList(),
             ),
           ),
         ),

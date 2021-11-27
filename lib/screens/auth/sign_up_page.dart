@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/dropdown/gf_dropdown.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/localization/const.dart';
@@ -38,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
         appBar: AppBar(
           toolbarHeight: 140,
           backgroundColor: Theme.of(context).backgroundColor,
-          elevation: 0,
+          elevation: 3,
           title: Center(
               child: Text(
             getTranslated(context, 'create_account'),
@@ -51,7 +53,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 color: Colors.blueGrey,
                 size: 30,
               ),
-              onPressed: () {_changeLanguage();}),
+              onPressed: () {
+                _changeLanguage();
+              }),
           actions: [
             SizedBox(
               width: 55,
@@ -109,6 +113,14 @@ class _UserPageState extends State<UserPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
 
+  String? selectEvent = "item1";
+  List<String> listEvent = [
+    'item1',
+    'item2',
+    'item3',
+    'item4',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -235,7 +247,7 @@ class _UserPageState extends State<UserPage> {
                     borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
-                  icon: showPassword
+                  icon: showConfirmPassword
                       ? Icon(Icons.remove_red_eye)
                       : Icon(Icons.visibility_off_outlined),
                   onPressed: () => setState(
@@ -256,17 +268,29 @@ class _UserPageState extends State<UserPage> {
             SizedBox(
               height: 8,
             ),
-            TextField(
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
-              obscureText: false,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'phone'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(Icons.phone),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Theme.of(context).accentColor),
+                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+              child: IntlPhoneField(
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                decoration: InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    labelText: getTranslated(context, 'phone'),
+                    border: InputBorder.none,
+                    counterStyle: TextStyle(
+                      height: double.minPositive,
+                    ),
+                    counterText: "",
+                    contentPadding: EdgeInsets.only(bottom: 15)),
+                initialCountryCode: "DZ",
+                onChanged: (phone) {
+                  print(phone.completeNumber);
+                },
+                onCountryChanged: (dynamic phone) {
+                  print('Country code changed to: ' + phone.countryCode);
+                },
               ),
             ),
             SizedBox(
@@ -317,7 +341,6 @@ class _UserPageState extends State<UserPage> {
                 )
               ],
             ),
-
             SizedBox(
               height: 30,
             ),
@@ -337,6 +360,13 @@ class _CompanyPageState extends State<CompanyPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
   double raduice = 15.0;
+  String? selectEvent = "item1";
+  List<String> listEvent = [
+    'item1',
+    'item2',
+    'item3',
+    'item4',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -464,37 +494,12 @@ class _CompanyPageState extends State<CompanyPage> {
                     borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
-                  icon: showPassword
+                  icon: showConfirmPassword
                       ? Icon(Icons.remove_red_eye)
                       : Icon(Icons.visibility_off_outlined),
                   onPressed: () => setState(
                       () => showConfirmPassword = !showConfirmPassword),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Area',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextField(
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
-              obscureText: false,
-              decoration: InputDecoration(
-                hintText: 'Choose area',
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
               ),
             ),
             SizedBox(
@@ -510,24 +515,36 @@ class _CompanyPageState extends State<CompanyPage> {
             SizedBox(
               height: 8,
             ),
-            TextField(
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
-              obscureText: false,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'phone'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(Icons.phone),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Theme.of(context).accentColor),
+                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+              child: IntlPhoneField(
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                decoration: InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    labelText: getTranslated(context, 'phone'),
+                    border: InputBorder.none,
+                    counterStyle: TextStyle(
+                      height: double.minPositive,
+                    ),
+                    counterText: "",
+                    contentPadding: EdgeInsets.only(bottom: 15)),
+                initialCountryCode: "DZ",
+                onChanged: (phone) {
+                  print(phone.completeNumber);
+                },
+                onCountryChanged: (dynamic phone) {
+                  print('Country code changed to: ' + phone.countryCode);
+                },
               ),
             ),
             SizedBox(
               height: 16,
             ),
             Text(
-              'Field',
+              getTranslated(context, 'area'),
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -536,16 +553,75 @@ class _CompanyPageState extends State<CompanyPage> {
             SizedBox(
               height: 8,
             ),
-            TextField(
+            Container(
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              color: Theme.of(context).backgroundColor,
+              child: DropdownButtonHideUnderline(
+                child: GFDropdown(
+                  value: selectEvent,
+                  padding: const EdgeInsets.all(15),
+                  borderRadius: BorderRadius.circular(10),
+                  border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
+                  dropdownButtonColor: Theme.of(context).backgroundColor,
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectEvent = newValue as String;
+                    });
+                  },
+                  items: listEvent
+                      .map((value) => DropdownMenuItem(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ))
+                      .toList(),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 16,
+            ),
+
+            Text(
+              getTranslated(context, 'field'),
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
                   color: Theme.of(context).accentColor),
-              obscureText: false,
-              decoration: InputDecoration(
-                hintText: 'Field',
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              color: Theme.of(context).backgroundColor,
+              child: DropdownButtonHideUnderline(
+                child: GFDropdown(
+                  value: selectEvent,
+                  padding: const EdgeInsets.all(15),
+                  borderRadius: BorderRadius.circular(10),
+                  border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
+                  dropdownButtonColor: Theme.of(context).backgroundColor,
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectEvent = newValue as String;
+                    });
+                  },
+                  items: listEvent
+                      .map((value) => DropdownMenuItem(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ))
+                      .toList(),
+                ),
               ),
             ),
             SizedBox(

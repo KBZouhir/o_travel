@@ -30,6 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
         appBar: buildAppBar(context),
         body:SingleChildScrollView(
           child:  Container(
+            color: Theme.of(context).backgroundColor,
             height: MediaQuery.of(context).size.height*1.3,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -81,56 +82,15 @@ class _SearchScreenState extends State<SearchScreen> {
                 Container(
                   height: 60,
                   width: MediaQuery.of(context).size.width,
+                  color: Theme.of(context).backgroundColor,
                   margin: EdgeInsets.symmetric(vertical: 10),
                   child: DropdownButtonHideUnderline(
                     child: GFDropdown(
                       value: selectEvent,
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
-                      border: const BorderSide(color: Colors.black12, width: 1),
-                      dropdownButtonColor: Colors.white,
-                      onChanged: (newValue) {
-                        setState(() {
-                          selectEvent =newValue as String;
-                        });
-                      },
-                      items: listEvent
-                          .map((value) => DropdownMenuItem(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ))
-                          .toList(),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                    getTranslated(context, 'month'),
-
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: DropdownButtonHideUnderline(
-                    child: GFDropdown(
-                      value: selectEvent,
-                      padding: const EdgeInsets.all(15),
-                      borderRadius: BorderRadius.circular(10),
-                      border: const BorderSide(color: Colors.black12, width: 1),
-                      dropdownButtonColor: Colors.white,
+                      border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
+                      dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
                           selectEvent = newValue as String;
@@ -148,6 +108,51 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
+
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    getTranslated(context, 'month'),
+
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).accentColor),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  color: Theme.of(context).backgroundColor,
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  child: DropdownButtonHideUnderline(
+                    child: GFDropdown(
+                      value: selectEvent,
+                      padding: const EdgeInsets.all(15),
+                      borderRadius: BorderRadius.circular(10),
+                      border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
+                      dropdownButtonColor: Theme.of(context).backgroundColor,
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectEvent = newValue as String;
+                        });
+                      },
+                      items: listEvent
+                          .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ))
+                          .toList(),
+                    ),
+                  ),
+                ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -164,17 +169,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 Container(
                   height: 60,
                   width: MediaQuery.of(context).size.width,
+                  color: Theme.of(context).backgroundColor,
                   margin: EdgeInsets.symmetric(vertical: 10),
                   child: DropdownButtonHideUnderline(
                     child: GFDropdown(
                       value: selectEvent,
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
-                      border: const BorderSide(color: Colors.black12, width: 1),
-                      dropdownButtonColor: Colors.white,
+                      border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
+                      dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
-                          selectEvent = 'newValue as Event?';
+                          selectEvent = newValue as String;
                         });
                       },
                       items: listEvent
@@ -189,6 +195,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
+
                 SizedBox(
                   height: 10,
                 ),

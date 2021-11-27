@@ -67,7 +67,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
             return Container(
               width: _current == index ? 20 : 8,
               height: 8.0,
-              margin: EdgeInsets.symmetric(vertical: 10.0),
+              margin: EdgeInsets.symmetric(horizontal:2,vertical: 10.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color:

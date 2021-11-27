@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:photo_view/photo_view.dart';
 
 class ShowAd extends StatefulWidget {
   final String image;
@@ -30,23 +31,31 @@ class _ShowAdState extends State<ShowAd> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Hero(
-                    tag: 'ad_image' + widget.image,
-                    child: CachedNetworkImage(
-                      imageUrl: widget.image,
-                      placeholder: (context, url) => Center(
-                          child: Container(
-                              width: 10,
-                              height: 10,
-                              child: CircularProgressIndicator(
-                                color: Theme.of(context).primaryColor,
-                              ))),
-                      errorWidget: (context, url, error) => new Icon(Icons.error),
-                      width: size.width,
-                      fit: BoxFit.fitWidth,
+                  GestureDetector(
+                    onTap: () => showDialog(
+                        context: context,
+                        builder: (_) => DetailImageScreen(widget.image)),
+                    child: Hero(
+                      tag: 'ad_image' + widget.image,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.image,
+                        placeholder: (context, url) => Center(
+                            child: Container(
+                                width: 10,
+                                height: 10,
+                                child: CircularProgressIndicator(
+                                  color: Theme.of(context).primaryColor,
+                                ))),
+                        errorWidget: (context, url, error) =>
+                            new Icon(Icons.error),
+                        width: size.width,
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 60,
                   )
-                  ,SizedBox(height: 60,)
                 ],
               ),
             ),
@@ -352,5 +361,18 @@ class _ShowAdState extends State<ShowAd> {
         )
       ],
     );
+  }
+}
+
+class DetailImageScreen extends StatelessWidget {
+  final String photo;
+
+  DetailImageScreen(this.photo);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () => Navigator.pop(context),
+        child: PhotoView(imageProvider: NetworkImage(photo)));
   }
 }
