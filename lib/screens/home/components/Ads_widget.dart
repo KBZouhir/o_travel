@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/screens/ads/show.dart';
 
-class AdsContainer extends StatelessWidget {
-  const AdsContainer({Key? key}) : super(key: key);
+class OffersContainer extends StatelessWidget {
+  const OffersContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +13,16 @@ class AdsContainer extends StatelessWidget {
   }
 }
 
-class AdWidget extends StatefulWidget {
-  final String image;
+class OfferWidget extends StatefulWidget {
+  final Offer offer;
 
-  const AdWidget({Key? key, required this.image}) : super(key: key);
+  const OfferWidget({Key? key, required this.offer}) : super(key: key);
 
   @override
-  _AdWidgetState createState() => _AdWidgetState();
+  _OfferWidgetState createState() => _OfferWidgetState();
 }
 
-class _AdWidgetState extends State<AdWidget> {
+class _OfferWidgetState extends State<OfferWidget> {
   bool favorite = false;
 
   @override
@@ -29,7 +30,7 @@ class _AdWidgetState extends State<AdWidget> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ShowAd(image:widget.image)));
+            context, MaterialPageRoute(builder: (context) => ShowOffer(offer:widget.offer)));
       },
       onDoubleTap: () {
         setState(() {
@@ -54,12 +55,12 @@ class _AdWidgetState extends State<AdWidget> {
         child: Stack(
           children: [
             Hero(
-              tag: 'ad_image'+widget.image,
+              tag: 'ad_image'+widget.offer.images[0].url,
               child:
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 child: CachedNetworkImage(
-                  imageUrl: widget.image,
+                  imageUrl: widget.offer.images[0].url,
                   placeholder: (context, url) => Container(
                       width: 50,
                       height: 50,
@@ -78,7 +79,6 @@ class _AdWidgetState extends State<AdWidget> {
                   child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                 height: MediaQuery.of(context).size.width * 0.12,
-                width: MediaQuery.of(context).size.width * 0.3,
                 decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.8),
                     borderRadius: BorderRadius.all(Radius.circular(15))),

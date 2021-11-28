@@ -3,20 +3,21 @@ import 'dart:ffi';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:photo_view/photo_view.dart';
 
-class ShowAd extends StatefulWidget {
-  final String image;
+class ShowOffer extends StatefulWidget {
+  final Offer       offer;
 
-  const ShowAd({Key? key, required this.image}) : super(key: key);
+  const ShowOffer({Key? key, required this.      offer}) : super(key: key);
 
   @override
-  _ShowAdState createState() => _ShowAdState();
+  _ShowOfferState createState() => _ShowOfferState();
 }
 
-class _ShowAdState extends State<ShowAd> {
+class _ShowOfferState extends State<ShowOffer> {
   bool show = false;
 
   @override
@@ -34,11 +35,11 @@ class _ShowAdState extends State<ShowAd> {
                   GestureDetector(
                     onTap: () => showDialog(
                         context: context,
-                        builder: (_) => DetailImageScreen(widget.image)),
+                        builder: (_) => DetailImageScreen(widget.offer.images[0].url)),
                     child: Hero(
-                      tag: 'ad_image' + widget.image,
+                      tag: 'ad_image'+widget.offer.images[0].url,
                       child: CachedNetworkImage(
-                        imageUrl: widget.image,
+                        imageUrl: widget.offer.images[0].url,
                         placeholder: (context, url) => Center(
                             child: Container(
                                 width: 10,

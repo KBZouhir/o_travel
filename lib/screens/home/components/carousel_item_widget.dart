@@ -22,8 +22,8 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ShowAd(image:widget.item)));
+       /* Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ShowOffer(offer:widget.item)));*/
       },
       onDoubleTap: () {
         setState(() {

@@ -28,18 +28,18 @@ class Company {
   String countryCode;
   String image;
   int state;
-  int checked;
+  bool checked;
   dynamic facebook;
   dynamic whatsapp;
   dynamic snapchat;
   dynamic instagram;
   dynamic twitter;
   dynamic rate;
-  int latitude;
-  int longitude;
+  String latitude;
+  String longitude;
   String address;
   dynamic description;
-  String tradeRegister;
+  dynamic tradeRegister;
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
     id: json["id"],

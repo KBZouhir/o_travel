@@ -1,3 +1,8 @@
+// To parse this JSON data, do
+//
+//     final offer = offerFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:o_travel/Models/category.dart';
@@ -27,7 +32,7 @@ class Offer {
 
   int id;
   String name;
-  int price;
+  String price;
   String description;
   dynamic rate;
   DateTime date;
@@ -70,8 +75,9 @@ class Offer {
     "company": company.toJson(),
     "countries": List<dynamic>.from(countries.map((x) => x.toJson())),
   };
+
+  @override
+  String toString() {
+    return 'Offer{id: $id, name: $name, price: $price, description: $description, rate: $rate, date: $date, favoriteByMe: $favoriteByMe, state: $state, featured: $featured, images: $images, category: $category, company: $company, countries: $countries}';
+  }
 }
-
-
-
-

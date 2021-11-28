@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-Offer offerFromJson(String str) => Offer.fromJson(json.decode(str));
+Report offerFromJson(String str) => Report.fromJson(json.decode(str));
 
-String offerToJson(Offer data) => json.encode(data.toJson());
+String offerToJson(Report data) => json.encode(data.toJson());
 
-class Offer {
-  Offer({
+class Report {
+  Report({
     required this.subject,
     required this.message,
   });
@@ -13,7 +13,7 @@ class Offer {
   String subject;
   String message;
 
-  factory Offer.fromJson(Map<String, dynamic> json) => Offer(
+  factory Report.fromJson(Map<String, dynamic> json) => Report(
     subject: json["subject"],
     message: json["message"],
   );

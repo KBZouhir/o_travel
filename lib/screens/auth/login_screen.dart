@@ -34,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
         title: Center(
@@ -58,15 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
-        padding: const EdgeInsets.all(20),
         child: Center(
           child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  child: Image.asset('assets/images/logo.png', width: 100),
-                ),
+
                 SizedBox(
                   height: 40,
                 ),
@@ -81,18 +78,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 8,
                 ),
                 TextFormField(
+                  textAlignVertical: TextAlignVertical.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
                       color: Theme.of(context).accentColor),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
+
                     hintText: getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(raduice))),
                     prefixIcon: Icon(
                       Icons.perm_identity,
-                      size: 30,
+                      size: 25,
                     ),
                   ),
                 ),
@@ -110,6 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 8,
                 ),
                 TextField(
+                  textAlignVertical: TextAlignVertical.center,
+
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -119,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: getTranslated(context, 'password'),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: Icon(Icons.lock,size: 25,),
                     suffixIcon: IconButton(
                       icon: showPassword
                           ? Icon(Icons.remove_red_eye)
@@ -166,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       getTranslated(context, 'login'),
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize:20,
                         color: Colors.white,
                       ),
                     ),

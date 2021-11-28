@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 
-class AdsList extends StatelessWidget {
-  final adsList;
+class OfferList extends StatelessWidget {
+  final offerList;
 
-  const AdsList({
+  const OfferList({
     Key? key,
-    required this.adsList
+    required this.offerList
   }) : super(key: key);
 
   @override
@@ -15,10 +15,10 @@ class AdsList extends StatelessWidget {
     return StaggeredGridView.countBuilder(
       shrinkWrap: true,
       crossAxisCount:4,
-      itemCount: adsList.length,
+      itemCount: offerList.length,
       physics: BouncingScrollPhysics(),
       itemBuilder: (BuildContext context, int index) =>
-          Container( child: AdWidget(image: adsList[index])),
+          Container( child: OfferWidget(offer: offerList[index])),
       staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
       mainAxisSpacing: 10.0,
       crossAxisSpacing: 10.0,

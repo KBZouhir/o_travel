@@ -37,7 +37,7 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
                 padding: EdgeInsets.only(top: 10,bottom: 60,right: 10,left: 10),
                 width: size.width,
                 height: size.height,
-                child: AdsList(adsList:images),
+                child:       OfferList(offerList:images),
 
 
               ),

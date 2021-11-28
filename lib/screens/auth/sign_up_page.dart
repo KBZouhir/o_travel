@@ -383,7 +383,7 @@ class _CompanyPageState extends State<CompanyPage> {
               height: 16,
             ),
             Text(
-              getTranslated(context, 'username'),
+              getTranslated(context, 'company_name'),
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -399,7 +399,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   color: Theme.of(context).accentColor),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hintText: getTranslated(context, 'username'),
+                hintText: getTranslated(context, 'company_name'),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(raduice))),
                 prefixIcon: Icon(

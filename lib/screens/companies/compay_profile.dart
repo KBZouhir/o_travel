@@ -220,7 +220,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   ],
                 )
             ),
-            AdsList(adsList:images),
+            OfferList(offerList:images),
 
           ],
         ),
