@@ -1,14 +1,15 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/screens/ads/show.dart';
 
 class CarouselItemWidget extends StatefulWidget {
-  final String item;
+  final Offer offer;
 
   const CarouselItemWidget({
     Key? key,
-    required this.item,
+    required this.offer,
   }) : super(key: key);
 
   @override
@@ -46,11 +47,11 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
         child: Stack(
           children: [
         Hero(
-        tag: 'ad_image'+widget.item,
+        tag: 'ad_image'+widget.offer.images[0].url,
           child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: CachedNetworkImage(
-                imageUrl: widget.item,
+                imageUrl: widget.offer.images[0].url,
                 fit: BoxFit.cover,
                 width: 1000,
                 height: 1000,

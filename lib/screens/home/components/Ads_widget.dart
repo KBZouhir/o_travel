@@ -27,6 +27,7 @@ class _OfferWidgetState extends State<OfferWidget> {
 
   @override
   Widget build(BuildContext context) {
+    favorite=widget.offer.favoriteByMe;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -136,7 +137,9 @@ class _OfferWidgetState extends State<OfferWidget> {
               left: 0,
             ),
             Positioned(
+
               child: IconButton(
+
                 icon: Icon(
                   Icons.favorite,
                   color: (favorite) ? Colors.red : Colors.white,

@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+Company countryFromJson(String str) => Company.fromJson(json.decode(str));
+
+String countryToJson(Company data) => json.encode(data.toJson());
+
+
 class Company {
   Company({
     required this.id,

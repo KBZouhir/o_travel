@@ -10,6 +10,5 @@ import 'package:o_travel/api/company/story_api.dart';
 import 'api/company/category_api.dart';
 
 void main() {
-  getAllOffers().then((value) => print('getAllOffer $value'));
 }
 

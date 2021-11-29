@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:o_travel/Models/company.dart';
+import 'package:o_travel/Models/offer.dart';
+import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/companies/campany_profile_edit.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
@@ -9,13 +12,35 @@ import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class CompanyProfile extends StatefulWidget {
-  const CompanyProfile({Key? key}) : super(key: key);
+  final Company company;
+
+  const CompanyProfile({Key? key, required this.company}) : super(key: key);
 
   @override
   _CompanyProfileState createState() => _CompanyProfileState();
 }
 
 class _CompanyProfileState extends State<CompanyProfile> {
+
+  List<Offer> offerList = [];
+
+
+  getResources() {
+    getAllOffers('company','${widget.company.id}').then((value) {
+      setState(() {
+        offerList = value;
+      });
+    });
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getResources();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery
@@ -62,7 +87,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         borderRadius: BorderRadius.circular(100),
                         child: CachedNetworkImage(
                           imageUrl:
-                          "https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png",
+                          widget.company.image,
                           height: size.height * 0.12,
                           width: size.height * 0.12,
                           fit: BoxFit.cover,
@@ -88,7 +113,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text('Jannat Asia ',
+                              Text(widget.company.name,
                                   style: TextStyle(
                                       fontSize: 25,
                                       color: Colors.white,
@@ -96,11 +121,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('Tourism\Sultanate of Oman',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w300)),
+
                             ]))
                   ],
                 )),
@@ -110,7 +131,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      getTranslated(context, 'lorem'),
+                      widget.company.description??getTranslated(context, "lorem"),
                       style: TextStyle(fontSize: 16,height: 1.5),
                     ),
                     SizedBox(height: 16,),
@@ -130,7 +151,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         ),
                         Spacer(),
                         Text(
-                          '----',
+                          widget.company.address,
+                          softWrap: true,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
@@ -153,7 +175,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         Spacer(),
 
                         Text(
-                          '----',
+                          widget.company.email,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
@@ -176,7 +198,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         Spacer(),
 
                         Text(
-                          '----',
+                          widget.company.phone,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
@@ -214,13 +236,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       getTranslated(context,  "added_ads"),
                       style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(height: 16,),
 
-
+                    OfferList(offerList:offerList),
                   ],
                 )
             ),
-            OfferList(offerList:images),
+
 
           ],
         ),

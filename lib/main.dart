@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/reset/verify.dart';
+import 'package:o_travel/screens/companies/companies_guide.dart';
 import 'package:o_travel/screens/home/home.dart';
 
 import 'package:o_travel/screens/localization/const.dart';
@@ -110,13 +111,14 @@ class _MyAppState extends State<MyApp> {
                       }
                       return supportedLocales.first;
                     },
-                    home: OnBoardingPage(),
+                    home: CompaniesGuideScreen(),
                   );
                 });
           }
         });
   }
 }
+
 
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);

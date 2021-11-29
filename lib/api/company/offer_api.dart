@@ -7,8 +7,8 @@ import 'package:o_travel/api/CONFIG.dart';
 
 String prifix="offers";
 
-Future<List<Offer>> getAllOffers() async {
-  final response = await http.get(Uri.parse(companyURL + prifix),
+Future<List<Offer>> getAllOffers(String filter_name ,String filter_value) async {
+  final response = await http.get(Uri.parse(companyURL + prifix +'?$filter_name=$filter_value'),
       headers:  {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -21,5 +21,5 @@ Future<List<Offer>> getAllOffers() async {
     throw Exception('Failed to load  $prifix');
   }
 
-}
 
+}

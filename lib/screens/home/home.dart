@@ -15,6 +15,7 @@ import 'package:o_travel/api/company/story_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
+import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
 import 'package:o_travel/screens/contact.dart';
@@ -24,7 +25,7 @@ import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/notifications/notification.dart';
 import 'package:o_travel/screens/searche/searche.dart';
 import 'package:o_travel/screens/settings/settings.dart';
-
+import 'package:photo_view/photo_view.dart';
 
 import 'components/ads_list.dart';
 
@@ -46,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'item4',
   ];
   List<Offer> offerList = [];
+  List<Offer> featuredOfferList = [];
   List<Category> categoryList = [];
   Category? selectedCategory;
 
@@ -57,20 +59,24 @@ class _HomeScreenState extends State<HomeScreen> {
     getAllCategory().then((value) {
       setState(() {
         categoryList = value;
-        selectedCategory = categoryList[0];
       });
     });
 
     getAllCountry().then((value) {
       setState(() {
         countryList = value;
-        selectedCountry = countryList[0];
       });
     });
 
-    getAllOffers().then((value) {
+    getAllOffers('featured','1').then((value) {
       setState(() {
         offerList = value;
+      });
+    });
+    getAllOffers('featured','2').then((value) {
+      setState(() {
+        featuredOfferList = value;
+        print('featuredOfferList $featuredOfferList');
       });
     });
 
@@ -80,7 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
-
 
   @override
   void initState() {
@@ -94,187 +99,207 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: MyDrawer(size: size),
       appBar: buildAppBar(context),
-      body: Builder(
-          builder: (BuildContext context) {
-            if(offerList.length>0 && storyList.length>0 && countryList.length>0 && categoryList.length>0)
-              return Container(
-                  width: size.width,
-                  height: size.height,
-                  color: Theme.of(context).backgroundColor,
-                  child: Stack(
-                    children: [
-                      RefreshIndicator(
-                        color: Theme.of(context).primaryColor,
-                        key: _refreshIndicatorKey,
-                        onRefresh: _refresh,
-                        child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Builder(builder: (BuildContext context) {
+        if (offerList.length > 0 &&
+            storyList.length > 0 &&
+            countryList.length > 0 &&
+            featuredOfferList.length > 0 &&
+            categoryList.length > 0)
+          return Container(
+              width: size.width,
+              height: size.height,
+              color: Theme.of(context).backgroundColor,
+              child: Stack(
+                children: [
+                  RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    key: _refreshIndicatorKey,
+                    onRefresh: _refresh,
+                    child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          StoriesList(storyList: storyList),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 3,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .accentColor
+                                    .withOpacity(0.05),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SearchWidget(size: size),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          CarouselWidget(offerList:featuredOfferList),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              StorisWidget(storyList :storyList),
-                              SizedBox(
-                                height: 10,
+                              Container(
+                                height: 50,
+                                width: size.width * 0.29,
+                                constraints: BoxConstraints(
+                                  maxWidth: size.width * 0.29,
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: GFDropdown(
+                                    hint: Text(
+                                        getTranslated(context, 'trip_type')),
+                                    value: selectedCategory,
+                                    padding: const EdgeInsets.all(15),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    dropdownButtonColor: Theme.of(context)
+                                        .accentColor
+                                        .withOpacity(0.05),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        selectedCategory =
+                                            newValue as Category?;
+                                      });
+                                    },
+                                    items: categoryList
+                                        .map((value) => DropdownMenuItem(
+                                              value: value,
+                                              child: Text(
+                                                value.name,
+                                                style: TextStyle(fontSize: 18),
+                                              ),
+                                            ))
+                                        .toList(),
+                                  ),
+                                ),
                               ),
                               Container(
-                                height: 3,
-                                decoration: BoxDecoration(
-                                    color:
-                                    Theme.of(context).accentColor.withOpacity(0.05),
+                                height: 50,
+                                width: size.width * 0.29,
+                                constraints: BoxConstraints(
+                                  maxWidth: size.width * 0.29,
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: GFDropdown(
+                                    hint:
+                                        Text(getTranslated(context, 'country')),
+                                    value: selectedCountry,
+                                    padding: const EdgeInsets.all(15),
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              SearchWidget(size: size),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              CarouselWidget(),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    width: size.width * 0.29,
-                                    child: DropdownButtonHideUnderline(
-                                      child: GFDropdown(
-                                        value: selectedCategory,
-                                        padding: const EdgeInsets.all(15),
-                                        borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
-                                        dropdownButtonColor: Theme.of(context)
-                                            .accentColor
-                                            .withOpacity(0.05),
-                                        onChanged: (newValue) {
-                                          setState(() {
-                                            selectedCategory = newValue as Category?;
-                                          });
-                                        },
-                                        items: categoryList
-                                            .map((value) => DropdownMenuItem(
-                                          value: value,
-                                          child: Text(
-                                            value.name,
-                                            style: TextStyle(fontSize: 18),
-                                          ),
-                                        ))
-                                            .toList(),
-                                      ),
-                                    ),
+                                    dropdownButtonColor: Theme.of(context)
+                                        .accentColor
+                                        .withOpacity(0.05),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        selectedCountry = newValue as Country?;
+                                      });
+                                    },
+                                    items: countryList
+                                        .map((value) => DropdownMenuItem(
+                                              value: value,
+                                              child: Text(
+                                                value.name,
+                                                style: TextStyle(fontSize: 18),
+                                              ),
+                                            ))
+                                        .toList(),
                                   ),
-                                  Container(
-                                    height: 50,
-                                    width: size.width * 0.29,
-                                    child: DropdownButtonHideUnderline(
-                                      child: GFDropdown(
-                                        value: selectedCountry,
-                                        padding: const EdgeInsets.all(15),
-                                        borderRadius:
+                                ),
+                              ),
+                              Container(
+                                height: 50,
+                                width: size.width * 0.29,
+                                constraints: BoxConstraints(
+                                  maxWidth: size.width * 0.29,
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: GFDropdown(
+                                    hint: Text(getTranslated(context, 'month')),
+                                    value: selectEvent,
+                                    padding: const EdgeInsets.all(15),
+                                    borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
-                                        dropdownButtonColor: Theme.of(context)
-                                            .accentColor
-                                            .withOpacity(0.05),
-                                        onChanged: (newValue) {
-                                          setState(() {
-                                            selectedCountry = newValue as Country?;
-                                          });
-                                        },
-                                        items: countryList
-                                            .map((value) => DropdownMenuItem(
-                                          value: value,
-                                          child: Text(
-                                            value.name,
-                                            style: TextStyle(fontSize: 18),
-                                          ),
-                                        ))
-                                            .toList(),
-                                      ),
-                                    ),
+                                    dropdownButtonColor: Theme.of(context)
+                                        .accentColor
+                                        .withOpacity(0.05),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        selectEvent = newValue as String;
+                                      });
+                                    },
+                                    items: listEvent
+                                        .map((value) => DropdownMenuItem(
+                                              value: value,
+                                              child: Text(
+                                                value,
+                                                style: TextStyle(fontSize: 18),
+                                              ),
+                                            ))
+                                        .toList(),
                                   ),
-                                  Container(
-                                    height: 50,
-                                    width: size.width * 0.29,
-                                    child: DropdownButtonHideUnderline(
-                                      child: GFDropdown(
-                                        value: selectEvent,
-                                        padding: const EdgeInsets.all(15),
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(15)),
-                                        dropdownButtonColor: Theme.of(context)
-                                            .accentColor
-                                            .withOpacity(0.05),
-                                        onChanged: (newValue) {
-                                          setState(() {
-                                            selectEvent = newValue as String;
-                                          });
-                                        },
-                                        items: listEvent
-                                            .map((value) => DropdownMenuItem(
-                                          value: value,
-                                          child: Text(
-                                            value,
-                                            style: TextStyle(fontSize: 18),
-                                          ),
-                                        ))
-                                            .toList(),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              OfferList(
-                                offerList: offerList,
-                              ),
-                              SizedBox(
-                                height: 80,
+                                ),
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          OfferList(
+                            offerList: offerList,
+                          ),
+                          SizedBox(
+                            height: 80,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      margin: EdgeInsets.all(5),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(raduice),
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddNewAdScreen()));
+                        },
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          getTranslated(context, 'add_new_ad'),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          width: double.infinity,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(raduice),
-                          ),
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AddNewAdScreen()));
-                            },
-                            color: Theme.of(context).primaryColor,
-                            child: Text(
-                              getTranslated(context, 'add_new_ad'),
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ));
-            else return GFLoader(loaderColorOne:  Theme.of(context).primaryColor,);
-
-          }
-      ),
+                    ),
+                  )
+                ],
+              ));
+        else
+          return GFLoader(
+            loaderColorOne: Theme.of(context).primaryColor,
+          );
+      }),
     );
   }
 
@@ -399,9 +424,10 @@ class SearchWidget extends StatelessWidget {
   }
 }
 
-class StorisWidget extends StatelessWidget {
+class StoriesList extends StatelessWidget {
   final List<Story> storyList;
-  const StorisWidget({
+
+  const StoriesList({
     required this.storyList,
     Key? key,
   }) : super(key: key);
@@ -409,46 +435,45 @@ class StorisWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 5),
-        // This next line does the trick.
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 15),
-            width: 50.0,
-            height: 50.0,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                    color: Theme.of(context).primaryColor.withOpacity(0.4),
-                    width: 2),
-                borderRadius: BorderRadius.all(Radius.circular(50))),
-            child: Center(
-              child: Icon(Icons.add,
-                  size: 30,
-                  color: Theme.of(context).primaryColor.withOpacity(0.4)),
+        height: 50,
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(right: 15),
+              width: 50.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                      color: Theme.of(context).primaryColor.withOpacity(0.4),
+                      width: 2),
+                  borderRadius: BorderRadius.all(Radius.circular(50))),
+              child: Center(
+                child: Icon(Icons.add,
+                    size: 30,
+                    color: Theme.of(context).primaryColor.withOpacity(0.4)),
+              ),
             ),
-          ),
-          StoryItemWidget(),
-          StoryItemWidget(),
-          StoryItemWidget(),
-          StoryItemWidget(),
-          StoryItemWidget(),
-          StoryItemWidget(),
-          StoryItemWidget(),
-          StoryItemWidget(),
-          StoryItemWidget(),
-        ],
-      ),
-    );
+            Expanded(
+              child: ListView.builder(
+                  itemCount: storyList.length,
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return StoryItemWidget(story: storyList[index]);
+                  }),
+            )
+          ],
+        ));
   }
 }
 
 class StoryItemWidget extends StatelessWidget {
+  final Story story;
+
   const StoryItemWidget({
     Key? key,
+    required this.story,
   }) : super(key: key);
   final _momentCount = 5;
   final _momentDuration = const Duration(seconds: 5);
@@ -458,7 +483,9 @@ class StoryItemWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showDialog(context: context, builder: (_) => DetailStoryScreen(story));
+      },
       child: Container(
         margin: EdgeInsets.only(right: 15),
         width: 50.0,
@@ -473,8 +500,7 @@ class StoryItemWidget extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(20)),
             child: CachedNetworkImage(
-              imageUrl:
-                  'https://i.pinimg.com/originals/6d/da/c4/6ddac42ba8f9b79fa5ddd86f4e051e2d.jpg',
+              imageUrl: story.imageUrl,
               fit: BoxFit.cover,
               width: 1000,
               height: 1000,
@@ -695,6 +721,64 @@ class MyDrawer extends StatelessWidget {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SettingsScreen()));
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DetailStoryScreen extends StatelessWidget {
+  final Story story;
+
+  DetailStoryScreen(this.story);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      height: size.height,
+      width: size.width,
+      child: Stack(
+        children: [
+          Container(
+            child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: PhotoView(imageProvider: NetworkImage(story.imageUrl))),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              color: Colors.grey.withOpacity(0.03),
+              height: 60,
+              width: size.width,
+              child: Row(
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(story.company.image),
+                    maxRadius: 18,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        story.company.name,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      )),
+                ],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
           ),
         ],
       ),

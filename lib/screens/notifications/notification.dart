@@ -16,74 +16,6 @@ class NotificationsScreen extends StatefulWidget {
 class _NotificationsScreenState extends State<NotificationsScreen> {
   List<Company> Companys = const <Company>[
     const Company(
-        title: 'logopond',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThMuQw_uYqQWSaKwg8KEMHQ2rpLsDNllSiVdl3te6jMAwxY1wKxHa0nZuDpVoClLnH-Lk&usqp=CAU'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-    const Company(
         title: 'Home',
         image:
             'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
@@ -268,8 +200,8 @@ class SelectCard extends StatelessWidget {
 
     return GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CompanyProfile()));
+      /*    Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CompanyProfile()));*/
         },
         child: Stack(
           children: [
