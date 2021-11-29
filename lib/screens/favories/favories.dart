@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:o_travel/Models/offer.dart';
+import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
@@ -16,13 +18,31 @@ class FavoriesScreen extends StatefulWidget {
 }
 
 class _FavoriesScreenState extends State<FavoriesScreen> {
-  List<String> list = [
-    'listCat',
-    'listCat',
-    'listCat',
-    'listCat',
-  ];
-  int i = 1;
+
+  List<Offer> offerList = [];
+
+
+  getResources() {
+    /*getAllCategory().then((value) {
+      setState(() {
+        categoryList = value;
+      });
+    });
+
+    getAllCountry().then((value) {
+      setState(() {
+        countryList = value;
+      });
+    });*/
+
+    getAllOffers('favorite', '1').then((value) {
+      setState(() {
+        offerList = value;
+      });
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,16 +50,14 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
     return Scaffold(
       appBar: buildAppBar( context),
       body: Builder(builder: (context){
-        if(i==1){
+        if(offerList.length>0){
           return Stack(
             children: [
               Container(
                 padding: EdgeInsets.only(top: 10,bottom: 60,right: 10,left: 10),
                 width: size.width,
                 height: size.height,
-                child:       OfferList(offerList:images),
-
-
+                child:  OfferList(offerList:offerList)
               ),
               Positioned(
                 bottom: 10,
@@ -57,7 +75,7 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
                     ),
                     onPressed: (){
                       setState(() {
-                        i=0;
+                        offerList=[];
                       });
                     },
                     child: Row(

@@ -24,10 +24,14 @@ class OfferWidget extends StatefulWidget {
 
 class _OfferWidgetState extends State<OfferWidget> {
   bool favorite = false;
+  @override
+  void initState() {
+    super.initState();
+    favorite=widget.offer.favoriteByMe;
+  }
 
   @override
   Widget build(BuildContext context) {
-    favorite=widget.offer.favoriteByMe;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -82,7 +86,7 @@ class _OfferWidgetState extends State<OfferWidget> {
                 height: MediaQuery.of(context).size.width * 0.12,
                 decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.8),
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight:Radius.circular(20) )),
                 child: Stack(
                   children: [
                     Positioned(

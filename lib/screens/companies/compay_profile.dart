@@ -21,17 +21,14 @@ class CompanyProfile extends StatefulWidget {
 }
 
 class _CompanyProfileState extends State<CompanyProfile> {
-
   List<Offer> offerList = [];
 
-
   getResources() {
-    getAllOffers('company','${widget.company.id}').then((value) {
+    getAllOffers('company', '${widget.company.id}').then((value) {
       setState(() {
         offerList = value;
       });
     });
-
   }
 
   @override
@@ -40,12 +37,9 @@ class _CompanyProfileState extends State<CompanyProfile> {
     getResources();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -53,11 +47,11 @@ class _CompanyProfileState extends State<CompanyProfile> {
           children: [
             Container(
                 padding:
-                EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+                    EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
                 height: 240,
                 decoration: BoxDecoration(
                   borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(50)),
+                      BorderRadius.only(bottomLeft: Radius.circular(50)),
                   color: primaryColorDark,
                 ),
                 child: Column(
@@ -79,31 +73,33 @@ class _CompanyProfileState extends State<CompanyProfile> {
                               color: Colors.white,
                               size: 25,
                             ),
-                            onPressed: () =>    Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => CompanyProfileEdit()))),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CompanyProfileEdit()))),
                       ],
                     ),
                     Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                          widget.company.image,
-                          height:100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              Container(
-                                  width: 50,
-                                  height: 50,
-                                  child: Center(
-                                      child: CircularProgressIndicator(
-                                        color: Theme
-                                            .of(context)
-                                            .primaryColor,
-                                      ))),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+                        child: Hero(
+                          tag: 'company_img_${widget.company.id}',
+                          child: CachedNetworkImage(
+                            imageUrl: widget.company.image,
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Container(
+                                width: 50,
+                                height: 50,
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  color: Theme.of(context).primaryColor,
+                                ))),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
                         ),
                       ),
                     ),
@@ -111,19 +107,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       height: 10,
                     ),
                     Center(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(widget.company.name,
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                              SizedBox(
-                                height: 10,
-                              ),
-
-                            ]))
+                        child:Text(widget.company.name,
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        )
                   ],
                 )),
             Container(
@@ -132,23 +121,26 @@ class _CompanyProfileState extends State<CompanyProfile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.company.description??getTranslated(context, "lorem"),
-                      style: TextStyle(fontSize: 16,height: 1.5),
+                      widget.company.description ??
+                          getTranslated(context, "lorem"),
+                      style: TextStyle(fontSize: 16, height: 1.5),
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Divider(
                       height: 1,
-                      color: Theme
-                          .of(context)
-                          .accentColor
-                          .withOpacity(0.2),
+                      color: Theme.of(context).accentColor.withOpacity(0.2),
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Row(
                       children: [
                         Text(
                           getTranslated(context, "area"),
-                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         Spacer(),
                         Text(
@@ -158,117 +150,108 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Divider(
                       height: 1,
-                      color: Theme
-                          .of(context)
-                          .accentColor
-                          .withOpacity(0.2),
+                      color: Theme.of(context).accentColor.withOpacity(0.2),
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Row(
                       children: [
                         Text(
                           getTranslated(context, "email"),
-                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         Spacer(),
-
                         Text(
                           widget.company.email,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Divider(
                       height: 1,
-                      color: Theme
-                          .of(context)
-                          .accentColor
-                          .withOpacity(0.2),
+                      color: Theme.of(context).accentColor.withOpacity(0.2),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: [
                         Text(
-                      getTranslated(context, 'phone'),
-                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+                          getTranslated(context, 'phone'),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         Spacer(),
-
                         Text(
                           widget.company.phone,
                           style: TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Divider(
                       height: 1,
-                      color: Theme
-                          .of(context)
-                          .accentColor
-                          .withOpacity(0.2),
+                      color: Theme.of(context).accentColor.withOpacity(0.2),
                     ),
-                    SizedBox(height: 16,),
-
+                    SizedBox(
+                      height: 16,
+                    ),
                     Text(
                       getTranslated(context, 'Social_Media_Accounts'),
-                      style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                   Row(
-                     mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
-                       GestureDetector(
-                       onTap: (){
-
-                       },
-                       child: Image.asset('assets/images/insta.png'),
-                     ), GestureDetector(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Image.asset('assets/images/insta.png'),
+                        ),
+                        GestureDetector(
                           onTap: () {},
                           child: Image.asset('assets/images/wtsp.png'),
                         ),
                         GestureDetector(
-                         onTap: (){
-
-                         },
-                         child: Image.asset('assets/images/snap.png'),
-                       ),
-
-                       GestureDetector(
-                         onTap: (){
-
-                         },
-                         child: Image.asset('assets/images/gmail.png'),
-                       ),
-
-
-                     ],
-                   ),
-                    SizedBox(height: 16,),
+                          onTap: () {},
+                          child: Image.asset('assets/images/snap.png'),
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Image.asset('assets/images/gmail.png'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Divider(
-
                       height: 1,
-                      color: Theme
-                          .of(context)
-                          .accentColor
-                          .withOpacity(0.2),
+                      color: Theme.of(context).accentColor.withOpacity(0.2),
                     ),
-                    SizedBox(height: 16,),
-
+                    SizedBox(
+                      height: 16,
+                    ),
                     Text(
-                      getTranslated(context,  "added_ads"),
-                      style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
+                      getTranslated(context, "added_ads"),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-
-                    OfferList(offerList:offerList),
+                    OfferList(offerList: offerList),
                   ],
-                )
-            ),
-
-
+                )),
           ],
         ),
       ),

@@ -37,63 +37,68 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
     return Scaffold(
         appBar: buildAppBar(context),
         body: Container(
-          height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: size.height * 0.01),
-                  child: Container(
-                    height: 60,
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor.withOpacity(0.05),
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    child: Center(
-                      child: TextField(
-                        maxLines: 1,
-                        style: TextStyle(fontSize: 20),
-                        textAlignVertical: TextAlignVertical.center,
-                        decoration: InputDecoration(
-                          filled: true,
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Theme.of(context).iconTheme.color,
-                            size: 25,
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.01, horizontal: 16),
+                    child: Container(
+                      height: 60,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                          color:
+                              Theme.of(context).accentColor.withOpacity(0.05),
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      child: Center(
+                        child: TextField(
+                          maxLines: 1,
+                          style: TextStyle(fontSize: 20),
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: InputDecoration(
+                            filled: true,
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Theme.of(context).iconTheme.color,
+                              size: 25,
+                            ),
+                            border:
+                                OutlineInputBorder(borderSide: BorderSide.none),
+                            fillColor: Theme.of(context)
+                                .backgroundColor
+                                .withOpacity(0),
+                            contentPadding: EdgeInsets.zero,
+                            hintText: getTranslated(context, 'search'),
                           ),
-                          border: OutlineInputBorder(borderSide: BorderSide.none),
-                          fillColor:
-                          Theme.of(context).backgroundColor.withOpacity(0),
-                          contentPadding: EdgeInsets.zero,
-                          hintText: getTranslated(context, 'search'),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Builder(builder: (BuildContext context) {
-                  if (companies.length > 0)
-                    return GridView.count(
-                        crossAxisCount: 3,
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        children: List.generate(companies.length, (index) {
-                          return Center(
-                            child: SelectCard(company: companies[index]),
-                          );
-                        })
-                    );
-                  else
-                    return Container( height: 400, child: GFLoader(),);
-                })
-              ],
-            ),
-          )
-        ));
+                  Builder(builder: (BuildContext context) {
+                    if (companies.length > 0)
+                      return GridView.count(
+                          crossAxisCount: 3,
+                          padding: EdgeInsets.all(16),
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          children: List.generate(companies.length, (index) {
+                            return Center(
+                              child: SelectCard(company: companies[index]),
+                            );
+                          }));
+                    else
+                      return Container(
+                        height: 400,
+                        child: GFLoader(),
+                      );
+                  })
+                ],
+              ),
+            )));
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -142,7 +147,15 @@ class SelectCard extends StatelessWidget {
             padding: EdgeInsets.all(10),
             height: 400,
             decoration: BoxDecoration(
-                border: Border.all(color: Theme.of(context).accentColor),
+                color: Theme.of(context).backgroundColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 4,
+                    offset: Offset(0, 2), // changes position of shadow
+                  ),
+                ],
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Center(
               child: Column(
@@ -151,33 +164,36 @@ class SelectCard extends StatelessWidget {
                     Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(100)),
-                        child: CachedNetworkImage(
-                          imageUrl: company.image,
-                          fit: BoxFit.cover,
-                          width: 70,
-                          height: 70,
-                          placeholder: (context, url) => Center(
-                              child: Container(
-                                  width: 10,
-                                  height: 10,
-                                  child: CircularProgressIndicator(
-                                    color: Theme.of(context).primaryColor,
-                                  ))),
-                          errorWidget: (context, url, error) =>
-                              new Icon(Icons.error),
+                        child: Hero(
+                          tag: 'company_img_${company.id}',
+                          child: CachedNetworkImage(
+                            imageUrl: company.image,
+                            fit: BoxFit.cover,
+                            width: 70,
+                            height: 70,
+                            placeholder: (context, url) => Center(
+                                child: Container(
+                                    width: 10,
+                                    height: 10,
+                                    child: CircularProgressIndicator(
+                                      color: Theme.of(context).primaryColor,
+                                    ))),
+                            errorWidget: (context, url, error) =>
+                                new Icon(Icons.error),
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                        (company.name.length > 12)
-                            ? company.name.substring(0, 12)
-                            : company.name,
-                        style: TextStyle(
-                          color: Theme.of(context).accentColor,
-                        )),
+                     Text(
+                          (company.name.length > 12)
+                              ? company.name.substring(0, 12)
+                              : company.name,
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                          )),
                   ]),
             )));
   }

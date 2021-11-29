@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Story> storyList = [];
 
   getResources() {
-    getAllCategory().then((value) {
+    /*getAllCategory().then((value) {
       setState(() {
         categoryList = value;
       });
@@ -66,14 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         countryList = value;
       });
-    });
+    });*/
 
-    getAllOffers('featured','1').then((value) {
+    getAllOffers('featured', '1').then((value) {
       setState(() {
         offerList = value;
       });
     });
-    getAllOffers('featured','2').then((value) {
+    getAllOffers('featured', '2').then((value) {
       setState(() {
         featuredOfferList = value;
         print('featuredOfferList $featuredOfferList');
@@ -97,210 +97,221 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: MyDrawer(size: size),
-      appBar: buildAppBar(context),
-      body: Builder(builder: (BuildContext context) {
-        if (offerList.length > 0 &&
-            storyList.length > 0 &&
-            countryList.length > 0 &&
-            featuredOfferList.length > 0 &&
-            categoryList.length > 0)
-          return Container(
-              width: size.width,
-              height: size.height,
-              color: Theme.of(context).backgroundColor,
-              child: Stack(
-                children: [
-                  RefreshIndicator(
-                    color: Theme.of(context).primaryColor,
-                    key: _refreshIndicatorKey,
-                    onRefresh: _refresh,
-                    child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          StoriesList(storyList: storyList),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 3,
-                            decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .accentColor
-                                    .withOpacity(0.05),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SearchWidget(size: size),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          CarouselWidget(offerList:featuredOfferList),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: size.width * 0.29,
-                                constraints: BoxConstraints(
-                                  maxWidth: size.width * 0.29,
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: GFDropdown(
-                                    hint: Text(
-                                        getTranslated(context, 'trip_type')),
-                                    value: selectedCategory,
-                                    padding: const EdgeInsets.all(15),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)),
-                                    dropdownButtonColor: Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(0.05),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        selectedCategory =
-                                            newValue as Category?;
-                                      });
-                                    },
-                                    items: categoryList
-                                        .map((value) => DropdownMenuItem(
-                                              value: value,
-                                              child: Text(
-                                                value.name,
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ))
-                                        .toList(),
-                                  ),
+        drawer: MyDrawer(size: size),
+        appBar: buildAppBar(context),
+        body: Container(
+            width: size.width,
+            height: size.height,
+            color: Theme.of(context).backgroundColor,
+            child: Stack(
+              children: [
+                RefreshIndicator(
+                  color: Theme.of(context).primaryColor,
+                  key: _refreshIndicatorKey,
+                  onRefresh: _refresh,
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Builder(builder: (BuildContext context) {
+                          if (storyList.length > 0)
+                            return StoriesList(storyList: storyList);
+                          else
+                            return Container(
+                              height: 70,
+                              child: GFLoader(),
+                            );;
+                        }),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 3,
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .accentColor
+                                  .withOpacity(0.05),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SearchWidget(size: size),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Builder(builder: (BuildContext context) {
+                          if (featuredOfferList.length > 0)
+                            return CarouselWidget(offerList: featuredOfferList);
+                          else
+                            return Container(
+                              height: 200,
+                              child: GFLoader(),
+                            );
+
+                        }),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              height: 50,
+                              width: size.width * 0.29,
+                              constraints: BoxConstraints(
+                                maxWidth: size.width * 0.29,
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: GFDropdown(
+                                  hint:
+                                      Text(getTranslated(context, 'trip_type')),
+                                  value: selectedCategory,
+                                  padding: const EdgeInsets.all(15),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  dropdownButtonColor: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(0.05),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      selectedCategory = newValue as Category?;
+                                    });
+                                  },
+                                  items: categoryList
+                                      .map((value) => DropdownMenuItem(
+                                            value: value,
+                                            child: Text(
+                                              value.name,
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ))
+                                      .toList(),
                                 ),
                               ),
-                              Container(
-                                height: 50,
-                                width: size.width * 0.29,
-                                constraints: BoxConstraints(
-                                  maxWidth: size.width * 0.29,
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: GFDropdown(
-                                    hint:
-                                        Text(getTranslated(context, 'country')),
-                                    value: selectedCountry,
-                                    padding: const EdgeInsets.all(15),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)),
-                                    dropdownButtonColor: Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(0.05),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        selectedCountry = newValue as Country?;
-                                      });
-                                    },
-                                    items: countryList
-                                        .map((value) => DropdownMenuItem(
-                                              value: value,
-                                              child: Text(
-                                                value.name,
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ))
-                                        .toList(),
-                                  ),
+                            ),
+                            Container(
+                              height: 50,
+                              width: size.width * 0.29,
+                              constraints: BoxConstraints(
+                                maxWidth: size.width * 0.29,
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: GFDropdown(
+                                  hint: Text(getTranslated(context, 'country')),
+                                  value: selectedCountry,
+                                  padding: const EdgeInsets.all(15),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  dropdownButtonColor: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(0.05),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      selectedCountry = newValue as Country?;
+                                    });
+                                  },
+                                  items: countryList
+                                      .map((value) => DropdownMenuItem(
+                                            value: value,
+                                            child: Text(
+                                              value.name,
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ))
+                                      .toList(),
                                 ),
                               ),
-                              Container(
-                                height: 50,
-                                width: size.width * 0.29,
-                                constraints: BoxConstraints(
-                                  maxWidth: size.width * 0.29,
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: GFDropdown(
-                                    hint: Text(getTranslated(context, 'month')),
-                                    value: selectEvent,
-                                    padding: const EdgeInsets.all(15),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)),
-                                    dropdownButtonColor: Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(0.05),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        selectEvent = newValue as String;
-                                      });
-                                    },
-                                    items: listEvent
-                                        .map((value) => DropdownMenuItem(
-                                              value: value,
-                                              child: Text(
-                                                value,
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ))
-                                        .toList(),
-                                  ),
+                            ),
+                            Container(
+                              height: 50,
+                              width: size.width * 0.29,
+                              constraints: BoxConstraints(
+                                maxWidth: size.width * 0.29,
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: GFDropdown(
+                                  hint: Text(getTranslated(context, 'month')),
+                                  value: selectEvent,
+                                  padding: const EdgeInsets.all(15),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  dropdownButtonColor: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(0.05),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      selectEvent = newValue as String;
+                                    });
+                                  },
+                                  items: listEvent
+                                      .map((value) => DropdownMenuItem(
+                                            value: value,
+                                            child: Text(
+                                              value,
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ))
+                                      .toList(),
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          OfferList(
-                            offerList: offerList,
-                          ),
-                          SizedBox(
-                            height: 80,
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Builder(builder: (BuildContext context) {
+                          if (offerList.length > 0)
+                            return OfferList(
+                              offerList: offerList,
+                            );
+                          else
+                            return Container(
+                              height: 200,
+                              child: GFLoader(),
+                            );
+                        }),
+                        SizedBox(
+                          height: 80,
+                        ),
+                      ],
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      margin: EdgeInsets.all(5),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      width: double.infinity,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(raduice),
-                      ),
-                      child: MaterialButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AddNewAdScreen()));
-                        },
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          getTranslated(context, 'add_new_ad'),
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: EdgeInsets.all(5),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(raduice),
+                    ),
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddNewAdScreen()));
+                      },
+                      color: Theme.of(context).primaryColor,
+                      child: Text(
+                        getTranslated(context, 'add_new_ad'),
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  )
-                ],
-              ));
-        else
-          return GFLoader(
-            loaderColorOne: Theme.of(context).primaryColor,
-          );
-      }),
-    );
+                  ),
+                )
+              ],
+            )));
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -729,24 +740,46 @@ class MyDrawer extends StatelessWidget {
 }
 
 class DetailStoryScreen extends StatelessWidget {
-  final Story story;
 
+  final Story story;
   DetailStoryScreen(this.story);
+
+  final fieldMessageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      color: Theme.of(context).backgroundColor,
       height: size.height,
       width: size.width,
       child: Stack(
         children: [
           Container(
             child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: PhotoView(imageProvider: NetworkImage(story.imageUrl))),
+              onTap: () => Navigator.pop(context),
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20)),
+                  child: CachedNetworkImage(
+                    imageUrl: story.imageUrl,
+                    fit: BoxFit.cover,
+                    width: 1000,
+                    height: 1000,
+                    placeholder: (context, url) => Center(
+                        child: Container(
+                            width: 10,
+                            height: 10,
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                            ))),
+                    errorWidget: (context, url, error) => new Icon(Icons.error),
+                  ),
+                ),
+              ),
+            ),
           ),
           Align(
             alignment: Alignment.topLeft,
@@ -779,7 +812,29 @@ class DetailStoryScreen extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-          ),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: Colors.white70,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: fieldMessageController,
+                  onSubmitted: (String str) {},
+                  maxLines: 1,
+                  style: TextStyle(fontSize: 16,color: Colors.black),
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    filled: true,
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                    contentPadding: EdgeInsets.zero,
+                    hintText: 'write your message',
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
