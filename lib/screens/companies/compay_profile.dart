@@ -48,12 +48,13 @@ class _CompanyProfileState extends State<CompanyProfile> {
         .size;
     return Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
                 padding:
                 EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
-                height: 250,
+                height: 240,
                 decoration: BoxDecoration(
                   borderRadius:
                   BorderRadius.only(bottomLeft: Radius.circular(50)),
@@ -88,8 +89,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         child: CachedNetworkImage(
                           imageUrl:
                           widget.company.image,
-                          height: size.height * 0.12,
-                          width: size.height * 0.12,
+                          height:100,
+                          width: 100,
                           fit: BoxFit.cover,
                           placeholder: (context, url) =>
                               Container(
@@ -188,7 +189,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                           .accentColor
                           .withOpacity(0.2),
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(height: 20,),
                     Row(
                       children: [
                         Text(
@@ -217,10 +218,35 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       getTranslated(context, 'Social_Media_Accounts'),
                       style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
                     ),
-                    Text(
-                      'Social Media Accounts',
-                      style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
-                    ),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       GestureDetector(
+                       onTap: (){
+
+                       },
+                       child: Image.asset('assets/images/insta.png'),
+                     ), GestureDetector(
+                          onTap: () {},
+                          child: Image.asset('assets/images/wtsp.png'),
+                        ),
+                        GestureDetector(
+                         onTap: (){
+
+                         },
+                         child: Image.asset('assets/images/snap.png'),
+                       ),
+
+                       GestureDetector(
+                         onTap: (){
+
+                         },
+                         child: Image.asset('assets/images/gmail.png'),
+                       ),
+
+
+                     ],
+                   ),
                     SizedBox(height: 16,),
                     Divider(
 
