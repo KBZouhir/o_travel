@@ -38,7 +38,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
             height: 200,
             viewportFraction: 0.8,
             initialPage: 0,
-            enableInfiniteScroll: true,
+            enableInfiniteScroll: false,
             reverse: false,
             autoPlayInterval: Duration(seconds: 3),
             autoPlayAnimationDuration: Duration(milliseconds: 800),

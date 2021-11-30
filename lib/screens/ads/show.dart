@@ -3,15 +3,19 @@ import 'dart:ffi';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:o_travel/Models/category.dart';
+import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShowOffer extends StatefulWidget {
-  final Offer       offer;
+  final Offer offer;
 
-  const ShowOffer({Key? key, required this.      offer}) : super(key: key);
+  const ShowOffer({Key? key, required this.offer}) : super(key: key);
 
   @override
   _ShowOfferState createState() => _ShowOfferState();
@@ -35,9 +39,10 @@ class _ShowOfferState extends State<ShowOffer> {
                   GestureDetector(
                     onTap: () => showDialog(
                         context: context,
-                        builder: (_) => DetailImageScreen(widget.offer.images[0].url)),
+                        builder: (_) =>
+                            DetailImageScreen(widget.offer.images[0].url)),
                     child: Hero(
-                      tag: 'ad_image'+widget.offer.images[0].url,
+                      tag: 'offer${widget.offer.images[0].url}',
                       child: CachedNetworkImage(
                         imageUrl: widget.offer.images[0].url,
                         placeholder: (context, url) => Center(
@@ -120,7 +125,7 @@ class _ShowOfferState extends State<ShowOffer> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'The Sultanate\'s flights',
+                                  widget.offer.name,
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .accentColor
@@ -130,7 +135,7 @@ class _ShowOfferState extends State<ShowOffer> {
                                 ),
                               ),
                               Text(
-                                'Tourism',
+                                widget.offer.category.name,
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .accentColor
@@ -146,18 +151,20 @@ class _ShowOfferState extends State<ShowOffer> {
                           Row(
                             children: [
                               Expanded(
-                                child: Text(
-                                  'Grid view',
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .accentColor
-                                          .withOpacity(.8),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
+                                child: Wrap(
+
+                                  alignment: WrapAlignment.start,
+
+                                  spacing: 5.0,
+
+                                  direction: Axis.horizontal,
+
+                                  children: buildTags(widget.offer.countries,context),
+
                                 ),
                               ),
                               Text(
-                                '500\$',
+                                widget.offer.price+'\$',
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .accentColor
@@ -183,7 +190,10 @@ class _ShowOfferState extends State<ShowOffer> {
                                           width: 3)),
                                   child: Center(
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        launch("tel://${widget.offer.company.phone}");
+
+                                      },
                                       icon: Icon(
                                         Icons.phone_outlined,
                                         size: 35,
@@ -201,7 +211,8 @@ class _ShowOfferState extends State<ShowOffer> {
                                           width: 3)),
                                   child: Center(
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                      },
                                       icon: Icon(
                                         Icons.chat_outlined,
                                         size: 35,
@@ -233,8 +244,7 @@ class _ShowOfferState extends State<ShowOffer> {
                           SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            getTranslated(context, 'lorem'),
+                          Text(widget.offer.description,
                             style: TextStyle(fontSize: 16, height: 1.5),
                           ),
                           SizedBox(
@@ -245,8 +255,8 @@ class _ShowOfferState extends State<ShowOffer> {
                               Spacer(),
                               Text(
                                 getTranslated(context, 'publish_date') +
-                                    ' ' +
-                                    '4/3/2021',
+                                    '    ' +
+                                    '${DateFormat.yMd().format(DateTime.parse(widget.offer.date.toString()))}',
                                 style: TextStyle(
                                     fontSize: 14,
                                     height: 1.5,
@@ -280,50 +290,71 @@ class _ShowOfferState extends State<ShowOffer> {
                             height: 20,
                           ),
                           Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    "https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png",
-                                height: size.height * 0.13,
-                                width: size.height * 0.13,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => Container(
-                                    width: 50,
-                                    height: 50,
-                                    child: Center(
-                                        child: CircularProgressIndicator(
-                                      color: Theme.of(context).primaryColor,
-                                    ))),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Center(
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                Text('Jannat Asia ',
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        color: Theme.of(context).accentColor,
-                                        fontWeight: FontWeight.bold)),
-                                SizedBox(
-                                  height: 10,
+                                GestureDetector(
+                                  child: Column(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              widget.offer.company.image,
+                                          height: size.height * 0.13,
+                                          width: size.height * 0.13,
+                                          fit: BoxFit.cover,
+                                          placeholder: (context, url) =>
+                                              Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                  ))),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text( widget.offer.company.name,
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
                                 ),
-                                Text('Tourism\Sultanate of Oman',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Theme.of(context).accentColor,
-                                        fontWeight: FontWeight.w300)),
                                 SizedBox(
                                   height: 50,
                                 ),
-                                Image.asset('assets/images/social_icons.png'),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Image.asset('assets/images/insta.png'),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Image.asset('assets/images/wtsp.png'),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Image.asset('assets/images/snap.png'),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Image.asset('assets/images/gmail.png'),
+                                        ),
+                                      ],
+                                    ),
                                 SizedBox(
                                   height: 50,
                                 ),
@@ -363,6 +394,34 @@ class _ShowOfferState extends State<ShowOffer> {
       ],
     );
   }
+
+  List<Widget> buildTags(List<Country> countries,context) {
+    List<Widget> countryTags = <Widget>[];
+
+    for(int i = 0; i < countries.length; i++) {
+
+      countryTags.add(
+        Chip(
+          padding: EdgeInsets.all(5.0),
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),),
+          shadowColor: Colors.grey.shade50,
+          backgroundColor:  Theme.of(context).backgroundColor,
+
+          label: Text(countries[i].name),
+
+
+
+        ),
+      );
+
+    }
+
+    return countryTags;
+
+  }
+
 }
 
 class DetailImageScreen extends StatelessWidget {

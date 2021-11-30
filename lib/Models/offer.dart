@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/company.dart';
+import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/image.dart';
 
 Offer offerFromJson(String str) => Offer.fromJson(json.decode(str));
@@ -42,7 +43,7 @@ class Offer {
   List<Image> images;
   Category category;
   Company company;
-  List<Category> countries;
+  List<Country> countries;
 
   factory Offer.fromJson(Map<String, dynamic> json) => Offer(
     id: json["id"],
@@ -57,7 +58,7 @@ class Offer {
     images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
     category: Category.fromJson(json["category"]),
     company: Company.fromJson(json["company"]),
-    countries: List<Category>.from(json["countries"].map((x) => Category.fromJson(x))),
+    countries: List<Country>.from(json["countries"].map((x) => Country.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {

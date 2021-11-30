@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ import 'package:o_travel/screens/ads/add.dart';
 import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
+import 'package:o_travel/screens/companies/compay_profile.dart';
 import 'package:o_travel/screens/contact.dart';
 import 'package:o_travel/screens/favories/favories.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';
@@ -122,7 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             return Container(
                               height: 70,
                               child: GFLoader(),
-                            );;
+                            );
+                          ;
                         }),
                         SizedBox(
                           height: 10,
@@ -151,7 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 200,
                               child: GFLoader(),
                             );
-
                         }),
                         SizedBox(
                           height: 10,
@@ -364,7 +367,7 @@ class SearchWidget extends StatelessWidget {
           child: Center(
             child: TextField(
               maxLines: 1,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 filled: true,
@@ -610,7 +613,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.home_filled),
             title: Text(
               getTranslated(context, 'home'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               // Update the state of the app
@@ -627,7 +630,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.favorite_border),
             title: Text(
               getTranslated(context, 'favorites'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -643,7 +646,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.notifications),
             title: Text(
               getTranslated(context, 'notifications'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -661,7 +664,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.chat),
             title: Text(
               getTranslated(context, 'chat'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -677,7 +680,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.list),
             title: Text(
               getTranslated(context, 'add_new_ad_page'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -693,7 +696,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.help_outline_sharp),
             title: Text(
               getTranslated(context, 'about'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -709,7 +712,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.phone),
             title: Text(
               getTranslated(context, 'contact_us'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -725,7 +728,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.settings),
             title: Text(
               getTranslated(context, 'settings'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 22),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -740,8 +743,8 @@ class MyDrawer extends StatelessWidget {
 }
 
 class DetailStoryScreen extends StatelessWidget {
-
   final Story story;
+
   DetailStoryScreen(this.story);
 
   final fieldMessageController = TextEditingController();
@@ -756,27 +759,24 @@ class DetailStoryScreen extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20)),
-                  child: CachedNetworkImage(
-                    imageUrl: story.imageUrl,
-                    fit: BoxFit.cover,
-                    width: 1000,
-                    height: 1000,
-                    placeholder: (context, url) => Center(
-                        child: Container(
-                            width: 10,
-                            height: 10,
-                            child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                            ))),
-                    errorWidget: (context, url, error) => new Icon(Icons.error),
-                  ),
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20)),
+                child: CachedNetworkImage(
+                  imageUrl: story.imageUrl,
+                  fit: BoxFit.cover,
+                  width: 1000,
+                  height: 1000,
+                  placeholder: (context, url) => Center(
+                      child: Container(
+                          width: 10,
+                          height: 10,
+                          child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                          ))),
+                  errorWidget: (context, url, error) => new Icon(Icons.error),
                 ),
               ),
             ),
@@ -785,27 +785,65 @@ class DetailStoryScreen extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Container(
               padding: EdgeInsets.all(10),
-              color: Colors.grey.withOpacity(0.03),
-              height: 60,
+              height: 70,
+              decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor.withOpacity(0.2),
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20)),
+              ),
               width: size.width,
               child: Row(
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(story.company.image),
-                    maxRadius: 18,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CompanyProfile(company: story.company)));
+                    },
+                    child: Row(
+                      children: [
+                        Hero(
+                          tag: 'company_img_${story.company.id}',
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(story.company.image),
+                            maxRadius: 20,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              story.company.name,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Theme.of(context)
+                                      .accentColor
+                                      .withOpacity(1),
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        story.company.name,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      )),
+                  Spacer(),
+                  Card(
+                      color: Theme.of(context).backgroundColor.withOpacity(0.7),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Container(
+                          height: 40,
+                          width: 40,
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(Icons.close))))
                 ],
               ),
             ),
@@ -816,23 +854,24 @@ class DetailStoryScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: Colors.white70,
+              color: Theme.of(context).backgroundColor.withOpacity(0.5),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: fieldMessageController,
-                  onSubmitted: (String str) {},
-                  maxLines: 1,
-                  style: TextStyle(fontSize: 16,color: Colors.black),
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    filled: true,
-                    border: OutlineInputBorder(borderSide: BorderSide.none),
-                    contentPadding: EdgeInsets.zero,
-                    hintText: 'write your message',
-                  ),
-                ),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: fieldMessageController,
+                    onSubmitted: (String str) {},
+                    maxLines: 1,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).accentColor.withOpacity(1)),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                      filled: false,
+                      border: OutlineInputBorder(borderSide: BorderSide.none),
+                      contentPadding: EdgeInsets.zero,
+                      hintText: getTranslated(context, 'write_message'),
+                    ),
+                  )),
             ),
           )
         ],

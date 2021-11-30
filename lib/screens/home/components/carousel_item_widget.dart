@@ -43,11 +43,11 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
           ),
         ],
         ),
-        margin: EdgeInsets.symmetric(horizontal: 5.0),
+        margin: EdgeInsets.symmetric(horizontal: 5.0,vertical: 10),
         child: Stack(
           children: [
         Hero(
-        tag: 'ad_image'+widget.offer.images[0].url,
+        tag: 'offer${widget.offer.images[0].url}',
           child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: CachedNetworkImage(
@@ -68,30 +68,29 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
             Positioned(
               child: Container(
                 height: 50,
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.6),
                     borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(20),
                         bottomLeft: Radius.circular(20))),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: 15,
-                    ),
                     Text(
-                      'Bousna',
-                      style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Spacer(),
-                    Text(
-                      '300 \$',
+                      '${widget.offer.price} \$',
                       style: TextStyle(fontSize: 22, color: Colors.white,
                           fontWeight: FontWeight.w800),
                     ),
-                    Spacer(),
+
+                    Text(
+                      widget.offer.countries[0].name.substring(0,10),
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500),
+                    ),
+
                     IconButton(
                       icon: Icon(
                         Icons.chat_outlined,
@@ -102,9 +101,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                         setState(() {});
                       },
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
+
                   ],
                 ),
               ),

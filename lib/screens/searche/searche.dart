@@ -157,7 +157,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 10,
                 ),
                 Text(
-                  getTranslated(context, 'service_type'),
+                  getTranslated(context, 'trip_type'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -200,7 +200,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 10,
                 ),
                 Text(
-                  'Price',
+                  getTranslated(context, 'price'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -225,7 +225,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           activeColor: Theme.of(context).primaryColor,
                         ),SizedBox(width: 8,),
                         Text(
-                            'Default Order',
+                            getTranslated(context, 'default_order'),
                             style: TextStyle(
                               fontSize: 16,
                               color: Theme.of(context).accentColor,
@@ -246,7 +246,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           activeColor: Theme.of(context).primaryColor,
                         ),SizedBox(width: 8,),
                         Text(
-                            'By latest',
+                           getTranslated(context, 'by_latest'),
                             style: TextStyle(
                               fontSize: 16,
                               color: Theme.of(context).accentColor,
@@ -267,28 +267,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           activeColor: Theme.of(context).primaryColor,
                         ),SizedBox(width: 8,),
                         Text(
-                            'Lowest price to highest',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context).accentColor,
-                            )
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: 4,
-                          groupValue: val,
-                          onChanged: (value) {
-                            setState(() {
-                              val = value as int;
-                            });
-                          },
-                          activeColor: Theme.of(context).primaryColor,
-                        ),SizedBox(width: 8,),
-                        Text(
-                            'Default Order',
+                            getTranslated(context, 'lowest_to_highest') ,
                             style: TextStyle(
                               fontSize: 16,
                               color: Theme.of(context).accentColor,
@@ -314,9 +293,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         MaterialPageRoute(builder: (context) => ResultScreen())),
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                      'Search',
+                      getTranslated(context, 'search'),
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Colors.white,
                       ),
                     ),

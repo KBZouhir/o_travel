@@ -60,7 +60,7 @@ class _OfferWidgetState extends State<OfferWidget> {
         child: Stack(
           children: [
             Hero(
-              tag: 'ad_image'+widget.offer.images[0].url,
+              tag: 'offer${widget.offer.images[0].url}',
               child:
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -95,7 +95,7 @@ class _OfferWidgetState extends State<OfferWidget> {
                         left: 0,
                         child: Center(
                           child: Text(
-                            'Bousna',
+                            widget.offer.countries[0].name.substring(0,10),
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -109,7 +109,7 @@ class _OfferWidgetState extends State<OfferWidget> {
                         left: 0,
                         child: Center(
                           child: Text(
-                            '300 \$',
+                            '${widget.offer.price} \$',
                             style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.black,
