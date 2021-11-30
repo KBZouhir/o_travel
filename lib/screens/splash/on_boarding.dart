@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/choose_page.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
@@ -12,7 +13,11 @@ class OnBoardingPage extends StatefulWidget {
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
-
+  String _lang = 'en';
+  void _changeLanguage() async {
+    Locale _locale = await setLocale(_lang);
+    MyApp.setLocale(context, _locale);
+  }
   void _onIntroEnd(context) {
     Navigator.of(context).pop();
     Navigator.of(context).push(
@@ -46,8 +51,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           child: Padding(
             padding: const EdgeInsets.only(top: 16, right: 16),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: Center()),
+                IconButton(
+                  icon: Icon(
+                    Icons.language_outlined,
+                    color: Colors.blueGrey,
+                    size: 30,
+                  ),
+                  onPressed: () => _changeLanguage(),
+                ),
                 TextButton(
                   child: Text(
                     getTranslated(context, 'skip'),

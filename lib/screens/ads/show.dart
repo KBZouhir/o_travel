@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
+import 'package:o_travel/screens/companies/compay_profile.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:photo_view/photo_view.dart';
@@ -294,6 +295,11 @@ class _ShowOfferState extends State<ShowOffer> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                 GestureDetector(
+                                  onTap:(){
+                                    Navigator.pop(context);
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => CompanyProfile(company: widget.offer.company)));
+                                  },
                                   child: Column(
                                     children: [
                                       ClipRRect(

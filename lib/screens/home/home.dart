@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:intl/intl.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
@@ -42,13 +44,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
-  String? selectEvent = "item1";
-  List<String> listEvent = [
-    'item1',
-    'item2',
-    'item3',
-    'item4',
-  ];
+  DateTime? selectedDate;
+
   List<Offer> offerList = [];
   List<Offer> featuredOfferList = [];
   List<Category> categoryList = [];
@@ -171,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: DropdownButtonHideUnderline(
                                 child: GFDropdown(
                                   hint:
-                                      Text(getTranslated(context, 'trip_type')),
+                                      Text(getTranslated(context, 'trip_type'),style: TextStyle(fontSize: 16),),
                                   value: selectedCategory,
                                   padding: const EdgeInsets.all(15),
                                   borderRadius:
@@ -204,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: GFDropdown(
-                                  hint: Text(getTranslated(context, 'country')),
+                                  hint: Text(getTranslated(context, 'country'),style: TextStyle(fontSize: 16)),
                                   value: selectedCountry,
                                   padding: const EdgeInsets.all(15),
                                   borderRadius:
@@ -235,30 +232,46 @@ class _HomeScreenState extends State<HomeScreen> {
                               constraints: BoxConstraints(
                                 maxWidth: size.width * 0.29,
                               ),
-                              child: DropdownButtonHideUnderline(
-                                child: GFDropdown(
-                                  hint: Text(getTranslated(context, 'month')),
-                                  value: selectEvent,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showMonthPicker(
+                                    context: context,
+                                    firstDate:
+                                        DateTime(DateTime.now().year - 1, 5),
+                                    lastDate:
+                                        DateTime(DateTime.now().year + 1, 9),
+                                    initialDate: selectedDate ?? DateTime.now(),
+                                  ).then((date) {
+                                    if (date != null) {
+                                      setState(() {
+                                        selectedDate = date;
+                                      });
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  height: 60,
+                                  width: MediaQuery.of(context).size.width,
                                   padding: const EdgeInsets.all(15),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
-                                  dropdownButtonColor: Theme.of(context)
-                                      .accentColor
-                                      .withOpacity(0.05),
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      selectEvent = newValue as String;
-                                    });
-                                  },
-                                  items: listEvent
-                                      .map((value) => DropdownMenuItem(
-                                            value: value,
-                                            child: Text(
-                                              value,
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ))
-                                      .toList(),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                      color: Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(0.05),),
+
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      selectedDate == null
+                                          ? getTranslated(context, 'month')
+                                          : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
+                                      style: TextStyle(
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
