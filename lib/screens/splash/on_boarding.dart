@@ -5,6 +5,7 @@ import 'package:o_travel/constants.dart';
 import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/choose_page.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     MyApp.setLocale(context, _locale);
   }
   void _onIntroEnd(context) {
+    SharedPreferences.getInstance().then((value) => value.setBool('isFirstTime', false));
     Navigator.of(context).pop();
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => ChoosePage()),
@@ -65,7 +67,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   child: Text(
                     getTranslated(context, 'skip'),
                     style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   onPressed: () => _onIntroEnd(context),
                 )

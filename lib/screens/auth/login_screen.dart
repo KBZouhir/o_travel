@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:o_travel/validators/formValidators.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool company;
@@ -17,6 +19,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool showPassword = true;
   String _lang = 'en';
+  GlobalKey<FormState> _form = GlobalKey<FormState>();
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   void initState() {
     getLocale().then((locale) {
@@ -32,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -60,188 +68,215 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            child: Form(
+              key:_form ,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                TextFormField(
-                  textAlignVertical: TextAlignVertical.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-
-                    hintText: getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                    prefixIcon: Icon(
-                      Icons.perm_identity,
-                      size: 25,
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Text(
+                    getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.0,
+                        color: Theme.of(context).accentColor),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    controller: usernameController,
+                    textAlignVertical: TextAlignVertical.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.0,
+                        color: Theme.of(context).accentColor),
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hintText: getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                      prefixIcon: Icon(
+                        Icons.perm_identity,
+                        size: 25,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Text(
-                  getTranslated(context, 'password'),
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                TextField(
-                  textAlignVertical: TextAlignVertical.center,
-
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
-                  obscureText: showPassword,
-                  decoration: InputDecoration(
-                    hintText: getTranslated(context, 'password'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                    prefixIcon: Icon(Icons.lock,size: 25,),
-                    suffixIcon: IconButton(
-                      icon: showPassword
-                          ? Icon(Icons.remove_red_eye)
-                          : Icon(Icons.visibility_off_outlined),
-                      onPressed: () =>
-                          setState(() => showPassword = !showPassword),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text(
+                    getTranslated(context, 'password'),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.0,
+                        color: Theme.of(context).accentColor),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  TextFormField(
+                    textAlignVertical: TextAlignVertical.center,
+                    controller: passwordController,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.0,
+                        color: Theme.of(context).accentColor),
+                    obscureText: showPassword,
+                    decoration: InputDecoration(
+                      hintText: getTranslated(context, 'password'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                      prefixIcon: Icon(Icons.lock,size: 25,),
+                      suffixIcon: IconButton(
+                        icon: showPassword
+                            ? Icon(Icons.remove_red_eye)
+                            : Icon(Icons.visibility_off_outlined),
+                        onPressed: () =>
+                            setState(() => showPassword = !showPassword),
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EmailPage()));
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EmailPage()));
+                        },
+                        child: Text(
+                          getTranslated(context, 'forgot_password'),
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor.withOpacity(0.7),
+                            fontSize: 14.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(raduice),
+                    ),
+                    child: MaterialButton(
+                      onPressed: (){
+                        if(_form.currentState!.validate()){
+                          if(widget.company){
+                            loginCompany(usernameController.text,passwordController.text).then((value){
+                              if(value.id > -1){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
+                              }
+                            });
+                          }else{
+                            loginUser(usernameController.text,passwordController.text).then((value){
+                              if(value.id > -1){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
+                              }
+                            });
+                          }
+                        }
+
                       },
+                      color: Theme.of(context).primaryColor,
                       child: Text(
-                        getTranslated(context, 'forgot_password'),
+                        getTranslated(context, 'login'),
                         style: TextStyle(
-                          color: Theme.of(context).accentColor.withOpacity(0.7),
-                          fontSize: 14.0,
+                          fontSize:20,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(raduice),
                   ),
-                  child: MaterialButton(
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen())),
-                    color: Theme.of(context).primaryColor,
-                    child: Text(
-                      getTranslated(context, 'login'),
-                      style: TextStyle(
-                        fontSize:20,
-                        color: Colors.white,
+                  SizedBox(
+                    height: 30,
+                  ),
+                  widget.company
+                      ? Center()
+                      : Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          getTranslated(context, 'connect_with'),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).accentColor,
+                            fontSize: 16.0,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                widget.company
-                    ? Center()
-                    : Column(
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Center(
-                            child: Text(
-                              getTranslated(context, 'connect_with'),
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Theme.of(context).accentColor,
-                                fontSize: 16.0,
-                              ),
-                            ),
+                          IconButton(
+                            icon: Image.asset(
+                                'assets/images/google-plus.png'),
+                            iconSize: 50,
+                            onPressed: () {},
                           ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: Image.asset(
-                                    'assets/images/google-plus.png'),
-                                iconSize: 50,
-                                onPressed: () {},
-                              ),
-                              IconButton(
-                                icon: Image.asset('assets/images/facebook.png'),
-                                iconSize: 50,
-                                onPressed: () {},
-                              ),
-                            ],
+                          IconButton(
+                            icon: Image.asset('assets/images/facebook.png'),
+                            iconSize: 50,
+                            onPressed: () {},
                           ),
                         ],
                       ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      getTranslated(context, 'you_do_not_have_account'),
-                      style: TextStyle(
-                        color: Theme.of(context).accentColor.withOpacity(0.8),
-                        fontSize: 16.0,
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        getTranslated(context, 'you_do_not_have_account'),
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor.withOpacity(0.8),
+                          fontSize: 16.0,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignUpPage()));
-                      },
-                      child: Text(getTranslated(context, 'sign_up'),
-                          style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16.0,
-                          )),
-                    )
-                  ],
-                ),
-              ],
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpPage()));
+                        },
+                        child: Text(getTranslated(context, 'sign_up'),
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16.0,
+                            )),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
+
 }

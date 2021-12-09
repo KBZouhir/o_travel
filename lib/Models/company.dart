@@ -42,9 +42,9 @@ class Company {
   dynamic instagram;
   dynamic twitter;
   dynamic rate;
-  String latitude;
-  String longitude;
-  String address;
+  dynamic latitude;
+  dynamic longitude;
+  dynamic address;
   dynamic description;
   dynamic tradeRegister;
 

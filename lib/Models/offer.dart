@@ -33,7 +33,7 @@ class Offer {
 
   int id;
   String name;
-  String price;
+  int price;
   String description;
   dynamic rate;
   DateTime date;

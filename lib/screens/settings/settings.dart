@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/main.dart';
+import 'package:o_travel/screens/dialogs/logout.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -39,9 +40,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             ListTile(
               leading: Icon(Icons.language_outlined),
-              title: Text(
-                getTranslated(context,'language'),
-                style: TextStyle(fontSize: 20),
+              title: Row(
+                children: [
+                  Text(
+                    getTranslated(context,'language'),
+                    style: TextStyle(fontSize: 20),
+                  ),Spacer(),
+                  Text(
+                    _lang.toUpperCase(),
+                    style: TextStyle(fontSize: 20,),
+                  )
+                ],
               ),
               onTap: () {
                 _changeLanguage(this._lang);
@@ -113,10 +122,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                showDialog(context: context,barrierColor: Colors.white38, builder: (_) => LogoutDialog());
+
               },
             ),
             Divider(

@@ -10,17 +10,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 String prifix="countries";
 
 Future<List<Country>> getAllCountry() async {
-  final response = await http.get(Uri.parse(companyURL + prifix),
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String _token =prefs.getString("_token")??'';
+  String _url =prefs.getString("_url")??'';
+
+  final response = await http.get(Uri.parse(_url + prifix),
       headers:  {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer $company_token',
+        'Authorization': 'Bearer $_token',
       });
   if (response.statusCode == 200) {
     Iterable l = jsonDecode(response.body)['data'];
     return List<Country>.from(l.map((s) => Country.fromJson(s)));
   } else {
-    throw Exception('Failed to load  $prifix');
+    print('Failed to load  $prifix');
+    return [];
   }
 
 }

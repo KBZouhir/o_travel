@@ -95,7 +95,7 @@ class _OfferWidgetState extends State<OfferWidget> {
                         left: 0,
                         child: Center(
                           child: Text(
-                            widget.offer.countries[0].name.substring(0,10),
+                           (widget.offer.countries[0].name.length>10)? widget.offer.countries[0].name.substring(0,10): widget.offer.countries[0].name,
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,

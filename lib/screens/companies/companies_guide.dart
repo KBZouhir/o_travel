@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/api/company/company_api.dart';
-import 'package:o_travel/screens/companies/compay_profile.dart';
+import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class CompaniesGuideScreen extends StatefulWidget {

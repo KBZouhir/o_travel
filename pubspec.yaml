@@ -45,14 +45,14 @@ dependencies:
   intl_phone_field: ^2.1.0
   pinput: ^1.2.0
   month_picker_dialog: ^0.4.0
+  form_validator: ">=0.1.1 <2.0.0"
+  provider: ^6.0.1
 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
 
 
 flutter_icons:

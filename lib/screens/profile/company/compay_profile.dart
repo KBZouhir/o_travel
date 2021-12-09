@@ -6,7 +6,7 @@ import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/companies/campany_profile_edit.dart';
+import 'package:o_travel/screens/profile/company/campany_profile_edit.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/localization/const.dart';

@@ -113,13 +113,11 @@ class _UserPageState extends State<UserPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
 
-  String? selectEvent = "item1";
-  List<String> listEvent = [
-    'item1',
-    'item2',
-    'item3',
-    'item4',
-  ];
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

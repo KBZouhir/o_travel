@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:intl/intl.dart';
@@ -12,22 +13,23 @@ import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/Models/story.dart';
-import 'package:o_travel/api/company/category_api.dart';
-import 'package:o_travel/api/company/country_api.dart';
+import 'package:o_travel/Models/type.dart';
+import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/api/company/story_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
-import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
-import 'package:o_travel/screens/companies/compay_profile.dart';
+import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/contact.dart';
-import 'package:o_travel/screens/favories/favories.dart';
+import 'package:o_travel/screens/favorites/favories.dart';
+import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/notifications/notification.dart';
+import 'package:o_travel/screens/profile/user/user_profile.dart';
 import 'package:o_travel/screens/searche/searche.dart';
 import 'package:o_travel/screens/settings/settings.dart';
 import 'package:photo_view/photo_view.dart';
@@ -45,12 +47,16 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
   DateTime? selectedDate;
-
+  ScrollController _scrollController = new ScrollController();
+  bool loadingOffer = true;
+  bool loadingFeatured = true;
+  bool loadingStory = true;
+  bool isCompany = false;
   List<Offer> offerList = [];
   List<Offer> featuredOfferList = [];
   List<Category> categoryList = [];
   Category? selectedCategory;
-
+  dynamic me;
   List<Country> countryList = [];
   Country? selectedCountry;
   List<Story> storyList = [];
@@ -68,14 +74,36 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });*/
 
+    UserType.getType().then((value) {
+      setState(() {
+        isCompany=value;
+      });
+      if (value)
+        getCompany().then((value) {
+          setState(() {
+            me = value;
+            print('$me');
+          });
+        });
+      else
+        getUser().then((value) {
+          setState(() {
+            me = value;
+            print('$me');
+          });
+        });
+    });
+
     getAllOffers('featured', '1').then((value) {
       setState(() {
-        offerList = value;
+        offerList.addAll(value);
+        loadingFeatured = false;
       });
     });
     getAllOffers('featured', '2').then((value) {
       setState(() {
-        featuredOfferList = value;
+        featuredOfferList.addAll(value);
+        loadingFeatured = false;
         print('featuredOfferList $featuredOfferList');
       });
     });
@@ -83,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getAllStory().then((value) {
       setState(() {
         storyList = value;
+        loadingStory = false;
       });
     });
   }
@@ -91,13 +120,23 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     getResources();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        getAllOffers('featured', '1').then((value) {
+          setState(() {
+            offerList.addAll(value);
+          });
+        });
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        drawer: MyDrawer(size: size),
+        drawer: MyDrawer(me: me,isCompany:isCompany),
         appBar: buildAppBar(context),
         body: Container(
             width: size.width,
@@ -118,12 +157,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         Builder(builder: (BuildContext context) {
                           if (storyList.length > 0)
                             return StoriesList(storyList: storyList);
-                          else
+                          else if (loadingStory)
                             return Container(
-                              height: 70,
+                              height: 60,
                               child: GFLoader(),
                             );
-                          ;
+                          else
+                            return Container(
+                              height: 60,
+                              child: Center(
+                                child: Text(getTranslated(context, 'no_data')),
+                              ),
+                            );
                         }),
                         SizedBox(
                           height: 10,
@@ -147,10 +192,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         Builder(builder: (BuildContext context) {
                           if (featuredOfferList.length > 0)
                             return CarouselWidget(offerList: featuredOfferList);
-                          else
+                          else if (loadingFeatured)
                             return Container(
                               height: 200,
                               child: GFLoader(),
+                            );
+                          else
+                            return Container(
+                              height: 200,
+                              child: Center(
+                                child: Text(getTranslated(context, 'no_data')),
+                              ),
                             );
                         }),
                         SizedBox(
@@ -167,8 +219,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: GFDropdown(
-                                  hint:
-                                      Text(getTranslated(context, 'trip_type'),style: TextStyle(fontSize: 16),),
+                                  hint: Text(
+                                    getTranslated(context, 'trip_type'),
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                   value: selectedCategory,
                                   padding: const EdgeInsets.all(15),
                                   borderRadius:
@@ -201,7 +255,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: GFDropdown(
-                                  hint: Text(getTranslated(context, 'country'),style: TextStyle(fontSize: 16)),
+                                  hint: Text(getTranslated(context, 'country'),
+                                      style: TextStyle(fontSize: 16)),
                                   value: selectedCountry,
                                   padding: const EdgeInsets.all(15),
                                   borderRadius:
@@ -254,12 +309,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: MediaQuery.of(context).size.width,
                                   padding: const EdgeInsets.all(15),
                                   decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                      color: Theme.of(context)
-                                          .accentColor
-                                          .withOpacity(0.05),),
-
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    color: Theme.of(context)
+                                        .accentColor
+                                        .withOpacity(0.05),
+                                  ),
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
@@ -282,13 +337,31 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Builder(builder: (BuildContext context) {
                           if (offerList.length > 0)
-                            return OfferList(
-                              offerList: offerList,
+                            return StaggeredGridView.countBuilder(
+                              shrinkWrap: true,
+                              crossAxisCount: 4,
+                              itemCount: offerList.length,
+                              physics: BouncingScrollPhysics(),
+                              itemBuilder: (BuildContext context, int index) =>
+                                  Container(
+                                      child:
+                                          OfferWidget(offer: offerList[index])),
+                              staggeredTileBuilder: (int index) =>
+                                  new StaggeredTile.fit(2),
+                              mainAxisSpacing: 10.0,
+                              crossAxisSpacing: 10.0,
+                            );
+                          else if (loadingFeatured)
+                            return Container(
+                              height: 400,
+                              child: GFLoader(),
                             );
                           else
                             return Container(
-                              height: 200,
-                              child: GFLoader(),
+                              height: 400,
+                              child: Center(
+                                child: Text(getTranslated(context, 'no_data')),
+                              ),
                             );
                         }),
                         SizedBox(
@@ -298,34 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    margin: EdgeInsets.all(5),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(raduice),
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddNewAdScreen()));
-                      },
-                      color: Theme.of(context).primaryColor,
-                      child: Text(
-                        getTranslated(context, 'add_new_ad'),
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+
               ],
             )));
   }
@@ -354,6 +400,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _refresh() async {
     setState(() {
+      loadingOffer = true;
+      loadingFeatured = true;
+      loadingStory = true;
       getResources();
     });
   }
@@ -550,10 +599,11 @@ class StoryItemWidget extends StatelessWidget {
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
     Key? key,
-    required this.size,
+    required this.me,required this.isCompany,
   }) : super(key: key);
 
-  final Size size;
+  final dynamic me;
+  final bool isCompany;
 
   @override
   Widget build(BuildContext context) {
@@ -562,66 +612,75 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           Container(
-              padding:
-                  EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
-              height: size.height * 0.31,
-              decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.only(bottomLeft: Radius.circular(50)),
-                color: primaryColorDark,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                        size: 25,
-                      ),
-                      onPressed: () => Navigator.pop(context)),
-                  Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt0gx9N5aOyDbSKsuvfJBHC1glECMt7U_VhA&usqp=CAU",
-                        height: size.height * 0.1,
-                        width: size.height * 0.1,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => Container(
-                            width: 50,
-                            height: 50,
-                            child: Center(
-                                child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                            ))),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+            padding: EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50)),
+              color: primaryColorDark,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                      size: 25,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                        Spacer(),
-                        Text(getTranslated(context, 'username'),
-                            style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                        Icon(
-                          Icons.edit,
-                          color: Colors.grey,
-                          size: 25,
+                    onPressed: () => Navigator.pop(context)),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) {
+                                   if(isCompany) return CompanyProfile(company: me);
+                                   else return UserProfile(user:me );
+                                  }
+                                  ));
+                    },
+                    child: Column(
+                      children: [
+                        Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: CachedNetworkImage(
+                              imageUrl:(me!=null)? me.image:'',
+                              height: 60,
+                              width: 60,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => Container(
+                                  width: 50,
+                                  height: 50,
+                                  child: Center(
+                                      child: CircularProgressIndicator(
+                                    color: Theme.of(context).primaryColor,
+                                  ))),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                          ),
                         ),
-                        Spacer(),
-                      ]))
-                ],
-              )),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                            child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                              Spacer(),
+                              Text(me.name,
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                              Spacer(),
+                            ]))
+                      ],
+                    ))
+              ],
+            ),
+          ),
           ListTile(
             leading: Icon(Icons.home_filled),
             title: Text(
@@ -629,10 +688,9 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 22),
             ),
             onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
               Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
             },
           ),
           Divider(
@@ -685,22 +743,24 @@ class MyDrawer extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ChatScreen()));
             },
           ),
-          Divider(
+        if(isCompany) Column(
+          children: [ Divider(
             height: 1,
             color: Theme.of(context).accentColor.withOpacity(0.2),
           ),
-          ListTile(
-            leading: Icon(Icons.list),
-            title: Text(
-              getTranslated(context, 'add_new_ad_page'),
-              style: TextStyle(fontSize: 22),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddNewAdScreen()));
-            },
-          ),
+            ListTile(
+              leading: Icon(Icons.list),
+              title: Text(
+                getTranslated(context, 'add_new_ad_page'),
+                style: TextStyle(fontSize: 22),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddNewAdScreen()));
+              },
+            ),],
+        ),
           Divider(
             height: 1,
             color: Theme.of(context).accentColor.withOpacity(0.2),

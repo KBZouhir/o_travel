@@ -10,6 +10,7 @@
   "logout": "Logout",
   "logout_message": "Do you really want to logout ?",
   "cancel": "Cancel",
+  "yes": "Yes",
   "make_suggestion": "Make a Suggestion",
   "ad_not_available": "No ad is available",
   "categorie_not_avaiable": "no category is available",
@@ -205,9 +206,7 @@
   "by_latest": "By latest",
   "lowest_to_highest": "Lowest price to highest",
 
-  "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 
-
-
-
+  "no_data": "No data to show"
 }
