@@ -11,16 +11,16 @@ import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
-class CompanyProfile extends StatefulWidget {
+class ShowCompanyProfile extends StatefulWidget {
   final Company company;
 
-  const CompanyProfile({Key? key, required this.company}) : super(key: key);
+  const ShowCompanyProfile({Key? key, required this.company}) : super(key: key);
 
   @override
-  _CompanyProfileState createState() => _CompanyProfileState();
+  _ShowCompanyProfileState createState() => _ShowCompanyProfileState();
 }
 
-class _CompanyProfileState extends State<CompanyProfile> {
+class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
   List<Offer> offerList = [];
 
   getResources() {
@@ -47,11 +47,11 @@ class _CompanyProfileState extends State<CompanyProfile> {
           children: [
             Container(
                 padding:
-                EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+                    EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
                 height: 240,
                 decoration: BoxDecoration(
                   borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(50)),
+                      BorderRadius.only(bottomLeft: Radius.circular(50)),
                   color: primaryColorDark,
                 ),
                 child: Column(
@@ -67,17 +67,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                             ),
                             onPressed: () => Navigator.pop(context)),
                         Spacer(),
-                        IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 25,
-                            ),
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        CompanyProfileEdit(company:widget.company)))),
+                        SizedBox(width: 50,),
                       ],
                     ),
                     Center(
@@ -95,8 +85,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                 height: 50,
                                 child: Center(
                                     child: CircularProgressIndicator(
-                                      color: Theme.of(context).primaryColor,
-                                    ))),
+                                  color: Theme.of(context).primaryColor,
+                                ))),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
                           ),
@@ -107,12 +97,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       height: 10,
                     ),
                     Center(
-                      child:Text(widget.company.name,
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    )
+                        child:Text(widget.company.name,
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        )
                   ],
                 )),
             Container(
@@ -210,7 +200,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     Text(
                       getTranslated(context, 'Social_Media_Accounts'),
                       style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -246,7 +236,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     Text(
                       getTranslated(context, "added_ads"),
                       style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     OfferList(offerList: offerList),
                   ],

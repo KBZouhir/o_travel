@@ -15,8 +15,8 @@ class City {
 
   int id;
   String name;
-  String latitude;
-  String longitude;
+  dynamic latitude;
+  dynamic longitude;
 
   factory City.fromJson(Map<String, dynamic> json) => City(
     id: json["id"],

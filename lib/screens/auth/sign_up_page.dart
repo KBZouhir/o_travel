@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:o_travel/Models/city.dart';
+import 'package:o_travel/Models/domain.dart';
+import 'package:o_travel/api/company/auth.dart';
+import 'package:o_travel/api/company/city_api.dart';
+import 'package:o_travel/api/company/domain_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/main.dart';
+import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -112,12 +118,12 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
-
+  late String  countryCode;
+  late String  phone;
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +150,7 @@ class _UserPageState extends State<UserPage> {
               height: 8,
             ),
             TextFormField(
+              controller: usernameController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -173,6 +180,7 @@ class _UserPageState extends State<UserPage> {
               height: 8,
             ),
             TextFormField(
+              controller: emailController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -202,6 +210,7 @@ class _UserPageState extends State<UserPage> {
               height: 8,
             ),
             TextField(
+              controller: passwordController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -234,6 +243,7 @@ class _UserPageState extends State<UserPage> {
               height: 8,
             ),
             TextField(
+              controller: confirmPasswordController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -284,10 +294,14 @@ class _UserPageState extends State<UserPage> {
                     contentPadding: EdgeInsets.only(bottom: 15)),
                 initialCountryCode: "DZ",
                 onChanged: (phone) {
-                  print(phone.completeNumber);
+                  setState(() {
+                    this.phone=phone.number!;
+                  });
                 },
                 onCountryChanged: (dynamic phone) {
-                  print('Country code changed to: ' + phone.countryCode);
+                  setState(() {
+                    this.countryCode=phone.countryCode!;
+                  });
                 },
               ),
             ),
@@ -302,7 +316,16 @@ class _UserPageState extends State<UserPage> {
                 borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
-                onPressed: () => print("Create an account"),
+                onPressed: (){
+                  registerUser(usernameController.text, emailController.text, passwordController.text, confirmPasswordController.text, countryCode, phone, 'device_token').then((value){
+                    if(value.id > -1){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen()));
+                    }
+                  });
+                },
                 color: Theme.of(context).primaryColor,
                 child: Text(
                   getTranslated(context, 'create_account'),
@@ -358,13 +381,39 @@ class _CompanyPageState extends State<CompanyPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
   double raduice = 15.0;
-  String? selectEvent = "item1";
-  List<String> listEvent = [
-    'item1',
-    'item2',
-    'item3',
-    'item4',
-  ];
+  late String  countryCode;
+  late String  phone;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  List<City> cityList = [];
+  City? selectedCity;
+
+  List<Domain> domainList = [];
+  Domain? selectedDomain;
+
+  getResources() {
+    getAllDomain().then((value) {
+      setState(() {
+        domainList = value;
+      });
+    });
+
+    getAllCity().then((value) {
+      setState(() {
+        cityList = value;
+      });
+    });
+  }
+
+  DateTime? selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    getResources();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -391,6 +440,7 @@ class _CompanyPageState extends State<CompanyPage> {
               height: 8,
             ),
             TextFormField(
+              controller: nameController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -420,6 +470,7 @@ class _CompanyPageState extends State<CompanyPage> {
               height: 8,
             ),
             TextFormField(
+              controller: emailController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -449,6 +500,7 @@ class _CompanyPageState extends State<CompanyPage> {
               height: 8,
             ),
             TextField(
+              controller: passwordController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -481,6 +533,7 @@ class _CompanyPageState extends State<CompanyPage> {
               height: 8,
             ),
             TextField(
+              controller: confirmPasswordController,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
@@ -531,10 +584,16 @@ class _CompanyPageState extends State<CompanyPage> {
                     contentPadding: EdgeInsets.only(bottom: 15)),
                 initialCountryCode: "DZ",
                 onChanged: (phone) {
-                  print(phone.completeNumber);
+                 setState(() {
+                   countryCode=phone.countryCode!;
+                   this.phone=phone.number!;
+                 });
                 },
                 onCountryChanged: (dynamic phone) {
-                  print('Country code changed to: ' + phone.countryCode);
+                  setState(() {
+                    countryCode=phone.countryCode!;
+                    this.phone=phone.number!;
+                  });
                 },
               ),
             ),
@@ -557,21 +616,21 @@ class _CompanyPageState extends State<CompanyPage> {
               color: Theme.of(context).backgroundColor,
               child: DropdownButtonHideUnderline(
                 child: GFDropdown(
-                  value: selectEvent,
+                  value: selectedCity,
                   padding: const EdgeInsets.all(15),
                   borderRadius: BorderRadius.circular(10),
                   border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
                   dropdownButtonColor: Theme.of(context).backgroundColor,
                   onChanged: (newValue) {
                     setState(() {
-                      selectEvent = newValue as String;
+                      selectedCity = newValue as City?;
                     });
                   },
-                  items: listEvent
+                  items: cityList
                       .map((value) => DropdownMenuItem(
                     value: value,
                     child: Text(
-                      value,
+                      value.name,
                       style: TextStyle(fontSize: 18),
                     ),
                   ))
@@ -600,21 +659,21 @@ class _CompanyPageState extends State<CompanyPage> {
               color: Theme.of(context).backgroundColor,
               child: DropdownButtonHideUnderline(
                 child: GFDropdown(
-                  value: selectEvent,
+                  value: selectedDomain,
                   padding: const EdgeInsets.all(15),
                   borderRadius: BorderRadius.circular(10),
                   border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
                   dropdownButtonColor: Theme.of(context).backgroundColor,
                   onChanged: (newValue) {
                     setState(() {
-                      selectEvent = newValue as String;
+                      selectedDomain = newValue as Domain?;
                     });
                   },
-                  items: listEvent
+                  items: domainList
                       .map((value) => DropdownMenuItem(
                             value: value,
                             child: Text(
-                              value,
+                              value.name,
                               style: TextStyle(fontSize: 18),
                             ),
                           ))
@@ -633,7 +692,10 @@ class _CompanyPageState extends State<CompanyPage> {
                 borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
-                onPressed: () => print("Create an account"),
+                onPressed: (){
+                  registerCompany(nameController.text, emailController.text, passwordController.text,
+                      confirmPasswordController.text, countryCode, phone, selectedCity!.id, selectedDomain!.id, 'device_token');
+                },
                 color: Theme.of(context).primaryColor,
                 child: Text(
                   getTranslated(context, 'create_account'),

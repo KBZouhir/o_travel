@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/profile/company/compay_profile.dart';
+import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 

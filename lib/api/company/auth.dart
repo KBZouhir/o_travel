@@ -36,6 +36,40 @@ Future<Company> loginCompany(email,password) async {
 
     }
 }
+Future<Company> registerCompany(name,email,password,confirm_password,country_code,phone,city_id,domain_id,device_token) async {
+
+  final response = await http
+      .post(Uri.parse(userURL + 'register' ),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "name" : name,
+        "email" : email,
+        "password": password,
+        "password_confirmation": confirm_password,
+        "country_code": country_code,
+        "phone": phone,
+        'city_id':city_id,
+        'domain_id':domain_id,
+        "device_token" : "fcm token from firebase",
+      }));
+  if (response.statusCode==200) {
+    UserType.setType(true);
+    Token.setToken(jsonDecode(response.body)['access_token']);
+    UserType.setUrl(companyURL);
+    return  Company.fromJson(jsonDecode(response.body)['company']);
+  }else{
+    throw Exception(response.body);
+  }
+}
+
+
+
+
+
+
 Future<User> loginUser(email,password) async {
     final response = await http
         .post(Uri.parse(userURL + 'login'),
@@ -58,29 +92,31 @@ Future<User> loginUser(email,password) async {
       throw Exception('Failed to load  $prifix');
     }
 }
-Future<int> register(name,email,password,confirm_password,country_code,phone,device_token) async {
+Future<User> registerUser(name,email,password,confirm_password,country_code,phone,device_token) async {
 
   final response = await http
-      .post(Uri.parse(baseURL + 'register' ),
+      .post(Uri.parse(userURL + 'register' ),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
       body: jsonEncode(<String, dynamic>{
-        "name" : "name",
-        "email" : "company@app.com",
-        "password": "password",
-        "confirm_password": "password",
-        "country_code": "country_code",
-        "phone": "phone",
+        "name" : name,
+        "email" : email,
+        "password": password,
+        "password_confirmation": confirm_password,
+        "country_code": country_code,
+        "phone": phone,
         "device_token" : "fcm token from firebase",
       }));
   if (response.statusCode==200) {
-
+    UserType.setType(false);
+    Token.setToken(jsonDecode(response.body)['access_token']);
+    UserType.setUrl(userURL);
+    return  User.fromJson(jsonDecode(response.body)['user']);
   }else{
-
+throw Exception(response.body);
   }
-  return 0;
 }
 Future<int> update(company) async {
   final response = await http
@@ -171,6 +207,13 @@ void logout(BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token =prefs.getString("_token")??'';
   String _url =prefs.getString("_url")??'';
+  prefs.clear();
+
+  Navigator.of(context).pop();
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ChoosePage()));
   final response = await http
       .post(Uri.parse(_url + 'logout'),
       headers:  {
@@ -178,16 +221,10 @@ void logout(BuildContext context) async {
       'Accept': 'application/json',
       'Authorization': 'Bearer $_token',
       });
-  if (response.statusCode == 200) {
-    SharedPreferences.getInstance().then((value){
-        value.clear();
-    });
 
-    Navigator.of(context).pop();
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ChoosePage()));
+  if (response.statusCode == 200) {
+
+
   } else {
     throw Exception('Failed to load  $prifix');
 

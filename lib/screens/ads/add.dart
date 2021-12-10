@@ -10,6 +10,7 @@ import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/api/company/category_api.dart';
 import 'package:o_travel/api/company/country_api.dart';
+import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
@@ -28,6 +29,12 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
 
   List<Country> countryList = [];
   Country? selectedCountry;
+
+
+  TextEditingController nameController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
+  TextEditingController priceController=TextEditingController();
+
 
   getResources() {
     getAllCategory().then((value) {
@@ -171,6 +178,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   ),
                   SizedBox(height: 8),
                   TextFormField(
+                    controller: nameController,
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 20.0,
@@ -192,7 +200,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                         color: Theme.of(context).accentColor),
                   ),
                   SizedBox(height: 8),
-                  TextFormField(
+                  TextFormField(controller: descriptionController,
 
                     onChanged: (val) {
                       setState(() {
@@ -365,6 +373,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   ),
                   SizedBox(height: 8),
                   TextFormField(
+                    controller: priceController,
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 20.0,
@@ -388,7 +397,9 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       borderRadius: BorderRadius.circular(raduice),
                     ),
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        createOffer(image1!, image2!, image3!, nameController.text,12121, 330, 1);
+                      },
                       color: Theme.of(context).primaryColor,
                       child: Text(
                         getTranslated(context, 'save'),

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/Models/offer.dart';
+import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/screens/ads/show.dart';
 
 class OffersContainer extends StatelessWidget {
@@ -24,10 +25,11 @@ class OfferWidget extends StatefulWidget {
 
 class _OfferWidgetState extends State<OfferWidget> {
   bool favorite = false;
+
   @override
   void initState() {
     super.initState();
-    favorite=widget.offer.favoriteByMe;
+    favorite = widget.offer.favoriteByMe;
   }
 
   @override
@@ -35,11 +37,15 @@ class _OfferWidgetState extends State<OfferWidget> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ShowOffer(offer:widget.offer)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShowOffer(offer: widget.offer)));
       },
       onDoubleTap: () {
         setState(() {
+          if(!favorite) addToFavorites(widget.offer.id);
           favorite = true;
+
         });
       },
       child: Container(
@@ -60,25 +66,23 @@ class _OfferWidgetState extends State<OfferWidget> {
         child: Stack(
           children: [
             Hero(
-              tag: 'offer${widget.offer.images[0].url}',
-              child:
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                child: CachedNetworkImage(
-                  imageUrl: widget.offer.images[0].url,
-                  placeholder: (context, url) => Container(
-                      width: 50,
-                      height: 50,
-                      child: Center(
-                          child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor,
-                          ))),
-                  errorWidget: (context, url, error) => new Icon(Icons.error),
-                  fit: BoxFit.cover,
-                  width: 1000,
-                ),
-              )
-            ),
+                tag: 'offer${widget.offer.images[0].url}',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.offer.images[0].url,
+                    placeholder: (context, url) => Container(
+                        width: 50,
+                        height: 50,
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                        ))),
+                    errorWidget: (context, url, error) => new Icon(Icons.error),
+                    fit: BoxFit.cover,
+                    width: 1000,
+                  ),
+                )),
             Positioned(
               child: Center(
                   child: Container(
@@ -86,7 +90,9 @@ class _OfferWidgetState extends State<OfferWidget> {
                 height: MediaQuery.of(context).size.width * 0.12,
                 decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.8),
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight:Radius.circular(20) )),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20))),
                 child: Stack(
                   children: [
                     Positioned(
@@ -95,7 +101,10 @@ class _OfferWidgetState extends State<OfferWidget> {
                         left: 0,
                         child: Center(
                           child: Text(
-                           (widget.offer.countries[0].name.length>10)? widget.offer.countries[0].name.substring(0,10): widget.offer.countries[0].name,
+                            (widget.offer.countries[0].name.length > 10)
+                                ? widget.offer.countries[0].name
+                                    .substring(0, 10)
+                                : widget.offer.countries[0].name,
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -141,9 +150,7 @@ class _OfferWidgetState extends State<OfferWidget> {
               left: 0,
             ),
             Positioned(
-
               child: IconButton(
-
                 icon: Icon(
                   Icons.favorite,
                   color: (favorite) ? Colors.red : Colors.white,
@@ -151,6 +158,7 @@ class _OfferWidgetState extends State<OfferWidget> {
                 ),
                 onPressed: () {
                   setState(() {
+                    if(!favorite) addToFavorites(widget.offer.id);
                     favorite = !favorite;
                   });
                 },

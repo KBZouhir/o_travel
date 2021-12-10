@@ -8,6 +8,7 @@ import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
+import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:photo_view/photo_view.dart';

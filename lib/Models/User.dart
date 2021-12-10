@@ -27,7 +27,7 @@ class User {
   String phone;
   String countryCode;
   String image;
-  int state;
+  dynamic state;
 
 
   factory User.fromJson(Map<String, dynamic> json) => User(

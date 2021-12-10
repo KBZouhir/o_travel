@@ -1,17 +1,42 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class CompanyProfileEdit extends StatefulWidget {
-  const CompanyProfileEdit({Key? key}) : super(key: key);
-
+  const CompanyProfileEdit({Key? key, required this.company}) : super(key: key);
+final Company  company;
   @override
   _CompanyProfileEditState createState() => _CompanyProfileEditState();
 }
 
 class _CompanyProfileEditState extends State<CompanyProfileEdit> {
+
+
+  TextEditingController usernameController=TextEditingController();
+  TextEditingController emailController=TextEditingController();
+  TextEditingController phoneController=TextEditingController();
+  TextEditingController aboutController=TextEditingController();
+  TextEditingController gpsController=TextEditingController();
+  TextEditingController areaController=TextEditingController();
+  TextEditingController fieldController=TextEditingController();
+  TextEditingController commercialController=TextEditingController();
+  TextEditingController snapController=TextEditingController();
+  TextEditingController instaController=TextEditingController();
+
+  @override
+  void initState() {
+    usernameController.text=widget.company.name;
+    emailController.text=widget.company.email;
+    phoneController.text=widget.company.phone;
+    aboutController.text=widget.company.description;
+    gpsController.text='${widget.company.latitude} ${widget.company.latitude}';
+    areaController.text=widget.company.countryCode;
+    snapController.text=widget.company.snapchat;
+    instaController.text=widget.company.instagram;
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery
@@ -55,8 +80,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: CachedNetworkImage(
-                          imageUrl:
-                          "https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png",
+                          imageUrl:widget.company.image,
                           height: 100,
                           width: 100,
                           fit: BoxFit.cover,
@@ -96,6 +120,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextFormField(
+                      controller: usernameController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -125,6 +150,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller: aboutController,
                       onChanged: (val) {
                         setState(() {
 
@@ -160,6 +186,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller: gpsController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -187,6 +214,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller: emailController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -214,6 +242,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller: phoneController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -240,6 +269,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller: areaController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -266,6 +296,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller:fieldController ,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -292,6 +323,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller: commercialController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -319,6 +351,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller: snapController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -345,6 +378,8 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       height: 8
                     ),
                     TextField(
+                      controller:instaController,
+
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,

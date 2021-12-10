@@ -6,6 +6,7 @@ import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/api/company/company_api.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 
 class CompaniesGuideScreen extends StatefulWidget {
   const CompaniesGuideScreen({Key? key}) : super(key: key);
@@ -129,7 +130,6 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
     );
   }
 }
-
 class SelectCard extends StatelessWidget {
   const SelectCard({Key? key, required this.company}) : super(key: key);
   final Company company;
@@ -141,7 +141,7 @@ class SelectCard extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => CompanyProfile(company: company)));
+                  builder: (context) => ShowCompanyProfile(company: company)));
         },
         child: Container(
             padding: EdgeInsets.all(10),

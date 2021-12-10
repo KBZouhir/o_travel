@@ -25,7 +25,7 @@ class Company {
     required this.longitude,
     required this.address,
     required this.description,
-    required this.tradeRegister,
+    required this.wallet,
   });
 
   int id;
@@ -36,38 +36,38 @@ class Company {
   String image;
   int state;
   bool checked;
-  dynamic facebook;
-  dynamic whatsapp;
-  dynamic snapchat;
-  dynamic instagram;
-  dynamic twitter;
-  dynamic rate;
-  dynamic latitude;
-  dynamic longitude;
-  dynamic address;
-  dynamic description;
-  dynamic tradeRegister;
+  String facebook;
+  String whatsapp;
+  String snapchat;
+  String instagram;
+  String twitter;
+  String rate;
+  int latitude;
+  int longitude;
+  String address;
+  String description;
+  int wallet;
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
     id: json["id"],
-    name: json["name"],
-    email: json["email"],
-    phone: json["phone"],
-    countryCode: json["country_code"],
-    image: json["image"],
-    state: json["state"],
-    checked: json["checked"],
-    facebook: json["facebook"],
-    whatsapp: json["whatsapp"],
-    snapchat: json["snapchat"],
-    instagram: json["instagram"],
-    twitter: json["twitter"],
-    rate: json["rate"],
-    latitude: json["latitude"],
-    longitude: json["longitude"],
-    address: json["address"],
-    description: json["description"],
-    tradeRegister: json["trade_register"],
+    name: json["name"]??'',
+    email: json["email"]??'',
+    phone: json["phone"]??'',
+    countryCode: json["country_code"]??'',
+    image: json["image"]??'',
+    state: json["state"]??1,
+    checked: json["checked"]??false,
+    facebook: json["facebook"]??'',
+    whatsapp: json["whatsapp"]??'',
+    snapchat: json["snapchat"]??'',
+    instagram: json["instagram"]??'',
+    twitter: json["twitter"]??'',
+    rate: json["rate"]??'',
+    latitude: json["latitude"]??0,
+    longitude: json["longitude"]??0,
+    address: json["address"]??'',
+    description: json["description"]??'',
+    wallet:json["wallet"]??0,
   );
 
   Map<String, dynamic> toJson() => {
@@ -89,6 +89,6 @@ class Company {
     "longitude": longitude,
     "address": address,
     "description": description,
-    "trade_register": tradeRegister,
+    "wallet": wallet,
   };
 }
