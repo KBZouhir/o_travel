@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:o_travel/Models/story.dart';
 import 'package:o_travel/api/company/story_api.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
 
@@ -46,7 +47,9 @@ class StoryItemWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        showDialog(context: context, builder: (_) => DetailStoryScreen(story));
+        showDialog(context: context, builder: (_){
+         return DetailStoryScreen(story);
+        });
       },
       child: Container(
         margin: EdgeInsets.only(right: 15),
@@ -181,9 +184,12 @@ class DetailStoryScreen extends StatelessWidget {
                           width: 40,
                           child: IconButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                deleteStory(story.id).then((value){
+                                  Navigator.pop(context,true);
+                                  HomeScreen.setStories(context);
+                                });
                               },
-                              icon: Icon(Icons.delete)))),
+                              icon: Icon(Icons.delete_outlined,color: Colors.white,)))),
                   Card(
                       color: Theme.of(context).backgroundColor.withOpacity(0.7),
                       shape: RoundedRectangleBorder(

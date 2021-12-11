@@ -31,8 +31,6 @@ Future<List<Offer>> getAllOffers(
   }
 }
 
-
-
 Future<String> createOffer(File image1, File image2, File image3, name,
     description, price, category) async {
   print('${name}');
@@ -102,6 +100,7 @@ Future addToFavorites(int offerId) async {
 
   }
 }
+
 Future<String> deleteOffer(int id) async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();

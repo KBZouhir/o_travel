@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:o_travel/Models/company.dart';
+import 'package:o_travel/api/company/company_api.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
@@ -14,35 +16,54 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-  List<Company> Companys = const <Company>[
-    const Company(
-        title: 'Home',
-        image:
-            'https://logopond.com/logos/eb87954719a4054a051c128a94d1a850.png'),
-  ];
-  int i = 1;
+  List<Company> companies = [];
+bool loading=true;
+  getResources() {
+    getAllCompany().then((value) {
+      setState(() {
+        companies = value;
+        loading =false;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getResources();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
         appBar: buildAppBar(context),
         body: Builder(builder: (context) {
-          if (i == 1) {
+          if (companies.length > 0){
             return Stack(
               children: [
                 Container(
-                    padding: EdgeInsets.only(
-                        top: 10, bottom: 60, right: 10, left: 10),
+                    padding: EdgeInsets.only(bottom: 60),
                     width: size.width,
                     height: size.height,
-                    child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: Companys.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return SelectCard(company: Companys[index]);
-                        })),
+                    child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(8),
+                  itemCount: companies.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SelectCard(company: companies[index],index:index);
+                  })
+            ],
+          )),
+          ),
                 Positioned(
                   bottom: 10,
                   left: 10,
@@ -59,7 +80,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       ),
                       onPressed: () {
                         setState(() {
-                          i = 0;
+                          companies.clear();
+                          loading=false;
                         });
                       },
                       child: Row(
@@ -80,7 +102,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 )
               ],
             );
-          } else {
+          } else if (loading)
+            return Container(
+              height: 200,
+              child: GFLoader(),
+            );
+          else{
             return NoFavoritesWidget(size: size);
           }
         }));
@@ -184,15 +211,12 @@ class NoFavoritesWidget extends StatelessWidget {
   }
 }
 
-class Company {
-  const Company({required this.title, required this.image});
 
-  final String title, image;
-}
 
 class SelectCard extends StatelessWidget {
-  const SelectCard({Key? key, required this.company}) : super(key: key);
+  const SelectCard({Key? key, required this.company, required this.index}) : super(key: key);
   final Company company;
+  final int  index;
 
   @override
   Widget build(BuildContext context) {
@@ -208,10 +232,17 @@ class SelectCard extends StatelessWidget {
             Container(
                 padding: EdgeInsets.all(10),
                 margin: EdgeInsets.only(top: 10),
-                height: 100,
+                height: 90,
                 decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).accentColor.withOpacity(0.5)),
+                  color: Theme.of(context).backgroundColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: Offset(0, 2), // changes position of shadow
+                      ),
+                    ],
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Center(
                   child: Row(children: [
@@ -241,7 +272,7 @@ class SelectCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(company.title,
+                        Text(company.name,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,

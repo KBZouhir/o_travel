@@ -12,11 +12,11 @@ Future<List<Company>> getAllCompany() async {
   String _token =prefs.getString("_token")??'';
   String _url =prefs.getString("_url")??'';
 
-  final response = await http.get(Uri.parse(_url + prifix),
+  final response = await http.get(Uri.parse(userURL + prifix),
       headers:  {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer $_token',
+        'Authorization': 'Bearer $user_token',
       });
 
   if (response.statusCode == 200) {

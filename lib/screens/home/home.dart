@@ -43,9 +43,13 @@ import 'components/ads_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
+  static void setStories(BuildContext context) {
+    _HomeScreenState? state = context.findAncestorStateOfType<_HomeScreenState>();
+    state!.getStories();
+  }
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -66,6 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Country? selectedCountry;
   List<Story> storyList = [];
 
+  getStories(){
+    getAllStory().then((value) {
+      setState(() {
+        storyList = value;
+        loadingStory = false;
+      });
+    });
+  }
   getResources() {
     /*getAllCategory().then((value) {
       setState(() {
