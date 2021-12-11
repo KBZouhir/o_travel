@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
+import 'package:o_travel/api/company/offer_api.dart';
+import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 import 'package:o_travel/screens/home/components/Ads_widget.dart';
@@ -25,17 +27,28 @@ class ShowOffer extends StatefulWidget {
 
 class _ShowOfferState extends State<ShowOffer> {
   bool show = false;
+  List<Offer> offerList = [];
 
+  getResources() {
+    getAllOffers('company', '${widget.offer.company.id}').then((value) {
+      setState(() {
+
+        offerList = value;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getResources();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: SingleChildScrollView(
+      body:  SingleChildScrollView(
               child: Column(
                 children: [
                   GestureDetector(
@@ -61,204 +74,181 @@ class _ShowOfferState extends State<ShowOffer> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 60,
-                  )
-                ],
-              ),
-            ),
-          ),
-          if (!show)
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    show = true;
-                  });
-                },
-                child: Container(
-                  height: 50,
-                  color: Theme.of(context).primaryColor,
-                  child: Center(
-                    child: Text(
-                      getTranslated(context, 'more_details'),
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                  ),
-                ),
-              ),
-            )
-          else
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                  height: size.height * 0.7,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).backgroundColor,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20))),
-                  child: SingleChildScrollView(
-                      padding: EdgeInsets.only(right: 20, left: 20),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                show = false;
-                              });
-                            },
-                            child: Container(
-                              height: 50,
-                              width: size.width,
-                              child: Center(
-                                child: Text(
-                                  getTranslated(context, 'less_details'),
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontSize: 18),
-                                ),
-                              ),
+                  Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset: Offset(0, 2), // changes position of shadow
                             ),
-                          ),
-                          Row(
+                          ],
+                          color: Theme.of(context).backgroundColor,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      child: Column(
                             children: [
-                              Expanded(
-                                child: Text(
-                                  widget.offer.name,
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .accentColor
-                                          .withOpacity(.8),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                              Text(
-                                widget.offer.category.name,
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(0.6),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Wrap(
-
-                                  alignment: WrapAlignment.start,
-
-                                  spacing: 5.0,
-
-                                  direction: Axis.horizontal,
-
-                                  children: buildTags(widget.offer.countries,context),
-
-                                ),
-                              ),
-                              Text(
-                                '${widget.offer.price}\$',
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(1),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(100)),
-                                      border: Border.all(
-                                          color: Colors.greenAccent
-                                              .withOpacity(0.8),
-                                          width: 3)),
-                                  child: Center(
-                                    child: IconButton(
-                                      onPressed: () {
-                                        launch("tel://${widget.offer.company.phone}");
-
-                                      },
-                                      icon: Icon(
-                                        Icons.phone_outlined,
-                                        size: 35,
-                                        color: Theme.of(context).accentColor,
-                                      ),
-                                    ),
-                                  )),
-                              Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(100)),
-                                      border: Border.all(
-                                          color: Colors.blueAccent
-                                              .withOpacity(0.8),
-                                          width: 3)),
-                                  child: Center(
-                                    child: IconButton(
-                                      onPressed: () {
-                                      },
-                                      icon: Icon(
-                                        Icons.chat_outlined,
-                                        size: 35,
-                                        color: Theme.of(context).accentColor,
-                                      ),
-                                    ),
-                                  )),
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(100)),
-                                    border: Border.all(
-                                        color:
-                                            Colors.redAccent.withOpacity(0.8),
-                                        width: 3)),
-                                child: Center(
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.favorite_border,
-                                      size: 35,
-                                      color: Theme.of(context).accentColor,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      widget.offer.name,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .accentColor
+                                              .withOpacity(.8),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
                                     ),
                                   ),
-                                ),
+                                  Text(
+                                    widget.offer.category.name,
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .accentColor
+                                            .withOpacity(0.6),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(widget.offer.description,
-                            style: TextStyle(fontSize: 16, height: 1.5),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              Spacer(),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Wrap(
+
+                                      alignment: WrapAlignment.start,
+
+                                      spacing: 5.0,
+
+                                      direction: Axis.horizontal,
+
+                                      children: buildTags(widget.offer.countries,context),
+
+                                    ),
+                                  ),
+                                  Text(
+                                    '${widget.offer.price}\$',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .accentColor
+                                            .withOpacity(1),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          border: Border.all(
+                                              color: Colors.greenAccent
+                                                  .withOpacity(0.8),
+                                              width: 3)),
+                                      child: Center(
+                                        child: IconButton(
+                                          onPressed: () {
+                                            launch("tel://${widget.offer.company.phone}");
+
+                                          },
+                                          icon: Icon(
+                                            Icons.phone_outlined,
+                                            size: 35,
+                                            color: Theme.of(context).accentColor,
+                                          ),
+                                        ),
+                                      )),
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          border: Border.all(
+                                              color: Colors.blueAccent
+                                                  .withOpacity(0.8),
+                                              width: 3)),
+                                      child: Center(
+                                        child: IconButton(
+                                          onPressed: () {
+                                          },
+                                          icon: Icon(
+                                            Icons.chat_outlined,
+                                            size: 35,
+                                            color: Theme.of(context).accentColor,
+                                          ),
+                                        ),
+                                      )),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(100)),
+                                        border: Border.all(
+                                            color:
+                                            Colors.redAccent.withOpacity(0.8),
+                                            width: 3)),
+                                    child: Center(
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.favorite_border,
+                                          size: 35,
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(widget.offer.description,
+                                style: TextStyle(fontSize: 16, height: 1.5),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  Text(
+                                    getTranslated(context, 'publish_date') +
+                                        '    ' +
+                                        '${DateFormat.yMd().format(DateTime.parse(widget.offer.date.toString()))}',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        height: 1.5,
+                                        color: Theme.of(context)
+                                            .accentColor
+                                            .withOpacity(0.6)),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Divider(
+                                height: 1,
+                                color:
+                                Theme.of(context).accentColor.withOpacity(0.5),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
                               Text(
-                                getTranslated(context, 'publish_date') +
-                                    '    ' +
-                                    '${DateFormat.yMd().format(DateTime.parse(widget.offer.date.toString()))}',
+                                getTranslated(context, 'contact_company'),
                                 style: TextStyle(
                                     fontSize: 14,
                                     height: 1.5,
@@ -266,111 +256,100 @@ class _ShowOfferState extends State<ShowOffer> {
                                         .accentColor
                                         .withOpacity(0.6)),
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Divider(
-                            height: 1,
-                            color:
-                                Theme.of(context).accentColor.withOpacity(0.5),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            getTranslated(context, 'contact_company'),
-                            style: TextStyle(
-                                fontSize: 14,
-                                height: 1.5,
-                                color: Theme.of(context)
-                                    .accentColor
-                                    .withOpacity(0.6)),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Center(
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                GestureDetector(
-                                  onTap:(){
-                                    Navigator.pop(context);
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => CompanyProfile(company: widget.offer.company)));
-                                  },
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Center(
                                   child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              widget.offer.company.image,
-                                          height: size.height * 0.13,
-                                          width: size.height * 0.13,
-                                          fit: BoxFit.cover,
-                                          placeholder: (context, url) =>
-                                              Container(
-                                                  width: 50,
-                                                  height: 50,
-                                                  child: Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                  ))),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(Icons.error),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text( widget.offer.company.name,
-                                          style: TextStyle(
-                                              fontSize: 25,
-                                              color:
-                                                  Theme.of(context).accentColor,
-                                              fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         GestureDetector(
-                                          onTap: () {},
-                                          child: Image.asset('assets/images/insta.png'),
+                                          onTap:(){
+                                            Navigator.pop(context);
+                                            Navigator.push(context,
+                                                MaterialPageRoute(builder: (context) => CompanyProfile(company: widget.offer.company)));
+                                          },
+                                          child: Column(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(100),
+                                                child: CachedNetworkImage(
+                                                  imageUrl:
+                                                  widget.offer.company.image,
+                                                  height: 80,
+                                                  width: 80,
+                                                  fit: BoxFit.cover,
+                                                  placeholder: (context, url) =>
+                                                      Container(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child: Center(
+                                                              child:
+                                                              CircularProgressIndicator(
+                                                                color: Theme.of(context)
+                                                                    .primaryColor,
+                                                              ))),
+                                                  errorWidget: (context, url, error) =>
+                                                      Icon(Icons.error),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text( widget.offer.company.name,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color:
+                                                      Theme.of(context).accentColor,
+                                                      fontWeight: FontWeight.bold)),
+                                            ],
+                                          ),
                                         ),
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: Image.asset('assets/images/wtsp.png'),
+                                        SizedBox(
+                                          height:20,
                                         ),
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: Image.asset('assets/images/snap.png'),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Image.asset('assets/images/insta.png'),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Image.asset('assets/images/wtsp.png'),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Image.asset('assets/images/snap.png'),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Image.asset('assets/images/gmail.png'),
+                                            ),
+                                          ],
                                         ),
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: Image.asset('assets/images/gmail.png'),
+                                        SizedBox(
+                                          height: 20,
                                         ),
-                                      ],
-                                    ),
-                                SizedBox(
-                                  height: 50,
-                                ),
-                              ]))
-                        ],
-                      ))),
+                                        Text(
+                                          getTranslated(context, "added_ads"),
+                                          style:
+                                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        OfferList(offerList: offerList),
+                                      ]))
+                            ],
+                          )),
+                ],
+              ),
             ),
-        ],
-      ),
+
+
     );
   }
 

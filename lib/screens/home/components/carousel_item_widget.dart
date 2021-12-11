@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/Models/offer.dart';
+import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/screens/ads/show.dart';
 
 class CarouselItemWidget extends StatefulWidget {
@@ -17,8 +18,12 @@ class CarouselItemWidget extends StatefulWidget {
 }
 
 class _CarouselItemWidgetState extends State<CarouselItemWidget> {
-  bool favorite = false;
-
+  late bool favorite ;
+  @override
+  void initState() {
+    super.initState();
+    favorite = widget.offer.favoriteByMe;
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,6 +33,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
       },
       onDoubleTap: () {
         setState(() {
+          if(!favorite) addToFavorites(widget.offer.id);
           favorite = !favorite;
         });
       },
@@ -118,6 +124,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                 ),
                 onPressed: () {
                   setState(() {
+                    if(!favorite) addToFavorites(widget.offer.id);
                     favorite = !favorite;
                   });
                 },

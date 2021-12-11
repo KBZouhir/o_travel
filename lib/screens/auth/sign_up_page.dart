@@ -8,12 +8,13 @@ import 'package:o_travel/api/company/city_api.dart';
 import 'package:o_travel/api/company/domain_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/main.dart';
+import 'package:o_travel/screens/auth/login_screen.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
-
+  const SignUpPage({Key? key,required this.isCompany}) : super(key: key);
+ final bool isCompany;
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -41,7 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 2,initialIndex: widget.isCompany?1:0,
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 140,
@@ -70,6 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
           bottom: TabBar(
             unselectedLabelColor: Theme.of(context).primaryColor,
             indicatorSize: TabBarIndicatorSize.label,
+
             indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(raduice),
                 color: Theme.of(context).primaryColor),
@@ -98,6 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         body: TabBarView(
+
           children: [
             UserPage(),
             CompanyPage(),
@@ -351,7 +354,10 @@ class _UserPageState extends State<UserPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    print('Sign Up');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen(company: false)));
                   },
                   child: Text(getTranslated(context, 'login'),
                       style: TextStyle(
@@ -721,7 +727,10 @@ class _CompanyPageState extends State<CompanyPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    print('Sign Up');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen(company: true)));
                   },
                   child: Text(getTranslated(context, 'login'),
                       style: TextStyle(

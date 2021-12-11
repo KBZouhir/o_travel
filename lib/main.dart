@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:o_travel/Models/type.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/auth/choose_page.dart';
-import 'package:o_travel/screens/auth/login_screen.dart';
-import 'package:o_travel/screens/auth/reset/verify.dart';
-import 'package:o_travel/screens/companies/companies_guide.dart';
 import 'package:o_travel/screens/home/home.dart';
-
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/localization/demo_localisation.dart';
 import 'package:o_travel/screens/splash/on_boarding.dart';
@@ -51,7 +46,6 @@ class _MyAppState extends State<MyApp> {
         this._locale = locale;
       });
     });
-
     super.didChangeDependencies();
   }
 
@@ -62,10 +56,7 @@ class _MyAppState extends State<MyApp> {
     return FutureBuilder(
         future: Init.instance.initialize(),
         builder: (context, AsyncSnapshot snapshot) {
-           SharedPreferences.getInstance().then((value){
-             if( value.getBool('isFirstTime')!=null)isFirstTime= value.getBool('isFirstTime')!;
-             if( value.getString('_token')!=null)isLogged= true;
-           });
+
 
           // Show splash screen while waiting for app resources to load:
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -73,6 +64,18 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 home: Splash());
           } else {
+            SharedPreferences.getInstance().then((value){
+              print("isFirstTime ${value.getBool('isFirstTime')}");
+              print("_token ${value.getString('_token')}");
+              if( value.getBool('isFirstTime')!=null)isFirstTime= value.getBool('isFirstTime')!;
+            if( value.getString('_token')!=null){
+              print("_token ${value.getString('_token')}");
+
+              isLogged= true;
+            }else
+              isLogged= false;
+
+            });
             return ValueListenableBuilder<ThemeMode>(
                 valueListenable: MyApp.themeNotifier,
                 builder: (_, ThemeMode currentMode, __) {
@@ -123,7 +126,7 @@ class _MyAppState extends State<MyApp> {
                       }
                       return supportedLocales.first;
                     },
-                    home: isFirstTime? OnBoardingPage():(isLogged?HomeScreen():ChoosePage()),
+                    home: isFirstTime? OnBoardingPage():(!isLogged?ChoosePage():HomeScreen()),
                   );
                 });
           }

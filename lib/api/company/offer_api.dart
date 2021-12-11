@@ -10,8 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String prifix = "offers";
 
-Future<List<Offer>> getAllOffers(
-    String filter_name, String filter_value) async {
+Future<List<Offer>> getAllOffers(String filter_name, String filter_value) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
@@ -31,8 +30,7 @@ Future<List<Offer>> getAllOffers(
   }
 }
 
-Future<String> createOffer(File image1, File image2, File image3, name,
-    description, price, category) async {
+Future<String> createOffer(File image1, File image2, File image3, name, description, price, category) async {
   print('${name}');
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -91,13 +89,9 @@ Future addToFavorites(int offerId) async {
       body: jsonEncode(<String, dynamic>{
         "id" : offerId,
       }));
-  print('${response.body}');
-
   if (response.statusCode == 200) {
-  print('${response.body}');
   } else {
     throw Exception('Failed to load  $prifix');
-
   }
 }
 

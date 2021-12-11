@@ -232,7 +232,7 @@ class SelectCard extends StatelessWidget {
             Container(
                 padding: EdgeInsets.all(10),
                 margin: EdgeInsets.only(top: 10),
-                height: 90,
+                height: 100,
                 decoration: BoxDecoration(
                   color: Theme.of(context).backgroundColor,
                     boxShadow: [

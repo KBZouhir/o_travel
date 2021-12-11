@@ -258,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SignUpPage()));
+                                  builder: (context) => SignUpPage(isCompany: widget.company,)));
                         },
                         child: Text(getTranslated(context, 'sign_up'),
                             style: TextStyle(
