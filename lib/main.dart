@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/auth/choose_page.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/localization/demo_localisation.dart';
@@ -29,8 +28,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isFirstTime=true;
-  bool isLogged=false;
+  bool isFirstTime = true;
+  bool isLogged = false;
   late Locale _locale;
 
   setLocale(Locale locale) {
@@ -49,32 +48,27 @@ class _MyAppState extends State<MyApp> {
     super.didChangeDependencies();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: Init.instance.initialize(),
         builder: (context, AsyncSnapshot snapshot) {
-
-          SharedPreferences.getInstance().then((value){
+          SharedPreferences.getInstance().then((value) {
             print("isFirstTime ${value.getBool('isFirstTime')}");
             print("_token ${value.getString('_token')}");
-            if( value.getBool('isFirstTime')!=null)
-              isFirstTime= value.getBool('isFirstTime')!;
-            if( value.getString('_token')!=null){
+            if (value.getBool('isFirstTime') != null)
+              isFirstTime = value.getBool('isFirstTime')!;
+            if (value.getString('_token') != null) {
               print("_token2 ${value.getString('_token')}");
-              isLogged= true;
-            }else
-              isLogged= false;
+              isLogged = true;
+            } else
+              isLogged = false;
           });
           // Show splash screen while waiting for app resources to load:
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: Splash());
+                debugShowCheckedModeBanner: false, home: Splash());
           } else {
-
             return ValueListenableBuilder<ThemeMode>(
                 valueListenable: MyApp.themeNotifier,
                 builder: (_, ThemeMode currentMode, __) {
@@ -118,21 +112,20 @@ class _MyAppState extends State<MyApp> {
                     localeResolutionCallback: (locale, supportedLocales) {
                       for (var supportedLocale in supportedLocales) {
                         if (supportedLocale.languageCode ==
-                            locale!.languageCode &&
+                                locale!.languageCode &&
                             supportedLocale.countryCode == locale.countryCode) {
                           return supportedLocale;
                         }
                       }
                       return supportedLocales.first;
                     },
-                    home:(!isLogged?OnBoardingPage():HomeScreen()),
+                    home: (!isLogged ? OnBoardingPage() : HomeScreen()),
                   );
                 });
           }
         });
   }
 }
-
 
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);

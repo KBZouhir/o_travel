@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/api/company/company_api.dart';
-import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 
@@ -19,7 +18,7 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
   List<Company> companies = [];
   int companyPage = 1;
   ScrollController _scrollController = new ScrollController();
-  bool hasNewData= true;
+  bool hasNewData = true;
   getResources() {
     getAllCompany(companyPage).then((value) {
       setState(() {
@@ -41,9 +40,11 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
 
         getAllCompany(companyPage).then((value) {
           setState(() {
-            if (value.length == 0) hasNewData = false; else companyPage = companyPage + 1;
+            if (value.length == 0)
+              hasNewData = false;
+            else
+              companyPage = companyPage + 1;
             companies.addAll(value);
-
           });
         });
       }

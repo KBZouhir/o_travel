@@ -6,7 +6,6 @@ import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
-import 'package:o_travel/validators/formValidators.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool company;
@@ -26,27 +25,31 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    super.initState();
     getLocale().then((locale) {
       setState(() {
-        if(locale.languageCode=='en')this._lang='ar';
-        else this._lang='en';
+        if (locale.languageCode == 'en')
+          this._lang = 'ar';
+        else
+          this._lang = 'en';
       });
     });
   }
+
   void _changeLanguage() async {
     Locale _locale = await setLocale(_lang);
     MyApp.setLocale(context, _locale);
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
         title: Center(
             child: Text(
-              getTranslated(context, 'login'),
+          getTranslated(context, 'login'),
           style: TextStyle(fontSize: 25, color: Theme.of(context).primaryColor),
         )),
         leading: IconButton(
@@ -69,16 +72,19 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
             child: Form(
-              key:_form ,
+              key: _form,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   SizedBox(
                     height: 40,
                   ),
                   Text(
-                    getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
+                    getTranslated(context, 'username') +
+                        ' ' +
+                        getTranslated(context, 'or') +
+                        ' ' +
+                        getTranslated(context, 'email'),
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
@@ -96,9 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Theme.of(context).accentColor),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hintText: getTranslated(context, 'username')+' '+getTranslated(context, 'or')+' '+getTranslated(context, 'email'),
+                      hintText: getTranslated(context, 'username') +
+                          ' ' +
+                          getTranslated(context, 'or') +
+                          ' ' +
+                          getTranslated(context, 'email'),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(raduice))),
                       prefixIcon: Icon(
                         Icons.perm_identity,
                         size: 25,
@@ -129,8 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: getTranslated(context, 'password'),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                      prefixIcon: Icon(Icons.lock,size: 25,),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(raduice))),
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        size: 25,
+                      ),
                       suffixIcon: IconButton(
                         icon: showPassword
                             ? Icon(Icons.remove_red_eye)
@@ -153,7 +168,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           getTranslated(context, 'forgot_password'),
                           style: TextStyle(
-                            color: Theme.of(context).accentColor.withOpacity(0.7),
+                            color:
+                                Theme.of(context).accentColor.withOpacity(0.7),
                             fontSize: 14.0,
                           ),
                         ),
@@ -171,20 +187,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(raduice),
                     ),
                     child: MaterialButton(
-                      onPressed: (){
-                        if(_form.currentState!.validate()){
-                          if(widget.company){
-                            loginCompany(usernameController.text,passwordController.text).then((value){
-                              if(value.id > -1){
+                      onPressed: () {
+                        if (_form.currentState!.validate()) {
+                          if (widget.company) {
+                            loginCompany(usernameController.text,
+                                    passwordController.text)
+                                .then((value) {
+                              if (value.id > -1) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => HomeScreen()));
                               }
                             });
-                          }else{
-                            loginUser(usernameController.text,passwordController.text).then((value){
-                              if(value.id > -1){
+                          } else {
+                            loginUser(usernameController.text,
+                                    passwordController.text)
+                                .then((value) {
+                              if (value.id > -1) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -193,13 +213,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             });
                           }
                         }
-
                       },
                       color: Theme.of(context).primaryColor,
                       child: Text(
                         getTranslated(context, 'login'),
                         style: TextStyle(
-                          fontSize:20,
+                          fontSize: 20,
                           color: Colors.white,
                         ),
                       ),
@@ -211,38 +230,39 @@ class _LoginScreenState extends State<LoginScreen> {
                   widget.company
                       ? Center()
                       : Column(
-                    children: [
-                      Center(
-                        child: Text(
-                          getTranslated(context, 'connect_with'),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).accentColor,
-                            fontSize: 16.0,
-                          ),
+                          children: [
+                            Center(
+                              child: Text(
+                                getTranslated(context, 'connect_with'),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).accentColor,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  icon: Image.asset(
+                                      'assets/images/google-plus.png'),
+                                  iconSize: 50,
+                                  onPressed: () {},
+                                ),
+                                IconButton(
+                                  icon:
+                                      Image.asset('assets/images/facebook.png'),
+                                  iconSize: 50,
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: Image.asset(
-                                'assets/images/google-plus.png'),
-                            iconSize: 50,
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: Image.asset('assets/images/facebook.png'),
-                            iconSize: 50,
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -258,7 +278,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SignUpPage(isCompany: widget.company,)));
+                                  builder: (context) => SignUpPage(
+                                        isCompany: widget.company,
+                                      )));
                         },
                         child: Text(getTranslated(context, 'sign_up'),
                             style: TextStyle(
@@ -277,6 +299,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -12,15 +10,12 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: buildAppBar( context),
-        body:SingleChildScrollView(
-          child:  Container(
+        appBar: buildAppBar(context),
+        body: SingleChildScrollView(
+          child: Container(
             height: 700,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -35,16 +30,16 @@ class _AboutScreenState extends State<AboutScreen> {
                   ),
                 ),
                 SizedBox(
-                  height:20,
+                  height: 20,
                 ),
                 Text(
-                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, '
-                        'consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.',
-                    style: TextStyle(
-                        height: 1.5,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16.0,
-                        color: Theme.of(context).accentColor),
+                  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, '
+                  'consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.',
+                  style: TextStyle(
+                      height: 1.5,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16.0,
+                      color: Theme.of(context).accentColor),
                 ),
                 SizedBox(
                   height: 30,
@@ -52,16 +47,19 @@ class _AboutScreenState extends State<AboutScreen> {
                 Row(
                   children: [
                     Spacer(),
-                    Icon(Icons.email_outlined, size: 22,color: Theme.of(context).accentColor,),
+                    Icon(
+                      Icons.email_outlined,
+                      size: 22,
+                      color: Theme.of(context).accentColor,
+                    ),
                     SizedBox(
-                      width:10,
+                      width: 10,
                     ),
-                    Text(
-                        "otravel2040@gmail.com",
-                        style: TextStyle(color: Theme.of(context).accentColor,fontSize: 16)
-                    ),
+                    Text("otravel2040@gmail.com",
+                        style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontSize: 16)),
                     Spacer(),
-
                   ],
                 ),
                 SizedBox(
@@ -70,32 +68,40 @@ class _AboutScreenState extends State<AboutScreen> {
                 Row(
                   children: [
                     Spacer(),
-                    Icon(Icons.phone, size: 22,color: Theme.of(context).accentColor,),
+                    Icon(
+                      Icons.phone,
+                      size: 22,
+                      color: Theme.of(context).accentColor,
+                    ),
                     SizedBox(
-                      width:10,
+                      width: 10,
                     ),
-                    Text(
-                        "+96878085137",
-                        style: TextStyle(color: Theme.of(context).accentColor,fontSize: 16)
-                    ),
+                    Text("+96878085137",
+                        style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontSize: 16)),
                     Spacer(),
-                    Icon(Icons.location_on_outlined, size: 22,color: Theme.of(context).accentColor,),
+                    Icon(
+                      Icons.location_on_outlined,
+                      size: 22,
+                      color: Theme.of(context).accentColor,
+                    ),
                     SizedBox(
-                      width:10,
+                      width: 10,
                     ),
-                    Text(
-                        "Oman - Muscat",
-                        style: TextStyle(color: Theme.of(context).accentColor,fontSize: 16)
-                    ),
+                    Text("Oman - Muscat",
+                        style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontSize: 16)),
                     Spacer(),
-
                   ],
                 ),
               ],
             ),
           ),
-        ) );
+        ));
   }
+
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       iconTheme: Theme.of(context).iconTheme,
@@ -111,10 +117,11 @@ class _AboutScreenState extends State<AboutScreen> {
             color: Colors.white,
           )),
       title: Center(
-          child: Text(getTranslated(context, 'about'),
-            style: TextStyle(
-                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
+          child: Text(
+        getTranslated(context, 'about'),
+        style: TextStyle(
+            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      )),
       actions: [
         SizedBox(
           width: 55,
@@ -122,5 +129,4 @@ class _AboutScreenState extends State<AboutScreen> {
       ],
     );
   }
-
 }

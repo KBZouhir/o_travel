@@ -2,7 +2,6 @@
 //
 //     final offer = offerFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:o_travel/Models/category.dart';
@@ -46,36 +45,37 @@ class Offer {
   List<Country> countries;
 
   factory Offer.fromJson(Map<String, dynamic> json) => Offer(
-    id: json["id"],
-    name: json["name"],
-    price: json["price"],
-    description: json["description"],
-    rate: json["rate"],
-    date: DateTime.parse(json["date"]),
-    favoriteByMe: json["favorite_by_me"],
-    state: json["state"],
-    featured: json["featured"],
-    images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-    category: Category.fromJson(json["category"]),
-    company: Company.fromJson(json["company"]),
-    countries: List<Country>.from(json["countries"].map((x) => Country.fromJson(x))),
-  );
+        id: json["id"],
+        name: json["name"],
+        price: json["price"],
+        description: json["description"],
+        rate: json["rate"],
+        date: DateTime.parse(json["date"]),
+        favoriteByMe: json["favorite_by_me"],
+        state: json["state"],
+        featured: json["featured"],
+        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        category: Category.fromJson(json["category"]),
+        company: Company.fromJson(json["company"]),
+        countries: List<Country>.from(
+            json["countries"].map((x) => Country.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "price": price,
-    "description": description,
-    "rate": rate,
-    "date": date.toIso8601String(),
-    "favorite_by_me": favoriteByMe,
-    "state": state,
-    "featured": featured,
-    "images": List<dynamic>.from(images.map((x) => x.toJson())),
-    "category": category.toJson(),
-    "company": company.toJson(),
-    "countries": List<dynamic>.from(countries.map((x) => x.toJson())),
-  };
+        "id": id,
+        "name": name,
+        "price": price,
+        "description": description,
+        "rate": rate,
+        "date": date.toIso8601String(),
+        "favorite_by_me": favoriteByMe,
+        "state": state,
+        "featured": featured,
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "category": category.toJson(),
+        "company": company.toJson(),
+        "countries": List<dynamic>.from(countries.map((x) => x.toJson())),
+      };
 
   @override
   String toString() {
