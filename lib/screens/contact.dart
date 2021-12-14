@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -12,15 +11,12 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: buildAppBar(context),
-        body:SingleChildScrollView(
-          child:  Container(
+        body: SingleChildScrollView(
+          child: Container(
             height: 800,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -34,19 +30,15 @@ class _ContactScreenState extends State<ContactScreen> {
                     'assets/images/Contact.png',
                   ),
                 ),
-                SizedBox(
-                    height: 16
-                ),
+                SizedBox(height: 16),
                 Text(
                   getTranslated(context, 'email'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color:Theme.of(context).accentColor),
+                      color: Theme.of(context).accentColor),
                 ),
-                SizedBox(
-                    height: 8
-                ),
+                SizedBox(height: 8),
                 TextFormField(
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -56,16 +48,15 @@ class _ContactScreenState extends State<ContactScreen> {
                   decoration: InputDecoration(
                     hintText: 'Example@gmail.com',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(raduice))),
                     prefixIcon: Icon(
                       Icons.email_outlined,
                       size: 30,
                     ),
                   ),
                 ),
-                SizedBox(
-                    height: 16
-                ),
+                SizedBox(height: 16),
                 Text(
                   getTranslated(context, 'subject'),
                   style: TextStyle(
@@ -73,14 +64,10 @@ class _ContactScreenState extends State<ContactScreen> {
                       fontSize: 20.0,
                       color: Theme.of(context).accentColor),
                 ),
-                SizedBox(
-                    height: 8
-                ),
+                SizedBox(height: 8),
                 TextField(
                   onChanged: (val) {
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   keyboardType: TextInputType.multiline,
                   maxLength: 500,
@@ -90,7 +77,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     contentPadding: EdgeInsets.all(10),
                     border: OutlineInputBorder(
                         borderRadius:
-                        BorderRadius.all(Radius.circular(raduice))),
+                            BorderRadius.all(Radius.circular(raduice))),
                   ),
                   style: TextStyle(
                     height: 1.6,
@@ -98,9 +85,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     decorationThickness: 0,
                   ), // when user presses enter it will adapt to it
                 ),
-                SizedBox(
-                    height: 16
-                ),
+                SizedBox(height: 16),
                 SizedBox(
                   height: 20,
                 ),
@@ -126,8 +111,9 @@ class _ContactScreenState extends State<ContactScreen> {
               ],
             ),
           ),
-        ) );
+        ));
   }
+
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       iconTheme: Theme.of(context).iconTheme,
@@ -143,10 +129,11 @@ class _ContactScreenState extends State<ContactScreen> {
             color: Colors.white,
           )),
       title: Center(
-          child: Text(getTranslated(context, 'contact_us'),
-            style: TextStyle(
-                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
+          child: Text(
+        getTranslated(context, 'contact_us'),
+        style: TextStyle(
+            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      )),
       actions: [
         SizedBox(
           width: 55,
@@ -154,5 +141,4 @@ class _ContactScreenState extends State<ContactScreen> {
       ],
     );
   }
-
 }

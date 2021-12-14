@@ -15,9 +15,8 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    int i = 1;
     return Scaffold(
-        appBar: buildAppBar(context) ,
+        appBar: buildAppBar(context),
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height * 1.3,
@@ -147,6 +146,7 @@ class _ResultScreenState extends State<ResultScreen> {
           ),
         ));
   }
+
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       iconTheme: Theme.of(context).iconTheme,
@@ -162,10 +162,11 @@ class _ResultScreenState extends State<ResultScreen> {
             color: Colors.white,
           )),
       title: Center(
-          child: Text(getTranslated(context, 'search'),
-            style: TextStyle(
-                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
+          child: Text(
+        getTranslated(context, 'search'),
+        style: TextStyle(
+            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      )),
       actions: [
         SizedBox(
           width: 55,

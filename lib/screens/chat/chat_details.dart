@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -22,8 +21,8 @@ class ChatDetails extends StatefulWidget {
 
 class _ChatDetailsState extends State<ChatDetails> {
   List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello, Will", messageType: "receiver", image: ''),
-
+    ChatMessage(
+        messageContent: "Hello, Will", messageType: "receiver", image: ''),
   ];
   File? image1;
   final fieldMessageController = TextEditingController();
@@ -32,12 +31,14 @@ class _ChatDetailsState extends State<ChatDetails> {
     if (image == null) return;
     final imgTemp = File(image.path);
     setState(() {
-
       this.image1 = imgTemp;
-      this.messages.insert(0,new ChatMessage(messageContent: '', messageType: 'sender',image: image.path));
-
+      this.messages.insert(
+          0,
+          new ChatMessage(
+              messageContent: '', messageType: 'sender', image: image.path));
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +67,11 @@ class _ChatDetailsState extends State<ChatDetails> {
             ],
           ),
           actions: [
-            IconButton(onPressed: () {
-              launch("tel://${widget.user.phone}");
-            }, icon: Icon(Icons.phone_outlined))
+            IconButton(
+                onPressed: () {
+                  launch("tel://${widget.user.phone}");
+                },
+                icon: Icon(Icons.phone_outlined))
           ],
         ),
         body: Stack(children: <Widget>[
@@ -92,21 +95,26 @@ class _ChatDetailsState extends State<ChatDetails> {
                           ? Theme.of(context).primaryColor
                           : gray228),
                     ),
-                    padding: (messages[index].image!='')?EdgeInsets.all(5):EdgeInsets.all(16),
-                    child:
-                        (messages[index].image!='')?  ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          child: Image.file(new File(messages[index].image),width: 100,),
-                        ):Text(
-                          messages[index].messageContent,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: (messages[index].messageType == "sender"
-                                ? Colors.white
-                                : Colors.black87),
+                    padding: (messages[index].image != '')
+                        ? EdgeInsets.all(5)
+                        : EdgeInsets.all(16),
+                    child: (messages[index].image != '')
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            child: Image.file(
+                              new File(messages[index].image),
+                              width: 100,
+                            ),
+                          )
+                        : Text(
+                            messages[index].messageContent,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: (messages[index].messageType == "sender"
+                                  ? Colors.white
+                                  : Colors.black87),
+                            ),
                           ),
-                        ),
-
                   ),
                 ),
               );
@@ -154,25 +162,33 @@ class _ChatDetailsState extends State<ChatDetails> {
                                       .withOpacity(0.4),
                                 )),
                             Expanded(
-                              child:TextField(
+                              child: TextField(
                                 controller: fieldMessageController,
-                                onSubmitted: (String str){
-                                 setState(() {
-                                   this.messages.insert(0,new ChatMessage(messageContent: '$str', messageType: 'sender',image: ''));
-                                 });
-                                 fieldMessageController.clear();
+                                onSubmitted: (String str) {
+                                  setState(() {
+                                    this.messages.insert(
+                                        0,
+                                        new ChatMessage(
+                                            messageContent: '$str',
+                                            messageType: 'sender',
+                                            image: ''));
+                                  });
+                                  fieldMessageController.clear();
                                 },
-                              maxLines: 1,
-                              style: TextStyle(fontSize: 14),
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: InputDecoration(
-                                filled: true,
-                                border: OutlineInputBorder(borderSide: BorderSide.none),
-                                fillColor: Theme.of(context).backgroundColor.withOpacity(0),
-                                contentPadding: EdgeInsets.zero,
-                                hintText: 'write your message',
+                                maxLines: 1,
+                                style: TextStyle(fontSize: 14),
+                                textAlignVertical: TextAlignVertical.center,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide.none),
+                                  fillColor: Theme.of(context)
+                                      .backgroundColor
+                                      .withOpacity(0),
+                                  contentPadding: EdgeInsets.zero,
+                                  hintText: 'write your message',
+                                ),
                               ),
-                            ),
                             ),
                             IconButton(
                                 onPressed: () {
@@ -193,5 +209,4 @@ class _ChatDetailsState extends State<ChatDetails> {
               ))
         ]));
   }
-
 }

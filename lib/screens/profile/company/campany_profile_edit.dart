@@ -7,54 +7,51 @@ import 'package:o_travel/screens/localization/const.dart';
 
 class CompanyProfileEdit extends StatefulWidget {
   const CompanyProfileEdit({Key? key, required this.company}) : super(key: key);
-final Company  company;
+  final Company company;
   @override
   _CompanyProfileEditState createState() => _CompanyProfileEditState();
 }
 
 class _CompanyProfileEditState extends State<CompanyProfileEdit> {
-
-
-  TextEditingController usernameController=TextEditingController();
-  TextEditingController emailController=TextEditingController();
-  TextEditingController phoneController=TextEditingController();
-  TextEditingController aboutController=TextEditingController();
-  TextEditingController gpsController=TextEditingController();
-  TextEditingController areaController=TextEditingController();
-  TextEditingController fieldController=TextEditingController();
-  TextEditingController commercialController=TextEditingController();
-  TextEditingController snapController=TextEditingController();
-  TextEditingController instaController=TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController aboutController = TextEditingController();
+  TextEditingController gpsController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
+  TextEditingController fieldController = TextEditingController();
+  TextEditingController commercialController = TextEditingController();
+  TextEditingController snapController = TextEditingController();
+  TextEditingController instaController = TextEditingController();
 
   @override
   void initState() {
-    usernameController.text=widget.company.name;
-    emailController.text=widget.company.email;
-    phoneController.text=widget.company.phone;
-    aboutController.text=widget.company.description;
-    gpsController.text='${widget.company.latitude} ${widget.company.latitude}';
-    areaController.text=widget.company.countryCode;
-    snapController.text=widget.company.snapchat;
-    instaController.text=widget.company.instagram;
+    super.initState();
+    usernameController.text = widget.company.name;
+    emailController.text = widget.company.email;
+    phoneController.text = widget.company.phone;
+    aboutController.text = widget.company.description;
+    gpsController.text =
+        '${widget.company.latitude} ${widget.company.latitude}';
+    areaController.text = widget.company.countryCode;
+    snapController.text = widget.company.snapchat;
+    instaController.text = widget.company.instagram;
   }
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-
         child: Column(
           children: [
             Container(
                 padding:
-                EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
+                    EdgeInsets.only(top: 30, bottom: 10, left: 10, right: 10),
                 height: 250,
                 decoration: BoxDecoration(
                   borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(raduice)),
+                      BorderRadius.only(bottomLeft: Radius.circular(raduice)),
                   color: primaryColorDark,
                 ),
                 child: Column(
@@ -70,7 +67,13 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                             ),
                             onPressed: () => Navigator.pop(context)),
                         Spacer(),
-                        Text(getTranslated(context, 'edit_profile'),style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                        Text(
+                          getTranslated(context, 'edit_profile'),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
                         Spacer(),
                         SizedBox(width: 55)
                       ],
@@ -80,20 +83,17 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: CachedNetworkImage(
-                          imageUrl:widget.company.image,
+                          imageUrl: widget.company.image,
                           height: 100,
                           width: 100,
                           fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              Container(
-                                  width: 50,
-                                  height: 50,
-                                  child: Center(
-                                      child: CircularProgressIndicator(
-                                        color: Theme
-                                            .of(context)
-                                            .primaryColor,
-                                      ))),
+                          placeholder: (context, url) => Container(
+                              width: 50,
+                              height: 50,
+                              child: Center(
+                                  child: CircularProgressIndicator(
+                                color: Theme.of(context).primaryColor,
+                              ))),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
@@ -103,22 +103,18 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                 )),
             Container(
                 padding: EdgeInsets.all(16),
-                child :Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'company_name'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color:Theme.of(context).accentColor),
+                          color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextFormField(
                       controller: usernameController,
                       style: TextStyle(
@@ -129,16 +125,15 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'company_name'),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(
                           Icons.perm_identity,
                           size: 30,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'about_company'),
                       style: TextStyle(
@@ -146,15 +141,11 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
                       controller: aboutController,
                       onChanged: (val) {
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       keyboardType: TextInputType.multiline,
                       maxLength: 300,
@@ -164,7 +155,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                         contentPadding: EdgeInsets.all(10),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(raduice))),
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                       style: TextStyle(
                         height: 1.6,
@@ -172,9 +163,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                         decorationThickness: 0,
                       ), // when user presses enter it will adapt to it
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'location_gps'),
                       style: TextStyle(
@@ -182,27 +171,24 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
                       controller: gpsController,
                       style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
-                          color: Theme.of(context).accentColor,),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.0,
+                        color: Theme.of(context).accentColor,
+                      ),
                       obscureText: false,
-
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'location_gps'),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.location_on),
                       ),
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'email'),
                       style: TextStyle(
@@ -210,9 +196,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
                       controller: emailController,
                       style: TextStyle(
@@ -221,16 +205,14 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText:getTranslated(context, 'email'),
+                        hintText: getTranslated(context, 'email'),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.email_outlined),
                       ),
                     ),
-
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'phone'),
                       style: TextStyle(
@@ -238,9 +220,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
                       controller: phoneController,
                       style: TextStyle(
@@ -251,13 +231,12 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'phone'),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.phone),
                       ),
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'area'),
                       style: TextStyle(
@@ -265,9 +244,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
                       controller: areaController,
                       style: TextStyle(
@@ -276,15 +253,12 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
-
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'field'),
                       style: TextStyle(
@@ -292,26 +266,21 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
-                      controller:fieldController ,
+                      controller: fieldController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                       obscureText: false,
                       decoration: InputDecoration(
-
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
-
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'commercial_register'),
                       style: TextStyle(
@@ -319,9 +288,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
                       controller: commercialController,
                       style: TextStyle(
@@ -333,13 +300,11 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                         prefixIcon: Icon(Icons.add_photo_alternate),
                         hintText: getTranslated(context, 'commercial_register'),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
-
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'snapchat'),
                       style: TextStyle(
@@ -347,9 +312,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
                       controller: snapController,
                       style: TextStyle(
@@ -360,13 +323,11 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'snapchat'),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
-
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
-                    SizedBox(
-                      height: 16
-                    ),
+                    SizedBox(height: 16),
                     Text(
                       getTranslated(context, 'instagram'),
                       style: TextStyle(
@@ -374,12 +335,9 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).accentColor),
                     ),
-                    SizedBox(
-                      height: 8
-                    ),
+                    SizedBox(height: 8),
                     TextField(
-                      controller:instaController,
-
+                      controller: instaController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -388,8 +346,8 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'instagram'),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(raduice))),
-
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
                     SizedBox(
@@ -417,11 +375,8 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                     SizedBox(
                       height: 30,
                     ),
-
                   ],
-                )
-                )
-
+                ))
           ],
         ),
       ),

@@ -1,14 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/profile/company/campany_profile_edit.dart';
-import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
@@ -26,13 +23,14 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
   bool loading = true;
 
   getResources() {
-    getAllOffers('company', '${widget.company.id}',offerPage).then((value) {
+    getAllOffers('company', '${widget.company.id}', offerPage).then((value) {
       setState(() {
         offerList = value;
         offerPage = offerPage + 1;
       });
     });
   }
+
   int offerPage = 1;
   bool hasNewData = true;
   ScrollController _scrollController = new ScrollController();
@@ -47,23 +45,26 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
 
         getAllOffers('featured', '1', offerPage).then((value) {
           setState(() {
-            if (value.length == 0) hasNewData = false; else offerPage = offerPage + 1;
+            if (value.length == 0)
+              hasNewData = false;
+            else
+              offerPage = offerPage + 1;
 
             offerList.addAll(value);
-
           });
         });
       }
     });
   }
+
   @override
   void dispose() {
     super.dispose();
     _scrollController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         controller: _scrollController,
@@ -92,7 +93,9 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                             ),
                             onPressed: () => Navigator.pop(context)),
                         Spacer(),
-                        SizedBox(width: 50,),
+                        SizedBox(
+                          width: 50,
+                        ),
                       ],
                     ),
                     Center(
@@ -122,12 +125,12 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                       height: 10,
                     ),
                     Center(
-                        child:Text(widget.company.name,
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                        )
+                      child: Text(widget.company.name,
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    )
                   ],
                 )),
             Container(
@@ -136,7 +139,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.company.description ,
+                      widget.company.description,
                       style: TextStyle(fontSize: 16, height: 1.5),
                     ),
                     SizedBox(

@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
@@ -23,7 +21,7 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
   int offerPage = 1;
   bool hasNewData = true;
   getResources() {
-    getAllOffers('favorite', '1',1).then((value) {
+    getAllOffers('favorite', '1', 1).then((value) {
       setState(() {
         offerList = value;
       });

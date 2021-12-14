@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:o_travel/Models/story.dart';
 import 'package:o_travel/api/company/story_api.dart';
 import 'package:o_travel/constants.dart';
@@ -38,18 +37,16 @@ class StoryItemWidget extends StatelessWidget {
     Key? key,
     required this.story,
   }) : super(key: key);
-  final _momentCount = 5;
-  final _momentDuration = const Duration(seconds: 5);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return GestureDetector(
       onTap: () {
-        showDialog(context: context, builder: (_){
-         return DetailStoryScreen(story);
-        });
+        showDialog(
+            context: context,
+            builder: (_) {
+              return DetailStoryScreen(story);
+            });
       },
       child: Container(
         margin: EdgeInsets.only(right: 15),
@@ -184,12 +181,15 @@ class DetailStoryScreen extends StatelessWidget {
                           width: 40,
                           child: IconButton(
                               onPressed: () {
-                                deleteStory(story.id).then((value){
-                                  Navigator.pop(context,true);
+                                deleteStory(story.id).then((value) {
+                                  Navigator.pop(context, true);
                                   HomeScreen.setStories(context);
                                 });
                               },
-                              icon: Icon(Icons.delete_outlined,color: Colors.white,)))),
+                              icon: Icon(
+                                Icons.delete_outlined,
+                                color: Colors.white,
+                              )))),
                   Card(
                       color: Theme.of(context).backgroundColor.withOpacity(0.7),
                       shape: RoundedRectangleBorder(

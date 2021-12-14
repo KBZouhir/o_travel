@@ -1,5 +1,3 @@
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +5,9 @@ import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/components/carousel_item_widget.dart';
 
-
 class CarouselWidget extends StatefulWidget {
   final List<Offer> offerList;
-  const CarouselWidget({Key? key,required this.offerList }) : super(key: key);
+  const CarouselWidget({Key? key, required this.offerList}) : super(key: key);
 
   @override
   _CarouselWidgetState createState() => _CarouselWidgetState();
@@ -21,8 +18,6 @@ class _CarouselWidgetState extends State<CarouselWidget> {
 
   @override
   Widget build(BuildContext context) {
-
-
     List<T> map<T>(List list, Function handler) {
       List<T> result = [];
       for (var i = 0; i < list.length; i++) {
@@ -61,15 +56,15 @@ class _CarouselWidgetState extends State<CarouselWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: map<Widget>(
           widget.offerList,
-              (index, url) {
+          (index, url) {
             return Container(
               width: _current == index ? 20 : 8,
               height: 8.0,
-              margin: EdgeInsets.symmetric(horizontal:2,vertical: 10.0),
+              margin: EdgeInsets.symmetric(horizontal: 2, vertical: 10.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color:
-                  _current == index ? primaryColorDark : primaryColorLite),
+                      _current == index ? primaryColorDark : primaryColorLite),
             );
           },
         ),
@@ -77,6 +72,3 @@ class _CarouselWidgetState extends State<CarouselWidget> {
     ]);
   }
 }
-
-
-

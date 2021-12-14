@@ -17,12 +17,12 @@ class NotificationsScreen extends StatefulWidget {
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
   List<Company> companies = [];
-bool loading=true;
+  bool loading = true;
   getResources() {
     getAllCompany(1).then((value) {
       setState(() {
         companies = value;
-        loading =false;
+        loading = false;
       });
     });
   }
@@ -33,37 +33,37 @@ bool loading=true;
     getResources();
   }
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: buildAppBar(context),
         body: Builder(builder: (context) {
-          if (companies.length > 0){
+          if (companies.length > 0) {
             return Stack(
               children: [
                 Container(
-                    padding: EdgeInsets.only(bottom: 60),
-                    width: size.width,
-                    height: size.height,
-                    child: SingleChildScrollView(
+                  padding: EdgeInsets.only(bottom: 60),
+                  width: size.width,
+                  height: size.height,
+                  child: SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.all(8),
-                  itemCount: companies.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SelectCard(company: companies[index],index:index);
-                  })
-            ],
-          )),
-          ),
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.all(8),
+                              itemCount: companies.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return SelectCard(
+                                    company: companies[index], index: index);
+                              })
+                        ],
+                      )),
+                ),
                 Positioned(
                   bottom: 10,
                   left: 10,
@@ -81,7 +81,7 @@ bool loading=true;
                       onPressed: () {
                         setState(() {
                           companies.clear();
-                          loading=false;
+                          loading = false;
                         });
                       },
                       child: Row(
@@ -107,12 +107,11 @@ bool loading=true;
               height: 200,
               child: GFLoader(),
             );
-          else{
+          else {
             return NoFavoritesWidget(size: size);
           }
         }));
   }
-
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -129,10 +128,11 @@ bool loading=true;
             color: Colors.white,
           )),
       title: Center(
-          child: Text(getTranslated(context, 'notifications'),
-            style: TextStyle(
-                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
+          child: Text(
+        getTranslated(context, 'notifications'),
+        style: TextStyle(
+            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      )),
       actions: [
         SizedBox(
           width: 55,
@@ -211,20 +211,17 @@ class NoFavoritesWidget extends StatelessWidget {
   }
 }
 
-
-
 class SelectCard extends StatelessWidget {
-  const SelectCard({Key? key, required this.company, required this.index}) : super(key: key);
+  const SelectCard({Key? key, required this.company, required this.index})
+      : super(key: key);
   final Company company;
-  final int  index;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return GestureDetector(
         onTap: () {
-      /*    Navigator.push(context,
+          /*    Navigator.push(context,
               MaterialPageRoute(builder: (context) => CompanyProfile()));*/
         },
         child: Stack(
@@ -234,7 +231,7 @@ class SelectCard extends StatelessWidget {
                 margin: EdgeInsets.only(top: 10),
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
+                    color: Theme.of(context).backgroundColor,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.3),
@@ -298,22 +295,21 @@ class SelectCard extends StatelessWidget {
                   ]),
                 )),
             Positioned(
-              top: 10,
-              right: 5,
-              left: 5,
-              child: Row(
-                children: [
-                  Expanded(child: Center()),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.close,
-                      size: 18,
+                top: 10,
+                right: 5,
+                left: 5,
+                child: Row(
+                  children: [
+                    Expanded(child: Center()),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.close,
+                        size: 18,
+                      ),
                     ),
-                  ),
-                ],
-              )
-            )
+                  ],
+                ))
           ],
         ));
   }

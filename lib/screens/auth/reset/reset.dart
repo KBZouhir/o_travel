@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class ResetPage extends StatefulWidget {
@@ -54,8 +53,8 @@ class _ResetPageState extends State<ResetPage> {
                               Icons.chevron_left,
                               color: Colors.white,
                               size: 40,
-                            )),                          Spacer(),
-
+                            )),
+                        Spacer(),
                       ],
                     ),
                     SizedBox(
@@ -95,13 +94,15 @@ class _ResetPageState extends State<ResetPage> {
                             decoration: InputDecoration(
                               hintText: getTranslated(context, 'password'),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(raduice))),
                               prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 icon: showPassword
                                     ? Icon(Icons.remove_red_eye)
                                     : Icon(Icons.visibility_off_outlined),
-                                onPressed: () => setState(() => showPassword = !showPassword),
+                                onPressed: () => setState(
+                                    () => showPassword = !showPassword),
                               ),
                             ),
                           ),
@@ -125,16 +126,18 @@ class _ResetPageState extends State<ResetPage> {
                                 color: Theme.of(context).accentColor),
                             obscureText: showConfirmPassword,
                             decoration: InputDecoration(
-                              hintText: getTranslated(context, 'confirm_password'),
+                              hintText:
+                                  getTranslated(context, 'confirm_password'),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(raduice))),
                               prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 icon: showPassword
                                     ? Icon(Icons.remove_red_eye)
                                     : Icon(Icons.visibility_off_outlined),
-                                onPressed: () => setState(
-                                        () => showConfirmPassword = !showConfirmPassword),
+                                onPressed: () => setState(() =>
+                                    showConfirmPassword = !showConfirmPassword),
                               ),
                             ),
                           ),

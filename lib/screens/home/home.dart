@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,24 +18,13 @@ import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/api/company/story_api.dart';
 import 'package:o_travel/constants.dart';
-import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
-import 'package:o_travel/screens/chat/chat_page.dart';
 import 'package:o_travel/screens/companies/companies_guide.dart';
 import 'package:o_travel/screens/home/components/drawer.dart';
 import 'package:o_travel/screens/home/components/stories.dart';
-import 'package:o_travel/screens/profile/company/compay_profile.dart';
-import 'package:o_travel/screens/profile/company/show_company_profile.dart';
-import 'package:o_travel/screens/contact.dart';
-import 'package:o_travel/screens/favorites/favories.dart';
-import 'package:o_travel/screens/home/components/Ads_widget.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';
 import 'package:o_travel/screens/localization/const.dart';
-import 'package:o_travel/screens/notifications/notification.dart';
-import 'package:o_travel/screens/profile/user/user_profile.dart';
 import 'package:o_travel/screens/searche/searche.dart';
-import 'package:o_travel/screens/settings/settings.dart';
-import 'package:photo_view/photo_view.dart';
 
 import 'components/ads_list.dart';
 
@@ -151,10 +138,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
         getAllOffers('featured', '1', offerPage).then((value) {
           setState(() {
-            if (value.length == 0) hasNewData = false; else offerPage = offerPage + 1;
+            if (value.length == 0)
+              hasNewData = false;
+            else
+              offerPage = offerPage + 1;
 
             offerList.addAll(value);
-
           });
         });
       }
@@ -493,7 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _refresh() async {
     setState(() {
-      offerPage=1;
+      offerPage = 1;
       loadingOffer = true;
       loadingFeatured = true;
       loadingStory = true;

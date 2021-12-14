@@ -13,8 +13,8 @@ import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key,required this.isCompany}) : super(key: key);
- final bool isCompany;
+  const SignUpPage({Key? key, required this.isCompany}) : super(key: key);
+  final bool isCompany;
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -24,6 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void initState() {
+    super.initState();
     getLocale().then((locale) {
       setState(() {
         if (locale.languageCode == 'en')
@@ -42,7 +43,8 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,initialIndex: widget.isCompany?1:0,
+      length: 2,
+      initialIndex: widget.isCompany ? 1 : 0,
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 140,
@@ -71,7 +73,6 @@ class _SignUpPageState extends State<SignUpPage> {
           bottom: TabBar(
             unselectedLabelColor: Theme.of(context).primaryColor,
             indicatorSize: TabBarIndicatorSize.label,
-
             indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(raduice),
                 color: Theme.of(context).primaryColor),
@@ -100,7 +101,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         body: TabBarView(
-
           children: [
             UserPage(),
             CompanyPage(),
@@ -121,8 +121,8 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
-  late String  countryCode;
-  late String  phone;
+  late String countryCode;
+  late String phone;
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -298,12 +298,12 @@ class _UserPageState extends State<UserPage> {
                 initialCountryCode: "DZ",
                 onChanged: (phone) {
                   setState(() {
-                    this.phone=phone.number!;
+                    this.phone = phone.number!;
                   });
                 },
                 onCountryChanged: (dynamic phone) {
                   setState(() {
-                    this.countryCode=phone.countryCode!;
+                    this.countryCode = phone.countryCode!;
                   });
                 },
               ),
@@ -319,9 +319,17 @@ class _UserPageState extends State<UserPage> {
                 borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
-                onPressed: (){
-                  registerUser(usernameController.text, emailController.text, passwordController.text, confirmPasswordController.text, countryCode, phone, 'device_token').then((value){
-                    if(value.id > -1){
+                onPressed: () {
+                  registerUser(
+                          usernameController.text,
+                          emailController.text,
+                          passwordController.text,
+                          confirmPasswordController.text,
+                          countryCode,
+                          phone,
+                          'device_token')
+                      .then((value) {
+                    if (value.id > -1) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -387,8 +395,8 @@ class _CompanyPageState extends State<CompanyPage> {
   bool showPassword = true;
   bool showConfirmPassword = true;
   double raduice = 15.0;
-  late String  countryCode;
-  late String  phone;
+  late String countryCode;
+  late String phone;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -590,15 +598,15 @@ class _CompanyPageState extends State<CompanyPage> {
                     contentPadding: EdgeInsets.only(bottom: 15)),
                 initialCountryCode: "DZ",
                 onChanged: (phone) {
-                 setState(() {
-                   countryCode=phone.countryCode!;
-                   this.phone=phone.number!;
-                 });
+                  setState(() {
+                    countryCode = phone.countryCode!;
+                    this.phone = phone.number!;
+                  });
                 },
                 onCountryChanged: (dynamic phone) {
                   setState(() {
-                    countryCode=phone.countryCode!;
-                    this.phone=phone.number!;
+                    countryCode = phone.countryCode!;
+                    this.phone = phone.number!;
                   });
                 },
               ),
@@ -625,7 +633,8 @@ class _CompanyPageState extends State<CompanyPage> {
                   value: selectedCity,
                   padding: const EdgeInsets.all(15),
                   borderRadius: BorderRadius.circular(10),
-                  border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
+                  border: BorderSide(
+                      color: Theme.of(context).accentColor, width: 1),
                   dropdownButtonColor: Theme.of(context).backgroundColor,
                   onChanged: (newValue) {
                     setState(() {
@@ -634,21 +643,19 @@ class _CompanyPageState extends State<CompanyPage> {
                   },
                   items: cityList
                       .map((value) => DropdownMenuItem(
-                    value: value,
-                    child: Text(
-                      value.name,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ))
+                            value: value,
+                            child: Text(
+                              value.name,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ))
                       .toList(),
                 ),
               ),
             ),
-
             SizedBox(
               height: 16,
             ),
-
             Text(
               getTranslated(context, 'field'),
               style: TextStyle(
@@ -668,7 +675,8 @@ class _CompanyPageState extends State<CompanyPage> {
                   value: selectedDomain,
                   padding: const EdgeInsets.all(15),
                   borderRadius: BorderRadius.circular(10),
-                  border:  BorderSide(color: Theme.of(context).accentColor, width: 1),
+                  border: BorderSide(
+                      color: Theme.of(context).accentColor, width: 1),
                   dropdownButtonColor: Theme.of(context).backgroundColor,
                   onChanged: (newValue) {
                     setState(() {
@@ -698,9 +706,17 @@ class _CompanyPageState extends State<CompanyPage> {
                 borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
-                onPressed: (){
-                  registerCompany(nameController.text, emailController.text, passwordController.text,
-                      confirmPasswordController.text, countryCode, phone, selectedCity!.id, selectedDomain!.id, 'device_token');
+                onPressed: () {
+                  registerCompany(
+                      nameController.text,
+                      emailController.text,
+                      passwordController.text,
+                      confirmPasswordController.text,
+                      countryCode,
+                      phone,
+                      selectedCity!.id,
+                      selectedDomain!.id,
+                      'device_token');
                 },
                 color: Theme.of(context).primaryColor,
                 child: Text(
