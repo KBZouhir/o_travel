@@ -1,5 +1,5 @@
 {
-"helloWorld": "مرحبا يا عالم",
+  "helloWorld": "مرحبا يا عالم",
   "search": "بحث",
   "cart": "عربة التسوق",
   "profile": "الملف الشخصي",
@@ -7,20 +7,14 @@
   "login": "تسجيل الدخول",
   "notification_settings": "إعدادات الإشعار",
   "language": "لغة",
-  "logout":"تسجيل خروج",
+  "logout": "تسجيل خروج",
   "logout_message": "هل أنت متأكد أنك تريد الخروج من التطبيق؟",
   "cancel": "إلغاء",
   "yes": "نعم",
-
-
-  "ad_not_available" : "لا يوجد إعلانات",
-
+  "ad_not_available": "لا يوجد إعلانات",
   "detail": "التفاصيل",
   "description": "وصف",
-
-
   "none": "لا شيء",
-
   "remove": "حذف",
   "check_out": "الدفع",
   "added_to_cart": "تمت الإضافة إلى عربة التسوق",
@@ -33,7 +27,7 @@
   "buyer_name": "اسم المشتري",
   "phone": "رقم الهاتف",
   "wilaya": "ولاية",
-  "province":"بلدية",
+  "province": "بلدية",
   "address": "عنوان",
   "shipping_type": "نوع الشحن",
   "add_address": "اضف عنوان",
@@ -41,38 +35,29 @@
   "choose_address": "اختر العنوان",
   "update": "تحديث",
   "update_address": "تحديث العنوان",
-
   "domicile": "منزل",
   "bureau": "عمل",
   "shipping_address": "عنوان الشحن",
   "empty_product_or_address": "منتجات فارغة أو لم يتم اختيار أي عنوان",
-
   "place_order": "قم بالطلب",
   "order_placed": "تم الطلب !",
   "order_success_message": "تم تقديم طلبك بنجاح ، لمزيد من التفاصيل ، تحقق من صفحة كل طلباتي ضمن ملفك الشخصي",
-
-
   "login_or_register": "تسجيل الدخول أو الإشتراك",
-
   "edit_profile": "تعديل الملف الشخصي",
   "all_my_orders": "كل طلباتي",
-  "pending_orders":"الطلبات المعلقة",
+  "pending_orders": "الطلبات المعلقة",
   "pending_payment": "في انتظار الدفع",
   "finished_orders": "الطلبات المنتهية",
   "validated": "ساري المفعول",
-
-
   "no_orders": "لا توجد طلبات",
   "order_time": "وقت الطلب",
   "order_id": "رقم التعريف الخاص بالطلب",
   "for_": "ل",
   "by": "بواسطة",
-  "shipping_cost":"تكلفة الشحن",
+  "shipping_cost": "تكلفة الشحن",
   "state": "حالة",
   "pending": "قيد الانتظار",
   "total_price": "السعر الإجمالي",
-
-
   "email": "البريد إلكتروني",
   "username": "اسم المستخدم",
   "password": "كلمة المرور",
@@ -82,7 +67,6 @@
   "save_modification": "حفظ التعديل",
   "you_do_not_have_account": "ليس لديك حساب؟",
   "i_have_account": "لدي حساب بالفعل",
-
   "sign_up": "اشتراك",
   "connect_with": "سجل الدخول ب",
   "or": "أو",
@@ -93,7 +77,6 @@
   "privacy_policy": "سياسة الخصوصية",
   "register": "تسجيل",
   "create_account": "إنشاء حساب",
-
   "forgot_password_text": "أدخل بريدك الإلكتروني لنقوم بإرسال كود التحقق لك",
   "code": " الرمز",
   "send_code": "أرسل الرمز",
@@ -104,49 +87,39 @@
   "reset_password": "إعادة تعيين كلمة المرور",
   "send": "أرسل",
   "done": "تم",
-
   "password_reset_success_message": "إعادة تعيين كلمة المرور بنجاح",
-
   "orders": "طلبات",
   "quantity": "كمية",
-  "leave_review":"أترك رأيك",
+  "leave_review": "أترك رأيك",
   "leave_comment": "أترك تعليق",
   "leave_rating": "أترك تقييم",
   "send_review": "أرسل التقييم",
-
   "livraison_must_not_be_null": "يجب ألا يكون الشحن فارغًا",
-  "wilaya_must_be_chosen": "يجب اختيار الولاية" ,
-  "address_must_not_be_empty": "يجب ألا يكون العنوان فارغًا" ,
-  "address_must_be_graduate": "يجب أن يكون العنوان أكبر من 5 أحرف" ,
-  "buyer_name_must_not_be_empty": "يجب ألا يكون اسم المشتري فارغًا" ,
-  "write_a_valid_name": "اكتب اسمًا صالحًا" ,
-  "phone_number_cannot_empty": "رقم الهاتف لا يمكن أن يكون فارغاً" ,
-  "please_enter_valid_phone": "الرجاء إدخال رقم هاتف صالح" ,
-  "password_must_not_be_empty": "كلمة المرور يجب ألا تكون فارغة" ,
-  "password_do_not_match": "كلمة المرور غير متطابقة" ,
-  "password_must_be_graduate": "يجب أن تكون كلمة المرور أكبر من 8 أحرف" ,
-  "username_cannot_be_empty": "اسم المستخدم لا يمكن أن يكون فارغًا" ,
-  "username_must_be_graduate": "يجب أن يكون اسم المستخدم أكبر من 7 أحرف" ,
-  "please_enter_valid_username": "الرجاء إدخال اسم مستخدم صالح" ,
-  "email_cannot_be_empty": "البريد الإلكتروني لا يمكن أن يكون فارغًا" ,
+  "wilaya_must_be_chosen": "يجب اختيار الولاية",
+  "address_must_not_be_empty": "يجب ألا يكون العنوان فارغًا",
+  "address_must_be_graduate": "يجب أن يكون العنوان أكبر من 5 أحرف",
+  "buyer_name_must_not_be_empty": "يجب ألا يكون اسم المشتري فارغًا",
+  "write_a_valid_name": "اكتب اسمًا صالحًا",
+  "phone_number_cannot_empty": "رقم الهاتف لا يمكن أن يكون فارغاً",
+  "please_enter_valid_phone": "الرجاء إدخال رقم هاتف صالح",
+  "password_must_not_be_empty": "كلمة المرور يجب ألا تكون فارغة",
+  "password_do_not_match": "كلمة المرور غير متطابقة",
+  "password_must_be_graduate": "يجب أن تكون كلمة المرور أكبر من 8 أحرف",
+  "username_cannot_be_empty": "اسم المستخدم لا يمكن أن يكون فارغًا",
+  "username_must_be_graduate": "يجب أن يكون اسم المستخدم أكبر من 7 أحرف",
+  "please_enter_valid_username": "الرجاء إدخال اسم مستخدم صالح",
+  "email_cannot_be_empty": "البريد الإلكتروني لا يمكن أن يكون فارغًا",
   "please_correct_email_format": "الرجاء تصحيح تنسيق البريد الإلكتروني",
-  "comment_must_not_be_empty": "يجب ألا يكون التعليق فارغًا" ,
-  "subject_must_not_be_empty": "يجب ألا يكون الموضوع فارغًا" ,
+  "comment_must_not_be_empty": "يجب ألا يكون التعليق فارغًا",
+  "subject_must_not_be_empty": "يجب ألا يكون الموضوع فارغًا",
   "missing": "ناقص",
   "subject": "الموضوع",
   "send_suggestion": "إرسال اقتراح",
   "tracking": "تتبع",
   "dzd": "دج",
-
-
-  "connectivity": "اتصال" ,
+  "connectivity": "اتصال",
   "no_connection_available": "لا يوجد اتصال متاح ، تحقق من WIFI أو بيانات شبكة الجوّال",
-
-
   "false_credentials": "معلومات الحساب ، تحقق من كلمة المرور أو البريد الإلكتروني",
-
-
-
   "night_mode": "الوضع الليلي",
   "share": "شارك التطبيق",
   "guide": "دليل الشركات",
@@ -158,24 +131,19 @@
   "about": "من نحن",
   "contact_us": "اتصل بنا",
   "settings": "الإعدادات",
-
-  "trip_type": "نوع الرحلة",
+  "trip_type": "العروض ",
   "country": "الدولة",
   "month": "الشهر",
-
-
   "delete_all": "حذف الكل",
   "no_favorites": "المفضلة فارغة",
   "no_notifications": "لا يوجد إِشعارات",
   "go_home": "العودة إلى الرئيسية",
-
   "select_photo": "اختر صورة الإعلان",
   "ad_name": "اسم الإعلان",
   "details": "التفاصيل",
   "main_section": "القسم الرئيسي",
   "price": "السعر",
   "save": "حفظ",
-
   "skip": "تخطي",
   "start": "ابدأ الآن",
   "start_from_here": "ابدأ من هنا",
@@ -184,12 +152,8 @@
   "book_desc": "    عندنا لك الحل الحبيب في تطبيق Otravel     تحصل كل العروض السياحية للمكاتب في منصة وحدة واختار اللي تبيه بكل سهولة",
   "end_here": " تهانينا! لقد وصلت",
   "end_here_desc": "شو تنتظر بعدك ادخل التطبيق واختار اللي تبيه من العروض القوية  وسافر وين ما تحب بأفضل الأسعار وبدون ما تبحث من مكتب لمكتب",
-
-  "individuals":"أفراد",
-  "companies":"شركات سياحية",
-
-
-
+  "individuals": "أفراد",
+  "companies": "شركات سياحية",
   "company_name": "اسم الشركة",
   "about_company": "نبذة تعريفية",
   "location_gps": "(GPS) موقع الشركة",
@@ -204,16 +168,12 @@
   "less_details": "تفاصيل أقل",
   "ad_details": "تفاصيل الإعلان",
   "publish_date": "تاريخ النشر",
-
   "contact_company": "للتواصل مع الشركة",
   "write_message": "اكتب رسالتك",
-
   "default_order": "الترتيب الافتراضي",
   "by_latest": "حسب الأحدث",
   "lowest_to_highest": "من الأدنى سعراً للأعلى",
-
   "lorem": "هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص",
   "no_data": "لا توجد بيانات للعرض",
   "add_story": "أضف قصة جديدة"
-
 }
