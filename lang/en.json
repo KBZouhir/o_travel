@@ -93,6 +93,7 @@
   "create_account": "Create account",
   "you_do_not_have_account": "you don't have account ?",
   "i_have_account": "I have already an account",
+
   "connect_with": "Login With",
   "or": "OR",
   "forgot_password": "Forgot password ?",
@@ -104,12 +105,14 @@
   "forgot_password_text": "Enter your email to send you your check code",
   "send_code": "Send code",
   "code": "code",
+
   "didnt_receive_code": "Didn't receive any code? ",
   "resend_code": "Resend Code",
   "confirm_code_text": "Please Enter the Code You Receive on you're Email",
   "reset_password": "Reset Password",
   "send": "send",
   "done": "Done",
+
   "password_reset_success_message": "password reset successful",
   "orders": "orders",
   "quantity": "Quantity",
@@ -154,19 +157,23 @@
   "about": "About us",
   "contact_us": "Contact us",
   "settings": "Settings",
-  "trip_type": "Offers",
+  "trip_type": "Trip Type",
   "country": "Country",
   "month": "Month",
+
   "delete_all": "Delete all",
   "no_favorites": "No favorites",
   "no_notifications": "No notifications",
   "go_home": "Go back home",
+
+
   "select_photo": "Select the Ad Photo",
   "ad_name": "Ad name",
   "details": "Details",
   "main_section": "Main section",
   "price": "Price",
   "save": "Save",
+  
   "skip": "Skip",
   "start": "Start",
   "start_from_here": "Start from here ",
@@ -175,8 +182,10 @@
   "book_desc": " Otravel We have the solution in this application. You get all the discounts and tourist offers to the offices in a unit platform, and you can easily choose what you want.\n",
   "end_here": " Great! you are here",
   "end_here_desc": "What are you waiting for so far? Enter the app, choose what you want with strong offers and travel where you like at the best prices and without what you look for from company to company.",
-  "individuals": "Individuals",
-  "companies": "Companies",
+
+  "individuals":"Individuals",
+  "companies":"Companies",
+
   "company_name": "Company name",
   "about_company": "About company",
   "location_gps": "Location GPS",
@@ -196,7 +205,9 @@
   "default_order": "Default order",
   "by_latest": "By latest",
   "lowest_to_highest": "Lowest price to highest",
+
   "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+
   "no_data": "No data to show",
   "add_story": "Add new story"
 }
