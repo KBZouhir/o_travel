@@ -20,9 +20,10 @@ class FavoriesScreen extends StatefulWidget {
 class _FavoriesScreenState extends State<FavoriesScreen> {
   List<Offer> offerList = [];
   bool loading = true;
-
+  int offerPage = 1;
+  bool hasNewData = true;
   getResources() {
-    getAllOffers('favorite', '1').then((value) {
+    getAllOffers('favorite', '1',1).then((value) {
       setState(() {
         offerList = value;
       });

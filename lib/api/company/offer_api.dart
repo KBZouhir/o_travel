@@ -3,20 +3,21 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:mime/mime.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/CONFIG.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String prifix = "offers";
 
-Future<List<Offer>> getAllOffers(String filter_name, String filter_value) async {
+Future<List<Offer>> getAllOffers(String filter_name, String filter_value,int page) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
 
+  print(_url + prifix + '?$filter_name=$filter_value&page=$page');
+
   final response = await http
-      .get(Uri.parse(_url + prifix + '?$filter_name=$filter_value'), headers: {
+      .get(Uri.parse(_url + prifix + '?$filter_name=$filter_value&page=$page'), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'Authorization': 'Bearer $_token',
@@ -30,7 +31,7 @@ Future<List<Offer>> getAllOffers(String filter_name, String filter_value) async 
   }
 }
 
-Future<String> createOffer(File image1, File image2, File image3, name, description, price, category) async {
+Future<String> createOffer(List<File> imageList, name, description, price, category) async {
   print('${name}');
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -41,34 +42,36 @@ Future<String> createOffer(File image1, File image2, File image3, name, descript
       http.MultipartRequest('POST', Uri.parse(_url + prifix));
 
   imageUploadRequest.headers['Authorization'] = 'Bearer $_token';
-  // Attach the file in the request
-  final mimeTypeData =
-      lookupMimeType(image1.path, headerBytes: [0xFF, 0xD8])!.split('/');
 
-  final file1 = await http.MultipartFile.fromBytes(
-      'file', await File.fromUri(image1.uri).readAsBytes());
+ for(var i=0; i< imageList.length ;i++){
+   final file = http.MultipartFile(
+       'image[$i]',
+       imageList[i].readAsBytes().asStream(),
+       imageList[i].lengthSync(),
+       filename: imageList[i].path.split("/").last);
 
-  imageUploadRequest.files.add(file1);
-  imageUploadRequest.fields['name'] = name;
-  imageUploadRequest.fields['description'] = description;
-  imageUploadRequest.fields['price'] = price;
-  imageUploadRequest.fields['date'] =
-      DateFormat.yMd().format(DateTime.parse(DateTime.now().toString()));
-  imageUploadRequest.fields['category_id'] = category;
+   imageUploadRequest.files.add(file);
+ }
+  imageUploadRequest.fields['name'] = 'name';
+  imageUploadRequest.fields['description'] = 'description';
+  imageUploadRequest.fields['price'] = '200';
+  imageUploadRequest.fields['date'] ='22-10-2021';
+
+  imageUploadRequest.fields['category_id'] = '1';
   imageUploadRequest.fields['countries[0]'] = '1';
 
   try {
     final streamedResponse = await imageUploadRequest.send();
     final response = await http.Response.fromStream(streamedResponse);
+    print( 'streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
+    print( 'Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
 
     if (response.statusCode != 200) {
       print('${response.body}');
 
       return 'null';
     }
-    final Map<String, dynamic> responseData = json.decode(response.body);
-    print('$responseData');
-    return responseData['message'];
+ return'';
   } catch (e) {
     print(e);
     return 'null';

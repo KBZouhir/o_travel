@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950814002084",
+    "project_id": "o-travel2",
+    "storage_bucket": "o-travel2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950814002084:android:ae74b99902372ca18d4f31",
+        "android_client_info": {
+          "package_name": "com.otravel.o_travel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950814002084-klvt728htfqodv9ae4vnnmpa2a3mubr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQo6cr10SvTyNe5ZZanlExr6KOuha9kNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950814002084-klvt728htfqodv9ae4vnnmpa2a3mubr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

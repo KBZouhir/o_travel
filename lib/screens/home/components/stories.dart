@@ -275,6 +275,7 @@ class _AddStoryState extends State<AddStory> {
               child: MaterialButton(
                 onPressed: () {
                   createStory(widget.image);
+                  Navigator.pop(context);
                 },
                 color: Theme.of(context).backgroundColor,
                 child: Text(

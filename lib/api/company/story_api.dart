@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:mime/mime.dart';
 import 'package:o_travel/Models/story.dart';
 import 'package:o_travel/api/CONFIG.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,24 +29,27 @@ Future<List<Story>> getAllStory() async {
   }
 
 Future<String> createStory(File image) async {
+  print('sending ...');
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
-  // Intilize the multipart request
+  // Initialize the multipart request
   final imageUploadRequest =
   http.MultipartRequest('POST', Uri.parse(_url + prifix));
 
   imageUploadRequest.headers['Authorization'] = 'Bearer $_token';
-  // Attach the file in the request
-  final mimeTypeData =
-  lookupMimeType(image.path, headerBytes: [0xFF, 0xD8])!.split('/');
+  imageUploadRequest.headers['Connection'] = 'keep-alive';
+  imageUploadRequest.headers['Content-Type'] = 'multipart/form-data';
 
-  final file = await http.MultipartFile.fromBytes(
-      'file', await File.fromUri(image.uri).readAsBytes());
-
-  imageUploadRequest.files.add(file);
-
+  imageUploadRequest.files.add(
+      http.MultipartFile(
+          'image',
+          image.readAsBytes().asStream(),
+          image.lengthSync(),
+          filename: image.path.split("/").last
+      ),
+  );
   try {
     final streamedResponse = await imageUploadRequest.send();
     final response = await http.Response.fromStream(streamedResponse);
@@ -55,9 +57,10 @@ Future<String> createStory(File image) async {
     if (response.statusCode != 200) {
       print('${response.body}');
 
-      return 'null';
+      return '';
     }
-    print('${response.body}');
+    print( 'streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${response.headers}\n body ${response.body}');
+   /// print( 'statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
     return '${response.body}';
   } catch (e) {
     print(e);

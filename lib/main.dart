@@ -57,25 +57,24 @@ class _MyAppState extends State<MyApp> {
         future: Init.instance.initialize(),
         builder: (context, AsyncSnapshot snapshot) {
 
-
+          SharedPreferences.getInstance().then((value){
+            print("isFirstTime ${value.getBool('isFirstTime')}");
+            print("_token ${value.getString('_token')}");
+            if( value.getBool('isFirstTime')!=null)
+              isFirstTime= value.getBool('isFirstTime')!;
+            if( value.getString('_token')!=null){
+              print("_token2 ${value.getString('_token')}");
+              isLogged= true;
+            }else
+              isLogged= false;
+          });
           // Show splash screen while waiting for app resources to load:
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const MaterialApp(
                 debugShowCheckedModeBanner: false,
                 home: Splash());
           } else {
-            SharedPreferences.getInstance().then((value){
-              print("isFirstTime ${value.getBool('isFirstTime')}");
-              print("_token ${value.getString('_token')}");
-              if( value.getBool('isFirstTime')!=null)isFirstTime= value.getBool('isFirstTime')!;
-            if( value.getString('_token')!=null){
-              print("_token ${value.getString('_token')}");
 
-              isLogged= true;
-            }else
-              isLogged= false;
-
-            });
             return ValueListenableBuilder<ThemeMode>(
                 valueListenable: MyApp.themeNotifier,
                 builder: (_, ThemeMode currentMode, __) {
@@ -126,7 +125,7 @@ class _MyAppState extends State<MyApp> {
                       }
                       return supportedLocales.first;
                     },
-                    home: isFirstTime? OnBoardingPage():(!isLogged?ChoosePage():HomeScreen()),
+                    home:(!isLogged?OnBoardingPage():HomeScreen()),
                   );
                 });
           }

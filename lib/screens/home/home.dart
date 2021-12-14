@@ -43,24 +43,29 @@ import 'components/ads_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
   static void setStories(BuildContext context) {
-    _HomeScreenState? state = context.findAncestorStateOfType<_HomeScreenState>();
+    _HomeScreenState? state =
+        context.findAncestorStateOfType<_HomeScreenState>();
     state!.getStories();
   }
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
-
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
   DateTime? selectedDate;
-  ScrollController _scrollController = new ScrollController();
   bool loadingOffer = true;
   bool loadingFeatured = true;
   bool loadingStory = true;
   bool isCompany = false;
+  int offerPage = 1;
+  bool hasNewData = true;
+  ScrollController _scrollController = new ScrollController();
+
   List<Offer> offerList = [];
   List<Offer> featuredOfferList = [];
   List<Category> categoryList = [];
@@ -70,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Country? selectedCountry;
   List<Story> storyList = [];
 
-  getStories(){
+  getStories() {
     getAllStory().then((value) {
       setState(() {
         storyList = value;
@@ -78,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
+
   getResources() {
     /*getAllCategory().then((value) {
       setState(() {
@@ -111,13 +117,14 @@ class _HomeScreenState extends State<HomeScreen> {
         });
     });
 
-    getAllOffers('featured', '1').then((value) {
+    getAllOffers('featured', '1', offerPage).then((value) {
       setState(() {
         offerList = (value);
         loadingFeatured = false;
+        offerPage = 2;
       });
     });
-    getAllOffers('featured', '2').then((value) {
+    getAllOffers('featured', '2', offerPage).then((value) {
       setState(() {
         featuredOfferList = (value);
         loadingFeatured = false;
@@ -137,16 +144,27 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     getResources();
-    /*  _scrollController.addListener(() {
+    _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        getAllOffers('featured', '1').then((value) {
+        print(_scrollController.position.pixels);
+
+        getAllOffers('featured', '1', offerPage).then((value) {
           setState(() {
+            if (value.length == 0) hasNewData = false; else offerPage = offerPage + 1;
+
             offerList.addAll(value);
+
           });
         });
       }
-    });*/
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 
   @override
@@ -166,6 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   key: _refreshIndicatorKey,
                   onRefresh: _refresh,
                   child: SingleChildScrollView(
+                    controller: _scrollController,
                     physics: BouncingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
@@ -177,31 +196,31 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(children: [
                                 (isCompany)
                                     ? GestureDetector(
-                                  onTap: (){
-                                    pickImage();
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.only(right: 15),
-                                    width: 50.0,
-                                    height: 50.0,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: Theme.of(context)
-                                                .primaryColor
-                                                .withOpacity(0.4),
-                                            width: 2),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(50))),
-                                    child: Center(
-                                      child: Icon(Icons.add,
-                                          size: 30,
-                                          color: Theme.of(context)
-                                              .primaryColor
-                                              .withOpacity(0.4)),
-                                    ),
-                                  ),
-                                )
+                                        onTap: () {
+                                          pickImage();
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.only(right: 15),
+                                          width: 50.0,
+                                          height: 50.0,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: Theme.of(context)
+                                                      .primaryColor
+                                                      .withOpacity(0.4),
+                                                  width: 2),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(50))),
+                                          child: Center(
+                                            child: Icon(Icons.add,
+                                                size: 30,
+                                                color: Theme.of(context)
+                                                    .primaryColor
+                                                    .withOpacity(0.4)),
+                                          ),
+                                        ),
+                                      )
                                     : SizedBox(),
                                 Expanded(
                                     child: (storyList.length > 0)
@@ -387,20 +406,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Builder(builder: (BuildContext context) {
                           if (offerList.length > 0)
-                            return StaggeredGridView.countBuilder(
-                              shrinkWrap: true,
-                              crossAxisCount: 4,
-                              itemCount: offerList.length,
-                              physics: BouncingScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) =>
-                                  Container(
-                                      child:
-                                          OfferWidget(offer: offerList[index])),
-                              staggeredTileBuilder: (int index) =>
-                                  new StaggeredTile.fit(2),
-                              mainAxisSpacing: 10.0,
-                              crossAxisSpacing: 10.0,
-                            );
+                            return OfferList(offerList: offerList);
                           else if (loadingFeatured)
                             return Container(
                               height: 400,
@@ -414,9 +420,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             );
                         }),
-                        SizedBox(
-                          height: 80,
-                        ),
+                        Container(
+                          height: 100,
+                          child: (hasNewData) ? GFLoader() : SizedBox(),
+                        )
                       ],
                     ),
                   ),
@@ -454,11 +461,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             )));
   }
+
   Future pickImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
     final imgTemp = File(image.path);
-    showDialog(context: context, builder: (_) => AddStory(image:imgTemp));
+    showDialog(context: context, builder: (_) => AddStory(image: imgTemp));
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -485,6 +493,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _refresh() async {
     setState(() {
+      offerPage=1;
       loadingOffer = true;
       loadingFeatured = true;
       loadingStory = true;
@@ -584,4 +593,3 @@ class SearchWidget extends StatelessWidget {
     );
   }
 }
-

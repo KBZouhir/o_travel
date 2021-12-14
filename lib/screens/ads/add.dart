@@ -24,6 +24,7 @@ class AddNewAdScreen extends StatefulWidget {
 class _AddNewAdScreenState extends State<AddNewAdScreen> {
   GlobalKey<FormState> _form = GlobalKey<FormState>();
   File? image1, image2, image3;
+  List<File> imageList=[];
   List<Category> categoryList = [];
   Category? selectedCategory;
 
@@ -398,7 +399,10 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                     ),
                     child: MaterialButton(
                       onPressed: () {
-                        createOffer(image1!, image2!, image3!, nameController.text,12121, 330, 1);
+                        if (image1 != null) imageList.add(image1!);
+                        if (image2 != null) imageList.add(image2!);
+                        if (image3 != null) imageList.add(image3!);
+                        createOffer(imageList, nameController.text,"12121", "330", "1");
                       },
                       color: Theme.of(context).primaryColor,
                       child: Text(

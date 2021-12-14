@@ -17,11 +17,14 @@ class CompaniesGuideScreen extends StatefulWidget {
 
 class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
   List<Company> companies = [];
-
+  int companyPage = 1;
+  ScrollController _scrollController = new ScrollController();
+  bool hasNewData= true;
   getResources() {
-    getAllCompany().then((value) {
+    getAllCompany(companyPage).then((value) {
       setState(() {
         companies = value;
+        companyPage = 2;
       });
     });
   }
@@ -30,6 +33,21 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
   void initState() {
     super.initState();
     getResources();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print(_scrollController.position.pixels);
+
+        getAllCompany(companyPage).then((value) {
+          setState(() {
+            if (value.length == 0) hasNewData = false; else companyPage = companyPage + 1;
+            companies.addAll(value);
+
+          });
+        });
+      }
+    });
   }
 
   @override
@@ -80,6 +98,7 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
                   Builder(builder: (BuildContext context) {
                     if (companies.length > 0)
                       return GridView.count(
+                          controller: _scrollController,
                           crossAxisCount: 3,
                           padding: EdgeInsets.all(16),
                           physics: NeverScrollableScrollPhysics(),
@@ -130,6 +149,7 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
     );
   }
 }
+
 class SelectCard extends StatelessWidget {
   const SelectCard({Key? key, required this.company}) : super(key: key);
   final Company company;
@@ -187,13 +207,13 @@ class SelectCard extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                     Text(
-                          (company.name.length > 12)
-                              ? company.name.substring(0, 12)
-                              : company.name,
-                          style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                          )),
+                    Text(
+                        (company.name.length > 12)
+                            ? company.name.substring(0, 12)
+                            : company.name,
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                        )),
                   ]),
             )));
   }

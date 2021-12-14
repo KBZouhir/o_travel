@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/company/offer_api.dart';
@@ -22,26 +23,50 @@ class ShowCompanyProfile extends StatefulWidget {
 
 class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
   List<Offer> offerList = [];
+  bool loading = true;
 
   getResources() {
-    getAllOffers('company', '${widget.company.id}').then((value) {
+    getAllOffers('company', '${widget.company.id}',offerPage).then((value) {
       setState(() {
         offerList = value;
+        offerPage = offerPage + 1;
       });
     });
   }
-
+  int offerPage = 1;
+  bool hasNewData = true;
+  ScrollController _scrollController = new ScrollController();
   @override
   void initState() {
     super.initState();
     getResources();
-  }
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print(_scrollController.position.pixels);
 
+        getAllOffers('featured', '1', offerPage).then((value) {
+          setState(() {
+            if (value.length == 0) hasNewData = false; else offerPage = offerPage + 1;
+
+            offerList.addAll(value);
+
+          });
+        });
+      }
+    });
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
+        controller: _scrollController,
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -239,6 +264,10 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     OfferList(offerList: offerList),
+                    Container(
+                      height: 100,
+                      child: (hasNewData) ? GFLoader() : SizedBox(),
+                    )
                   ],
                 )),
           ],

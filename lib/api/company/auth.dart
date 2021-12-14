@@ -26,7 +26,8 @@ Future<Company> loginCompany(email,password) async {
           "device_token" : "dfg",
           "uid" : "user id in firebase"
         }));
-    if (response.statusCode == 200) {
+    print('${response.body}');
+  if (response.statusCode == 200) {
       UserType.setType(true);
       Token.setToken(jsonDecode(response.body)['access_token']);
       UserType.setUrl(companyURL);

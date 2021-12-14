@@ -19,7 +19,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   List<Company> companies = [];
 bool loading=true;
   getResources() {
-    getAllCompany().then((value) {
+    getAllCompany(1).then((value) {
       setState(() {
         companies = value;
         loading =false;

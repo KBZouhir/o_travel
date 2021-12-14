@@ -7,12 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String prifix="companies";
 
-Future<List<Company>> getAllCompany() async {
+Future<List<Company>> getAllCompany(int page) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token =prefs.getString("_token")??'';
   String _url =prefs.getString("_url")??'';
 
-  final response = await http.get(Uri.parse(userURL + prifix),
+  final response = await http.get(Uri.parse(userURL + prifix+'&page=$page'),
       headers:  {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
