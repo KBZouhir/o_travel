@@ -43,9 +43,8 @@ class _OfferWidgetState extends State<OfferWidget> {
       },
       onDoubleTap: () {
         setState(() {
-          if(!favorite) addToFavorites(widget.offer.id);
+          if (!favorite) addToFavorites(widget.offer.id);
           favorite = true;
-
         });
       },
       child: Container(
@@ -158,7 +157,7 @@ class _OfferWidgetState extends State<OfferWidget> {
                 ),
                 onPressed: () {
                   setState(() {
-                    if(!favorite) addToFavorites(widget.offer.id);
+                    addToFavorites(widget.offer.id);
                     favorite = !favorite;
                   });
                 },

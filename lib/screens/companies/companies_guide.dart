@@ -59,6 +59,7 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
         body: Container(
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
+              controller: _scrollController,
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
@@ -99,7 +100,6 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
                   Builder(builder: (BuildContext context) {
                     if (companies.length > 0)
                       return GridView.count(
-                          controller: _scrollController,
                           crossAxisCount: 3,
                           padding: EdgeInsets.all(16),
                           physics: NeverScrollableScrollPhysics(),
@@ -113,10 +113,14 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
                           }));
                     else
                       return Container(
-                        height: 400,
+                        height: size.height - 100,
                         child: GFLoader(),
                       );
-                  })
+                  }),
+                  Container(
+                    height: 100,
+                    child: (hasNewData) ? GFLoader() : SizedBox(),
+                  )
                 ],
               ),
             )));

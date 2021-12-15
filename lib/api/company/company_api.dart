@@ -13,10 +13,10 @@ Future<List<Company>> getAllCompany(int page) async {
   String _url = prefs.getString("_url") ?? '';
 
   final response =
-      await http.get(Uri.parse(userURL + prifix + '&page=$page'), headers: {
+      await http.get(Uri.parse(_url + prifix + '?page=$page'), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': 'Bearer $user_token',
+    'Authorization': 'Bearer $_token',
   });
 
   if (response.statusCode == 200) {

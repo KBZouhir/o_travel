@@ -42,9 +42,11 @@ Future<String> createOffer(
       http.MultipartRequest('POST', Uri.parse(_url + prifix));
 
   imageUploadRequest.headers['Authorization'] = 'Bearer $_token';
+  imageUploadRequest.headers['Accept'] = 'application/json';
+  imageUploadRequest.headers['X-Requested-With'] = 'XMLHttpRequest';
 
   for (var i = 0; i < imageList.length; i++) {
-    final file = http.MultipartFile('image[$i]',
+    final file = http.MultipartFile('images[$i]',
         imageList[i].readAsBytes().asStream(), imageList[i].lengthSync(),
         filename: imageList[i].path.split("/").last);
 
