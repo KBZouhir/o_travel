@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/CONFIG.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,9 +32,31 @@ Future<List<Offer>> getAllOffers(
     return [];
   }
 }
+Future<List<Offer>> getCompanyOffers( int page) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String _token = prefs.getString("_token") ?? '';
+  String _url = prefs.getString("_url") ?? '';
 
-Future<String> createOffer(
-    List<File> imageList, name, description, price, category) async {
+  print(_url + prifix + '?page=$page');
+
+  final response = await http.get(
+      Uri.parse(_url + prifix + '?page=$page'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $_token',
+      });
+  if (response.statusCode == 200) {
+    Iterable l = jsonDecode(response.body)['data'];
+    return List<Offer>.from(l.map((s) => Offer.fromJson(s)));
+  } else {
+    print('Failed to load  $prifix');
+    return [];
+  }
+}
+
+Future<String> createOffer(List<File> imageList, name, description, price,
+    categoryId, countryId, month) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
@@ -52,13 +75,13 @@ Future<String> createOffer(
 
     imageUploadRequest.files.add(file);
   }
-  imageUploadRequest.fields['name'] = 'name';
-  imageUploadRequest.fields['description'] = 'description';
-  imageUploadRequest.fields['price'] = '200';
-  imageUploadRequest.fields['date'] = '22-10-2021';
+  imageUploadRequest.fields['name'] = '$name';
+  imageUploadRequest.fields['description'] = '$description';
+  imageUploadRequest.fields['price'] = price;
+  imageUploadRequest.fields['date'] = '$month';
 
-  imageUploadRequest.fields['category_id'] = '1';
-  imageUploadRequest.fields['countries[0]'] = '1';
+  imageUploadRequest.fields['category_id'] = '$categoryId';
+  imageUploadRequest.fields['countries[0]'] = '$countryId';
 
   try {
     final streamedResponse = await imageUploadRequest.send();
@@ -99,7 +122,7 @@ Future addToFavorites(int offerId) async {
   }
 }
 
-Future<String> deleteOffer(int id) async {
+Future<bool> deleteOffer(int id) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
 
@@ -112,9 +135,11 @@ Future<String> deleteOffer(int id) async {
       body: jsonEncode(<String, dynamic>{
         "id": id,
       }));
+  print('${response.body}');
   if (response.statusCode == 200) {
-    return '${response.statusCode}';
+    return true;
   } else {
+    return false;
     throw Exception('Failed to load  $prifix');
   }
 }

@@ -481,6 +481,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _refresh() async {
+    print('object');
     setState(() {
       offerPage = 1;
       loadingOffer = true;

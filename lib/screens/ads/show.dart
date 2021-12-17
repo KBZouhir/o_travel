@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -6,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/company/offer_api.dart';
+import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/localization/const.dart';
@@ -67,35 +69,97 @@ class _ShowOfferState extends State<ShowOffer> {
     _scrollController.dispose();
   }
 
+  int _current = 0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    List<T> map<T>(List list, Function handler) {
+      List<T> result = [];
+      for (var i = 0; i < list.length; i++) {
+        result.add(handler(i, list[i]));
+      }
+
+      return result;
+    }
+
     return Scaffold(
+      backgroundColor: primaryColorDark,
       appBar: buildAppBar(context),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () => showDialog(
-                  context: context,
-                  builder: (_) =>
-                      DetailImageScreen(widget.offer.images[0].url)),
-              child: Hero(
-                tag: 'offer${widget.offer.images[0].url}',
-                child: CachedNetworkImage(
-                  imageUrl: widget.offer.images[0].url,
-                  placeholder: (context, url) => Center(
-                      child: Container(
-                          width: 10,
-                          height: 10,
-                          child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor,
-                          ))),
-                  errorWidget: (context, url, error) => new Icon(Icons.error),
-                  width: size.width,
-                  fit: BoxFit.fitWidth,
-                ),
+            CarouselSlider(
+              options: CarouselOptions(
+                  height: 400,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: false,
+                  reverse: false,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.bounceIn,
+                  scrollDirection: Axis.horizontal,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  }),
+              items: widget.offer.images.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Padding(
+                        padding: EdgeInsets.all(10),
+                        child: GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (_) => DetailImageScreen(
+                                    i.url));
+                          },
+                          child: Hero(
+                            tag: 'offer${i.id}',
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              child: CachedNetworkImage(
+                                imageUrl: i.url,
+                                placeholder: (context, url) => Center(
+                                    child: Container(
+                                        width: 10,
+                                        height: 10,
+                                        child: CircularProgressIndicator(
+                                          color: Theme.of(context).primaryColor,
+                                        ))),
+                                errorWidget: (context, url, error) =>
+                                    new Icon(Icons.error),
+                                width: size.width,
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          ),
+                        ));
+                  },
+                );
+              }).toList(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: map<Widget>(
+                widget.offer.images,
+                (index, url) {
+                  return Container(
+                    width: _current == index ? 20 : 8,
+                    height: 8.0,
+                    margin: EdgeInsets.symmetric(horizontal: 2, vertical: 10.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: _current == index
+                            ? Colors.black
+                            : primaryColorLite),
+                  );
+                },
               ),
             ),
             Container(
@@ -422,6 +486,7 @@ class DetailImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(photo.isEmpty)Navigator.pop(context);
     return GestureDetector(
         onTap: () => Navigator.pop(context),
         child: PhotoView(imageProvider: NetworkImage(photo)));

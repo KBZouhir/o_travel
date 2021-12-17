@@ -32,13 +32,13 @@ class Offer {
 
   int id;
   String name;
-  int price;
+  dynamic price;
   String description;
   dynamic rate;
   DateTime date;
   bool favoriteByMe;
-  int state;
-  int featured;
+  int? state;
+  int? featured;
   List<Image> images;
   Category category;
   Company company;

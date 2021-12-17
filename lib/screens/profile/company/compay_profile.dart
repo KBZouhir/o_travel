@@ -6,6 +6,9 @@ import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
+import 'package:o_travel/screens/ads/add.dart';
+import 'package:o_travel/screens/ads/campany_ads.dart';
+import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/profile/company/campany_profile_edit.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/localization/const.dart';
@@ -67,6 +70,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+
       body: SingleChildScrollView(
         controller: _scrollController,
         physics: BouncingScrollPhysics(),
@@ -147,6 +152,33 @@ class _CompanyProfileState extends State<CompanyProfile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddNewAdScreen()));
+                        },
+                        
+                        child:Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: primaryColorLite,
+                            border: Border.all(color: Theme.of(context).primaryColor, )
+                              ,borderRadius: BorderRadius.all(Radius.circular(15))
+                          ),
+                          child: Center(
+                            child: Text(
+                                getTranslated(context, 'add_new_ad'),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                          ),
+                        ) 
+                        ),
+                    ),
+                    
                     Text(
                       widget.company.description,
                       style: TextStyle(fontSize: 16, height: 1.5),
@@ -208,7 +240,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       color: Theme.of(context).accentColor.withOpacity(0.2),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 16,
                     ),
                     Row(
                       children: [
@@ -222,6 +254,60 @@ class _CompanyProfileState extends State<CompanyProfile> {
                           widget.company.phone,
                           style: TextStyle(fontSize: 16),
                         ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Divider(
+                      height: 1,
+                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          getTranslated(context, 'added_ads'),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        Spacer(),
+                        TextButton(onPressed: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => CompanyAdsScreen()));
+                        }, child:   Text(
+                          getTranslated(context, 'edit'),
+                          style: TextStyle(fontSize: 16),
+                        ),)
+
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Divider(
+                      height: 1,
+                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          getTranslated(context, 'commercial_register'),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        Spacer(),
+                        IconButton(onPressed: (){
+                          showDialog(
+                              context: context,
+                              builder: (_) => DetailImageScreen(
+                                  widget.company.trade_register));
+                        }, icon: Icon(Icons.photo))
                       ],
                     ),
                     SizedBox(
@@ -270,16 +356,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     SizedBox(
                       height: 16,
                     ),
-                    Text(
-                      getTranslated(context, "added_ads"),
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    OfferList(offerList: offerList),
-                    Container(
-                      height: 100,
-                      child: (hasNewData) ? GFLoader() : SizedBox(),
-                    )
+
                   ],
                 )),
           ],

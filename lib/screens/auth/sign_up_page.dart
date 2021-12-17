@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:o_travel/Models/city.dart';
+import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/Models/domain.dart';
 import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/api/company/city_api.dart';
@@ -15,6 +18,7 @@ import 'package:o_travel/screens/localization/const.dart';
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key, required this.isCompany}) : super(key: key);
   final bool isCompany;
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -119,6 +123,8 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  final _auth = FirebaseAuth.instance;
+
   bool showPassword = true;
   bool showConfirmPassword = true;
   late String countryCode;
@@ -127,6 +133,23 @@ class _UserPageState extends State<UserPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  getResources() {
+    FirebaseMessaging.instance.getToken().then((value) {
+      setState(() {
+        deviceToken = value;
+      });
+    });
+  }
+
+  String? deviceToken = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getResources();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -319,7 +342,13 @@ class _UserPageState extends State<UserPage> {
                 borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
-                onPressed: () {
+                onPressed: () async {
+                  UserCredential user =
+                      (await _auth.createUserWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text));
+                  print('${user.user!.uid}');
+
                   registerUser(
                           usernameController.text,
                           emailController.text,
@@ -327,7 +356,7 @@ class _UserPageState extends State<UserPage> {
                           confirmPasswordController.text,
                           countryCode,
                           phone,
-                          'device_token')
+                          deviceToken)
                       .then((value) {
                     if (value.id > -1) {
                       Navigator.push(
@@ -392,6 +421,8 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
+  final _auth = FirebaseAuth.instance;
+
   bool showPassword = true;
   bool showConfirmPassword = true;
   double raduice = 15.0;
@@ -406,6 +437,7 @@ class _CompanyPageState extends State<CompanyPage> {
 
   List<Domain> domainList = [];
   Domain? selectedDomain;
+  DateTime? selectedDate;
 
   getResources() {
     getAllDomain().then((value) {
@@ -419,9 +451,14 @@ class _CompanyPageState extends State<CompanyPage> {
         cityList = value;
       });
     });
+    FirebaseMessaging.instance.getToken().then((value) {
+      setState(() {
+        deviceToken = value;
+      });
+    });
   }
 
-  DateTime? selectedDate;
+  String? deviceToken = '';
 
   @override
   void initState() {
@@ -706,8 +743,8 @@ class _CompanyPageState extends State<CompanyPage> {
                 borderRadius: BorderRadius.circular(raduice),
               ),
               child: MaterialButton(
-                onPressed: () {
-                  registerCompany(
+                onPressed: () async {
+                  Company val = await registerCompany(
                       nameController.text,
                       emailController.text,
                       passwordController.text,
@@ -716,7 +753,16 @@ class _CompanyPageState extends State<CompanyPage> {
                       phone,
                       selectedCity!.id,
                       selectedDomain!.id,
-                      'device_token');
+                      deviceToken);
+                  if (val.id > -1) {
+                    UserCredential user =
+                        (await _auth.createUserWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text));
+                    print('${user.user!.uid}');
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  }
                 },
                 color: Theme.of(context).primaryColor,
                 child: Text(

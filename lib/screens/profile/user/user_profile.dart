@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:o_travel/Models/User.dart';
+import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
@@ -14,6 +18,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  File? image;
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -65,11 +70,13 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 SizedBox(height: 16),
                 Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Hero(
-                      tag: 'company_img_${widget.user.id}',
-                      child: CachedNetworkImage(
+                  child: GestureDetector(
+                    onTap: () {
+                      pickImage();
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child:(image==null)? CachedNetworkImage(
                         imageUrl: widget.user.image,
                         height: 100,
                         width: 100,
@@ -79,10 +86,12 @@ class _UserProfileState extends State<UserProfile> {
                             height: 50,
                             child: Center(
                                 child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                            ))),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+                                  color: Theme.of(context).primaryColor,
+                                ))),
+                        errorWidget: (context, url, error) =>
+                            Icon(Icons.error),
+                      ):Image.file(image!,height: 100,
+                        width: 100,),
                     ),
                   ),
                 ),
@@ -188,7 +197,9 @@ class _UserProfileState extends State<UserProfile> {
                       borderRadius: BorderRadius.circular(raduice),
                     ),
                     child: MaterialButton(
-                      onPressed: () => print("save"),
+                      onPressed: (){
+                        updateUser(usernameController.text,emailController.text,phoneController.text);
+                      },
                       color: Theme.of(context).primaryColor,
                       child: Text(
                         getTranslated(context, 'save'),
@@ -208,4 +219,15 @@ class _UserProfileState extends State<UserProfile> {
       ),
     );
   }
+  Future pickImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+    final imgTemp = File(image.path);
+    setState(() {
+        this.image = imgTemp;
+        updateImg(imgTemp);
+    });
+
+  }
+
 }

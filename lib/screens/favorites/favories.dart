@@ -20,8 +20,9 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
   bool loading = true;
   int offerPage = 1;
   bool hasNewData = true;
+  ScrollController _scrollController=ScrollController();
   getResources() {
-    getAllOffers('favorite', '1', 1).then((value) {
+    getAllOffers('favorite', '1', offerPage).then((value) {
       setState(() {
         offerList = value;
       });
@@ -32,6 +33,29 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
   void initState() {
     super.initState();
     getResources();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print(_scrollController.position.pixels);
+
+        getAllOffers('favorite', '1', offerPage).then((value) {
+          setState(() {
+            if (value.length == 0)
+              hasNewData = false;
+            else
+              offerPage = offerPage + 1;
+
+            offerList.addAll(value);
+          });
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 
   @override
@@ -49,7 +73,37 @@ class _FavoriesScreenState extends State<FavoriesScreen> {
                         top: 10, bottom: 60, right: 10, left: 10),
                     width: size.width,
                     height: size.height,
-                    child: OfferList(offerList: offerList)),
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      physics: BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          Builder(builder: (BuildContext context) {
+                            if (offerList.length > 0)
+                              return OfferList(offerList: offerList);
+                            else if (loading)
+                              return Container(
+                                height: 400,
+                                child: GFLoader(),
+                              );
+                            else
+                              return Container(
+                                height: 400,
+                                child: Center(
+                                  child: Text(getTranslated(context, 'no_data')),
+                                ),
+                              );
+                          }),
+                          Container(
+                            height: 100,
+                            child: (hasNewData) ? GFLoader() : SizedBox(),
+                          )
+                        ],
+                      ),
+                    )),
                 Positioned(
                   bottom: 10,
                   left: 10,

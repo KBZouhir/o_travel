@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "950814002084",
-    "project_id": "o-travel2",
-    "storage_bucket": "o-travel2.appspot.com"
+    "project_number": "249797461220",
+    "project_id": "otravel-1113e",
+    "storage_bucket": "otravel-1113e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:950814002084:android:ae74b99902372ca18d4f31",
+        "mobilesdk_app_id": "1:249797461220:android:de5ceed22f2974566ad8f1",
         "android_client_info": {
           "package_name": "com.otravel.o_travel"
         }
       },
       "oauth_client": [
         {
-          "client_id": "950814002084-klvt728htfqodv9ae4vnnmpa2a3mubr1.apps.googleusercontent.com",
+          "client_id": "249797461220-qr9n5hevma2jmi2rajqjthj35ml4je4v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAQo6cr10SvTyNe5ZZanlExr6KOuha9kNM"
+          "current_key": "AIzaSyDm9SE2NqYjzbUDW30WP1Y5-9e213scOaw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "950814002084-klvt728htfqodv9ae4vnnmpa2a3mubr1.apps.googleusercontent.com",
+              "client_id": "249797461220-qr9n5hevma2jmi2rajqjthj35ml4je4v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

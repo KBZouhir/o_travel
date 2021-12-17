@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/constants.dart';
@@ -9,6 +11,7 @@ import 'package:o_travel/screens/localization/const.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool company;
+
   const LoginScreen({Key? key, required this.company}) : super(key: key);
 
   @override
@@ -26,6 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    getResources();
+
     getLocale().then((locale) {
       setState(() {
         if (locale.languageCode == 'en')
@@ -40,6 +45,21 @@ class _LoginScreenState extends State<LoginScreen> {
     Locale _locale = await setLocale(_lang);
     MyApp.setLocale(context, _locale);
   }
+
+  final _auth = FirebaseAuth.instance;
+
+  getResources() {
+    FirebaseMessaging.instance.getToken().then((value) {
+      setState(() {
+        deviceToken = value;
+      });
+    });
+  }
+
+  String? deviceToken = '';
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -187,13 +207,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(raduice),
                     ),
                     child: MaterialButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_form.currentState!.validate()) {
+                          UserCredential user =
+                              (await _auth.signInWithEmailAndPassword(
+                                  email: usernameController.text,
+                                  password: passwordController.text));
                           if (widget.company) {
-                            loginCompany(usernameController.text,
-                                    passwordController.text)
+                            loginCompany(
+                                    usernameController.text,
+                                    passwordController.text,
+                                    user.user!.uid,
+                                    deviceToken)
                                 .then((value) {
-                              if (value.id > -1) {
+                              if (value) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

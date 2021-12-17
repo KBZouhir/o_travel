@@ -1,9 +1,17 @@
+// To parse this JSON data, do
+//
+//     final company = companyFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
-Company countryFromJson(String str) => Company.fromJson(json.decode(str));
+import 'package:o_travel/Models/domain.dart';
 
-String countryToJson(Company data) => json.encode(data.toJson());
+import 'city.dart';
 
+Company companyFromJson(String str) => Company.fromJson(json.decode(str));
+
+String companyToJson(Company data) => json.encode(data.toJson());
 
 class Company {
   Company({
@@ -20,12 +28,14 @@ class Company {
     required this.snapchat,
     required this.instagram,
     required this.twitter,
-    required this.rate,
     required this.latitude,
     required this.longitude,
     required this.address,
     required this.description,
+    required this.trade_register,
     required this.wallet,
+    required this.domain,
+    required this.city,
   });
 
   int id;
@@ -34,61 +44,66 @@ class Company {
   String phone;
   String countryCode;
   String image;
-  int state;
+  int? state;
   bool checked;
   String facebook;
   String whatsapp;
   String snapchat;
   String instagram;
   String twitter;
-  String rate;
-  int latitude;
-  int longitude;
+  dynamic latitude;
+  dynamic longitude;
   String address;
   String description;
+  String trade_register;
   int wallet;
-
+  Domain? domain;
+  City? city;
   factory Company.fromJson(Map<String, dynamic> json) => Company(
-    id: json["id"],
-    name: json["name"]??'',
-    email: json["email"]??'',
-    phone: json["phone"]??'',
-    countryCode: json["country_code"]??'',
-    image: json["image"]??'',
-    state: json["state"]??1,
-    checked: json["checked"]??false,
-    facebook: json["facebook"]??'',
-    whatsapp: json["whatsapp"]??'',
-    snapchat: json["snapchat"]??'',
-    instagram: json["instagram"]??'',
-    twitter: json["twitter"]??'',
-    rate: json["rate"]??'',
-    latitude: json["latitude"]??0,
-    longitude: json["longitude"]??0,
-    address: json["address"]??'',
-    description: json["description"]??'',
-    wallet:json["wallet"]??0,
+    id: json["id"] == null ? '' : json["id"],
+    name: json["name"] == null ? '' : json["name"],
+    email: json["email"] == null ? '' : json["email"],
+    phone: json["phone"] == null ? '' : json["phone"],
+    countryCode: json["country_code"] == null ? '' : json["country_code"],
+    image: json["image"] == null ? '' : json["image"],
+    state: json["state"] == null ? 1 : json["state"],
+    checked: json["checked"] == null ? false : json["checked"],
+    facebook: json["facebook"] == null ? '' : json["facebook"],
+    whatsapp: json["whatsapp"] == null ? '' : json["whatsapp"],
+    snapchat: json["snapchat"] == null ? '' : json["snapchat"],
+    instagram: json["instagram"] == null ? '' : json["instagram"],
+    twitter: json["twitter"] == null ? '' : json["twitter"],
+    latitude: json["latitude"] == null ? 0.0 : json["latitude"],
+    longitude: json["longitude"] == null ? 0.0 : json["longitude"],
+    address: json["address"] == null ? '' : json["address"],
+    description: json["description"] == null ? '' : json["description"],
+    trade_register: json["trade_register"] == null ? '' : json["trade_register"],
+    wallet: json["wallet"] == null ? 0 : json["wallet"],
+    domain: json["domain"] == null ? null : Domain.fromJson(json["domain"]),
+    city: json["city"] == null ? null : City.fromJson(json["city"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "email": email,
-    "phone": phone,
-    "country_code": countryCode,
-    "image": image,
-    "state": state,
-    "checked": checked,
-    "facebook": facebook,
-    "whatsapp": whatsapp,
-    "snapchat": snapchat,
-    "instagram": instagram,
-    "twitter": twitter,
-    "rate": rate,
-    "latitude": latitude,
-    "longitude": longitude,
-    "address": address,
-    "description": description,
-    "wallet": wallet,
+    "id": id == null ? null : id,
+    "name": name == null ? null : name,
+    "email": email == null ? null : email,
+    "phone": phone == null ? null : phone,
+    "country_code": countryCode == null ? null : countryCode,
+    "image": image == null ? null : image,
+    "state": state == null ? null : state,
+    "checked": checked == null ? null : checked,
+    "facebook": facebook == null ? null : facebook,
+    "whatsapp": whatsapp == null ? null : whatsapp,
+    "snapchat": snapchat == null ? null : snapchat,
+    "instagram": instagram == null ? null : instagram,
+    "twitter": twitter == null ? null : twitter,
+    "latitude": latitude == null ? null : latitude,
+    "longitude": longitude == null ? null : longitude,
+    "address": address == null ? null : address,
+    "description": description == null ? null : description,
+    "trade_register": trade_register == null ? null : address,
+    "wallet": wallet == null ? null : description,
+    "domain": domain == null ? null : domain!.toJson(),
+    "city": city == null ? null : city!.toJson(),
   };
 }

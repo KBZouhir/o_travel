@@ -165,6 +165,8 @@
 
 
   "delete_all": "حذف الكل",
+  "delete": "حذف الإعلان ",
+  "delete_message": "هل تريد حقاً حذف الإعلان ؟ ",
   "no_favorites": "المفضلة فارغة",
   "no_notifications": "لا يوجد إِشعارات",
   "go_home": "العودة إلى الرئيسية",
@@ -198,6 +200,8 @@
   "commercial_register": "السجل التجاري",
   "snapchat": "حساب سناب شات",
   "instagram": "حساب الانستغرام",
+  "facebook": "حساب الفيسبوك",
+  "tweeter": "حساب التويتر",
   "Social_Media_Accounts": "تواصل معنا من خلال حساباتنا",
   "added_ads": "الإعلانات المضافة",
   "more_details": "مزيد من التفاصيل",

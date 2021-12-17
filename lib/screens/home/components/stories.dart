@@ -9,6 +9,7 @@ import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
+import 'package:story_view/story_view.dart';
 
 class StoriesList extends StatelessWidget {
   final List<Story> storyList;
@@ -88,6 +89,7 @@ class DetailStoryScreen extends StatelessWidget {
   DetailStoryScreen(this.story);
 
   final fieldMessageController = TextEditingController();
+  final storyController = StoryController();
 
   @override
   Widget build(BuildContext context) {
@@ -99,26 +101,23 @@ class DetailStoryScreen extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            child: Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
-                child: CachedNetworkImage(
-                  imageUrl: story.imageUrl,
-                  fit: BoxFit.cover,
-                  width: 1000,
-                  height: 1000,
-                  placeholder: (context, url) => Center(
-                      child: Container(
-                          width: 10,
-                          height: 10,
-                          child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor,
-                          ))),
-                  errorWidget: (context, url, error) => new Icon(Icons.error),
-                ),
-              ),
+            child:StoryView(
+              inline: true,
+              storyItems: List.generate(images.length, (index) {
+                return StoryItem.pageImage(
+                  url:images[index],
+                  controller: storyController,
+                );
+              }),
+              onStoryShow: (s) {
+                print("Showing a story");
+              },
+              onComplete: () {
+                print("Completed a cycle");
+              },
+              progressPosition: ProgressPosition.top,
+              repeat: false,
+              controller: storyController,
             ),
           ),
           Align(
@@ -127,7 +126,7 @@ class DetailStoryScreen extends StatelessWidget {
               padding: EdgeInsets.all(10),
               height: 70,
               decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor.withOpacity(0.2),
+                color: Theme.of(context).backgroundColor.withOpacity(0.69),
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20)),
@@ -163,7 +162,7 @@ class DetailStoryScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Theme.of(context)
-                                      .accentColor
+                                      .primaryColor
                                       .withOpacity(1),
                                   fontWeight: FontWeight.bold),
                             )),
