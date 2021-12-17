@@ -9,6 +9,7 @@ import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
+import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 import 'package:story_view/story_view.dart';
 
 class StoriesList extends StatelessWidget {
@@ -141,7 +142,7 @@ class DetailStoryScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  CompanyProfile(company: story.company)));
+                                  ShowCompanyProfile(company: story.company)));
                     },
                     child: Row(
                       children: [
@@ -206,7 +207,7 @@ class DetailStoryScreen extends StatelessWidget {
               ),
             ),
           ),
-          Align(
+         /* Align(
             alignment: Alignment.bottomCenter,
             child: Card(
               shape: RoundedRectangleBorder(
@@ -231,7 +232,7 @@ class DetailStoryScreen extends StatelessWidget {
                     ),
                   )),
             ),
-          )
+          )*/
         ],
       ),
     );

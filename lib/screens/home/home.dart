@@ -243,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 10,
                         ),
-                        SearchWidget(size: size),
+                        SearchWidget(),
                         SizedBox(
                           height: 20,
                         ),
@@ -491,17 +491,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 }
+class SearchWidget extends StatefulWidget {
+  const SearchWidget({Key? key}) : super(key: key);
 
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
+  @override
+  _SearchWidgetState createState() => _SearchWidgetState();
+}
 
-  final Size size;
+class _SearchWidgetState extends State<SearchWidget> {
+ String search='';
+
 
   @override
   Widget build(BuildContext context) {
+    Size size =MediaQuery.of(context).size;
     return Row(
       children: [
         Container(
@@ -512,6 +515,11 @@ class SearchWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Center(
             child: TextField(
+              onChanged: (value){
+                setState(() {
+                  search=value;
+                });
+              },
               maxLines: 1,
               style: TextStyle(fontSize: 22),
               textAlignVertical: TextAlignVertical.center,
@@ -547,8 +555,9 @@ class SearchWidget extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               onPressed: () {
+                print(search);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
+                    MaterialPageRoute(builder: (context) => SearchScreen(search: search,)));
               },
             ),
           ),

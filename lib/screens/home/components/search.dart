@@ -60,7 +60,7 @@ class SearchWidget extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
+                    MaterialPageRoute(builder: (context) => SearchScreen(search: '',)));
               },
             ),
           ),

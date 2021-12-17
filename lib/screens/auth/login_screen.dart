@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/main.dart';
@@ -278,7 +279,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   icon: Image.asset(
                                       'assets/images/google-plus.png'),
                                   iconSize: 50,
-                                  onPressed: () {},
+                                  onPressed: () async {
+
+                                  },
                                 ),
                                 IconButton(
                                   icon:

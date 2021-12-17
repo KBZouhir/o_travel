@@ -11,6 +11,7 @@ import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/components/ads_list.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -346,7 +347,7 @@ class _ShowOfferState extends State<ShowOffer> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => CompanyProfile(
+                                      builder: (context) => ShowCompanyProfile(
                                           company: widget.offer.company)));
                             },
                             child: Column(

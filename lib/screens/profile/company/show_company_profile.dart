@@ -266,10 +266,25 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                    OfferList(offerList: offerList),
+                    Builder(builder: (BuildContext context) {
+                      if (offerList.length > 0)
+                        return OfferList(offerList: offerList);
+                      else if (loading)
+                        return Container(
+                          height: 400,
+                          child: GFLoader(),
+                        );
+                      else
+                        return Container(
+                          height: 400,
+                          child: Center(
+                            child: Text(getTranslated(context, 'no_data')),
+                          ),
+                        );
+                    }),
                     Container(
                       height: 100,
-                      child: (hasNewData) ? GFLoader() : SizedBox(),
+                      child: (hasNewData&&offerList.length > 0) ? GFLoader() : SizedBox(),
                     )
                   ],
                 )),

@@ -12,7 +12,9 @@ import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/searche/result.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  final String search;
+
+  const SearchScreen({Key? key,required this.search}) : super(key: key);
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -21,10 +23,10 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   List<Category> categoryList = [];
   Category? selectedCategory;
-
+  TextEditingController searchController=TextEditingController();
   List<Country> countryList = [];
   Country? selectedCountry;
-
+  DateTime? selectedDate;
   getResources() {
     getAllCategory().then((value) {
       setState(() {
@@ -39,11 +41,12 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-  DateTime? selectedDate;
+
 
   @override
   void initState() {
     super.initState();
+    searchController.text=widget.search;
     getResources();
   }
 
@@ -70,6 +73,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(15))),
                     child: Center(
                       child: TextField(
+                        controller: searchController,
                         maxLines: 1,
                         style: TextStyle(fontSize: 20),
                         textAlignVertical: TextAlignVertical.center,
@@ -326,7 +330,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ResultScreen())),
+                            builder: (context) => ResultScreen(search: searchController.text, category: selectedCategory!=null?selectedCategory!.id:-1,
+                                month:selectedDate!=null? '${selectedDate!.year}-${selectedDate!.month}':'', country:selectedCountry!=null?selectedCountry!.id:-1))),
                     color: Theme.of(context).primaryColor,
                     child: Text(
                       getTranslated(context, 'search'),

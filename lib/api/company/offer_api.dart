@@ -8,7 +8,28 @@ import 'package:o_travel/api/CONFIG.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String prifix = "offers";
+Future<List<Offer>> fetchOffers(String filter, int page) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String _token = prefs.getString("_token") ?? '';
+  String _url = prefs.getString("_url") ?? '';
 
+  print(_url + prifix + '?page=$page$filter');
+
+  final response = await http.get(
+      Uri.parse(_url + prifix + '?page=$page$filter'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $_token',
+      });
+  if (response.statusCode == 200) {
+    Iterable l = jsonDecode(response.body)['data'];
+    return List<Offer>.from(l.map((s) => Offer.fromJson(s)));
+  } else {
+    print('Failed to load  $prifix');
+    return [];
+  }
+}
 Future<List<Offer>> getAllOffers(
     String filter_name, String filter_value, int page) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -32,6 +53,7 @@ Future<List<Offer>> getAllOffers(
     return [];
   }
 }
+
 Future<List<Offer>> getCompanyOffers( int page) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
