@@ -51,8 +51,9 @@ class _EditAdScreenState extends State<EditAdScreen> {
       });
     });
   }
+  bool isEnglish=true;
 
-  DateTime? selectedDate;
+  late DateTime selectedDate;
 
   @override
   void initState() {
@@ -60,6 +61,9 @@ class _EditAdScreenState extends State<EditAdScreen> {
     nameController.text=widget.offer.name;
     descriptionController.text=widget.offer.description;
     priceController.text='${widget.offer.price}';
+    getLocale().then((locale) {
+      if(locale.languageCode=='ar')isEnglish=false;
+    });
 
     getResources();
   }
@@ -86,6 +90,13 @@ class _EditAdScreenState extends State<EditAdScreen> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      selectedCategory=widget.offer.category;
+      categoryList.add(selectedCategory!);
+      selectedCountry=widget.offer.countries[0];
+      countryList.add(selectedCountry!);
+      selectedDate= widget.offer.date;
+    });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -352,11 +363,11 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             Border.all(color: Theme.of(context).accentColor)),
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
-                      alignment: Alignment.centerLeft,
+                      alignment:isEnglish? Alignment.centerLeft : Alignment.centerRight,
                       child: Text(
                         selectedDate == null
                             ? getTranslated(context, 'month')
-                            : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
+                            : '${DateTime.parse(selectedDate.toString()).month}-${DateTime.parse(selectedDate.toString()).year}',
                         style: TextStyle(
                           height: 1.6,
                           fontSize: 20,

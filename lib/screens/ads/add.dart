@@ -34,6 +34,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  bool isEnglish=true;
 
   getResources() {
     getAllCategory().then((value) {
@@ -54,6 +55,9 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
   @override
   void initState() {
     super.initState();
+    getLocale().then((locale) {
+        if(locale.languageCode=='ar')isEnglish=false;
+    });
     getResources();
   }
   @override
@@ -309,11 +313,11 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                             Border.all(color: Theme.of(context).accentColor)),
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
-                      alignment: Alignment.centerLeft,
+                      alignment:isEnglish? Alignment.centerLeft : Alignment.centerRight,
                       child: Text(
                         selectedDate == null
                             ? getTranslated(context, 'month')
-                            : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
+                            :  '${DateTime.parse(selectedDate.toString()).month}-${DateTime.parse(selectedDate.toString()).year}',
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 18,

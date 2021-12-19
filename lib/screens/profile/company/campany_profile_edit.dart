@@ -43,10 +43,10 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
   late String phone;
   late String countryCode;
   List<City> cityList = [];
-  City? selectedCity;
+ late City selectedCity;
 
   List<Domain> domainList = [];
-  Domain? selectedDomain;
+  late Domain selectedDomain;
 
   getResources() {
     getAllDomain().then((value) {
@@ -82,6 +82,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
    countryCode = widget.company.countryCode;
    registerName = (widget.company.trade_register.length>50)?widget.company.trade_register.substring(0,49):widget.company.trade_register;
 
+
     getResources();
   }
 @override
@@ -101,6 +102,12 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
   }
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      selectedCity=widget.company.city!;
+      cityList.add(selectedCity);
+      selectedDomain=widget.company.domain!;
+      domainList.add(selectedDomain);
+    });
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
@@ -371,7 +378,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           dropdownButtonColor: Theme.of(context).backgroundColor,
                           onChanged: (newValue) {
                             setState(() {
-                              selectedCity = newValue as City?;
+                              selectedCity = newValue as City;
                             });
                           },
                           items: cityList
@@ -413,7 +420,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           dropdownButtonColor: Theme.of(context).backgroundColor,
                           onChanged: (newValue) {
                             setState(() {
-                              selectedDomain = newValue as Domain?;
+                              selectedDomain = newValue as Domain;
                             });
                           },
                           items: domainList
