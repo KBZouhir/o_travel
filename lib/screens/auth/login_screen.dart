@@ -60,7 +60,12 @@ class _LoginScreenState extends State<LoginScreen> {
   String? deviceToken = '';
 
 
-
+  @override
+  void dispose() {
+    super.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -56,7 +56,13 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
     super.initState();
     getResources();
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+  }
   Future pickImage(int index) async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/Models/User.dart';
@@ -15,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const prifix = '';
 
 Future<bool> loginCompany(email, password,uid,deviceToken) async {
+
   final response = await http.post(Uri.parse(companyURL + 'login'),
       headers: {
         'Content-Type': 'application/json',
@@ -28,11 +30,17 @@ Future<bool> loginCompany(email, password,uid,deviceToken) async {
       }));
   print('${response.body}');
   if (response.statusCode == 200) {
+
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
+
     UserType.setType(true);
     Token.setToken(jsonDecode(response.body)['access_token']);
     UserType.setUrl(companyURL);
     return true;
   } else {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Failed with Error');
     return false;
 
   }
@@ -40,6 +48,9 @@ Future<bool> loginCompany(email, password,uid,deviceToken) async {
 
 Future<Company> registerCompany(name, email, password, confirm_password,
     country_code, phone, city_id, domain_id, device_token) async {
+  EasyLoading.show(status: 'loading...');
+
+
   final response = await http.post(Uri.parse(companyURL + 'register'),
       headers: {
         'Content-Type': 'application/json',
@@ -58,11 +69,15 @@ Future<Company> registerCompany(name, email, password, confirm_password,
       }));
   print('${response.body}');
   if (response.statusCode == 200) {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     UserType.setType(true);
     Token.setToken(jsonDecode(response.body)['access_token']);
     UserType.setUrl(companyURL);
     return Company.fromJson(jsonDecode(response.body)['company']);
   } else {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error!');
     throw Exception(response.body);
   }
 }

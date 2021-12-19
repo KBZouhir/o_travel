@@ -62,24 +62,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               color: Theme.of(context).accentColor.withOpacity(0.2),
             ),
             ListTile(
-              leading: Icon(Icons.notifications),
-              title:  Text(
-                getTranslated(context,'notification_settings'),
-
-                style: TextStyle(fontSize: 20),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Theme.of(context).accentColor.withOpacity(0.2),
-            ),
-            ListTile(
               leading: Icon(Icons.nightlight_round),
               title: Row(
                 children: [

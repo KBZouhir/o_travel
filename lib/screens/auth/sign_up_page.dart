@@ -150,7 +150,15 @@ class _UserPageState extends State<UserPage> {
     super.initState();
     getResources();
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -464,6 +472,15 @@ class _CompanyPageState extends State<CompanyPage> {
   void initState() {
     super.initState();
     getResources();
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
   }
 
   @override

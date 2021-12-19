@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
@@ -79,12 +80,67 @@ Future<List<Offer>> getCompanyOffers( int page) async {
 
 Future<String> createOffer(List<File> imageList, name, description, price,
     categoryId, countryId, month) async {
+
+  EasyLoading.show();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
   // Intilize the multipart request
   final imageUploadRequest =
       http.MultipartRequest('POST', Uri.parse(_url + prifix));
+
+  imageUploadRequest.headers['Authorization'] = 'Bearer $_token';
+  imageUploadRequest.headers['Accept'] = 'application/json';
+  imageUploadRequest.headers['X-Requested-With'] = 'XMLHttpRequest';
+
+  for (var i = 0; i < imageList.length; i++) {
+    final file = http.MultipartFile('images[$i]',
+        imageList[i].readAsBytes().asStream(), imageList[i].lengthSync(),
+        filename: imageList[i].path.split("/").last);
+
+    imageUploadRequest.files.add(file);
+  }
+  imageUploadRequest.fields['name'] = '$name';
+  imageUploadRequest.fields['description'] = '$description';
+  imageUploadRequest.fields['price'] = price;
+  imageUploadRequest.fields['date'] = '$month';
+
+  imageUploadRequest.fields['category_id'] = '$categoryId';
+  imageUploadRequest.fields['countries[0]'] = '$countryId';
+
+  try {
+    final streamedResponse = await imageUploadRequest.send();
+    final response = await http.Response.fromStream(streamedResponse);
+    print(
+        'streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
+    print(
+        'Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
+
+    if (response.statusCode == 200) {
+      print('${response.body}');
+      if(EasyLoading.isShow)EasyLoading.dismiss();
+      EasyLoading.showSuccess('Great Success!');
+      return 'null';
+    }else{
+      if(EasyLoading.isShow)EasyLoading.dismiss();
+      EasyLoading.showError('Error!');
+      return '';
+    }
+
+  } catch (e) {
+    print(e);
+    return 'null';
+  }
+}
+
+Future<String> updateOffer(List<File> imageList, name, description, price,
+    categoryId, countryId, month) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String _token = prefs.getString("_token") ?? '';
+  String _url = prefs.getString("_url") ?? '';
+  // Intilize the multipart request
+  final imageUploadRequest =
+  http.MultipartRequest('POST', Uri.parse(_url + prifix));
 
   imageUploadRequest.headers['Authorization'] = 'Bearer $_token';
   imageUploadRequest.headers['Accept'] = 'application/json';
@@ -124,6 +180,7 @@ Future<String> createOffer(List<File> imageList, name, description, price,
     return 'null';
   }
 }
+
 
 Future addToFavorites(int offerId) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

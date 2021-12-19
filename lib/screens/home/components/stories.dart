@@ -91,10 +91,10 @@ class DetailStoryScreen extends StatelessWidget {
 
   final fieldMessageController = TextEditingController();
   final storyController = StoryController();
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    List<String> imageList=[story.imageUrl];
 
     return Container(
       height: size.height,
@@ -104,9 +104,9 @@ class DetailStoryScreen extends StatelessWidget {
           Container(
             child:StoryView(
               inline: true,
-              storyItems: List.generate(images.length, (index) {
+              storyItems: List.generate(imageList.length, (index) {
                 return StoryItem.pageImage(
-                  url:images[index],
+                  url:imageList[index],
                   controller: storyController,
                 );
               }),
@@ -114,7 +114,7 @@ class DetailStoryScreen extends StatelessWidget {
                 print("Showing a story");
               },
               onComplete: () {
-                print("Completed a cycle");
+                Navigator.pop(context, true);
               },
               progressPosition: ProgressPosition.top,
               repeat: false,

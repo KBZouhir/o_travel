@@ -50,6 +50,11 @@ class _SearchScreenState extends State<SearchScreen> {
     getResources();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+  }
   int val = 1;
 
   @override

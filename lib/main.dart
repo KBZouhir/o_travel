@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/home.dart';
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
                 valueListenable: MyApp.themeNotifier,
                 builder: (_, ThemeMode currentMode, __) {
                   return MaterialApp(
+
                     debugShowCheckedModeBanner: false,
                     title: 'O travel',
                     darkTheme: ThemeData(

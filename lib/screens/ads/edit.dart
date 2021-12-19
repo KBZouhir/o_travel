@@ -18,7 +18,7 @@ import 'package:o_travel/screens/localization/const.dart';
 class EditAdScreen extends StatefulWidget {
   final Offer offer;
 
-  const EditAdScreen({Key? key,required this.offer}) : super(key: key);
+  const EditAdScreen({Key? key, required this.offer}) : super(key: key);
 
   @override
   _EditAdScreenState createState() => _EditAdScreenState();
@@ -57,8 +57,21 @@ class _EditAdScreenState extends State<EditAdScreen> {
   @override
   void initState() {
     super.initState();
+    nameController.text=widget.offer.name;
+    descriptionController.text=widget.offer.description;
+    priceController.text='${widget.offer.price}';
+
     getResources();
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+  }
+
 
   Future pickImage(int index) async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -100,21 +113,31 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     Spacer(),
                     InkWell(
                       child: (image1 == null)
-                          ? Image.asset(
-                        'assets/images/img_picker.png',
-                        width: size.width * 0.3,
-                        height: size.width * 0.3,
-                        fit: BoxFit.cover,
-                      )
+                          ? (widget.offer.images.length > 0)
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.network(
+                                    widget.offer.images[0].url,
+                                    width: size.width * 0.3,
+                                    height: size.width * 0.3,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : Image.asset(
+                                  'assets/images/img_picker.png',
+                                  width: size.width * 0.3,
+                                  height: size.width * 0.3,
+                                  fit: BoxFit.cover,
+                                )
                           : ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.file(
-                          image1!,
-                          width: size.width * 0.3,
-                          height: size.width * 0.3,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.file(
+                                image1!,
+                                width: size.width * 0.3,
+                                height: size.width * 0.3,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                       onTap: () {
                         pickImage(1);
                         print('image1');
@@ -122,9 +145,18 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     ),
                     Spacer(),
                     InkWell(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       child: (image2 == null)
-                          ? Image.asset(
+                          ? (widget.offer.images.length > 1)
+                          ? ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          widget.offer.images[1].url,
+                          width: size.width * 0.3,
+                          height: size.width * 0.3,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                          : Image.asset(
                         'assets/images/img_picker.png',
                         width: size.width * 0.3,
                         height: size.width * 0.3,
@@ -141,31 +173,41 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       ),
                       onTap: () {
                         pickImage(2);
-                        print('image2');
+                        print('image1');
                       },
                     ),
+
                     Spacer(),
                     InkWell(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       child: (image3 == null)
-                          ? Image.asset(
+                          ? (widget.offer.images.length > 2)
+                              ? ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          widget.offer.images[2].url,
+                          width: size.width * 0.3,
+                          height: size.width * 0.3,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                              : Image.asset(
                         'assets/images/img_picker.png',
                         width: size.width * 0.3,
                         height: size.width * 0.3,
                         fit: BoxFit.cover,
                       )
                           : ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.file(
-                          image3!,
-                          width: size.width * 0.3,
-                          height: size.width * 0.3,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.file(
+                                image3!,
+                                width: size.width * 0.3,
+                                height: size.width * 0.3,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                       onTap: () {
                         pickImage(3);
-                        print('image3');
+                        print('image1');
                       },
                     ),
                     Spacer(),
@@ -191,7 +233,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     hintText: getTranslated(context, 'ad_name'),
                     border: OutlineInputBorder(
                         borderRadius:
-                        BorderRadius.all(Radius.circular(raduice))),
+                            BorderRadius.all(Radius.circular(raduice))),
                   ),
                 ),
                 SizedBox(height: 16),
@@ -205,23 +247,22 @@ class _EditAdScreenState extends State<EditAdScreen> {
                 SizedBox(height: 8),
                 TextFormField(
                   controller: descriptionController,
-
                   onChanged: (val) {
                     setState(() {});
                   },
                   keyboardType: TextInputType.multiline,
                   maxLength: 500,
-                  minLines: 10,
-                  maxLines: 10,
+                  minLines: 5,
+                  maxLines: 5,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     border: OutlineInputBorder(
                         borderRadius:
-                        BorderRadius.all(Radius.circular(raduice))),
+                            BorderRadius.all(Radius.circular(raduice))),
                   ),
                   style: TextStyle(
                     height: 1.6,
-                    fontSize: 16,
+                    fontSize: 20,
                     decorationThickness: 0,
                   ), // when user presses enter it will adapt to it
                 ),
@@ -243,6 +284,11 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   margin: EdgeInsets.symmetric(vertical: 10),
                   child: DropdownButtonHideUnderline(
                     child: GFDropdown(
+                      style: TextStyle(
+                        height: 1.6,
+                        fontSize: 20,
+                        color: Theme.of(context).accentColor,
+                        decorationThickness: 0,),
                       hint: Text(getTranslated(context, 'country')),
                       value: selectedCountry,
                       padding: const EdgeInsets.all(15),
@@ -257,12 +303,12 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       },
                       items: countryList
                           .map((value) => DropdownMenuItem(
-                        value: value,
-                        child: Text(
-                          value.name,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ))
+                                value: value,
+                                child: Text(
+                                  value.name,
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ))
                           .toList(),
                     ),
                   ),
@@ -303,7 +349,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: Theme.of(context).backgroundColor,
                         border:
-                        Border.all(color: Theme.of(context).accentColor)),
+                            Border.all(color: Theme.of(context).accentColor)),
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -312,9 +358,9 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             ? getTranslated(context, 'month')
                             : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                          height: 1.6,
+                          fontSize: 20,
+                          decorationThickness: 0,),
                       ),
                     ),
                   ),
@@ -339,6 +385,11 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   margin: EdgeInsets.symmetric(vertical: 10),
                   child: DropdownButtonHideUnderline(
                     child: GFDropdown(
+                      style: TextStyle(
+                        height: 1.6,
+                        fontSize: 20,
+                        color: Theme.of(context).accentColor,
+                        decorationThickness: 0,),
                       hint: Text(getTranslated(context, 'trip_type')),
                       value: selectedCategory,
                       padding: const EdgeInsets.all(15),
@@ -353,12 +404,12 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       },
                       items: categoryList
                           .map((value) => DropdownMenuItem(
-                        value: value,
-                        child: Text(
-                          value.name,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ))
+                                value: value,
+                                child: Text(
+                                  value.name,
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ))
                           .toList(),
                     ),
                   ),
@@ -388,7 +439,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     hintText: getTranslated(context, 'price'),
                     border: OutlineInputBorder(
                         borderRadius:
-                        BorderRadius.all(Radius.circular(raduice))),
+                            BorderRadius.all(Radius.circular(raduice))),
                   ),
                 ),
                 SizedBox(
@@ -406,7 +457,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       if (image1 != null) imageList.add(image1!);
                       if (image2 != null) imageList.add(image2!);
                       if (image3 != null) imageList.add(image3!);
-                      createOffer(
+                      updateOffer(
                           imageList,
                           nameController.text,
                           descriptionController.text,
@@ -450,10 +501,10 @@ class _EditAdScreenState extends State<EditAdScreen> {
           )),
       title: Center(
           child: Text(
-            getTranslated(context, 'add_new_ad'),
-            style: TextStyle(
-                fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-          )),
+        getTranslated(context, 'add_new_ad'),
+        style: TextStyle(
+            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      )),
       actions: [
         SizedBox(
           width: 55,
