@@ -162,111 +162,112 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         drawer: MyDrawer(me: me, isCompany: isCompany),
         appBar: buildAppBar(context),
-        body: Container(
-            width: size.width,
-            height: size.height,
-            color: Theme.of(context).backgroundColor,
-            child: Stack(
-              children: [
-                RefreshIndicator(
-                  color: Theme.of(context).primaryColor,
-                  key: _refreshIndicatorKey,
-                  onRefresh: _refresh,
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    physics: BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Builder(builder: (BuildContext context) {
-                          return Container(
-                              height: 50,
-                              child: Row(children: [
-                                (isCompany)
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          pickImage();
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(right: 15),
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  color: Theme.of(context)
-                                                      .primaryColor
-                                                      .withOpacity(0.4),
-                                                  width: 2),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(50))),
-                                          child: Center(
-                                            child: Icon(Icons.add,
-                                                size: 30,
-                                                color: Theme.of(context)
-                                                    .primaryColor
-                                                    .withOpacity(0.4)),
-                                          ),
-                                        ),
+        body: SafeArea(
+          child: Container(
+              width: size.width,
+              height: size.height,
+              color: Theme.of(context).backgroundColor,
+              child: Stack(
+                children: [
+                  RefreshIndicator(
+                    color: Theme.of(context).primaryColor,
+                    key: _refreshIndicatorKey,
+                    onRefresh: _refresh,
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      physics: BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Builder(builder: (BuildContext context) {
+                            return Container(
+                                height: 50,
+                                child: Row(children: [
+                                  (isCompany)
+                                      ? GestureDetector(
+                                    onTap: () {
+                                      pickImage();
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 15),
+                                      width: 50.0,
+                                      height: 50.0,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: Theme.of(context)
+                                                  .primaryColor
+                                                  .withOpacity(0.4),
+                                              width: 2),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50))),
+                                      child: Center(
+                                        child: Icon(Icons.add,
+                                            size: 30,
+                                            color: Theme.of(context)
+                                                .primaryColor
+                                                .withOpacity(0.4)),
+                                      ),
+                                    ),
+                                  )
+                                      : SizedBox(),
+                                  Expanded(
+                                      child: (storyList.length > 0)
+                                          ? StoriesList(storyList: storyList)
+                                          : (loadingStory)
+                                          ? Container(
+                                        height: 60,
+                                        child: GFLoader(),
                                       )
-                                    : SizedBox(),
-                                Expanded(
-                                    child: (storyList.length > 0)
-                                        ? StoriesList(storyList: storyList)
-                                        : (loadingStory)
-                                            ? Container(
-                                                height: 60,
-                                                child: GFLoader(),
-                                              )
-                                            : Container(
-                                                height: 60,
-                                                child: Center(
-                                                  child: Text(getTranslated(
-                                                      context, 'no_data')),
-                                                ),
-                                              ))
-                              ]));
-                        }),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 3,
-                          decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .accentColor
-                                  .withOpacity(0.05),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SearchWidget(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Builder(builder: (BuildContext context) {
-                          if (featuredOfferList.length > 0)
-                            return CarouselWidget(offerList: featuredOfferList);
-                          else if (loadingFeatured)
-                            return Container(
-                              height: 200,
-                              child: GFLoader(),
-                            );
-                          else
-                            return Container(
-                              height: 200,
-                              child: Center(
-                                child: Text(getTranslated(context, 'no_data')),
-                              ),
-                            );
-                        }),
-                        SizedBox(
-                          height: 10,
-                        ),
-                       /* Row(
+                                          : Container(
+                                        height: 60,
+                                        child: Center(
+                                          child: Text(getTranslated(
+                                              context, 'no_data')),
+                                        ),
+                                      ))
+                                ]));
+                          }),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 3,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .accentColor
+                                    .withOpacity(0.05),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SearchWidget(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Builder(builder: (BuildContext context) {
+                            if (featuredOfferList.length > 0)
+                              return CarouselWidget(offerList: featuredOfferList);
+                            else if (loadingFeatured)
+                              return Container(
+                                height: 200,
+                                child: GFLoader(),
+                              );
+                            else
+                              return Container(
+                                height: 200,
+                                child: Center(
+                                  child: Text(getTranslated(context, 'no_data')),
+                                ),
+                              );
+                          }),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          /* Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Container(
@@ -390,65 +391,66 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),*/
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Builder(builder: (BuildContext context) {
-                          if (offerList.length > 0)
-                            return OfferList(offerList: offerList);
-                          else if (loadingFeatured)
-                            return Container(
-                              height: 400,
-                              child: GFLoader(),
-                            );
-                          else
-                            return Container(
-                              height: 400,
-                              child: Center(
-                                child: Text(getTranslated(context, 'no_data')),
-                              ),
-                            );
-                        }),
-                        Container(
-                          height: 100,
-                          child: (hasNewData) ? GFLoader() : SizedBox(),
-                        )
-                      ],
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Builder(builder: (BuildContext context) {
+                            if (offerList.length > 0)
+                              return OfferList(offerList: offerList);
+                            else if (loadingFeatured)
+                              return Container(
+                                height: 400,
+                                child: GFLoader(),
+                              );
+                            else
+                              return Container(
+                                height: 400,
+                                child: Center(
+                                  child: Text(getTranslated(context, 'no_data')),
+                                ),
+                              );
+                          }),
+                          Container(
+                            height: 100,
+                            child: (hasNewData) ? GFLoader() : SizedBox(),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                isCompany
-                    ? Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          width: double.infinity,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(raduice),
-                          ),
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AddNewAdScreen()));
-                            },
-                            color: Theme.of(context).primaryColor,
-                            child: Text(
-                              getTranslated(context, 'add_new_ad'),
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
+                  isCompany
+                      ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      margin: EdgeInsets.all(5),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(raduice),
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddNewAdScreen()));
+                        },
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          getTranslated(context, 'add_new_ad'),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
                           ),
                         ),
-                      )
-                    : SizedBox()
-              ],
-            )));
+                      ),
+                    ),
+                  )
+                      : SizedBox()
+                ],
+              )),
+        ));
   }
 
   Future pickImage() async {

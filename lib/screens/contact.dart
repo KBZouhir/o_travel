@@ -32,7 +32,7 @@ class _ContactScreenState extends State<ContactScreen> {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  getTranslated(context, 'email'),
+                  getTranslated(context, 'subject'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -44,21 +44,16 @@ class _ContactScreenState extends State<ContactScreen> {
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
                       color: Theme.of(context).accentColor),
-                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    hintText: 'Example@gmail.com',
+                    hintText: getTranslated(context, 'subject'),
                     border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.all(Radius.circular(raduice))),
-                    prefixIcon: Icon(
-                      Icons.email_outlined,
-                      size: 30,
-                    ),
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  getTranslated(context, 'subject'),
+                  getTranslated(context, 'message'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,

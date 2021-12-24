@@ -343,7 +343,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       context: context,
                       firstDate: DateTime(DateTime.now().year - 1, 5),
                       lastDate: DateTime(DateTime.now().year + 1, 9),
-                      initialDate: selectedDate ?? DateTime.now(),
+                      initialDate: selectedDate ,
                     ).then((date) {
                       if (date != null) {
                         setState(() {
@@ -475,7 +475,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                           priceController.text,
                           selectedCategory!.id,
                           selectedCountry!.id,
-                          '${selectedDate!.day}-${selectedDate!.month}-${selectedDate!.year}');
+                          '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}');
                     },
                     color: Theme.of(context).primaryColor,
                     child: Text(

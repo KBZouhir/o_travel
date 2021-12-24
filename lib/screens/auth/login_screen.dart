@@ -9,6 +9,7 @@ import 'package:o_travel/screens/auth/reset/email.dart';
 import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:o_travel/screens/privacy.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool company;
@@ -21,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showPassword = true;
+  bool checked = false;
   String _lang = 'en';
   GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -181,6 +183,105 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Checkbox(
+                        value: this.checked,
+                        onChanged: (value) {
+                          setState(() {
+                            this.checked = value!;
+                          });
+                        },
+                      ), //C
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PrivacyScreen()));
+                        },
+                        child: Text(
+                          getTranslated(context, 'privacy_policy'),
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.7),
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      
+                      borderRadius: BorderRadius.circular(raduice),
+                    ),
+                    child: MaterialButton(
+                      onPressed: () async {
+                          if(checked){
+                            if (_form.currentState!.validate())  {
+                              UserCredential user =
+                              (await _auth.signInWithEmailAndPassword(
+                                  email: usernameController.text,
+                                  password: passwordController.text));
+                              if (widget.company) {
+                                loginCompany(
+                                    usernameController.text,
+                                    passwordController.text,
+                                    user.user!.uid,
+                                    deviceToken)
+                                    .then((value) {
+                                  if (value) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomeScreen()));
+                                  }
+                                });
+                              } else {
+                                loginUser(usernameController.text,
+                                    passwordController.text)
+                                    .then((value) {
+                                  if (value.id > -1) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomeScreen()));
+                                  }
+                                });
+                              }
+                            }
+                          }else{
+                            final snackBar = SnackBar(
+                              content: const Text('You have to agree the term of uses'),
+
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                          }
+                      },
+                      color: checked?Theme.of(context).primaryColor:Theme.of(context).primaryColor.withOpacity(0.3),
+                      child: Text(
+                        getTranslated(context, 'login'),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -195,67 +296,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           getTranslated(context, 'forgot_password'),
                           style: TextStyle(
                             color:
-                                Theme.of(context).accentColor.withOpacity(0.7),
+                            Theme.of(context).accentColor.withOpacity(0.7),
                             fontSize: 14.0,
                           ),
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(raduice),
-                    ),
-                    child: MaterialButton(
-                      onPressed: () async {
-                        if (_form.currentState!.validate()) {
-                          UserCredential user =
-                              (await _auth.signInWithEmailAndPassword(
-                                  email: usernameController.text,
-                                  password: passwordController.text));
-                          if (widget.company) {
-                            loginCompany(
-                                    usernameController.text,
-                                    passwordController.text,
-                                    user.user!.uid,
-                                    deviceToken)
-                                .then((value) {
-                              if (value) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomeScreen()));
-                              }
-                            });
-                          } else {
-                            loginUser(usernameController.text,
-                                    passwordController.text)
-                                .then((value) {
-                              if (value.id > -1) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomeScreen()));
-                              }
-                            });
-                          }
-                        }
-                      },
-                      color: Theme.of(context).primaryColor,
-                      child: Text(
-                        getTranslated(context, 'login'),
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
                   ),
                   SizedBox(
                     height: 30,

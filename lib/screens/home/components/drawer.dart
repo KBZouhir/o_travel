@@ -9,6 +9,7 @@ import 'package:o_travel/screens/favorites/favories.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/notifications/notification.dart';
+import 'package:o_travel/screens/privacy.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/profile/user/user_profile.dart';
 import 'package:o_travel/screens/settings/settings.dart';
@@ -198,6 +199,22 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => AboutScreen()));
+            },
+          ),
+          Divider(
+            height: 1,
+            color: Theme.of(context).accentColor.withOpacity(0.2),
+          ),
+          ListTile(
+            leading: Icon(Icons.accessible),
+            title: Text(
+              getTranslated(context, 'privacy_policy'),
+              style: TextStyle(fontSize: 22),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PrivacyScreen()));
             },
           ),
           Divider(

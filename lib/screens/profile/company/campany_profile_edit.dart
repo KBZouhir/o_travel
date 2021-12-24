@@ -575,8 +575,8 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                             fbController.text,
                             tweeterController.text,
                             instaController.text,
-                            selectedCity!.id,
-                            selectedDomain!.id,
+                            selectedCity.id,
+                            selectedDomain.id,
                           );
                         },
                         color: Theme.of(context).primaryColor,

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:o_travel/api/company/api.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -10,6 +12,20 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
+  String aboutUs='';
+bool  loading=true;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    about().then((value){
+      setState(() {
+        aboutUs=value;
+        loading=false;
+      });
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +34,7 @@ class _AboutScreenState extends State<AboutScreen> {
           child: Container(
             height: 700,
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
+            child:loading?GFLoader(): Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
@@ -33,8 +49,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   height: 20,
                 ),
                 Text(
-                  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, '
-                  'consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.',
+                  aboutUs,
                   style: TextStyle(
                       height: 1.5,
                       fontWeight: FontWeight.w400,
