@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:o_travel/screens/companies/companies_guide.dart';
+import 'package:o_travel/screens/companies_guide.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/searche/searche.dart';
 

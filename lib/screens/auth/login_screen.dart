@@ -10,6 +10,7 @@ import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/privacy.dart';
+import 'package:o_travel/services/auth.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool company;
@@ -331,7 +332,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       'assets/images/google-plus.png'),
                                   iconSize: 50,
                                   onPressed: () async {
-
+                                    AuthMethods().signInWithGoogle(context);
                                   },
                                 ),
                                 IconButton(

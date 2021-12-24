@@ -11,6 +11,7 @@ import 'package:o_travel/Models/token.dart';
 import 'package:o_travel/Models/type.dart';
 import 'package:o_travel/api/CONFIG.dart';
 import 'package:o_travel/screens/auth/choose_page.dart';
+import 'package:o_travel/services/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const prifix = '';
@@ -106,6 +107,7 @@ Future<User> loginUser(email, password) async {
 
 Future<User> registerUser(name, email, password, confirm_password, country_code,
     phone, device_token) async {
+
   final response = await http.post(Uri.parse(userURL + 'register'),
       headers: {
         'Content-Type': 'application/json',
@@ -205,7 +207,7 @@ void logout(BuildContext context) async {
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
   prefs.clear();
-
+  AuthMethods().signOut();
   Navigator.of(context).pop();
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => ChoosePage()));
@@ -216,6 +218,7 @@ void logout(BuildContext context) async {
   });
 
   if (response.statusCode == 200) {
+
   } else {
     throw Exception('Failed to load  $prifix');
   }

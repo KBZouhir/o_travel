@@ -14,6 +14,7 @@ import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/login_screen.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:o_travel/services/auth.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key, required this.isCompany}) : super(key: key);
@@ -772,13 +773,7 @@ class _CompanyPageState extends State<CompanyPage> {
                       selectedDomain!.id,
                       deviceToken);
                   if (val.id > -1) {
-                    UserCredential user =
-                        (await _auth.createUserWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text));
-                    print('${user.user!.uid}');
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                    AuthMethods().signInWithEmailPassword(context,emailController.text,passwordController.text,nameController.text,true);
                   }
                 },
                 color: Theme.of(context).primaryColor,

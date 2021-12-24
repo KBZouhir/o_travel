@@ -19,7 +19,7 @@ import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/api/company/story_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/ads/add.dart';
-import 'package:o_travel/screens/companies/companies_guide.dart';
+import 'package:o_travel/screens/companies_guide.dart';
 import 'package:o_travel/screens/home/components/drawer.dart';
 import 'package:o_travel/screens/home/components/stories.dart';
 import 'package:o_travel/screens/home/components/carousel_widget.dart';

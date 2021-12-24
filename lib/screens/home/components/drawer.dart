@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
+import 'package:o_travel/screens/chat2/chat_page.dart';
 import 'package:o_travel/screens/contact.dart';
 import 'package:o_travel/screens/favorites/favories.dart';
 import 'package:o_travel/screens/home/home.dart';
@@ -158,8 +159,8 @@ class MyDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-            /*  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ChatScreen()));*/
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ChatScreen()));
             },
           ),
           if (isCompany)

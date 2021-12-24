@@ -27,6 +27,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
       setState(() {
         offerList = value;
         offerPage = offerPage + 1;
+        loading=false;
       });
     });
   }
