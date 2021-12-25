@@ -11,6 +11,7 @@ import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/privacy.dart';
 import 'package:o_travel/services/auth.dart';
+import 'package:o_travel/services/sheard_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool company;
@@ -237,6 +238,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               (await _auth.signInWithEmailAndPassword(
                                   email: usernameController.text,
                                   password: passwordController.text));
+
+                              User? userDetails = user.user;
+                              print('userDetails $userDetails');
+                              SharedPreferenceHelper().saveUserEmail(userDetails!.email??'');
+                              SharedPreferenceHelper().saveUserId(userDetails.uid);
+                              SharedPreferenceHelper()
+                                  .saveUserName(userDetails.displayName??'');
+                              SharedPreferenceHelper().saveDisplayName(userDetails.displayName??'');
+                              SharedPreferenceHelper().saveUserProfileUrl(userDetails.photoURL??'');
+
                               if (widget.company) {
                                 loginCompany(
                                     usernameController.text,

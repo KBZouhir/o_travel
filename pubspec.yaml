@@ -54,6 +54,8 @@ dependencies:
   cloud_firestore: ^2.5.1
   firebase_messaging: ^10.0.8
   flutter_easyloading: ^3.0.3
+  firebase_storage:
+  firebase_analytics:
 
 dev_dependencies:
   flutter_test:

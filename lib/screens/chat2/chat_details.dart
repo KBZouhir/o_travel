@@ -269,4 +269,9 @@ print(chatRoomId);
               image: image.path));
     });
   }
+
+
+  String basename(path) {
+    return '';
+  }
 }
