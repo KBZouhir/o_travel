@@ -352,12 +352,6 @@ class _UserPageState extends State<UserPage> {
               ),
               child: MaterialButton(
                 onPressed: () async {
-                  UserCredential user =
-                      (await _auth.createUserWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text));
-                  print('${user.user!.uid}');
-
                   registerUser(
                           usernameController.text,
                           emailController.text,
@@ -368,10 +362,7 @@ class _UserPageState extends State<UserPage> {
                           deviceToken)
                       .then((value) {
                     if (value.id > -1) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeScreen()));
+                        AuthMethods().signUPWithEmailPassword(context,emailController.text,passwordController.text,usernameController.text,false);
                     }
                   });
                 },
@@ -773,7 +764,7 @@ class _CompanyPageState extends State<CompanyPage> {
                       selectedDomain!.id,
                       deviceToken);
                   if (val.id > -1) {
-                    AuthMethods().signInWithEmailPassword(context,emailController.text,passwordController.text,nameController.text,true);
+                    AuthMethods().signUPWithEmailPassword(context,emailController.text,passwordController.text,nameController.text,true);
                   }
                 },
                 color: Theme.of(context).primaryColor,

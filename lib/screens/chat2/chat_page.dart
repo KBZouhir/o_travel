@@ -26,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   getMyInfoFromSharedPreference() async {
 
-    print('SharedPreferenceHelper().getUserId() $myId');
+
     myName = await SharedPreferenceHelper().getDisplayName();
     myProfilePic = await SharedPreferenceHelper().getUserProfileUrl();
     myUserName = await SharedPreferenceHelper().getUserName();

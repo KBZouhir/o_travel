@@ -226,12 +226,12 @@ print(chatRoomId);
 
   Widget chatMessageTile(String message, bool sendByMe) {
     return Row(
-      mainAxisAlignment:
-          sendByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+      mainAxisAlignment:sendByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Flexible(
           child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+
+              margin: EdgeInsets.only(top: 4,bottom: 4,right: sendByMe ? 16 : 50,left: sendByMe ? 50 :16,),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(24),
@@ -269,7 +269,16 @@ print(chatRoomId);
               image: image.path));
     });
   }
-
+ /* Future uploadImageToFirebase(BuildContext context) async {
+    String fileName = basename(image1!.path);
+    StorageReference firebaseStorageRef =
+    FirebaseStorage.instance.ref().child('uploads/$fileName');
+    StorageUploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
+    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    taskSnapshot.ref.getDownloadURL().then(
+          (value) => print("Done: $value"),
+    );
+  }*/
 
   String basename(path) {
     return '';

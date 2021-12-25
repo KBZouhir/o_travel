@@ -73,7 +73,7 @@ class AuthMethods {
 
   }
 
-  Future<User?> signInWithEmailPassword(BuildContext context,email,password,username,isCompany) async {
+  Future<User?> signUPWithEmailPassword(BuildContext context,email,password,username,isCompany) async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     UserCredential credential =
     (await _firebaseAuth.createUserWithEmailAndPassword(
