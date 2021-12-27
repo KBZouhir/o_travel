@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -13,6 +14,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging _messaging = FirebaseMessaging.instance;
+
+  // 3. On iOS, this helps to take the user permissions
+  NotificationSettings settings = await _messaging.requestPermission(
+    alert: true,
+    badge: true,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+     print('${message.notification?.title}');
+     print('${message.notification?.body}');
+    });
+  } else {
+    print('User declined or has not accepted permission');
+  }
+
+
   runApp(const MyApp());
 }
 
@@ -67,6 +88,9 @@ class _MyAppState extends State<MyApp> {
               isLogged = true;
             } else
               isLogged = false;
+          });
+          FirebaseMessaging.instance.getToken().then((value) {
+            print('getToken $value');
           });
           // Show splash screen while waiting for app resources to load:
           if (snapshot.connectionState == ConnectionState.waiting) {

@@ -92,14 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
         getCompany().then((value) {
           setState(() {
             me = value;
-            print('$me');
+          //  print('$me');
           });
         });
       else
         getUser().then((value) {
           setState(() {
             me = value;
-            print('$me');
+       //     print('$me');
           });
         });
     });
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         featuredOfferList = (value);
         loadingFeatured = false;
-        print('featuredOfferList $featuredOfferList');
+        //print('featuredOfferList $featuredOfferList');
       });
     });
 
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        print(_scrollController.position.pixels);
+       // print(_scrollController.position.pixels);
 
         getAllOffers('featured', '1', offerPage).then((value) {
           setState(() {
@@ -483,7 +483,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _refresh() async {
-    print('object');
+ ///   print('object');
     setState(() {
       offerPage = 1;
       loadingOffer = true;
@@ -557,7 +557,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 color: Theme.of(context).primaryColor,
               ),
               onPressed: () {
-                print(search);
+              //  print(search);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SearchScreen(search: search,)));
               },

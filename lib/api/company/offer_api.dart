@@ -17,7 +17,7 @@ Future<List<Offer>> fetchOffers(String filter, int page) async {
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
 
-  print(_url + prifix + '?page=$page$filter');
+ // print(_url + prifix + '?page=$page$filter');
 
   final response = await http.get(
       Uri.parse(_url + prifix + '?page=$page$filter'),
@@ -40,7 +40,7 @@ Future<List<Offer>> getAllOffers(
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
 
-  print(_url + prifix + '?$filter_name=$filter_value&page=$page');
+ // print(_url + prifix + '?$filter_name=$filter_value&page=$page');
 
   final response = await http.get(
       Uri.parse(_url + prifix + '?$filter_name=$filter_value&page=$page'),
@@ -63,7 +63,7 @@ Future<List<Offer>> getCompanyOffers( int page) async {
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
 
-  print(_url + prifix + '?page=$page');
+  //print(_url + prifix + '?page=$page');
 
   final response = await http.get(
       Uri.parse(_url + prifix + '?page=$page'),
@@ -76,7 +76,7 @@ Future<List<Offer>> getCompanyOffers( int page) async {
     Iterable l = jsonDecode(response.body)['data'];
     return List<Offer>.from(l.map((s) => Offer.fromJson(s)));
   } else {
-    print('Failed to load  $prifix');
+    //print('Failed to load  $prifix');
     return [];
   }
 }
@@ -114,13 +114,11 @@ Future createOffer(List<File> imageList, name, description, price,
   try {
     final streamedResponse = await imageUploadRequest.send();
     final response = await http.Response.fromStream(streamedResponse);
-    print(
-        'streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
-    print(
-        'Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
+    //print( 'streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
+   // print( 'Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
 
     if (response.statusCode == 200||response.statusCode == 201) {
-      print('${response.body}');
+      //print('${response.body}');
       if(EasyLoading.isShow)EasyLoading.dismiss();
       EasyLoading.showSuccess('Great Success!');
       Navigator.pop(context);

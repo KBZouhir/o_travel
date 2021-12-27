@@ -53,7 +53,7 @@ Future<bool> loginCompany(email, password,uid,deviceToken) async {
         "device_token": deviceToken,
         "uid": uid
       }));
-  print('${response.body}');
+  //print('${response.body}');
   if (response.statusCode == 200) {
 
     if(EasyLoading.isShow)EasyLoading.dismiss();
@@ -92,7 +92,7 @@ Future<Company> registerCompany(name, email, password, confirm_password,
         'domain_id': domain_id,
         "device_token":device_token,
       }));
-  print('${response.body}');
+  //print('${response.body}');
   if (response.statusCode == 200) {
     if(EasyLoading.isShow)EasyLoading.dismiss();
     EasyLoading.showSuccess('Great Success!');
@@ -131,7 +131,7 @@ Future<User> loginUser(email, password) async {
 
 Future<User> registerUser(name, email, password, confirm_password, country_code,
     phone, device_token,image_url) async {
-  print(image_url);
+  //print(image_url);
 
   final response = await http.post(Uri.parse(userURL + 'register'),
       headers: {
@@ -179,19 +179,17 @@ Future<String> updateImg(File image) async {
   try {
     final streamedResponse = await uploadRequest.send();
     final response = await http.Response.fromStream(streamedResponse);
-    print(
-        'streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
-    print(
-        'Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
+    //print('streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
+   // print('Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
 
     if (response.statusCode != 200) {
-      print('${response.body}');
+     // print('${response.body}');
 
       return 'null';
     }
     return '';
   } catch (e) {
-    print(e);
+  //  print(e);
     return 'null';
   }
 }
@@ -265,8 +263,7 @@ Future<String> updateCompany(File?
     cityId,
   domainId,
 ) async {
-  print(
-      '$name, $description, $email, $phone, $countryCode, $address, $snapchat, $facebook, $tweeter, $instagram, $cityId, $domainId');
+  //print('$name, $description, $email, $phone, $countryCode, $address, $snapchat, $facebook, $tweeter, $instagram, $cityId, $domainId');
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
@@ -310,13 +307,11 @@ Future<String> updateCompany(File?
   try {
     final streamedResponse = await uploadRequest.send();
     final response = await http.Response.fromStream(streamedResponse);
-    print(
-        'streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
-    print(
-        'Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
+   // print('streamedResponse statusCode ${streamedResponse.statusCode} \nheaders ${streamedResponse.headers}\n body ${streamedResponse.request}');
+   // print('Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
 
     if (response.statusCode != 200) {
-      print('${response.body}');
+      //print('${response.body}');
 
       return 'null';
     }

@@ -11,7 +11,7 @@ Future<List<Domain>> getAllDomain() async {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   });
-  print('${response.body}');
+ // print('${response.body}');
   if (response.statusCode == 200) {
     Iterable l = jsonDecode(response.body)['data'];
     return List<Domain>.from(l.map((s) => Domain.fromJson(s)));

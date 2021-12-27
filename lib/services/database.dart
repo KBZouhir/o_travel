@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:o_travel/services/sheard_helper.dart';
 
@@ -19,19 +21,34 @@ class DatabaseMethods {
     });
   }
 
-  Future<Stream<QuerySnapshot>> getUsers() async {
+  Future<Stream<QuerySnapshot>> getUsers(userList) async {
     String myid= await SharedPreferenceHelper().getUserId();
+
     return FirebaseFirestore.instance
-        .collection("users").where('userID',isNotEqualTo: myid)
+        .collection("users")
         .snapshots();
   }
 
-  Future<Stream<QuerySnapshot>> getUserByTyp(bool type) async {
-    return FirebaseFirestore.instance
-        .collection("users")
-        .where("isCompany", isEqualTo: type)
+  Future<List<String>> getMyChatRooms() async {
+    String myid= await SharedPreferenceHelper().getUserId();
+    final snapshot= FirebaseFirestore.instance
+        .collection("chatrooms")
+        .where("users", arrayContains: myid)
         .snapshots();
+    print('-------------------------------------------------------');
+    List<String> userList=[];
+    snapshot.forEach((element) {
+      element.docs.forEach((dc) {
+        userList.add(dc.get('users')[0].toString());
+        userList.add(dc.get('users')[1].toString());
+      });
+      print('userList $userList');
+
+    });
+return userList;
   }
+
+
   Future addMessage(String chatRoomId,  Map<String, dynamic> message) async {
     return FirebaseFirestore.instance
         .collection("chatrooms")
@@ -91,7 +108,6 @@ class DatabaseMethods {
     String userId = await SharedPreferenceHelper().getUserId();
     return FirebaseFirestore.instance
         .collection("chatrooms")
-        .orderBy("lastMessageSendTs", descending: true)
         .where("users", arrayContains: userId)
         .snapshots();
   }

@@ -44,14 +44,14 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         myId=value;
       });
-      UserType.getType().then((value) {
-        getAllChatrooms(!value);
-      });
+      getAllChatrooms();
+
     });
   }
 
-  getAllChatrooms(type) async {
-    DatabaseMethods().getUsers().then((value) {
+  getAllChatrooms() async {
+    List<String> userList=await DatabaseMethods().getMyChatRooms();
+    DatabaseMethods().getUsers(userList).then((value) {
       setState(() {
         loading = false;
         usersStream = value;

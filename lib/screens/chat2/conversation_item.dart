@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
-import 'package:o_travel/Models/type.dart';
 import 'package:o_travel/api/CONFIG.dart';
 import 'package:o_travel/screens/chat2/ChatUser.dart';
 import 'package:o_travel/screens/chat2/chat_details.dart';
