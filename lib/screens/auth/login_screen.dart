@@ -10,6 +10,7 @@ import 'package:o_travel/screens/auth/sign_up_page.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/privacy.dart';
+import 'package:o_travel/screens/term_of_use.dart';
 import 'package:o_travel/services/auth.dart';
 import 'package:o_travel/services/sheard_helper.dart';
 
@@ -205,10 +206,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PrivacyScreen()));
+                                  builder: (context) => TermOfUseScreen()));
                         },
                         child: Text(
-                          getTranslated(context, 'privacy_policy'),
+                          getTranslated(context, 'term_of_use'),
                           style: TextStyle(
                             color:
                                 Theme.of(context).primaryColor.withOpacity(0.7),

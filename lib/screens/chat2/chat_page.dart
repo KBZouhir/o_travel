@@ -51,7 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   getAllChatrooms(type) async {
-    DatabaseMethods().getUserByTyp(type).then((value) {
+    DatabaseMethods().getUsers().then((value) {
       setState(() {
         loading = false;
         usersStream = value;
@@ -80,9 +80,10 @@ class _ChatScreenState extends State<ChatScreen> {
                               imageURL: ds["imgUrl"],
                               name: ds["name"],
                               phone: ds["username"],
+                              isCompany: ds["isCompany"],
                               messageText: '',
                               time: ''),
-                          isMessageRead: false,
+
                         );
                       },
                     )

@@ -125,6 +125,7 @@ class _MyAppState extends State<MyApp> {
                       return supportedLocales.first;
                     },
                     home: (!isLogged ? OnBoardingPage() : HomeScreen()),
+                    builder: EasyLoading.init(),
                   );
                 });
           }

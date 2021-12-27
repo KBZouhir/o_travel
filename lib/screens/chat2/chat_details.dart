@@ -19,8 +19,9 @@ import 'package:url_launcher/url_launcher.dart';
 class ChatDetails extends StatefulWidget {
   final ChatUser user;
   final String myId;
+  final String chatRoomId;
 
-  const ChatDetails({Key? key, required this.user, required this.myId})
+  const ChatDetails({Key? key, required this.user, required this.myId, required this.chatRoomId})
       : super(key: key);
 
   @override
@@ -29,7 +30,6 @@ class ChatDetails extends StatefulWidget {
 
 class _ChatDetailsState extends State<ChatDetails> {
   List<ChatMessage> messages = [];
-  late String chatRoomId;
   bool loading = true;
   late Stream<QuerySnapshot> messageStream;
   File? image1;
@@ -41,24 +41,13 @@ class _ChatDetailsState extends State<ChatDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(widget.user.phone);
-    getChatroomId();
-  }
-getChatroomId(){
-  UserType.getType().then((value){
-    setState(() {
-      if(value)
-        chatRoomId= "${widget.user.userId}\_${widget.myId}";
-      else
-        chatRoomId="${widget.myId}\_${widget.user.userId}";
-    });
+    print(widget.chatRoomId=='0mFdn1vk6haULMFyTyo2GxZ54242_GPkZvgdkStULmqFc7k9oW0MfoPP2');
     getAllMessages();
-  });
-}
+  }
+
 
   getAllMessages() async {
-print(chatRoomId);
-    DatabaseMethods().getChatRoomMessages(chatRoomId).then((value) {
+    DatabaseMethods().getChatRoomMessages(widget.chatRoomId).then((value) {
       setState(() {
         loading = false;
         messageStream = value;
@@ -147,25 +136,18 @@ print(chatRoomId);
                               child: TextField(
                                 controller: fieldMessageController,
                                 onSubmitted: (String str) {
-                                  setState(() {
-                                    this.messages.insert(
-                                        0,
-                                        new ChatMessage(
-                                            senderId: widget.myId,
-                                            messageContent: '$str',
-                                            voice: '',
-                                            image: ''));
-
-                                    DatabaseMethods().addMessage(chatRoomId, {
+                                  if(str.trim().isNotEmpty){
+                                    DatabaseMethods().addMessage(widget.chatRoomId, {
                                       'senderId': widget.myId,
-                                      'messageContent': '$str',
+                                      'messageContent': '${fieldMessageController.text}',
                                       'voice': '',
                                       'image': '',
                                       'time': DateTime.now()
                                     });
-                                  });
-                                  fieldMessageController.text=' ';
 
+                                    fieldMessageController.text=' ';
+
+                                  }
                                 },
                                 maxLines: 1,
                                 style: TextStyle(fontSize: 16),
@@ -196,7 +178,37 @@ print(chatRoomId);
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(onTap: (){
+                    if(fieldMessageController.text.trim().isNotEmpty){
+                      DatabaseMethods().addMessage(widget.chatRoomId, {
+                        'senderId': widget.myId,
+                        'messageContent': '${fieldMessageController.text}',
+                        'voice': '',
+                        'image': '',
+                        'time': DateTime.now()
+                      });
+
+                      fieldMessageController.text=' ';
+
+                    }
+
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                      child: Icon(
+                        Icons.send,
+                        color: Theme.of(context).accentColor.withOpacity(0.4),
+                      ),
+                    ),),
+
                   ],
                 ),
               ))
@@ -211,6 +223,8 @@ print(chatRoomId);
             builder: (context, snapshot) {
               return snapshot.hasData
                   ? ListView.builder(
+                physics: BouncingScrollPhysics(),
+                      shrinkWrap: true,
                       padding: EdgeInsets.only(bottom: 70, top: 16),
                       itemCount: snapshot.data!.docs.length,
                       reverse: true,

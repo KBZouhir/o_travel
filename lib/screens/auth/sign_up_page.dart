@@ -359,7 +359,7 @@ class _UserPageState extends State<UserPage> {
                           confirmPasswordController.text,
                           countryCode,
                           phone,
-                          deviceToken)
+                          deviceToken,'')
                       .then((value) {
                     if (value.id > -1) {
                         AuthMethods().signUPWithEmailPassword(context,emailController.text,passwordController.text,usernameController.text,false);
@@ -421,11 +421,9 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-  final _auth = FirebaseAuth.instance;
 
   bool showPassword = true;
   bool showConfirmPassword = true;
-  double raduice = 15.0;
   late String countryCode;
   late String phone;
   TextEditingController nameController = TextEditingController();
@@ -442,13 +440,14 @@ class _CompanyPageState extends State<CompanyPage> {
   getResources() {
     getAllDomain().then((value) {
       setState(() {
-        domainList = value;
+        this.domainList = value;
       });
     });
 
     getAllCity().then((value) {
+
       setState(() {
-        cityList = value;
+        this.cityList = value;
       });
     });
     FirebaseMessaging.instance.getToken().then((value) {

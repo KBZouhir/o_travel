@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -420,7 +421,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                           priceController.text,
                           selectedCategory!.id,
                           selectedCountry!.id,
-                          '${selectedDate!.day}-${selectedDate!.month}-${selectedDate!.year}');
+                          '${selectedDate!.day}-${selectedDate!.month}-${selectedDate!.year}',context);
                     },
                     color: Theme.of(context).primaryColor,
                     child: Text(

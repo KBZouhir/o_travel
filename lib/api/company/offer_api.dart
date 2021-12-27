@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/CONFIG.dart';
+import 'package:o_travel/screens/home/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String prifix = "offers";
@@ -78,8 +81,8 @@ Future<List<Offer>> getCompanyOffers( int page) async {
   }
 }
 
-Future<String> createOffer(List<File> imageList, name, description, price,
-    categoryId, countryId, month) async {
+Future createOffer(List<File> imageList, name, description, price,
+    categoryId, countryId, month,context) async {
 
   EasyLoading.show();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -116,14 +119,18 @@ Future<String> createOffer(List<File> imageList, name, description, price,
     print(
         'Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200||response.statusCode == 201) {
       print('${response.body}');
       if(EasyLoading.isShow)EasyLoading.dismiss();
       EasyLoading.showSuccess('Great Success!');
-      return 'null';
+      Navigator.pop(context);
+     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+
+
     }else{
       if(EasyLoading.isShow)EasyLoading.dismiss();
-      EasyLoading.showError('Error!');
+       EasyLoading.showError('Error!');
+
       return '';
     }
 

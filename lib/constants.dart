@@ -9,6 +9,8 @@ const gray216 = Color.fromRGBO(216, 216, 216, 1);
 const gray148 = Color.fromRGBO(148, 148, 148, 1);
 const gray70 = Color.fromRGBO(112, 112, 112, 1);
 const gray48 = Color.fromRGBO(72, 72, 72, 1);
+const green = Color.fromRGBO(99, 250, 159, 1.0);
+const blue = Color.fromRGBO(99, 159, 250, 1.0);
 const raduice = 15.0;
 const List<String> images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjjdEVlUku9anVYSRsTkFzhJDg1hQUl92VQw&usqp=CAU',

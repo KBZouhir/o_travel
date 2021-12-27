@@ -2,17 +2,15 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:o_travel/Models/category.dart';
+import 'package:o_travel/api/CONFIG.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 Future<String>privacy() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String _token = prefs.getString("_token") ?? '';
-  String _url = prefs.getString("_url") ?? '';
-  final response = await http.get(Uri.parse(_url + 'privacy_policy'), headers: {
+
+  final response = await http.get(Uri.parse(baseURL + '/privacy_policy'), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': 'Bearer $_token',
   });
   if (response.statusCode == 200) {
     return jsonDecode(response.body)['privacy_policy'];
@@ -22,13 +20,20 @@ Future<String>privacy() async {
   }
 }
 Future<String>about() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String _token = prefs.getString("_token") ?? '';
-  String _url = prefs.getString("_url") ?? '';
-  final response = await http.get(Uri.parse(_url + 'about_us'), headers: {
+
+  final response = await http.get(Uri.parse(baseURL + '/about_us'), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': 'Bearer $_token',
+  });
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body)['about_us'];
+  } else {
+    return '';
+  }
+}Future<String>termOfUse() async {
+  final response = await http.get(Uri.parse(baseURL + '/terms_of_use'), headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
   });
   if (response.statusCode == 200) {
     return jsonDecode(response.body)['about_us'];

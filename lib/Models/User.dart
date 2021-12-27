@@ -24,8 +24,8 @@ class User {
   int id;
   String name;
   String email;
-  String phone;
-  String countryCode;
+  dynamic phone;
+  dynamic countryCode;
   String image;
   dynamic state;
 

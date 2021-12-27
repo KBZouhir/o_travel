@@ -16,6 +16,30 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const prifix = '';
 
+Future<User> loginSocilaite(name, emailOrPhone,deviceToken,uid, countryCode,image) async {
+
+  final response = await http.post(Uri.parse(userURL + 'socialite/login'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "name": name,
+        "username": emailOrPhone,
+        "device_token": deviceToken,
+        "uid": uid,
+        "country_code": countryCode,
+        "image": image,
+      }));
+  if (response.statusCode == 200) {
+    UserType.setType(false);
+    Token.setToken(jsonDecode(response.body)['access_token']);
+    UserType.setUrl(userURL);
+    return User.fromJson(jsonDecode(response.body)['user']);
+  } else {
+    throw Exception(response.body);
+  }
+}
 Future<bool> loginCompany(email, password,uid,deviceToken) async {
 
   final response = await http.post(Uri.parse(companyURL + 'login'),
@@ -106,7 +130,8 @@ Future<User> loginUser(email, password) async {
 }
 
 Future<User> registerUser(name, email, password, confirm_password, country_code,
-    phone, device_token) async {
+    phone, device_token,image_url) async {
+  print(image_url);
 
   final response = await http.post(Uri.parse(userURL + 'register'),
       headers: {
@@ -120,7 +145,8 @@ Future<User> registerUser(name, email, password, confirm_password, country_code,
         "password_confirmation": confirm_password,
         "country_code": country_code,
         "phone": phone,
-        "device_token": "fcm token from firebase",
+        "device_token": device_token,
+        "image_url": image_url,
       }));
   if (response.statusCode == 200) {
     UserType.setType(false);
