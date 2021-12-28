@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/about.dart';
 import 'package:o_travel/screens/ads/add.dart';
@@ -48,6 +49,7 @@ class MyDrawer extends StatelessWidget {
                       size: 25,
                     ),
                     onPressed: () => Navigator.pop(context)),
+                (me==null)?GFLoader():
                 GestureDetector(
                     onTap: () {
                       Navigator.push(context,
@@ -89,7 +91,7 @@ class MyDrawer extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Spacer(),
-                                  Text((me != null) ? me.name : '',
+                                  Text((me.name.toString().length>15) ? me.name.toString().substring(0,14)+'...' : me.name.toString(),
                                       style: TextStyle(
                                           fontSize: 25,
                                           color: Colors.white,

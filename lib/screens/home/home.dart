@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:image_picker/image_picker.dart';
@@ -131,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     getResources();
+    if(EasyLoading.isShow)EasyLoading.dismiss();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {

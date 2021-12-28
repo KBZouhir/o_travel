@@ -1,5 +1,7 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:o_travel/api/company/api.dart';
 import 'package:o_travel/screens/localization/const.dart';
@@ -40,14 +42,9 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Text(
-                  privacy_,
-                  style: TextStyle(
-                      height: 1.5,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.0,
-                      color: Theme.of(context).accentColor),
-                ),
+            Html(
+              data: privacy_,
+              ),
                 SizedBox(
                   height: 20,
                 ),

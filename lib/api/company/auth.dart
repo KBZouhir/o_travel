@@ -18,6 +18,7 @@ const prifix = '';
 
 Future<User> loginSocilaite(name, emailOrPhone,deviceToken,uid, countryCode,image) async {
 
+  EasyLoading.show();
   final response = await http.post(Uri.parse(userURL + 'socialite/login'),
       headers: {
         'Content-Type': 'application/json',
@@ -41,6 +42,7 @@ Future<User> loginSocilaite(name, emailOrPhone,deviceToken,uid, countryCode,imag
   }
 }
 Future<bool> loginCompany(email, password,uid,deviceToken) async {
+  EasyLoading.show();
 
   final response = await http.post(Uri.parse(companyURL + 'login'),
       headers: {
@@ -73,8 +75,7 @@ Future<bool> loginCompany(email, password,uid,deviceToken) async {
 
 Future<Company> registerCompany(name, email, password, confirm_password,
     country_code, phone, city_id, domain_id, device_token) async {
-  EasyLoading.show(status: 'loading...');
-
+  EasyLoading.show();
 
   final response = await http.post(Uri.parse(companyURL + 'register'),
       headers: {
@@ -108,6 +109,8 @@ Future<Company> registerCompany(name, email, password, confirm_password,
 }
 
 Future<User> loginUser(email, password) async {
+  EasyLoading.show();
+
   final response = await http.post(Uri.parse(userURL + 'login'),
       headers: {
         'Content-Type': 'application/json',
@@ -120,11 +123,15 @@ Future<User> loginUser(email, password) async {
         "uid": "user id in firebase"
       }));
   if (response.statusCode == 200) {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     UserType.setType(false);
     Token.setToken(jsonDecode(response.body)['access_token']);
     UserType.setUrl(userURL);
     return User.fromJson(jsonDecode(response.body)['user']);
   } else {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error!');
     throw Exception('Failed to load  $prifix');
   }
 }
@@ -132,6 +139,7 @@ Future<User> loginUser(email, password) async {
 Future<User> registerUser(name, email, password, confirm_password, country_code,
     phone, device_token,image_url) async {
   //print(image_url);
+  EasyLoading.show();
 
   final response = await http.post(Uri.parse(userURL + 'register'),
       headers: {
@@ -149,16 +157,22 @@ Future<User> registerUser(name, email, password, confirm_password, country_code,
         "image_url": image_url,
       }));
   if (response.statusCode == 200) {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     UserType.setType(false);
     Token.setToken(jsonDecode(response.body)['access_token']);
     UserType.setUrl(userURL);
     return User.fromJson(jsonDecode(response.body)['user']);
   } else {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error!');
     throw Exception(response.body);
   }
 }
 
 Future<String> updateImg(File image) async {
+  EasyLoading.show();
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
@@ -184,12 +198,17 @@ Future<String> updateImg(File image) async {
 
     if (response.statusCode != 200) {
      // print('${response.body}');
-
+      if(EasyLoading.isShow)EasyLoading.dismiss();
+      EasyLoading.showError('Error!');
       return 'null';
     }
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     return '';
   } catch (e) {
   //  print(e);
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error!');
     return 'null';
   }
 }
@@ -230,11 +249,8 @@ void logout(BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
-  prefs.clear();
-  AuthMethods().signOut();
-  Navigator.of(context).pop();
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => ChoosePage()));
+  EasyLoading.show();
+
   final response = await http.post(Uri.parse(_url + 'logout'), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -242,8 +258,16 @@ void logout(BuildContext context) async {
   });
 
   if (response.statusCode == 200) {
-
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
+    prefs.clear();
+    AuthMethods().signOut();
+    Navigator.of(context).pop();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ChoosePage()));
   } else {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error!');
     throw Exception('Failed to load  $prifix');
   }
 }
@@ -263,7 +287,7 @@ Future<String> updateCompany(File?
     cityId,
   domainId,
 ) async {
-  //print('$name, $description, $email, $phone, $countryCode, $address, $snapchat, $facebook, $tweeter, $instagram, $cityId, $domainId');
+  EasyLoading.show();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
@@ -311,13 +335,18 @@ Future<String> updateCompany(File?
    // print('Response statusCode ${response.statusCode} \nheaders ${response.headers}\n body ${response.body}');
 
     if (response.statusCode != 200) {
-      //print('${response.body}');
-
+      // print('${response.body}');
+      if(EasyLoading.isShow)EasyLoading.dismiss();
+      EasyLoading.showError('Error!');
       return 'null';
     }
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     return '';
   } catch (e) {
-    print(e);
+    //  print(e);
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error!');
     return 'null';
   }
 }
@@ -333,8 +362,12 @@ Future<bool> updateUser(username ,email,phone) async {
   });
 
   if (response.statusCode == 200) {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     return  true;
   } else {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error!');
     return false;
     throw Exception('Failed to load  $prifix');
   }

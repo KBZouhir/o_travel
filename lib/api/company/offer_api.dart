@@ -140,6 +140,7 @@ Future createOffer(List<File> imageList, name, description, price,
 
 Future<String> updateOffer(List<File> imageList, name, description, price,
     categoryId, countryId, month) async {
+  EasyLoading.show();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
   String _url = prefs.getString("_url") ?? '';
@@ -177,10 +178,15 @@ Future<String> updateOffer(List<File> imageList, name, description, price,
     if (response.statusCode != 200) {
       print('${response.body}');
 
-      return 'null';
+      if(EasyLoading.isShow)EasyLoading.dismiss();
+      EasyLoading.showError('Error');
     }
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     return '';
   } catch (e) {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showError('Error');
     print(e);
     return 'null';
   }
@@ -201,12 +207,15 @@ Future addToFavorites(int offerId) async {
         "id": offerId,
       }));
   if (response.statusCode == 200) {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showToast('Great Success!');
   } else {
     throw Exception('Failed to load  $prifix');
   }
 }
 
 Future<bool> deleteOffer(int id) async {
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
 
@@ -221,8 +230,12 @@ Future<bool> deleteOffer(int id) async {
       }));
   print('${response.body}');
   if (response.statusCode == 200) {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+    EasyLoading.showSuccess('Great Success!');
     return true;
   } else {
+    if(EasyLoading.isShow)EasyLoading.dismiss();
+  EasyLoading.showError('Error!');
     return false;
     throw Exception('Failed to load  $prifix');
   }

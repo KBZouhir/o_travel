@@ -14,24 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
-  // 3. On iOS, this helps to take the user permissions
-  NotificationSettings settings = await _messaging.requestPermission(
-    alert: true,
-    badge: true,
-    provisional: false,
-    sound: true,
-  );
-
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-     print('${message.notification?.title}');
-     print('${message.notification?.body}');
-    });
-  } else {
-    print('User declined or has not accepted permission');
-  }
 
 
   runApp(const MyApp());
