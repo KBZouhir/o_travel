@@ -11,6 +11,8 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
+  String? message;
+  String? subject;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

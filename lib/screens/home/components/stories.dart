@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/Models/StoriesCompany.dart';
+import 'package:o_travel/Models/company.dart';
 import 'package:o_travel/Models/story.dart';
+import 'package:o_travel/api/company/auth.dart';
 import 'package:o_travel/api/company/story_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/home/home.dart';
@@ -13,11 +16,15 @@ import 'package:o_travel/screens/profile/company/show_company_profile.dart';
 import 'package:story_view/story_view.dart';
 
 class StoriesList extends StatelessWidget {
-  final List<Story> storyList;
+  final List<StoryCompany> storyList;
+  final int id;
+  final bool isCompany;
 
   const StoriesList({
     required this.storyList,
     Key? key,
+    required this.id,
+    required this.isCompany,
   }) : super(key: key);
 
   @override
@@ -27,17 +34,22 @@ class StoriesList extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 5),
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return StoryItemWidget(story: storyList[index]);
+          return StoryItemWidget(
+            story: storyList[index], id: id, isCompany: isCompany,);
         });
   }
 }
 
 class StoryItemWidget extends StatelessWidget {
-  final Story story;
+  final StoryCompany story;
+  final int id;
+  final bool isCompany;
 
   const StoryItemWidget({
     Key? key,
     required this.story,
+    required this.id,
+    required this.isCompany,
   }) : super(key: key);
 
   @override
@@ -47,7 +59,7 @@ class StoryItemWidget extends StatelessWidget {
         showDialog(
             context: context,
             builder: (_) {
-              return DetailStoryScreen(story);
+              return DetailStoryScreen(story, id, isCompany);
             });
       },
       child: Container(
@@ -57,24 +69,30 @@ class StoryItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
-                color: Theme.of(context).primaryColor.withOpacity(0.4),
+                color: Theme
+                    .of(context)
+                    .primaryColor
+                    .withOpacity(0.4),
                 width: 4),
             borderRadius: BorderRadius.all(Radius.circular(50))),
         child: Center(
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(20)),
             child: CachedNetworkImage(
-              imageUrl: story.imageUrl,
+              imageUrl: story.image,
               fit: BoxFit.cover,
               width: 1000,
               height: 1000,
-              placeholder: (context, url) => Center(
-                  child: Container(
-                      width: 10,
-                      height: 10,
-                      child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                      ))),
+              placeholder: (context, url) =>
+                  Center(
+                      child: Container(
+                          width: 10,
+                          height: 10,
+                          child: CircularProgressIndicator(
+                            color: Theme
+                                .of(context)
+                                .primaryColor,
+                          ))),
               errorWidget: (context, url, error) => new Icon(Icons.error),
             ),
           ),
@@ -85,16 +103,21 @@ class StoryItemWidget extends StatelessWidget {
 }
 
 class DetailStoryScreen extends StatelessWidget {
-  final Story story;
+  final StoryCompany story;
+  final int id;
+  final bool isCompany;
 
-  DetailStoryScreen(this.story);
+  DetailStoryScreen( this.story, this.id,
+    this.isCompany);
 
   final fieldMessageController = TextEditingController();
   final storyController = StoryController();
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    List<String> imageList=[story.imageUrl];
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
     return Container(
       height: size.height,
@@ -102,11 +125,11 @@ class DetailStoryScreen extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            child:StoryView(
+            child: StoryView(
               inline: true,
-              storyItems: List.generate(imageList.length, (index) {
+              storyItems: List.generate(story.stories.length, (index) {
                 return StoryItem.pageImage(
-                  url:imageList[index],
+                  url: story.stories[index].imageUrl,
                   controller: storyController,
                 );
               }),
@@ -127,7 +150,10 @@ class DetailStoryScreen extends StatelessWidget {
               padding: EdgeInsets.all(10),
               height: 70,
               decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor.withOpacity(0.69),
+                color: Theme
+                    .of(context)
+                    .backgroundColor
+                    .withOpacity(0.69),
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20)),
@@ -137,19 +163,20 @@ class DetailStoryScreen extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
+                      /* getCompanyById();
                       Navigator.pop(context);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  ShowCompanyProfile(company: story.company)));
+                                  ShowCompanyProfile(company: story)));*/
                     },
                     child: Row(
                       children: [
                         Hero(
-                          tag: 'company_img_${story.company.id}',
+                          tag: 'company_img_${story.id}',
                           child: CircleAvatar(
-                            backgroundImage: NetworkImage(story.company.image),
+                            backgroundImage: NetworkImage(story.image),
                             maxRadius: 20,
                           ),
                         ),
@@ -159,10 +186,11 @@ class DetailStoryScreen extends StatelessWidget {
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              story.company.name,
+                              story.name,
                               style: TextStyle(
                                   fontSize: 16,
-                                  color: Theme.of(context)
+                                  color: Theme
+                                      .of(context)
                                       .primaryColor
                                       .withOpacity(1),
                                   fontWeight: FontWeight.bold),
@@ -171,7 +199,7 @@ class DetailStoryScreen extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  Card(
+                  (isCompany && id == story.id) ? Card(
                       color: Colors.redAccent.withOpacity(0.7),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
@@ -189,25 +217,12 @@ class DetailStoryScreen extends StatelessWidget {
                               icon: Icon(
                                 Icons.delete_outlined,
                                 color: Colors.white,
-                              )))),
-                  Card(
-                      color: Theme.of(context).backgroundColor.withOpacity(0.7),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Container(
-                          height: 40,
-                          width: 40,
-                          child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.close))))
+                              )))) : SizedBox(),
                 ],
               ),
             ),
           ),
-         /* Align(
+          /* Align(
             alignment: Alignment.bottomCenter,
             child: Card(
               shape: RoundedRectangleBorder(
@@ -250,7 +265,9 @@ class AddStory extends StatefulWidget {
 class _AddStoryState extends State<AddStory> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
       body: Stack(
@@ -277,12 +294,17 @@ class _AddStoryState extends State<AddStory> {
                   createStory(widget.image);
                   Navigator.pop(context);
                 },
-                color: Theme.of(context).backgroundColor,
+                color: Theme
+                    .of(context)
+                    .backgroundColor,
                 child: Text(
                   getTranslated(context, 'add_story'),
                   style: TextStyle(
                     fontSize: 18,
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme
+                        .of(context)
+                        .colorScheme
+                        .secondary,
                   ),
                 ),
               ),
@@ -291,7 +313,10 @@ class _AddStoryState extends State<AddStory> {
           Align(
             alignment: Alignment.topRight,
             child: Card(
-                color: Theme.of(context).backgroundColor.withOpacity(0.7),
+                color: Theme
+                    .of(context)
+                    .backgroundColor
+                    .withOpacity(0.7),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),

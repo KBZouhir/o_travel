@@ -11,27 +11,17 @@ class DatabaseMethods {
       required String name,
       required bool isCompany,
       required String profileUrl}) async {
-    final snapShot = await FirebaseFirestore.instance
+    return await FirebaseFirestore.instance
         .collection("users")
-        .where('email', isEqualTo: email)
-        .get();
-
-    if (snapShot.docs.isNotEmpty) {
-      // chatroom already exists
-      return snapShot;
-    } else {
-      return await FirebaseFirestore.instance
-          .collection("users")
-          .doc(userID)
-          .set({
-        "userID": userID,
-        "email": email,
-        "username": username,
-        "name": name,
-        "imgUrl": profileUrl,
-        'isCompany': isCompany
-      });
-    }
+        .doc(userID)
+        .set({
+      "userID": userID,
+      "email": email,
+      "username": username,
+      "name": name,
+      "imgUrl": profileUrl,
+      'isCompany': isCompany
+    });
   }
 
   Future<Stream<QuerySnapshot>> getUsers(userList) async {

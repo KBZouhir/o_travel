@@ -33,10 +33,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
     return Scaffold(
         appBar: buildAppBar(context),
         body: SingleChildScrollView(
-          child: Container(
-            height: 700,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child:loading?GFLoader(): Column(
+          child:loading?GFLoader(): Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
@@ -49,7 +46,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                   height: 20,
                 ),
               ],
-            ),
+
           ),
         ));
   }
