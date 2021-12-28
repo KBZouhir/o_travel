@@ -188,7 +188,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -213,7 +213,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -237,7 +237,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -261,7 +261,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -289,7 +289,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -315,7 +315,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -351,7 +351,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,

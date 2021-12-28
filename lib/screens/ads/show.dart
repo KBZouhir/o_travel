@@ -187,7 +187,7 @@ class _ShowOfferState extends State<ShowOffer> {
                             widget.offer.name,
                             style: TextStyle(
                                 color: Theme.of(context)
-                                    .accentColor
+                                    .colorScheme.secondary
                                     .withOpacity(.8),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
@@ -197,7 +197,7 @@ class _ShowOfferState extends State<ShowOffer> {
                           widget.offer.category.name,
                           style: TextStyle(
                               color: Theme.of(context)
-                                  .accentColor
+                                  .colorScheme.secondary
                                   .withOpacity(0.6),
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
@@ -222,7 +222,7 @@ class _ShowOfferState extends State<ShowOffer> {
                           '${widget.offer.price}\$',
                           style: TextStyle(
                               color:
-                                  Theme.of(context).accentColor.withOpacity(1),
+                                  Theme.of(context).colorScheme.secondary.withOpacity(1),
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )
@@ -249,7 +249,7 @@ class _ShowOfferState extends State<ShowOffer> {
                                 icon: Icon(
                                   Icons.phone_outlined,
                                   size: 35,
-                                  color: Theme.of(context).accentColor,
+                                  color: Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                             )),
@@ -266,7 +266,7 @@ class _ShowOfferState extends State<ShowOffer> {
                                 icon: Icon(
                                   Icons.chat_outlined,
                                   size: 35,
-                                  color: Theme.of(context).accentColor,
+                                  color: Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                             )),
@@ -283,7 +283,7 @@ class _ShowOfferState extends State<ShowOffer> {
                               icon: Icon(
                                 Icons.favorite_border,
                                 size: 35,
-                                color: Theme.of(context).accentColor,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                             ),
                           ),
@@ -311,7 +311,7 @@ class _ShowOfferState extends State<ShowOffer> {
                               fontSize: 14,
                               height: 1.5,
                               color: Theme.of(context)
-                                  .accentColor
+                                  .colorScheme.secondary
                                   .withOpacity(0.6)),
                         ),
                       ],
@@ -321,7 +321,7 @@ class _ShowOfferState extends State<ShowOffer> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.5),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
                     ),
                     SizedBox(
                       height: 20,
@@ -332,7 +332,7 @@ class _ShowOfferState extends State<ShowOffer> {
                           fontSize: 14,
                           height: 1.5,
                           color:
-                              Theme.of(context).accentColor.withOpacity(0.6)),
+                              Theme.of(context).colorScheme.secondary.withOpacity(0.6)),
                     ),
                     SizedBox(
                       height: 20,
@@ -376,7 +376,7 @@ class _ShowOfferState extends State<ShowOffer> {
                                 Text(widget.offer.company.name,
                                     style: TextStyle(
                                         fontSize: 20,
-                                        color: Theme.of(context).accentColor,
+                                        color: Theme.of(context).colorScheme.secondary,
                                         fontWeight: FontWeight.bold)),
                               ],
                             ),

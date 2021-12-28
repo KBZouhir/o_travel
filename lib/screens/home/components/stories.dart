@@ -222,7 +222,7 @@ class DetailStoryScreen extends StatelessWidget {
                     maxLines: 1,
                     style: TextStyle(
                         fontSize: 16,
-                        color: Theme.of(context).accentColor.withOpacity(1)),
+                        color: Theme.of(context).colorScheme.secondary.withOpacity(1)),
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       filled: false,
@@ -282,7 +282,7 @@ class _AddStoryState extends State<AddStory> {
                   getTranslated(context, 'add_story'),
                   style: TextStyle(
                     fontSize: 18,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               ),

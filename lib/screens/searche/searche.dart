@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     height: 60,
                     width: size.width,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor.withOpacity(0.05),
+                        color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
                         borderRadius: BorderRadius.all(Radius.circular(15))),
                     child: Center(
                       child: TextField(
@@ -108,7 +108,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -125,7 +125,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
                       border: BorderSide(
-                          color: Theme.of(context).accentColor, width: 1),
+                          color: Theme.of(context).colorScheme.secondary, width: 1),
                       dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
@@ -152,7 +152,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -180,13 +180,13 @@ class _SearchScreenState extends State<SearchScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: Theme.of(context).backgroundColor,
                         border:
-                            Border.all(color: Theme.of(context).accentColor)),
+                            Border.all(color: Theme.of(context).colorScheme.secondary)),
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(selectedDate==null?getTranslated(context, 'month'):'${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
@@ -201,7 +201,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -218,7 +218,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
                       border: BorderSide(
-                          color: Theme.of(context).accentColor, width: 1),
+                          color: Theme.of(context).colorScheme.secondary, width: 1),
                       dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
@@ -245,7 +245,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -271,7 +271,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Text(getTranslated(context, 'default_order'),
                             style: TextStyle(
                               fontSize: 16,
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ))
                       ],
                     ),
@@ -293,7 +293,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Text(getTranslated(context, 'by_latest'),
                             style: TextStyle(
                               fontSize: 16,
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ))
                       ],
                     ),
@@ -315,7 +315,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Text(getTranslated(context, 'lowest_to_highest'),
                             style: TextStyle(
                               fontSize: 16,
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ))
                       ],
                     ),

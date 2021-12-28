@@ -55,6 +55,9 @@ dependencies:
   flutter_easyloading: ^3.0.3
   flutter_html: ^2.2.1
   flutter_svg: ^0.23.0+1
+  flutter_local_notifications: ^9.1.5
+  firebase_storage: ^10.2.4
+  emoji_picker_flutter: ^1.0.8
 
 
 

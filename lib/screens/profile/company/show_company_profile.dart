@@ -148,7 +148,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -173,7 +173,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -197,7 +197,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 20,
@@ -221,7 +221,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,
@@ -257,7 +257,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).accentColor.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                     ),
                     SizedBox(
                       height: 16,

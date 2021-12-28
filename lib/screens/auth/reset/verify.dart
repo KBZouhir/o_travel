@@ -118,7 +118,7 @@ class _VerifyPageState extends State<VerifyPage> {
                     Text(
                       getTranslated(context, 'didnt_receive_code'),
                       style: TextStyle(
-                          fontSize: 20, color: Theme.of(context).accentColor),
+                          fontSize: 20, color: Theme.of(context).colorScheme.secondary),
                       textAlign: TextAlign.center,
                     ),
                     TextButton(

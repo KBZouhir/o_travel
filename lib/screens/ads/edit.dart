@@ -116,7 +116,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 15),
                 Row(
@@ -230,7 +230,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextFormField(
@@ -238,7 +238,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: getTranslated(context, 'ad_name'),
@@ -253,7 +253,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextFormField(
@@ -283,7 +283,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -298,14 +298,14 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       style: TextStyle(
                         height: 1.6,
                         fontSize: 20,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         decorationThickness: 0,),
                       hint: Text(getTranslated(context, 'country')),
                       value: selectedCountry,
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
                       border: BorderSide(
-                          color: Theme.of(context).accentColor, width: 1),
+                          color: Theme.of(context).colorScheme.secondary, width: 1),
                       dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
@@ -332,7 +332,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -360,7 +360,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: Theme.of(context).backgroundColor,
                         border:
-                            Border.all(color: Theme.of(context).accentColor)),
+                            Border.all(color: Theme.of(context).colorScheme.secondary)),
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
                       alignment:isEnglish? Alignment.centerLeft : Alignment.centerRight,
@@ -384,7 +384,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -399,14 +399,14 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       style: TextStyle(
                         height: 1.6,
                         fontSize: 20,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         decorationThickness: 0,),
                       hint: Text(getTranslated(context, 'trip_type')),
                       value: selectedCategory,
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
                       border: BorderSide(
-                          color: Theme.of(context).accentColor, width: 1),
+                          color: Theme.of(context).colorScheme.secondary, width: 1),
                       dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
@@ -436,7 +436,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextFormField(
@@ -444,7 +444,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: getTranslated(context, 'price'),

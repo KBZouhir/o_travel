@@ -99,7 +99,7 @@ class _ConversationItemState extends State<ConversationItem> {
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Theme.of(context)
-                                    .accentColor
+                                    .colorScheme.secondary
                                     .withOpacity(1),
                                 fontWeight: FontWeight.bold),
                           ),
@@ -111,7 +111,7 @@ class _ConversationItemState extends State<ConversationItem> {
                             style: TextStyle(
                                 fontSize: 13,
                                 color: Theme.of(context)
-                                    .accentColor
+                                    .colorScheme.secondary
                                     .withOpacity(0.8),
                                 fontWeight: FontWeight.normal),
                           ),
@@ -126,7 +126,7 @@ class _ConversationItemState extends State<ConversationItem> {
               time,
               style: TextStyle(
                   fontSize: 12,
-                  color: Theme.of(context).accentColor.withOpacity(1),
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(1),
                   fontWeight: FontWeight.normal),
             ),
           ],

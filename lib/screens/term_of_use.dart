@@ -46,7 +46,7 @@ class _TermOfUseScreenState extends State<TermOfUseScreen> {
                       height: 1.5,
                       fontWeight: FontWeight.w400,
                       fontSize: 16.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 20,

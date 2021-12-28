@@ -119,7 +119,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(height: 8),
                   TextFormField(
@@ -127,7 +127,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: getTranslated(context, 'username'),
@@ -146,7 +146,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(height: 8),
                   TextField(
@@ -154,7 +154,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                     obscureText: false,
                     decoration: InputDecoration(
                       hintText: getTranslated(context, 'email'),
@@ -170,7 +170,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(height: 8),
                   TextField(
@@ -178,7 +178,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                     obscureText: false,
                     decoration: InputDecoration(
                       hintText: getTranslated(context, 'phone'),

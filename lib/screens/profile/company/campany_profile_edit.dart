@@ -187,7 +187,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextFormField(
@@ -195,7 +195,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'company_name'),
@@ -214,7 +214,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -244,7 +244,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -252,7 +252,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'email'),
@@ -270,7 +270,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(
                       height: 8,
@@ -278,7 +278,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Theme.of(context).accentColor),
+                          border: Border.all(color: Theme.of(context).colorScheme.secondary),
                           borderRadius: BorderRadius.all(Radius.circular(raduice))),
                       child: IntlPhoneField(
                         controller: phoneController,
@@ -308,7 +308,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -316,7 +316,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'address'),
@@ -332,7 +332,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -340,7 +340,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                       obscureText: false,
                       decoration: InputDecoration(
@@ -359,7 +359,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(
                       height: 8,
@@ -374,7 +374,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           padding: const EdgeInsets.all(15),
                           borderRadius: BorderRadius.circular(10),
                           border: BorderSide(
-                              color: Theme.of(context).accentColor, width: 1),
+                              color: Theme.of(context).colorScheme.secondary, width: 1),
                           dropdownButtonColor: Theme.of(context).backgroundColor,
                           onChanged: (newValue) {
                             setState(() {
@@ -401,7 +401,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(
                       height: 8,
@@ -416,7 +416,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           padding: const EdgeInsets.all(15),
                           borderRadius: BorderRadius.circular(10),
                           border: BorderSide(
-                              color: Theme.of(context).accentColor, width: 1),
+                              color: Theme.of(context).colorScheme.secondary, width: 1),
                           dropdownButtonColor: Theme.of(context).backgroundColor,
                           onChanged: (newValue) {
                             setState(() {
@@ -441,22 +441,22 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     Container(
                       height: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(raduice)),
-                        border: Border.all(color: Theme.of(context).accentColor.withOpacity(0.7))
+                        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.7))
                       ),
                       child: Row(
                       children: [
                         IconButton(onPressed: (){
                           pickImage(false);
 
-                        }, icon: Icon(Icons.add_photo_alternate,color: Theme.of(context).accentColor),),
-                      Text((registerName.length!=0)?registerName:getTranslated(context, 'commercial_register'),style: TextStyle(fontSize:20,color: Theme.of(context).accentColor),)
+                        }, icon: Icon(Icons.add_photo_alternate,color: Theme.of(context).colorScheme.secondary),),
+                      Text((registerName.length!=0)?registerName:getTranslated(context, 'commercial_register'),style: TextStyle(fontSize:20,color: Theme.of(context).colorScheme.secondary),)
                       ],
                     ),),
                     SizedBox(height: 16),
@@ -465,7 +465,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -473,7 +473,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'snapchat'),
@@ -488,7 +488,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -496,7 +496,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'instagram'),
@@ -511,7 +511,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -519,7 +519,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'facebook'),
@@ -534,7 +534,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: 8),
                     TextField(
@@ -542,7 +542,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'tweeter'),

@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(
                     height: 8,
@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: getTranslated(context, 'username') +
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(
                     height: 8,
@@ -166,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0,
-                        color: Theme.of(context).accentColor),
+                        color: Theme.of(context).colorScheme.secondary),
                     obscureText: showPassword,
                     decoration: InputDecoration(
                       hintText: getTranslated(context, 'password'),
@@ -309,7 +309,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           getTranslated(context, 'forgot_password'),
                           style: TextStyle(
                             color:
-                            Theme.of(context).accentColor.withOpacity(0.7),
+                            Theme.of(context).colorScheme.secondary.withOpacity(0.7),
                             fontSize: 14.0,
                           ),
                         ),
@@ -328,7 +328,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 getTranslated(context, 'connect_with'),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).accentColor,
+                                  color: Theme.of(context).colorScheme.secondary,
                                   fontSize: 16.0,
                                 ),
                               ),
@@ -363,7 +363,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         getTranslated(context, 'you_do_not_have_account'),
                         style: TextStyle(
-                          color: Theme.of(context).accentColor.withOpacity(0.8),
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
                           fontSize: 16.0,
                         ),
                       ),
@@ -378,7 +378,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(getTranslated(context, 'sign_up'),
                             style: TextStyle(
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w700,
                               fontSize: 16.0,
                             )),

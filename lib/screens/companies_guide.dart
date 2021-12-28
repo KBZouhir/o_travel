@@ -71,7 +71,7 @@ class _CompaniesGuideScreenState extends State<CompaniesGuideScreen> {
                       width: size.width,
                       decoration: BoxDecoration(
                           color:
-                              Theme.of(context).accentColor.withOpacity(0.05),
+                              Theme.of(context).colorScheme.secondary.withOpacity(0.05),
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       child: Center(
                         child: TextField(
@@ -217,7 +217,7 @@ class SelectCard extends StatelessWidget {
                             ? company.name.substring(0, 12)
                             : company.name,
                         style: TextStyle(
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         )),
                   ]),
             )));

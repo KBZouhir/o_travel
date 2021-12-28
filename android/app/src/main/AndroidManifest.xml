@@ -24,6 +24,8 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+            <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="Otravel85555"/>
+
             <!-- Displays an Android View that continues showing the launch screens
                  Drawable until Flutter paints its first frame, then this splash
                  screens fades out. A splash screens is useful to avoid any visual

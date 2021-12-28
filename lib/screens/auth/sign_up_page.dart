@@ -179,7 +179,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -189,7 +189,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'username'),
@@ -209,7 +209,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -219,7 +219,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'email'),
@@ -239,7 +239,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -249,7 +249,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               obscureText: showPassword,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'password'),
@@ -272,7 +272,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -282,7 +282,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               obscureText: showConfirmPassword,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'confirm_password'),
@@ -306,7 +306,7 @@ class _UserPageState extends State<UserPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -314,7 +314,7 @@ class _UserPageState extends State<UserPage> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).accentColor),
+                  border: Border.all(color: Theme.of(context).colorScheme.secondary),
                   borderRadius: BorderRadius.all(Radius.circular(raduice))),
               child: IntlPhoneField(
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -385,7 +385,7 @@ class _UserPageState extends State<UserPage> {
                 Text(
                   getTranslated(context, 'i_have_account'),
                   style: TextStyle(
-                    color: Theme.of(context).accentColor.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
                     fontSize: 16.0,
                   ),
                 ),
@@ -398,7 +398,7 @@ class _UserPageState extends State<UserPage> {
                   },
                   child: Text(getTranslated(context, 'login'),
                       style: TextStyle(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.0,
                       )),
@@ -493,7 +493,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -503,7 +503,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'company_name'),
@@ -523,7 +523,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -533,7 +533,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'email'),
@@ -553,7 +553,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -563,7 +563,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               obscureText: showPassword,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'password'),
@@ -586,7 +586,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -596,7 +596,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
               obscureText: showConfirmPassword,
               decoration: InputDecoration(
                 hintText: getTranslated(context, 'confirm_password'),
@@ -620,7 +620,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -628,7 +628,7 @@ class _CompanyPageState extends State<CompanyPage> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).accentColor),
+                  border: Border.all(color: Theme.of(context).colorScheme.secondary),
                   borderRadius: BorderRadius.all(Radius.circular(raduice))),
               child: IntlPhoneField(
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -664,7 +664,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -679,7 +679,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   padding: const EdgeInsets.all(15),
                   borderRadius: BorderRadius.circular(10),
                   border: BorderSide(
-                      color: Theme.of(context).accentColor, width: 1),
+                      color: Theme.of(context).colorScheme.secondary, width: 1),
                   dropdownButtonColor: Theme.of(context).backgroundColor,
                   onChanged: (newValue) {
                     setState(() {
@@ -706,7 +706,7 @@ class _CompanyPageState extends State<CompanyPage> {
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             SizedBox(
               height: 8,
@@ -721,7 +721,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   padding: const EdgeInsets.all(15),
                   borderRadius: BorderRadius.circular(10),
                   border: BorderSide(
-                      color: Theme.of(context).accentColor, width: 1),
+                      color: Theme.of(context).colorScheme.secondary, width: 1),
                   dropdownButtonColor: Theme.of(context).backgroundColor,
                   onChanged: (newValue) {
                     setState(() {
@@ -785,7 +785,7 @@ class _CompanyPageState extends State<CompanyPage> {
                 Text(
                   getTranslated(context, 'i_have_account'),
                   style: TextStyle(
-                    color: Theme.of(context).accentColor.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
                     fontSize: 16.0,
                   ),
                 ),
@@ -798,7 +798,7 @@ class _CompanyPageState extends State<CompanyPage> {
                   },
                   child: Text(getTranslated(context, 'login'),
                       style: TextStyle(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.0,
                       )),

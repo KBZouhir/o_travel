@@ -54,7 +54,7 @@ bool  loading=true;
                       height: 1.5,
                       fontWeight: FontWeight.w400,
                       fontSize: 16.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 30,
@@ -65,14 +65,14 @@ bool  loading=true;
                     Icon(
                       Icons.email_outlined,
                       size: 22,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text("otravel2040@gmail.com",
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 16)),
                     Spacer(),
                   ],
@@ -86,27 +86,27 @@ bool  loading=true;
                     Icon(
                       Icons.phone,
                       size: 22,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text("+96878085137",
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 16)),
                     Spacer(),
                     Icon(
                       Icons.location_on_outlined,
                       size: 22,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text("Oman - Muscat",
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 16)),
                     Spacer(),
                   ],

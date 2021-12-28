@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:o_travel/Models/type.dart';
+import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/chat2/ChatUser.dart';
 import 'package:o_travel/screens/chat2/conversation_item.dart';
 import 'package:o_travel/screens/localization/const.dart';
@@ -98,7 +99,21 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(getTranslated(context, 'chat')),
+        centerTitle: true,
+        iconTheme: Theme.of(context).iconTheme,
+        toolbarHeight: 50,
+        backgroundColor: Theme.of(context).primaryColor,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            )),
+        title: Text(getTranslated(context, 'chat'),style:TextStyle(
+            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),

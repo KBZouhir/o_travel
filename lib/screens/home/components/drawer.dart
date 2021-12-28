@@ -117,7 +117,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(
             height: 1,
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           ),
           ListTile(
             leading: Icon(Icons.favorite_border),
@@ -133,7 +133,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(
             height: 1,
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           ),
           ListTile(
             leading: Icon(Icons.notifications),
@@ -151,7 +151,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(
             height: 1,
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           ),
           ListTile(
             leading: Icon(Icons.chat),
@@ -170,7 +170,7 @@ class MyDrawer extends StatelessWidget {
               children: [
                 Divider(
                   height: 1,
-                  color: Theme.of(context).accentColor.withOpacity(0.2),
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                 ),
                 ListTile(
                   leading: Icon(Icons.list),
@@ -190,7 +190,7 @@ class MyDrawer extends StatelessWidget {
             ),
           Divider(
             height: 1,
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           ),
           ListTile(
             leading: Icon(Icons.help_outline_sharp),
@@ -206,7 +206,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(
             height: 1,
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           ),
           ListTile(
             leading: Icon(Icons.accessible),
@@ -222,7 +222,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(
             height: 1,
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           ),
           ListTile(
             leading: Icon(Icons.phone),
@@ -238,7 +238,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(
             height: 1,
-            color: Theme.of(context).accentColor.withOpacity(0.2),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
           ),
           ListTile(
             leading: Icon(Icons.settings),

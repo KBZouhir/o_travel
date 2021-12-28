@@ -53,7 +53,7 @@ class LogoutDialog extends StatelessWidget {
                       Text(
                         getTranslated(context, 'logout_message'),
                         style: TextStyle(
-                            fontSize: 16, color: Theme.of(context).accentColor),
+                            fontSize: 16, color: Theme.of(context).colorScheme.secondary),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -80,7 +80,7 @@ class LogoutDialog extends StatelessWidget {
                             child:Center(
                               child:  Text(
                                 getTranslated(context, 'cancel'),
-                                style: TextStyle(fontSize: 20,color:Theme.of(context).accentColor),
+                                style: TextStyle(fontSize: 20,color:Theme.of(context).colorScheme.secondary),
                               ),
                             ),
                           )),

@@ -154,7 +154,7 @@ class _ResultScreenState extends State<ResultScreen> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 18.0,
-                                    color: Theme.of(context).accentColor),
+                                    color: Theme.of(context).colorScheme.secondary),
                               ),
                             ),
                             SizedBox(

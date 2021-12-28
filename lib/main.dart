@@ -9,13 +9,27 @@ import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/screens/localization/demo_localisation.dart';
 import 'package:o_travel/screens/splash/on_boarding.dart';
+import 'package:o_travel/services/push_notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
+  // 3. On iOS, this helps to take the user permissions
+  NotificationSettings settings = await _messaging.requestPermission(
+    alert: true,
+    badge: true,
+    provisional: false,
+    sound: true,
+  );
 
+  /* if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    EasyLoading.showToast('User accepted permission');
+  } else {
+    EasyLoading.showToast('User declined or has not accepted permission');
+  }*/
 
   runApp(const MyApp());
 }
@@ -61,6 +75,8 @@ class _MyAppState extends State<MyApp> {
     return FutureBuilder(
         future: Init.instance.initialize(),
         builder: (context, AsyncSnapshot snapshot) {
+          FCM().initMessaging();
+
           SharedPreferences.getInstance().then((value) {
             print("isFirstTime ${value.getBool('isFirstTime')}");
             print("_token ${value.getString('_token')}");
@@ -84,7 +100,6 @@ class _MyAppState extends State<MyApp> {
                 valueListenable: MyApp.themeNotifier,
                 builder: (_, ThemeMode currentMode, __) {
                   return MaterialApp(
-
                     debugShowCheckedModeBanner: false,
                     title: 'O travel',
                     darkTheme: ThemeData(

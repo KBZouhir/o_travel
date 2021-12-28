@@ -176,7 +176,7 @@ class NoFavoritesWidget extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 18.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
           ),
           SizedBox(
@@ -273,7 +273,7 @@ class SelectCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             )),
                         SizedBox(
                           height: 10,
@@ -281,14 +281,14 @@ class SelectCard extends StatelessWidget {
                         Text('Lorem ipsum dolor sit amet, ...',
                             style: TextStyle(
                               fontSize: 16,
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             )),
                         SizedBox(
                           height: 10,
                         ),
                         Text('3 Hours Ago',
                             style: TextStyle(
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ))
                       ],
                     )

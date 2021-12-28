@@ -20,7 +20,7 @@ class SearchWidget extends StatelessWidget {
           height: 50,
           width: size.width * 0.6,
           decoration: BoxDecoration(
-              color: Theme.of(context).accentColor.withOpacity(0.05),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Center(
             child: TextField(
@@ -49,7 +49,7 @@ class SearchWidget extends StatelessWidget {
           height: 50,
           width: size.width * 0.12,
           decoration: BoxDecoration(
-              color: Theme.of(context).accentColor.withOpacity(0.05),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Center(
             child: IconButton(
@@ -79,7 +79,7 @@ class SearchWidget extends StatelessWidget {
             height: 50,
             width: size.width * 0.2,
             decoration: BoxDecoration(
-                color: Theme.of(context).accentColor.withOpacity(0.05),
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
                 borderRadius: BorderRadius.all(Radius.circular(15))),
             child: Center(
               child: Text(

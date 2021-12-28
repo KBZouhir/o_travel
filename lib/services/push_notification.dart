@@ -1,40 +1,36 @@
+import 'dart:async';
 
-
-import 'dart:io';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
-class PushNotificationService {
-  final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-
-  Future initialise() async {
-
-      // 3. On iOS, this helps to take the user permissions
-      NotificationSettings settings = await _fcm.requestPermission(
-        alert: true,
-        badge: true,
-        provisional: false,
-        sound: true,
-      );
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+class FCM {
+  final messaging = FirebaseMessaging.instance;
+  late FlutterLocalNotificationsPlugin fltNotification;
 
-    } else {
-      print('User declined or has not accepted permission');
-    }
-      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        print('${message.notification?.title}');
-        print('${message.notification?.body}');
-      });
+  void initMessaging() {
+    var androiInit =
+        AndroidInitializationSettings('@mipmap/ic_launcher'); //for logo
+    var iosInit = IOSInitializationSettings();
+    var initSetting = InitializationSettings(android: androiInit, iOS: iosInit);
+    fltNotification = FlutterLocalNotificationsPlugin();
+    fltNotification.initialize(initSetting);
+    var androidDetails = AndroidNotificationDetails('Otravel85555', 'Otravel',
+        channelDescription: 'your channel description',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker');
+    var iosDetails = IOSNotificationDetails();
+    var generalNotificationDetails =
+        NotificationDetails(android: androidDetails, iOS: iosDetails);
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        print('${message.notification?.title}');
-        print('${message.notification?.body}');
-      });
-      /*FirebaseMessaging.onBackgroundMessage((message) {
-        print('${message.notification?.title}');
-        print('${message.notification?.body}');
-        return null;
-      });*/
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        fltNotification.show(notification.hashCode, notification.title,
+            notification.body, generalNotificationDetails);
+      }
+    });
   }
 }

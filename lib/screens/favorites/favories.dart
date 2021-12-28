@@ -215,7 +215,7 @@ class NoFavoritesWidget extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 18.0,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).colorScheme.secondary),
             ),
           ),
           SizedBox(

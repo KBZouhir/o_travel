@@ -80,7 +80,7 @@ class _ResetPageState extends State<ResetPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20.0,
-                                color: Theme.of(context).accentColor),
+                                color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(
                             height: 8,
@@ -89,7 +89,7 @@ class _ResetPageState extends State<ResetPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20.0,
-                                color: Theme.of(context).accentColor),
+                                color: Theme.of(context).colorScheme.secondary),
                             obscureText: showPassword,
                             decoration: InputDecoration(
                               hintText: getTranslated(context, 'password'),
@@ -114,7 +114,7 @@ class _ResetPageState extends State<ResetPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20.0,
-                                color: Theme.of(context).accentColor),
+                                color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(
                             height: 8,
@@ -123,7 +123,7 @@ class _ResetPageState extends State<ResetPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20.0,
-                                color: Theme.of(context).accentColor),
+                                color: Theme.of(context).colorScheme.secondary),
                             obscureText: showConfirmPassword,
                             decoration: InputDecoration(
                               hintText:

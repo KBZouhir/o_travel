@@ -59,7 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Divider(
               height: 1,
-              color: Theme.of(context).accentColor.withOpacity(0.2),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
             ),
             ListTile(
               leading: Icon(Icons.nightlight_round),
@@ -94,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Divider(
               height: 1,
-              color: Theme.of(context).accentColor.withOpacity(0.2),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
             ),
             ListTile(
               leading: Icon(Icons.logout),
@@ -110,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Divider(
               height: 1,
-              color: Theme.of(context).accentColor.withOpacity(0.2),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
             ),
             ListTile(
               leading: Icon(Icons.share),

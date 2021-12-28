@@ -100,7 +100,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 15),
                 Row(
@@ -185,7 +185,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextFormField(
@@ -193,7 +193,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: getTranslated(context, 'ad_name'),
@@ -208,7 +208,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextFormField(
@@ -239,7 +239,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -256,7 +256,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
                       border: BorderSide(
-                          color: Theme.of(context).accentColor, width: 1),
+                          color: Theme.of(context).colorScheme.secondary, width: 1),
                       dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
@@ -283,7 +283,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -311,7 +311,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: Theme.of(context).backgroundColor,
                         border:
-                            Border.all(color: Theme.of(context).accentColor)),
+                            Border.all(color: Theme.of(context).colorScheme.secondary)),
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
                       alignment:isEnglish? Alignment.centerLeft : Alignment.centerRight,
@@ -320,7 +320,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                             ? getTranslated(context, 'month')
                             :  '${DateTime.parse(selectedDate.toString()).month}-${DateTime.parse(selectedDate.toString()).year}',
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
@@ -335,7 +335,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
                   height: 2,
@@ -352,7 +352,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       padding: const EdgeInsets.all(15),
                       borderRadius: BorderRadius.circular(10),
                       border: BorderSide(
-                          color: Theme.of(context).accentColor, width: 1),
+                          color: Theme.of(context).colorScheme.secondary, width: 1),
                       dropdownButtonColor: Theme.of(context).backgroundColor,
                       onChanged: (newValue) {
                         setState(() {
@@ -382,7 +382,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextFormField(
@@ -390,7 +390,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: getTranslated(context, 'price'),

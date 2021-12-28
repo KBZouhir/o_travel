@@ -36,14 +36,14 @@ class _ContactScreenState extends State<ContactScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextFormField(
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                   decoration: InputDecoration(
                     hintText: getTranslated(context, 'subject'),
                     border: OutlineInputBorder(
@@ -57,7 +57,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
-                      color: Theme.of(context).accentColor),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
                 TextField(
