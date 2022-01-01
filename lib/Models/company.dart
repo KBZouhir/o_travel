@@ -36,6 +36,7 @@ class Company {
     required this.wallet,
     required this.domain,
     required this.city,
+    required this.social_media_visible,
   });
 
   int id;
@@ -46,6 +47,7 @@ class Company {
   String image;
   int? state;
   bool checked;
+  bool social_media_visible;
   String facebook;
   String whatsapp;
   String snapchat;
@@ -68,6 +70,7 @@ class Company {
     image: json["image"] == null ? '' : json["image"],
     state: json["state"] == null ? 1 : json["state"],
     checked: json["checked"] == null ? false : json["checked"],
+    social_media_visible: json["social_media_visible"] == null ? false : json["social_media_visible"],
     facebook: json["facebook"] == null ? '' : json["facebook"],
     whatsapp: json["whatsapp"] == null ? '' : json["whatsapp"],
     snapchat: json["snapchat"] == null ? '' : json["snapchat"],
@@ -91,7 +94,8 @@ class Company {
     "country_code": countryCode == null ? null : countryCode,
     "image": image == null ? null : image,
     "state": state == null ? null : state,
-    "checked": checked == null ? null : checked,
+    "checked": checked == null ? false : checked,
+    "social_media_visible": social_media_visible == null ? false : social_media_visible,
     "facebook": facebook == null ? null : facebook,
     "whatsapp": whatsapp == null ? null : whatsapp,
     "snapchat": snapchat == null ? null : snapchat,

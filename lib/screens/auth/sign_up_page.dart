@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -15,6 +16,7 @@ import 'package:o_travel/screens/auth/login_screen.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/services/auth.dart';
+import 'package:select_dialog/select_dialog.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key, required this.isCompany}) : super(key: key);
@@ -669,35 +671,81 @@ class _CompanyPageState extends State<CompanyPage> {
             SizedBox(
               height: 8,
             ),
-            Container(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              color: Theme.of(context).backgroundColor,
-              child: DropdownButtonHideUnderline(
-                child: GFDropdown(
-                  value: selectedCity,
-                  padding: const EdgeInsets.all(15),
-                  borderRadius: BorderRadius.circular(10),
-                  border: BorderSide(
-                      color: Theme.of(context).colorScheme.secondary, width: 1),
-                  dropdownButtonColor: Theme.of(context).backgroundColor,
-                  onChanged: (newValue) {
+            GestureDetector(
+              onTap: () {
+                SelectDialog.showModal<City>(
+                  context,
+                  showSearchBox: false,
+                  label: getTranslated(context, 'area'),
+                  selectedValue: selectedCity,
+                  items: List.generate(
+                      cityList.length, (index) => cityList[index]),
+                  itemBuilder: (context, item, isSelected) {
+                    return ListTile(
+                      leading: isSelected
+                          ? Icon(
+                        Icons.circle,
+                        color: Colors.blue,
+                      )
+                          : Icon(
+                        Icons.circle,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(.3),
+                      ),
+                      title: Text(item.name,style: TextStyle(fontSize: 20),),
+                      selected: isSelected,
+                    );
+                  },
+                  onChange: (City selected) {
                     setState(() {
-                      selectedCity = newValue as City?;
+                      selectedCity = selected;
                     });
                   },
-                  items: cityList
-                      .map((value) => DropdownMenuItem(
-                            value: value,
-                            child: Text(
-                              value.name,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ))
-                      .toList(),
+                  okButtonBuilder: (context, onPressed) {
+                    return Align(
+                      alignment: Alignment.centerRight,
+                      child: FloatingActionButton(
+                        onPressed: onPressed,
+                        child: Icon(Icons.check),
+                        mini: true,
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                height: 60,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Theme.of(context).backgroundColor,
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.secondary)),
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        selectedCity==null
+                            ? getTranslated(context, 'area')
+                            : selectedCity!.name,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Icon(CupertinoIcons.chevron_down,size: 16,)
+                    ],
+                  ),
                 ),
               ),
             ),
+
             SizedBox(
               height: 16,
             ),
@@ -711,32 +759,77 @@ class _CompanyPageState extends State<CompanyPage> {
             SizedBox(
               height: 8,
             ),
-            Container(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              color: Theme.of(context).backgroundColor,
-              child: DropdownButtonHideUnderline(
-                child: GFDropdown(
-                  value: selectedDomain,
-                  padding: const EdgeInsets.all(15),
-                  borderRadius: BorderRadius.circular(10),
-                  border: BorderSide(
-                      color: Theme.of(context).colorScheme.secondary, width: 1),
-                  dropdownButtonColor: Theme.of(context).backgroundColor,
-                  onChanged: (newValue) {
+            GestureDetector(
+              onTap: () {
+                SelectDialog.showModal<Domain>(
+                  context,
+                  showSearchBox: false,
+                  label: getTranslated(context, 'field'),
+                  selectedValue: selectedDomain,
+                  items: List.generate(
+                      domainList.length, (index) => domainList[index]),
+                  itemBuilder: (context, item, isSelected) {
+                    return ListTile(
+                      leading: isSelected
+                          ? Icon(
+                        Icons.circle,
+                        color: Colors.blue,
+                      )
+                          : Icon(
+                        Icons.circle,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(.3),
+                      ),
+                      title: Text(item.name,style: TextStyle(fontSize: 20),),
+                      selected: isSelected,
+                    );
+                  },
+                  onChange: (Domain selected) {
                     setState(() {
-                      selectedDomain = newValue as Domain?;
+                      selectedDomain = selected;
                     });
                   },
-                  items: domainList
-                      .map((value) => DropdownMenuItem(
-                            value: value,
-                            child: Text(
-                              value.name,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ))
-                      .toList(),
+                  okButtonBuilder: (context, onPressed) {
+                    return Align(
+                      alignment: Alignment.centerRight,
+                      child: FloatingActionButton(
+                        onPressed: onPressed,
+                        child: Icon(Icons.check),
+                        mini: true,
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                height: 60,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Theme.of(context).backgroundColor,
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.secondary)),
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        selectedDomain==null
+                            ? getTranslated(context, 'field')
+                            : selectedDomain!.name,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Icon(CupertinoIcons.chevron_down,size: 16,)
+                    ],
+                  ),
                 ),
               ),
             ),

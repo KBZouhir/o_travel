@@ -1,8 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:o_travel/Models/offer.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/screens/ads/show.dart';
+import 'package:o_travel/screens/chat2/ChatUser.dart';
+import 'package:o_travel/screens/chat2/chat_details.dart';
+import 'package:o_travel/services/database.dart';
+import 'package:o_travel/services/sheard_helper.dart';
 
 class CarouselItemWidget extends StatefulWidget {
   final Offer offer;
@@ -17,13 +22,35 @@ class CarouselItemWidget extends StatefulWidget {
 }
 
 class _CarouselItemWidgetState extends State<CarouselItemWidget> {
-  late bool favorite;
+  bool favorite = false;
+  late ChatUser user;
+  late String myId;
+  late String chatRoomId;
   @override
   void initState() {
     super.initState();
     favorite = widget.offer.favoriteByMe;
+    SharedPreferenceHelper().getUserId().then((value) {
+      setState(() {
+        myId=value;
+      });
+    });
+    getResources();
   }
-
+  getResources(){
+    DatabaseMethods().getUserInfo(widget.offer.company.email).then((value){
+      DocumentSnapshot ds = value.docs[0];
+      print(ds['userID']);
+      setState(() {
+        user = ChatUser(userId:  ds['userID'], name: widget.offer.company.name, messageText: '', imageURL: widget.offer.company.image, time: '', phone: ds['userID'], isCompany: true);
+      });
+    });
+  }
+  getChatRoomIdById(String a, String b) {
+    List<String> keyList = [a, b];
+    keyList.sort();
+    return  '${keyList[0]}_${keyList[1]}';
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -110,7 +137,15 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                         size: 30,
                       ),
                       onPressed: () {
-                        setState(() {});
+                       String chatRoomId =getChatRoomIdById(myId,user.userId);
+                        Map<String, dynamic> chatRoomInfoMap = {
+                          "users": [myId,user.userId]
+                        };
+                        DatabaseMethods().createChatRoom(chatRoomId, chatRoomInfoMap);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChatDetails(user: user, myId: myId, chatRoomId:chatRoomId)));
                       },
                     ),
                   ],

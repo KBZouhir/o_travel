@@ -41,6 +41,7 @@ class _ShowOfferState extends State<ShowOffer> {
   int offerPage = 1;
   bool hasNewData = true;
   ScrollController _scrollController = new ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -50,7 +51,8 @@ class _ShowOfferState extends State<ShowOffer> {
           _scrollController.position.maxScrollExtent) {
         print(_scrollController.position.pixels);
 
-        getAllOffers('featured', '1', offerPage).then((value) {
+        getAllOffers('company', '${widget.offer.company.id}', offerPage)
+            .then((value) {
           setState(() {
             if (value.length == 0)
               hasNewData = false;
@@ -71,6 +73,7 @@ class _ShowOfferState extends State<ShowOffer> {
   }
 
   int _current = 0;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -97,7 +100,6 @@ class _ShowOfferState extends State<ShowOffer> {
                   initialPage: 0,
                   enableInfiniteScroll: true,
                   reverse: false,
-
                   autoPlayInterval: Duration(seconds: 3),
                   autoPlayAnimationDuration: Duration(milliseconds: 800),
                   autoPlayCurve: Curves.bounceIn,
@@ -116,8 +118,7 @@ class _ShowOfferState extends State<ShowOffer> {
                           onTap: () {
                             showDialog(
                                 context: context,
-                                builder: (_) => DetailImageScreen(
-                                    i.url));
+                                builder: (_) => DetailImageScreen(i.url));
                           },
                           child: Hero(
                             tag: 'offer${i.id}',
@@ -187,7 +188,8 @@ class _ShowOfferState extends State<ShowOffer> {
                             widget.offer.name,
                             style: TextStyle(
                                 color: Theme.of(context)
-                                    .colorScheme.secondary
+                                    .colorScheme
+                                    .secondary
                                     .withOpacity(.8),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
@@ -197,7 +199,8 @@ class _ShowOfferState extends State<ShowOffer> {
                           widget.offer.category.name,
                           style: TextStyle(
                               color: Theme.of(context)
-                                  .colorScheme.secondary
+                                  .colorScheme
+                                  .secondary
                                   .withOpacity(0.6),
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
@@ -221,8 +224,10 @@ class _ShowOfferState extends State<ShowOffer> {
                         Text(
                           '${widget.offer.price}\$',
                           style: TextStyle(
-                              color:
-                                  Theme.of(context).colorScheme.secondary.withOpacity(1),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(1),
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )
@@ -249,7 +254,8 @@ class _ShowOfferState extends State<ShowOffer> {
                                 icon: Icon(
                                   Icons.phone_outlined,
                                   size: 35,
-                                  color: Theme.of(context).colorScheme.secondary,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                             )),
@@ -266,7 +272,8 @@ class _ShowOfferState extends State<ShowOffer> {
                                 icon: Icon(
                                   Icons.chat_outlined,
                                   size: 35,
-                                  color: Theme.of(context).colorScheme.secondary,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
                               ),
                             )),
@@ -311,7 +318,8 @@ class _ShowOfferState extends State<ShowOffer> {
                               fontSize: 14,
                               height: 1.5,
                               color: Theme.of(context)
-                                  .colorScheme.secondary
+                                  .colorScheme
+                                  .secondary
                                   .withOpacity(0.6)),
                         ),
                       ],
@@ -321,7 +329,10 @@ class _ShowOfferState extends State<ShowOffer> {
                     ),
                     Divider(
                       height: 1,
-                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(0.5),
                     ),
                     SizedBox(
                       height: 20,
@@ -331,8 +342,10 @@ class _ShowOfferState extends State<ShowOffer> {
                       style: TextStyle(
                           fontSize: 14,
                           height: 1.5,
-                          color:
-                              Theme.of(context).colorScheme.secondary.withOpacity(0.6)),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.6)),
                     ),
                     SizedBox(
                       height: 20,
@@ -376,7 +389,9 @@ class _ShowOfferState extends State<ShowOffer> {
                                 Text(widget.offer.company.name,
                                     style: TextStyle(
                                         fontSize: 20,
-                                        color: Theme.of(context).colorScheme.secondary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                         fontWeight: FontWeight.bold)),
                               ],
                             ),
@@ -384,27 +399,33 @@ class _ShowOfferState extends State<ShowOffer> {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset('assets/images/insta.png'),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset('assets/images/wtsp.png'),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset('assets/images/snap.png'),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset('assets/images/gmail.png'),
-                              ),
-                            ],
-                          ),
+                          (widget.offer.company.social_media_visible)
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Image.asset(
+                                          'assets/images/insta.png'),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child:
+                                          Image.asset('assets/images/wtsp.png'),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child:
+                                          Image.asset('assets/images/snap.png'),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Image.asset(
+                                          'assets/images/gmail.png'),
+                                    ),
+                                  ],
+                                )
+                              : SizedBox(),
                           SizedBox(
                             height: 20,
                           ),
@@ -487,7 +508,7 @@ class DetailImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(photo.isEmpty)Navigator.pop(context);
+    if (photo.isEmpty) Navigator.pop(context);
     return GestureDetector(
         onTap: () => Navigator.pop(context),
         child: PhotoView(imageProvider: NetworkImage(photo)));

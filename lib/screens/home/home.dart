@@ -220,20 +220,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                         )
                                       : SizedBox(),
                                   Expanded(
-                                      child: (storyList.length > 0)
-                                          ? StoriesList(storyList: storyList,id:me.id,isCompany:isCompany)
-                                          : (loadingStory)
-                                              ? Container(
-                                                  height: 60,
-                                                  child: GFLoader(),
-                                                )
-                                              : Container(
-                                                  height: 60,
-                                                  child: Center(
-                                                    child: Text(getTranslated(
-                                                        context, 'no_data')),
-                                                  ),
-                                                ))
+                                      child: (storyList.length == 0)
+                                          ?(loadingStory)
+                                          ? Container(
+                                        height: 60,
+                                        child: GFLoader(),
+                                      )
+                                          : Container(
+                                        height: 60,
+                                        child: Center(
+                                          child: Text(getTranslated(
+                                              context, 'no_data')),
+                                        ),
+                                      )
+                                          :  StoriesList(storyList: storyList,id:me.id,isCompany:isCompany))
                                 ]));
                           }),
                           SizedBox(

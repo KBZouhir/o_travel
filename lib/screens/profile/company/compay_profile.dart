@@ -47,7 +47,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
           _scrollController.position.maxScrollExtent) {
         print(_scrollController.position.pixels);
 
-        getAllOffers('featured', '1', offerPage).then((value) {
+        fetchOffers('company=${widget.company.id}', offerPage).then((value) {
           setState(() {
             if (value.length == 0)
               hasNewData = false;

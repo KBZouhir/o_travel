@@ -44,7 +44,7 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
           _scrollController.position.maxScrollExtent) {
 
 
-        getAllOffers('featured', '1', offerPage).then((value) {
+        getAllOffers('company', '${widget.company.id}',offerPage).then((value) {
           setState(() {
             if (value.length == 0)
               hasNewData = false;
@@ -219,42 +219,48 @@ class _ShowCompanyProfileState extends State<ShowCompanyProfile> {
                     SizedBox(
                       height: 16,
                     ),
-                    Divider(
-                      height: 1,
-                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      getTranslated(context, 'Social_Media_Accounts'),
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    (widget.company.social_media_visible)?
+                    Column(
                       children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset('assets/images/insta.png'),
+                        Divider(
+                          height: 1,
+                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset('assets/images/wtsp.png'),
+                        SizedBox(
+                          height: 16,
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset('assets/images/snap.png'),
+                        Text(
+                          getTranslated(context, 'Social_Media_Accounts'),
+                          style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset('assets/images/gmail.png'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: Image.asset('assets/images/insta.png'),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Image.asset('assets/images/wtsp.png'),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Image.asset('assets/images/snap.png'),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Image.asset('assets/images/gmail.png'),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 16,
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
+                    )
+                    :SizedBox(),
                     Divider(
                       height: 1,
                       color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
