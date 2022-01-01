@@ -58,7 +58,7 @@ dependencies:
   flutter_local_notifications: ^9.1.5
   firebase_storage: ^10.2.4
   emoji_picker_flutter: ^1.0.8
-
+  select_dialog: ^2.0.0
 
 
 dev_dependencies:

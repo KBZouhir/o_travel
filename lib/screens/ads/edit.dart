@@ -14,6 +14,7 @@ import 'package:o_travel/api/company/country_api.dart';
 import 'package:o_travel/api/company/offer_api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:select_dialog/select_dialog.dart';
 
 class EditAdScreen extends StatefulWidget {
   final Offer offer;
@@ -32,7 +33,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
   Category? selectedCategory;
 
   List<Country> countryList = [];
-  Country? selectedCountry;
+  List<Country> selectedCountries = [];
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -42,12 +43,15 @@ class _EditAdScreenState extends State<EditAdScreen> {
     getAllCategory().then((value) {
       setState(() {
         categoryList = value;
+          selectedCategory=widget.offer.category;;
       });
     });
 
     getAllCountry().then((value) {
       setState(() {
         countryList = value;
+        selectedCountries=widget.offer.countries;
+
       });
     });
   }
@@ -61,10 +65,16 @@ class _EditAdScreenState extends State<EditAdScreen> {
     nameController.text=widget.offer.name;
     descriptionController.text=widget.offer.description;
     priceController.text='${widget.offer.price}';
+    selectedDate=widget.offer.date;
     getLocale().then((locale) {
       if(locale.languageCode=='ar')isEnglish=false;
     });
-
+    setState(() {
+      selectedCategory=widget.offer.category;
+      categoryList.add(selectedCategory!);
+      selectedCountries=widget.offer.countries;
+      selectedDate= widget.offer.date;
+    });
     getResources();
   }
 
@@ -90,13 +100,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      selectedCategory=widget.offer.category;
-      categoryList.add(selectedCategory!);
-      selectedCountry=widget.offer.countries[0];
-      countryList.add(selectedCountry!);
-      selectedDate= widget.offer.date;
-    });
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -288,39 +292,77 @@ class _EditAdScreenState extends State<EditAdScreen> {
                 SizedBox(
                   height: 2,
                 ),
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  color: Theme.of(context).backgroundColor,
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: DropdownButtonHideUnderline(
-                    child: GFDropdown(
-                      style: TextStyle(
-                        height: 1.6,
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.secondary,
-                        decorationThickness: 0,),
-                      hint: Text(getTranslated(context, 'country')),
-                      value: selectedCountry,
-                      padding: const EdgeInsets.all(15),
-                      borderRadius: BorderRadius.circular(10),
-                      border: BorderSide(
-                          color: Theme.of(context).colorScheme.secondary, width: 1),
-                      dropdownButtonColor: Theme.of(context).backgroundColor,
-                      onChanged: (newValue) {
+                GestureDetector(
+                  onTap: () {
+                    SelectDialog.showModal<Country>(
+                      context,
+                      showSearchBox: false,
+                      label: getTranslated(context, 'country'),
+                      multipleSelectedValues: selectedCountries,
+                      items: List.generate(
+                          countryList.length, (index) => countryList[index]),
+                      itemBuilder: (context, item, isSelected) {
+                        return ListTile(
+                          leading: isSelected
+                              ? Icon(
+                            Icons.circle,
+                            color: Colors.blue,
+                          )
+                              : Icon(
+                            Icons.circle,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(.3),
+                          ),
+                          title: Text(item.name,style: TextStyle(fontSize: 20),),
+                          selected: isSelected,
+                        );
+                      },
+                      onMultipleItemsChange: (List<Country> selected) {
                         setState(() {
-                          selectedCountry = newValue as Country?;
+                          selectedCountries = selected;
                         });
                       },
-                      items: countryList
-                          .map((value) => DropdownMenuItem(
-                                value: value,
-                                child: Text(
-                                  value.name,
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ))
-                          .toList(),
+                      okButtonBuilder: (context, onPressed) {
+                        return Align(
+                          alignment: Alignment.centerRight,
+                          child: FloatingActionButton(
+                            onPressed: onPressed,
+                            child: Icon(Icons.check),
+                            mini: true,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Theme.of(context).backgroundColor,
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.secondary)),
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            selectedCountries.length==0
+                                ? getTranslated(context, 'country')
+                                : selectedCountries[0].name,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(CupertinoIcons.chevron_down,size: 16,)
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -359,19 +401,19 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: Theme.of(context).backgroundColor,
-                        border:
-                            Border.all(color: Theme.of(context).colorScheme.secondary)),
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.secondary)),
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Align(
-                      alignment:isEnglish? Alignment.centerLeft : Alignment.centerRight,
+                      alignment: Alignment.centerLeft,
                       child: Text(
                         selectedDate == null
                             ? getTranslated(context, 'month')
-                            : '${DateTime.parse(selectedDate.toString()).month}-${DateTime.parse(selectedDate.toString()).year}',
+                            : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
                         style: TextStyle(
-                          height: 1.6,
-                          fontSize: 20,
-                          decorationThickness: 0,),
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -389,45 +431,71 @@ class _EditAdScreenState extends State<EditAdScreen> {
                 SizedBox(
                   height: 2,
                 ),
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  color: Theme.of(context).backgroundColor,
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: DropdownButtonHideUnderline(
-                    child: GFDropdown(
-                      style: TextStyle(
-                        height: 1.6,
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.secondary,
-                        decorationThickness: 0,),
-                      hint: Text(getTranslated(context, 'trip_type')),
-                      value: selectedCategory,
-                      padding: const EdgeInsets.all(15),
-                      borderRadius: BorderRadius.circular(10),
-                      border: BorderSide(
-                          color: Theme.of(context).colorScheme.secondary, width: 1),
-                      dropdownButtonColor: Theme.of(context).backgroundColor,
-                      onChanged: (newValue) {
+                GestureDetector(
+                  //trip_type
+                  onTap: () {
+                    SelectDialog.showModal<Category>(
+                      context,
+                      label: getTranslated(context, 'trip_type'),
+                      items: categoryList,
+                      selectedValue: selectedCategory,
+                      itemBuilder:
+                          (BuildContext context, Category item, bool isSelected) {
+                        return ListTile(
+                          leading: isSelected
+                              ? Icon(
+                            Icons.circle,
+                            color: Colors.blue,
+                          )
+                              : Icon(
+                            Icons.circle,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(.3),
+                          ),
+                          title: Text(item.name),
+                          selected: isSelected,
+                        );
+                      },
+                      onChange: (selected) {
                         setState(() {
-                          selectedCategory = newValue as Category?;
+                          selectedCategory = selected;
                         });
                       },
-                      items: categoryList
-                          .map((value) => DropdownMenuItem(
-                                value: value,
-                                child: Text(
-                                  value.name,
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ))
-                          .toList(),
+                    );
+                  },
+                  child: Container(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Theme.of(context).backgroundColor,
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.secondary)),
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            selectedCategory == null
+                                ? getTranslated(context, 'trip_type')
+                                : selectedCategory!.name,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(CupertinoIcons.chevron_down,size: 16,)
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+
                 SizedBox(height: 16),
 
                 //----Price-------------------------------------
@@ -474,14 +542,14 @@ class _EditAdScreenState extends State<EditAdScreen> {
                           descriptionController.text,
                           priceController.text,
                           selectedCategory!.id,
-                          selectedCountry!.id,
+                          selectedCountries,
                           '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}');
                     },
                     color: Theme.of(context).primaryColor,
                     child: Text(
                       getTranslated(context, 'save'),
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Colors.white,
                       ),
                     ),

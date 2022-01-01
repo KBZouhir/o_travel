@@ -275,7 +275,7 @@ class _AddStoryState extends State<AddStory> {
               child: MaterialButton(
                 onPressed: () {
                   createStory(widget.image);
-                  Navigator.pop(context);
+                  Navigator.pop(context,true);
                 },
                 color: Theme.of(context).backgroundColor,
                 child: Text(
@@ -300,7 +300,7 @@ class _AddStoryState extends State<AddStory> {
                     width: 40,
                     child: IconButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context,false);
                         },
                         icon: Icon(Icons.close)))),
           )

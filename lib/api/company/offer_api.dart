@@ -82,7 +82,7 @@ Future<List<Offer>> getCompanyOffers( int page) async {
 }
 
 Future createOffer(List<File> imageList, name, description, price,
-    categoryId, countryId, month,context) async {
+    categoryId,List<Country> countries, month,context) async {
 
   EasyLoading.show();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -109,7 +109,9 @@ Future createOffer(List<File> imageList, name, description, price,
   imageUploadRequest.fields['date'] = '$month';
 
   imageUploadRequest.fields['category_id'] = '$categoryId';
-  imageUploadRequest.fields['countries[0]'] = '$countryId';
+  for(var i=0;i<countries.length;i++){
+    imageUploadRequest.fields['countries[$i]'] = '${countries[i].id}';
+  }
 
   try {
     final streamedResponse = await imageUploadRequest.send();
@@ -128,6 +130,7 @@ Future createOffer(List<File> imageList, name, description, price,
     }else{
       if(EasyLoading.isShow)EasyLoading.dismiss();
        EasyLoading.showError('Error!');
+      print('${response.body}');
 
       return '';
     }
@@ -139,7 +142,7 @@ Future createOffer(List<File> imageList, name, description, price,
 }
 
 Future<String> updateOffer(List<File> imageList, name, description, price,
-    categoryId, countryId, month) async {
+    categoryId, List<Country>countries, month) async {
   EasyLoading.show();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String _token = prefs.getString("_token") ?? '';
@@ -165,7 +168,9 @@ Future<String> updateOffer(List<File> imageList, name, description, price,
   imageUploadRequest.fields['date'] = '$month';
 
   imageUploadRequest.fields['category_id'] = '$categoryId';
-  imageUploadRequest.fields['countries[0]'] = '$countryId';
+  for(var i=0;i<countries.length;i++){
+    imageUploadRequest.fields['countries[$i]'] = '${countries[i].id}';
+  }
 
   try {
     final streamedResponse = await imageUploadRequest.send();
@@ -179,15 +184,15 @@ Future<String> updateOffer(List<File> imageList, name, description, price,
       print('${response.body}');
 
       if(EasyLoading.isShow)EasyLoading.dismiss();
-      EasyLoading.showError('Error');
+      EasyLoading.showError('Error 1');
     }
     if(EasyLoading.isShow)EasyLoading.dismiss();
     EasyLoading.showSuccess('Great Success!');
     return '';
   } catch (e) {
     if(EasyLoading.isShow)EasyLoading.dismiss();
-    EasyLoading.showError('Error');
-    print(e);
+    EasyLoading.showError('Error 2 $e');
+    throw(e);
     return 'null';
   }
 }

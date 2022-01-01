@@ -2,13 +2,10 @@
 //
 //     final company = companyFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-import 'package:o_travel/Models/domain.dart';
 import 'package:o_travel/Models/story.dart';
 
-import 'city.dart';
 
 StoryCompany companyFromJson(String str) => StoryCompany.fromJson(json.decode(str));
 

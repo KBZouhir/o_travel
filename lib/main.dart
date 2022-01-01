@@ -162,9 +162,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? Colors.white
-          : Color.fromRGBO(49, 47, 47, 1.0),
+      backgroundColor: primaryColorDark,
       body: Center(
           child: Image.asset(
         'assets/images/logo.png',

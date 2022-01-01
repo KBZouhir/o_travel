@@ -470,7 +470,7 @@ class _ShowOfferState extends State<ShowOffer> {
             borderRadius: BorderRadius.circular(10),
           ),
           shadowColor: Colors.grey.shade50,
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: gray228,
           label: Text(countries[i].name),
         ),
       );

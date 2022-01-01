@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,8 @@ import 'package:o_travel/screens/privacy.dart';
 import 'package:o_travel/screens/profile/company/compay_profile.dart';
 import 'package:o_travel/screens/profile/user/user_profile.dart';
 import 'package:o_travel/screens/settings/settings.dart';
+import 'package:o_travel/services/sheard_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -165,29 +169,26 @@ class MyDrawer extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ChatScreen()));
             },
           ),
-          if (isCompany)
-            Column(
-              children: [
-                Divider(
-                  height: 1,
-                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-                ),
-                ListTile(
-                  leading: Icon(Icons.list),
-                  title: Text(
-                    getTranslated(context, 'add_new_ad_page'),
-                    style: TextStyle(fontSize: 22),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AddNewAdScreen()));
-                  },
-                ),
-              ],
+          Divider(
+            height: 1,
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+          ),
+          ListTile(
+            leading: Icon(Icons.list),
+            title: Text(
+              getTranslated(context, 'add_new_ad_page'),
+              style: TextStyle(fontSize: 22),
             ),
+            onTap: () async {
+              String phone=await SharedPreferenceHelper().getPhone();
+              if (Platform.isAndroid) {
+                launch( "whatsapp://wa.me/$phone");
+              } else {
+                launch( "whatsapp://send?phone=$phone");
+              }
+
+            },
+          ),
           Divider(
             height: 1,
             color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
