@@ -53,12 +53,10 @@ class _OfferWidgetState extends State<OfferWidget> {
         });
       });
     }
-
   getChatRoomIdById(String a, String b) {
     List<String> keyList = [a, b];
     keyList.sort();
     return  '${keyList[0]}_${keyList[1]}';
-
 }
 
   @override

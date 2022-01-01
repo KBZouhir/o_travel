@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:o_travel/Models/StoriesCompany.dart';
 import 'package:o_travel/Models/story.dart';
 import 'package:o_travel/api/CONFIG.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,6 +68,7 @@ Future<String> createStory(File image) async {
     return 'null';
   }
 }
+
 Future<String> deleteStory(int id) async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -93,3 +95,22 @@ Future<String> deleteStory(int id) async {
 
 }
 
+Future<List<StoryCompany>> getAllStoryCompany() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String _token =prefs.getString("_token")??'';
+  String _url =prefs.getString("_url")??'';
+  final response = await http.get(Uri.parse(_url + prifix+'/company'),
+      headers:  {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $_token',
+      });
+  print('${response.body}');
+  if (response.statusCode == 200) {
+    Iterable l = jsonDecode(response.body)['data'];
+    return List<StoryCompany>.from(l.map((s) => StoryCompany.fromJson(s)));
+  } else {
+    print('Failed to load  $prifix');
+    return [];
+  }
+}

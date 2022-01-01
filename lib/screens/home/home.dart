@@ -10,6 +10,7 @@ import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:o_travel/Models/StoriesCompany.dart';
 import 'package:o_travel/Models/category.dart';
 import 'package:o_travel/Models/country.dart';
 import 'package:o_travel/Models/offer.dart';
@@ -64,10 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
   dynamic me;
   List<Country> countryList = [];
   Country? selectedCountry;
-  List<Story> storyList = [];
+  List<StoryCompany> storyList = [];
 
   getStories() {
-    getAllStory().then((value) {
+    getAllStoryCompany().then((value) {
       setState(() {
         storyList = value;
         loadingStory = false;
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
 
-    getAllStory().then((value) {
+    getAllStoryCompany().then((value) {
       setState(() {
         storyList = value;
         loadingStory = false;
@@ -220,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       : SizedBox(),
                                   Expanded(
                                       child: (storyList.length > 0)
-                                          ? StoriesList(storyList: storyList)
+                                          ? StoriesList(storyList: storyList,id:me.id,isCompany:isCompany)
                                           : (loadingStory)
                                               ? Container(
                                                   height: 60,

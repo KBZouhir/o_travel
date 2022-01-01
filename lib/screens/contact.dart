@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:o_travel/api/company/api.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/localization/const.dart';
 
@@ -11,6 +12,8 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
+  String? message;
+  String? subject;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +42,12 @@ class _ContactScreenState extends State<ContactScreen> {
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
-                TextFormField(
+                TextField(
+                  onChanged: (val) {
+                    setState(() {
+                      subject=val;
+                    });
+                  },
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.0,
@@ -62,7 +70,9 @@ class _ContactScreenState extends State<ContactScreen> {
                 SizedBox(height: 8),
                 TextField(
                   onChanged: (val) {
-                    setState(() {});
+                    setState(() {
+                      message=val;
+                    });
                   },
                   keyboardType: TextInputType.multiline,
                   maxLength: 500,
@@ -92,7 +102,9 @@ class _ContactScreenState extends State<ContactScreen> {
                     borderRadius: BorderRadius.circular(raduice),
                   ),
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      report( subject, message);
+                    },
                     color: Theme.of(context).primaryColor,
                     child: Text(
                       getTranslated(context, 'send'),

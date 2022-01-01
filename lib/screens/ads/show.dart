@@ -85,7 +85,7 @@ class _ShowOfferState extends State<ShowOffer> {
     }
 
     return Scaffold(
-      backgroundColor: primaryColorDark,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: buildAppBar(context),
       body: SingleChildScrollView(
         controller: _scrollController,
@@ -93,11 +93,11 @@ class _ShowOfferState extends State<ShowOffer> {
           children: [
             CarouselSlider(
               options: CarouselOptions(
-                  height: 400,
                   viewportFraction: 0.8,
                   initialPage: 0,
-                  enableInfiniteScroll: false,
+                  enableInfiniteScroll: true,
                   reverse: false,
+
                   autoPlayInterval: Duration(seconds: 3),
                   autoPlayAnimationDuration: Duration(milliseconds: 800),
                   autoPlayCurve: Curves.bounceIn,
@@ -435,7 +435,7 @@ class _ShowOfferState extends State<ShowOffer> {
       iconTheme: Theme.of(context).iconTheme,
       toolbarHeight: 50,
       backgroundColor: Theme.of(context).primaryColor,
-      elevation: 0,
+      elevation: 2,
       leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

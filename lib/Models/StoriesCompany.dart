@@ -31,7 +31,7 @@ class StoryCompany {
   String countryCode;
   String image;
   int? state;
-  bool checked;
+  bool? checked;
   List<Story> stories;
 
   factory StoryCompany.fromJson(Map<String, dynamic> json) => StoryCompany(
