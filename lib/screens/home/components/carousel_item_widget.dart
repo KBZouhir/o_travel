@@ -145,7 +145,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ChatDetails(user: user, myId: myId, chatRoomId:chatRoomId)));
+                                builder: (context) => ChatDetails (user: user, myId: myId, chatRoomId:chatRoomId)));
                       },
                     ),
                   ],
