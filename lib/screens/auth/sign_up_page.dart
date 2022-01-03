@@ -15,6 +15,7 @@ import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/login_screen.dart';
 import 'package:o_travel/screens/home/home.dart';
 import 'package:o_travel/screens/localization/const.dart';
+import 'package:o_travel/screens/term_of_use.dart';
 import 'package:o_travel/services/auth.dart';
 import 'package:select_dialog/select_dialog.dart';
 
@@ -28,16 +29,22 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   String _lang = 'en';
+  bool isAr = false;
+  bool checked = false;
 
   @override
   void initState() {
     super.initState();
     getLocale().then((locale) {
       setState(() {
-        if (locale.languageCode == 'en')
+        if (locale.languageCode == 'en') {
+          this.isAr = false;
           this._lang = 'ar';
-        else
+        } else {
+          this.isAr = false;
+
           this._lang = 'en';
+        }
       });
     });
   }
@@ -54,7 +61,6 @@ class _SignUpPageState extends State<SignUpPage> {
       initialIndex: widget.isCompany ? 1 : 0,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 140,
           backgroundColor: Theme.of(context).backgroundColor,
           elevation: 3,
           title: Center(
@@ -110,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
         body: TabBarView(
           children: [
             UserPage(),
-            CompanyPage(),
+            CompanyPage(isAr: isAr),
           ],
         ),
       ),
@@ -136,6 +142,9 @@ class _UserPageState extends State<UserPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  bool checked = false;
+
+  GlobalKey<FormState> _form = GlobalKey<FormState>();
 
   getResources() {
     FirebaseMessaging.instance.getToken().then((value) {
@@ -149,10 +158,11 @@ class _UserPageState extends State<UserPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+// TODO: implement initState
     super.initState();
     getResources();
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -162,6 +172,7 @@ class _UserPageState extends State<UserPage> {
     passwordController.dispose();
     confirmPasswordController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -170,260 +181,305 @@ class _UserPageState extends State<UserPage> {
         child: Center(
             child: SingleChildScrollView(
                 child: Container(
-                    child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'username'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextFormField(
-              controller: usernameController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'username'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(
-                  Icons.perm_identity,
-                  size: 30,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'email'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextFormField(
-              controller: emailController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'email'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(
-                  Icons.perm_identity,
-                  size: 30,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'password'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextField(
-              controller: passwordController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              obscureText: showPassword,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'password'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: showPassword
-                      ? Icon(Icons.remove_red_eye)
-                      : Icon(Icons.visibility_off_outlined),
-                  onPressed: () => setState(() => showPassword = !showPassword),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'confirm_password'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextField(
-              controller: confirmPasswordController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              obscureText: showConfirmPassword,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'confirm_password'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: showConfirmPassword
-                      ? Icon(Icons.remove_red_eye)
-                      : Icon(Icons.visibility_off_outlined),
-                  onPressed: () => setState(
-                      () => showConfirmPassword = !showConfirmPassword),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'phone'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).colorScheme.secondary),
-                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
-              child: IntlPhoneField(
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelText: getTranslated(context, 'phone'),
-                    border: InputBorder.none,
-                    counterStyle: TextStyle(
-                      height: double.minPositive,
-                    ),
-                    counterText: "",
-                    contentPadding: EdgeInsets.only(bottom: 15)),
-                initialCountryCode: "DZ",
-                onChanged: (phone) {
-                  setState(() {
-                    this.phone = phone.number!;
-                  });
-                },
-                onCountryChanged: (dynamic phone) {
-                  setState(() {
-                    this.countryCode = phone.countryCode!;
-                  });
-                },
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              width: double.infinity,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(raduice),
-              ),
-              child: MaterialButton(
-                onPressed: () async {
-                  registerUser(
-                          usernameController.text,
-                          emailController.text,
-                          passwordController.text,
-                          confirmPasswordController.text,
-                          countryCode,
-                          phone,
-                          deviceToken,'')
-                      .then((value) {
-                    if (value.id > -1) {
-                        AuthMethods().signUPWithEmailPassword(context,emailController.text,passwordController.text,usernameController.text,false);
-                    }
-                  });
-                },
-                color: Theme.of(context).primaryColor,
-                child: Text(
-                  getTranslated(context, 'create_account'),
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  getTranslated(context, 'i_have_account'),
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-                    fontSize: 16.0,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoginScreen(company: false)));
-                  },
-                  child: Text(getTranslated(context, 'login'),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16.0,
-                      )),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-          ],
-        )))));
+                    child:Form(
+                      key: _form,
+                      child:  Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            getTranslated(context, 'username'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
+                          SizedBox(),
+                          TextFormField(
+                            controller: usernameController,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              hintText: getTranslated(context, 'username'),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                              prefixIcon: Icon(
+                                Icons.perm_identity,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            getTranslated(context, 'email'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
+                          SizedBox(),
+                          TextFormField(
+                            controller: emailController,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              hintText: getTranslated(context, 'email'),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                              prefixIcon: Icon(
+                                Icons.perm_identity,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            getTranslated(context, 'password'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
+                          SizedBox(),
+                          TextField(
+                            controller: passwordController,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                            obscureText: showPassword,
+                            decoration: InputDecoration(
+                              hintText: getTranslated(context, 'password'),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                              prefixIcon: Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: showPassword
+                                    ? Icon(Icons.remove_red_eye)
+                                    : Icon(Icons.visibility_off_outlined),
+                                onPressed: () => setState(() => showPassword = !showPassword),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            getTranslated(context, 'confirm_password'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
+                          SizedBox(),
+                          TextField(
+                            controller: confirmPasswordController,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                            obscureText: showConfirmPassword,
+                            decoration: InputDecoration(
+                              hintText: getTranslated(context, 'confirm_password'),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                              prefixIcon: Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: showConfirmPassword
+                                    ? Icon(Icons.remove_red_eye)
+                                    : Icon(Icons.visibility_off_outlined),
+                                onPressed: () => setState(
+                                        () => showConfirmPassword = !showConfirmPassword),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            getTranslated(context, 'phone'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.0,
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
+                          SizedBox(),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Theme.of(context).colorScheme.secondary),
+                                borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                            child: IntlPhoneField(
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                              decoration: InputDecoration(
+                                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                                  labelText: getTranslated(context, 'phone'),
+                                  border: InputBorder.none,
+                                  counterStyle: TextStyle(
+                                    height: double.minPositive,
+                                  ),
+                                  counterText: "",
+                                  contentPadding: EdgeInsets.only(bottom: 15)),
+                              initialCountryCode: "DZ",
+                              onChanged: (phone) {
+                                setState(() {
+                                  this.phone = phone.number!;
+                                });
+                              },
+                              onCountryChanged: (dynamic phone) {
+                                setState(() {
+                                  this.countryCode = phone.countryCode!;
+                                });
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Checkbox(
+                                value: this.checked,
+                                onChanged: (value) {
+                                  setState(() {
+                                    this.checked = value!;
+                                  });
+                                },
+                              ), //C
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TermOfUseScreen()));
+                                },
+                                child: Text(
+                                  getTranslated(context, 'term_of_use'),
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.7),
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Container(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(raduice),
+                            ),
+                            child: MaterialButton(
+                              onPressed: () async {
+                                if (checked) {
+                                  if (_form.currentState!.validate()) {
+                                    registerUser(
+                                        usernameController.text,
+                                        emailController.text,
+                                        passwordController.text,
+                                        confirmPasswordController.text,
+                                        countryCode,
+                                        phone,
+                                        deviceToken,
+                                        '')
+                                        .then((value) {
+                                      if (value.id > -1) {
+                                        AuthMethods().signUPWithEmailPassword(
+                                            context,
+                                            emailController.text,
+                                            passwordController.text,
+                                            usernameController.text,
+                                            false);
+                                      }
+                                    });
+                                  } else {}
+                                } else {
+                                  final snackBar = SnackBar(
+                                    content: const Text('You have to agree the term of uses'),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                }
+                              },
+                              color: checked?Theme.of(context).primaryColor:Theme.of(context).primaryColor.withOpacity(0.3),
+                              child: Text(
+                                getTranslated(context, 'create_account'),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                getTranslated(context, 'i_have_account'),
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withOpacity(0.5),
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                                },
+                                child: Text(getTranslated(context, 'login'),
+                                    style: TextStyle(
+                                      color: Theme.of(context).colorScheme.secondary,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16.0,
+                                    )),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
+                    )))));
   }
 }
 
 class CompanyPage extends StatefulWidget {
-  const CompanyPage({Key? key}) : super(key: key);
+  final bool isAr;
+
+  const CompanyPage({Key? key, required this.isAr}) : super(key: key);
 
   @override
   _CompanyPageState createState() => _CompanyPageState();
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-
   bool showPassword = true;
   bool showConfirmPassword = true;
   late String countryCode;
@@ -432,6 +488,10 @@ class _CompanyPageState extends State<CompanyPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  bool checked = false;
+
+  GlobalKey<FormState> _form = GlobalKey<FormState>();
+
   List<City> cityList = [];
   City? selectedCity;
 
@@ -447,7 +507,6 @@ class _CompanyPageState extends State<CompanyPage> {
     });
 
     getAllCity().then((value) {
-
       setState(() {
         this.cityList = value;
       });
@@ -466,6 +525,7 @@ class _CompanyPageState extends State<CompanyPage> {
     super.initState();
     getResources();
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -484,424 +544,520 @@ class _CompanyPageState extends State<CompanyPage> {
         child: Center(
             child: SingleChildScrollView(
                 child: Container(
-                    child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'company_name'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextFormField(
-              controller: nameController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'company_name'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(
-                  Icons.perm_identity,
-                  size: 30,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'email'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextFormField(
-              controller: emailController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'email'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(
-                  Icons.perm_identity,
-                  size: 30,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'password'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextField(
-              controller: passwordController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              obscureText: showPassword,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'password'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: showPassword
-                      ? Icon(Icons.remove_red_eye)
-                      : Icon(Icons.visibility_off_outlined),
-                  onPressed: () => setState(() => showPassword = !showPassword),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'confirm_password'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            TextField(
-              controller: confirmPasswordController,
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-              obscureText: showConfirmPassword,
-              decoration: InputDecoration(
-                hintText: getTranslated(context, 'confirm_password'),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(raduice))),
-                prefixIcon: Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  icon: showConfirmPassword
-                      ? Icon(Icons.remove_red_eye)
-                      : Icon(Icons.visibility_off_outlined),
-                  onPressed: () => setState(
-                      () => showConfirmPassword = !showConfirmPassword),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'phone'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).colorScheme.secondary),
-                  borderRadius: BorderRadius.all(Radius.circular(raduice))),
-              child: IntlPhoneField(
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelText: getTranslated(context, 'phone'),
-                    border: InputBorder.none,
-                    counterStyle: TextStyle(
-                      height: double.minPositive,
-                    ),
-                    counterText: "",
-                    contentPadding: EdgeInsets.only(bottom: 15)),
-                initialCountryCode: "DZ",
-                onChanged: (phone) {
-                  setState(() {
-                    countryCode = phone.countryCode!;
-                    this.phone = phone.number!;
-                  });
-                },
-                onCountryChanged: (dynamic phone) {
-                  setState(() {
-                    countryCode = phone.countryCode!;
-                    this.phone = phone.number!;
-                  });
-                },
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'area'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            GestureDetector(
-              onTap: () {
-                SelectDialog.showModal<City>(
-                  context,
-                  showSearchBox: false,
-                  label: getTranslated(context, 'area'),
-                  selectedValue: selectedCity,
-                  items: List.generate(
-                      cityList.length, (index) => cityList[index]),
-                  itemBuilder: (context, item, isSelected) {
-                    return ListTile(
-                      leading: isSelected
-                          ? Icon(
-                        Icons.circle,
-                        color: Colors.blue,
-                      )
-                          : Icon(
-                        Icons.circle,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondary
-                            .withOpacity(.3),
-                      ),
-                      title: Text(item.name,style: TextStyle(fontSize: 20),),
-                      selected: isSelected,
-                    );
-                  },
-                  onChange: (City selected) {
-                    setState(() {
-                      selectedCity = selected;
-                    });
-                  },
-                  okButtonBuilder: (context, onPressed) {
-                    return Align(
-                      alignment: Alignment.centerRight,
-                      child: FloatingActionButton(
-                        onPressed: onPressed,
-                        child: Icon(Icons.check),
-                        mini: true,
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                height: 60,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Theme.of(context).backgroundColor,
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.secondary)),
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        selectedCity==null
-                            ? getTranslated(context, 'area')
-                            : selectedCity!.name,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Icon(CupertinoIcons.chevron_down,size: 16,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              getTranslated(context, 'field'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            GestureDetector(
-              onTap: () {
-                SelectDialog.showModal<Domain>(
-                  context,
-                  showSearchBox: false,
-                  label: getTranslated(context, 'field'),
-                  selectedValue: selectedDomain,
-                  items: List.generate(
-                      domainList.length, (index) => domainList[index]),
-                  itemBuilder: (context, item, isSelected) {
-                    return ListTile(
-                      leading: isSelected
-                          ? Icon(
-                        Icons.circle,
-                        color: Colors.blue,
-                      )
-                          : Icon(
-                        Icons.circle,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondary
-                            .withOpacity(.3),
-                      ),
-                      title: Text(item.name,style: TextStyle(fontSize: 20),),
-                      selected: isSelected,
-                    );
-                  },
-                  onChange: (Domain selected) {
-                    setState(() {
-                      selectedDomain = selected;
-                    });
-                  },
-                  okButtonBuilder: (context, onPressed) {
-                    return Align(
-                      alignment: Alignment.centerRight,
-                      child: FloatingActionButton(
-                        onPressed: onPressed,
-                        child: Icon(Icons.check),
-                        mini: true,
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                height: 60,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Theme.of(context).backgroundColor,
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.secondary)),
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        selectedDomain==null
-                            ? getTranslated(context, 'field')
-                            : selectedDomain!.name,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Icon(CupertinoIcons.chevron_down,size: 16,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              width: double.infinity,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(raduice),
-              ),
-              child: MaterialButton(
-                onPressed: () async {
-                  Company val = await registerCompany(
-                      nameController.text,
-                      emailController.text,
-                      passwordController.text,
-                      confirmPasswordController.text,
-                      countryCode,
-                      phone,
-                      selectedCity!.id,
-                      selectedDomain!.id,
-                      deviceToken);
-                  if (val.id > -1) {
-                    AuthMethods().signUPWithEmailPassword(context,emailController.text,passwordController.text,nameController.text,true);
-                  }
-                },
-                color: Theme.of(context).primaryColor,
-                child: Text(
-                  getTranslated(context, 'create_account'),
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  getTranslated(context, 'i_have_account'),
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-                    fontSize: 16.0,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoginScreen(company: true)));
-                  },
-                  child: Text(getTranslated(context, 'login'),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16.0,
-                      )),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-          ],
-        )))));
+                    child: Form(
+                        key: _form,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              getTranslated(context, 'company_name'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            SizedBox(),
+                            TextFormField(
+                              controller: nameController,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                hintText:
+                                    getTranslated(context, 'company_name'),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(raduice))),
+                                prefixIcon: Icon(
+                                  Icons.perm_identity,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              getTranslated(context, 'email'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            SizedBox(),
+                            TextFormField(
+                              controller: emailController,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                hintText: getTranslated(context, 'email'),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(raduice))),
+                                prefixIcon: Icon(
+                                  Icons.perm_identity,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              getTranslated(context, 'password'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            SizedBox(),
+                            TextField(
+                              controller: passwordController,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              obscureText: showPassword,
+                              decoration: InputDecoration(
+                                hintText: getTranslated(context, 'password'),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(raduice))),
+                                prefixIcon: Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                  icon: showPassword
+                                      ? Icon(Icons.remove_red_eye)
+                                      : Icon(Icons.visibility_off_outlined),
+                                  onPressed: () => setState(
+                                      () => showPassword = !showPassword),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              getTranslated(context, 'confirm_password'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            SizedBox(),
+                            TextField(
+                              controller: confirmPasswordController,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              obscureText: showConfirmPassword,
+                              decoration: InputDecoration(
+                                hintText:
+                                    getTranslated(context, 'confirm_password'),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(raduice))),
+                                prefixIcon: Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                  icon: showConfirmPassword
+                                      ? Icon(Icons.remove_red_eye)
+                                      : Icon(Icons.visibility_off_outlined),
+                                  onPressed: () => setState(() =>
+                                      showConfirmPassword =
+                                          !showConfirmPassword),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              getTranslated(context, 'phone'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            SizedBox(),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(raduice))),
+                              child: IntlPhoneField(
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w500),
+                                decoration: InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    labelText: getTranslated(context, 'phone'),
+                                    border: InputBorder.none,
+                                    counterStyle: TextStyle(
+                                      height: double.minPositive,
+                                    ),
+                                    counterText: "",
+                                    contentPadding:
+                                        EdgeInsets.only(bottom: 15)),
+                                initialCountryCode: "DZ",
+                                onChanged: (phone) {
+                                  setState(() {
+                                    countryCode = phone.countryCode!;
+                                    this.phone = phone.number!;
+                                  });
+                                },
+                                onCountryChanged: (dynamic phone) {
+                                  setState(() {
+                                    countryCode = phone.countryCode!;
+                                    this.phone = phone.number!;
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              getTranslated(context, 'area'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                SelectDialog.showModal<City>(
+                                  context,
+                                  showSearchBox: false,
+                                  label: getTranslated(context, 'area'),
+                                  selectedValue: selectedCity,
+                                  items: List.generate(cityList.length,
+                                      (index) => cityList[index]),
+                                  itemBuilder: (context, item, isSelected) {
+                                    return ListTile(
+                                      leading: isSelected
+                                          ? Icon(
+                                              Icons.circle,
+                                              color: Colors.blue,
+                                            )
+                                          : Icon(
+                                              Icons.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary
+                                                  .withOpacity(.3),
+                                            ),
+                                      title: Text(
+                                        widget.isAr ? item.name_ar : item.name,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      selected: isSelected,
+                                    );
+                                  },
+                                  onChange: (City selected) {
+                                    setState(() {
+                                      selectedCity = selected;
+                                    });
+                                  },
+                                  okButtonBuilder: (context, onPressed) {
+                                    return Align(
+                                      alignment: Alignment.centerRight,
+                                      child: FloatingActionButton(
+                                        onPressed: onPressed,
+                                        child: Icon(Icons.check),
+                                        mini: true,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 60,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: Theme.of(context).backgroundColor,
+                                    border: Border.all(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary)),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        selectedCity == null
+                                            ? getTranslated(context, 'area')
+                                            : widget.isAr
+                                                ? selectedCity!.name_ar
+                                                : selectedCity!.name,
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Icon(
+                                        CupertinoIcons.chevron_down,
+                                        size: 16,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              getTranslated(context, 'field'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                SelectDialog.showModal<Domain>(
+                                  context,
+                                  showSearchBox: false,
+                                  label: getTranslated(context, 'field'),
+                                  selectedValue: selectedDomain,
+                                  items: List.generate(domainList.length,
+                                      (index) => domainList[index]),
+                                  itemBuilder: (context, item, isSelected) {
+                                    return ListTile(
+                                      leading: isSelected
+                                          ? Icon(
+                                              Icons.circle,
+                                              color: Colors.blue,
+                                            )
+                                          : Icon(
+                                              Icons.circle,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary
+                                                  .withOpacity(.3),
+                                            ),
+                                      title: Text(
+                                        item.name,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      selected: isSelected,
+                                    );
+                                  },
+                                  onChange: (Domain selected) {
+                                    setState(() {
+                                      selectedDomain = selected;
+                                    });
+                                  },
+                                  okButtonBuilder: (context, onPressed) {
+                                    return Align(
+                                      alignment: Alignment.centerRight,
+                                      child: FloatingActionButton(
+                                        onPressed: onPressed,
+                                        child: Icon(Icons.check),
+                                        mini: true,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 60,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    color: Theme.of(context).backgroundColor,
+                                    border: Border.all(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary)),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        selectedDomain == null
+                                            ? getTranslated(context, 'field')
+                                            : selectedDomain!.name,
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Icon(
+                                        CupertinoIcons.chevron_down,
+                                        size: 16,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  value: this.checked,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      this.checked = value!;
+                                    });
+                                  },
+                                ), //C
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TermOfUseScreen()));
+                                  },
+                                  child: Text(
+                                    getTranslated(context, 'term_of_use'),
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.7),
+                                      fontSize: 18.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              width: double.infinity,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(raduice),
+                              ),
+                              child: MaterialButton(
+                                onPressed: () async {
+                                  if (checked) {
+                                    if (_form.currentState!.validate()) {
+                                      Company val = await registerCompany(
+                                          nameController.text,
+                                          emailController.text,
+                                          passwordController.text,
+                                          confirmPasswordController.text,
+                                          countryCode,
+                                          phone,
+                                          selectedCity!.id,
+                                          selectedDomain!.id,
+                                          deviceToken);
+                                      if (val.id > -1) {
+                                        AuthMethods().signUPWithEmailPassword(
+                                            context,
+                                            emailController.text,
+                                            passwordController.text,
+                                            nameController.text,
+                                            true);
+                                      }
+                                    } else {}
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      content: const Text(
+                                          'You have to agree the term of uses'),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                                color: checked
+                                    ? Theme.of(context).primaryColor
+                                    : Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.3),
+                                child: Text(
+                                  getTranslated(context, 'create_account'),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getTranslated(context, 'i_have_account'),
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary
+                                        .withOpacity(0.5),
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()));
+                                  },
+                                  child: Text(getTranslated(context, 'login'),
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16.0,
+                                      )),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        ))))));
   }
 }

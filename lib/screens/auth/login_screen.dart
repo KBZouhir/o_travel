@@ -15,9 +15,8 @@ import 'package:o_travel/services/auth.dart';
 import 'package:o_travel/services/sheard_helper.dart';
 
 class LoginScreen extends StatefulWidget {
-  final bool company;
 
-  const LoginScreen({Key? key, required this.company}) : super(key: key);
+  const LoginScreen({Key? key,}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -25,7 +24,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showPassword = true;
-  bool checked = false;
+  bool isCompany = false;
   String _lang = 'en';
   GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -75,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor ,
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
@@ -99,297 +99,304 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Form(
-              key: _form,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Text(
-                    getTranslated(context, 'username') +
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+            key: _form,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          this.isCompany=false;
+                        });
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(raduice),
+                            color: isCompany?Theme.of(context).backgroundColor:Theme.of(context).primaryColor
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            getTranslated(context, 'individuals'),
+                            style: TextStyle(fontSize: 22,color:isCompany?Theme.of(context).primaryColor:Colors.white ),
+                          ),
+                        ),
+                      ),
+                    )),
+                    Expanded(child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          this.isCompany=true;
+                        });
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(raduice),
+                            color: !isCompany?Theme.of(context).backgroundColor:Theme.of(context).primaryColor
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            getTranslated(context, 'companies'),
+                            style: TextStyle(fontSize: 22,color:!isCompany?Theme.of(context).primaryColor:Colors.white ),
+                          ),
+                        ),
+                      ),
+                    ))
+
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  getTranslated(context, 'username') +
+                      ' ' +
+                      getTranslated(context, 'or') +
+                      ' ' +
+                      getTranslated(context, 'email'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).colorScheme.secondary),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  controller: usernameController,
+                  textAlignVertical: TextAlignVertical.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).colorScheme.secondary),
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: getTranslated(context, 'username') +
                         ' ' +
                         getTranslated(context, 'or') +
                         ' ' +
                         getTranslated(context, 'email'),
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
-                        color: Theme.of(context).colorScheme.secondary),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextFormField(
-                    controller: usernameController,
-                    textAlignVertical: TextAlignVertical.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
-                        color: Theme.of(context).colorScheme.secondary),
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      hintText: getTranslated(context, 'username') +
-                          ' ' +
-                          getTranslated(context, 'or') +
-                          ' ' +
-                          getTranslated(context, 'email'),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(raduice))),
-                      prefixIcon: Icon(
-                        Icons.perm_identity,
-                        size: 25,
-                      ),
+                    border: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(raduice))),
+                    prefixIcon: Icon(
+                      Icons.perm_identity,
+                      size: 25,
                     ),
                   ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Text(
-                    getTranslated(context, 'password'),
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
-                        color: Theme.of(context).colorScheme.secondary),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextFormField(
-                    textAlignVertical: TextAlignVertical.center,
-                    controller: passwordController,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
-                        color: Theme.of(context).colorScheme.secondary),
-                    obscureText: showPassword,
-                    decoration: InputDecoration(
-                      hintText: getTranslated(context, 'password'),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(raduice))),
-                      prefixIcon: Icon(
-                        Icons.lock,
-                        size: 25,
-                      ),
-                      suffixIcon: IconButton(
-                        icon: showPassword
-                            ? Icon(Icons.remove_red_eye)
-                            : Icon(Icons.visibility_off_outlined),
-                        onPressed: () =>
-                            setState(() => showPassword = !showPassword),
-                      ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  getTranslated(context, 'password'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).colorScheme.secondary),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  textAlignVertical: TextAlignVertical.center,
+                  controller: passwordController,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.0,
+                      color: Theme.of(context).colorScheme.secondary),
+                  obscureText: showPassword,
+                  decoration: InputDecoration(
+                    hintText: getTranslated(context, 'password'),
+                    border: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(raduice))),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      size: 25,
+                    ),
+                    suffixIcon: IconButton(
+                      icon: showPassword
+                          ? Icon(Icons.remove_red_eye)
+                          : Icon(Icons.visibility_off_outlined),
+                      onPressed: () =>
+                          setState(() => showPassword = !showPassword),
                     ),
                   ),
+                ),
 
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Checkbox(
-                        value: this.checked,
-                        onChanged: (value) {
-                          setState(() {
-                            this.checked = value!;
-                          });
-                        },
-                      ), //C
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TermOfUseScreen()));
-                        },
-                        child: Text(
-                          getTranslated(context, 'term_of_use'),
-                          style: TextStyle(
-                            color:
-                                Theme.of(context).primaryColor.withOpacity(0.7),
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      
-                      borderRadius: BorderRadius.circular(raduice),
-                    ),
-                    child: MaterialButton(
-                      onPressed: () async {
-                          if(checked){
-                            if (_form.currentState!.validate())  {
-                              UserCredential user =
-                              (await _auth.signInWithEmailAndPassword(
-                                  email: usernameController.text,
-                                  password: passwordController.text));
-
-                              User? userDetails = user.user;
-                              print('userDetails $userDetails');
-                              SharedPreferenceHelper().saveUserEmail(userDetails!.email??'');
-                              SharedPreferenceHelper().saveUserId(userDetails.uid);
-                              SharedPreferenceHelper()
-                                  .saveUserName(userDetails.displayName??'');
-                              SharedPreferenceHelper().saveDisplayName(userDetails.displayName??'');
-                              SharedPreferenceHelper().saveUserProfileUrl(userDetails.photoURL??'');
-
-                              if (widget.company) {
-                                loginCompany(
-                                    usernameController.text,
-                                    passwordController.text,
-                                    user.user!.uid,
-                                    deviceToken)
-                                    .then((value) {
-                                  if (value) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomeScreen()));
-                                  }
-                                });
-                              } else {
-                                loginUser(usernameController.text,
-                                    passwordController.text)
-                                    .then((value) {
-                                  if (value.id > -1) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomeScreen()));
-                                  }
-                                });
-                              }
-                            }
-                          }else{
-                            final snackBar = SnackBar(
-                              content: const Text('You have to agree the term of uses'),
-
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-                          }
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EmailPage()));
                       },
-                      color: checked?Theme.of(context).primaryColor:Theme.of(context).primaryColor.withOpacity(0.3),
                       child: Text(
-                        getTranslated(context, 'login'),
+                        getTranslated(context, 'forgot_password'),
                         style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
+                          color:
+                          Theme.of(context).colorScheme.secondary.withOpacity(0.7),
+                          fontSize: 14.0,
                         ),
                       ),
                     ),
+                  ],
+                ),
+
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  width: double.infinity,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(raduice),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EmailPage()));
-                        },
-                        child: Text(
-                          getTranslated(context, 'forgot_password'),
-                          style: TextStyle(
-                            color:
-                            Theme.of(context).colorScheme.secondary.withOpacity(0.7),
-                            fontSize: 14.0,
-                          ),
-                        ),
+                  child: MaterialButton(
+                    onPressed: () async {
+                        if (_form.currentState!.validate())  {
+                          UserCredential user =
+                          (await _auth.signInWithEmailAndPassword(
+                              email: usernameController.text,
+                              password: passwordController.text));
+
+                          User? userDetails = user.user;
+                          print('userDetails $userDetails');
+                          SharedPreferenceHelper().saveUserEmail(userDetails!.email??'');
+                          SharedPreferenceHelper().saveUserId(userDetails.uid);
+                          SharedPreferenceHelper()
+                              .saveUserName(userDetails.displayName??'');
+                          SharedPreferenceHelper().saveDisplayName(userDetails.displayName??'');
+                          SharedPreferenceHelper().saveUserProfileUrl(userDetails.photoURL??'');
+
+                          if (isCompany) {
+                            loginCompany(
+                                usernameController.text,
+                                passwordController.text,
+                                user.user!.uid,
+                                deviceToken)
+                                .then((value) {
+                              if (value) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
+                              }
+                            });
+                          } else {
+                            loginUser(usernameController.text,
+                                passwordController.text)
+                                .then((value) {
+                              if (value.id > -1) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
+                              }
+                            });
+                          }
+                        }
+                    },
+                    color: Theme.of(context).primaryColor,
+                    child: Text(
+                      getTranslated(context, 'login'),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
                       ),
-                    ],
+                    ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  widget.company
-                      ? Center()
-                      : Column(
-                          children: [
-                            Center(
-                              child: Text(
-                                getTranslated(context, 'connect_with'),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).colorScheme.secondary,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  icon: Image.asset(
-                                      'assets/images/google-plus.png'),
-                                  iconSize: 50,
-                                  onPressed: () async {
-                                    AuthMethods().signInWithGoogle(context);
-                                  },
-                                ),
-                                IconButton(
-                                  icon:
-                                      Image.asset('assets/images/facebook.png'),
-                                  iconSize: 50,
-                                  onPressed: () {},
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        getTranslated(context, 'you_do_not_have_account'),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                isCompany
+                    ? Center()
+                    : Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        getTranslated(context, 'connect_with'),
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontSize: 16.0,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpPage(
-                                        isCompany: widget.company,
-                                      )));
-                        },
-                        child: Text(getTranslated(context, 'sign_up'),
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16.0,
-                            )),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Image.asset(
+                              'assets/images/google-plus.png'),
+                          iconSize: 50,
+                          onPressed: () async {
+                            AuthMethods().signInWithGoogle(context);
+                          },
+                        ),
+                        IconButton(
+                          icon:
+                          Image.asset('assets/images/facebook.png'),
+                          iconSize: 50,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      getTranslated(context, 'you_do_not_have_account'),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage(
+                                  isCompany: isCompany,
+                                )));
+                      },
+                      child: Text(getTranslated(context, 'sign_up'),
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.0,
+                          )),
+                    )
+                  ],
+                ),
+              ],
             ),
           ),
         ),
+
       ),
     );
   }

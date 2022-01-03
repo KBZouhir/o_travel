@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Country> countryList = [];
   Country? selectedCountry;
   List<StoryCompany> storyList = [];
-
+bool isAr=false;
   getStories() {
     getAllStoryCompany().then((value) {
       setState(() {
@@ -77,6 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getResources() {
+    getLocale().then((locale) {
+      setState(() {
+        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+      });
+    });
+
     getAllCategory().then((value) {
       setState(() {
         categoryList = value;
@@ -107,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //     print('$me');
           });
         });
+
     });
 
     getAllOffers('featured', '1', offerPage).then((value) {
@@ -310,8 +317,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .withOpacity(.3),
                                                 ),
                                           title: Text(
-                                            item.name,
-                                            style: TextStyle(fontSize: 20),
+                                            isAr ? item.name_ar : item.name,
+
                                           ),
                                           selected: isSelected,
                                         );
@@ -366,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .secondary,
-                                                fontSize: 20,
+                                                fontSize: 18,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Icon(
@@ -410,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .secondary
                                                       .withOpacity(.3),
                                                 ),
-                                          title: Text(item.name),
+                                          title: Text(isAr ? item.name_ar : item.name,),
                                           selected: isSelected,
                                         );
                                       },
@@ -454,7 +461,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .secondary,
-                                                fontSize: 20,
+                                                fontSize: 18,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Icon(

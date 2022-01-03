@@ -36,7 +36,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
-  bool isEnglish=true;
+  bool isAr=false;
 
   getResources() {
     getAllCategory().then((value) {
@@ -50,6 +50,11 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
         countryList = value;
       });
     });
+    getLocale().then((locale) {
+      setState(() {
+        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+      });
+    });
   }
 
   DateTime? selectedDate;
@@ -57,9 +62,8 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
   @override
   void initState() {
     super.initState();
-    getLocale().then((locale) {
-        if(locale.languageCode=='ar')isEnglish=false;
-    });
+
+
     getResources();
   }
   @override
@@ -188,7 +192,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       fontSize: 20.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
-                SizedBox(height: 8),
+                SizedBox(),
                 TextFormField(
                   controller: nameController,
                   style: TextStyle(
@@ -211,7 +215,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       fontSize: 20.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
-                SizedBox(height: 8),
+                SizedBox(),
                 TextFormField(
                   controller: descriptionController,
                   onChanged: (val) {
@@ -241,9 +245,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       fontSize: 20.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(),
                 GestureDetector(
                   onTap: () {
                     SelectDialog.showModal<Country>(
@@ -267,7 +269,10 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                                 .secondary
                                 .withOpacity(.3),
                           ),
-                          title: Text(item.name,style: TextStyle(fontSize: 20),),
+                          title: Text(
+                            isAr ? item.name_ar : item.name,
+                            style: TextStyle(fontSize: 20),
+                          ),
                           selected: isSelected,
                         );
                       },
@@ -297,14 +302,14 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                         color: Theme.of(context).backgroundColor,
                         border: Border.all(
                             color: Theme.of(context).colorScheme.secondary)),
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            selectedCountries.length==0
+                            selectedCountries.length == 0
                                 ? getTranslated(context, 'country')
                                 : selectedCountries[0].name,
                             style: TextStyle(
@@ -312,14 +317,17 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Icon(CupertinoIcons.chevron_down,size: 16,)
+                          Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16,
+                          )
                         ],
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height:16,
                 ),
                 Text(
                   getTranslated(context, 'month'),
@@ -328,9 +336,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       fontSize: 20.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(),
                 GestureDetector(
                   onTap: () {
                     showMonthPicker(
@@ -355,23 +361,33 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                         color: Theme.of(context).backgroundColor,
                         border: Border.all(
                             color: Theme.of(context).colorScheme.secondary)),
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    
                     child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        selectedDate == null
-                            ? getTranslated(context, 'month')
-                            : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      alignment:
+                      isAr ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            selectedDate == null
+                                ? getTranslated(context, 'month')
+                                : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16,
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height:16,
                 ),
                 Text(
                   getTranslated(context, 'trip_type'),
@@ -380,9 +396,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       fontSize: 20.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
-                SizedBox(
-                  height: 2,
-                ),
+                SizedBox(),
                 GestureDetector(
                   //trip_type
                   onTap: () {
@@ -391,6 +405,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       label: getTranslated(context, 'trip_type'),
                       items: categoryList,
                       selectedValue: selectedCategory,
+                      showSearchBox: false,
                       itemBuilder:
                           (BuildContext context, Category item, bool isSelected) {
                         return ListTile(
@@ -406,7 +421,10 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                                 .secondary
                                 .withOpacity(.3),
                           ),
-                          title: Text(item.name),
+                          title: Text(
+                            isAr ? item.name_ar : item.name,
+                            style: TextStyle(fontSize: 20),
+                          ),
                           selected: isSelected,
                         );
                       },
@@ -426,7 +444,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                         color: Theme.of(context).backgroundColor,
                         border: Border.all(
                             color: Theme.of(context).colorScheme.secondary)),
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
@@ -435,21 +453,24 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                           Text(
                             selectedCategory == null
                                 ? getTranslated(context, 'trip_type')
-                                : selectedCategory!.name,
+                                : isAr ? selectedCategory!.name_ar : selectedCategory!.name,
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Icon(CupertinoIcons.chevron_down,size: 16,)
+                          Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 16,
+                          )
                         ],
                       ),
                     ),
                   ),
                 ),
-
-                SizedBox(height: 16),
-
+                SizedBox(
+                  height:16,
+                ),
                 //----Price-------------------------------------
                 Text(
                   getTranslated(context, 'price'),
@@ -458,7 +479,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                       fontSize: 20.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
-                SizedBox(height: 8),
+                SizedBox(),
                 TextFormField(
                   controller: priceController,
                   style: TextStyle(

@@ -29,7 +29,9 @@ class _SearchScreenState extends State<SearchScreen> {
   List<Country> selectedCountries = [];
   Country? selectedCountry;
   DateTime? selectedDate;
+  bool isAr = false;
 
+  @override
   getResources() {
     getAllCategory().then((value) {
       setState(() {
@@ -40,6 +42,11 @@ class _SearchScreenState extends State<SearchScreen> {
     getAllCountry().then((value) {
       setState(() {
         countryList = value;
+      });
+    });
+    getLocale().then((locale) {
+      setState(() {
+        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
       });
     });
   }
@@ -114,9 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     fontSize: 20.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
-              SizedBox(
-                height: 2,
-              ),
+              SizedBox(),
               GestureDetector(
                 onTap: () {
                   SelectDialog.showModal<Country>(
@@ -140,7 +145,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                     .secondary
                                     .withOpacity(.3),
                               ),
-                        title: Text(item.name,style: TextStyle(fontSize: 20),),
+                        title: Text(
+                          isAr ? item.name_ar : item.name,
+                          style: TextStyle(fontSize: 20),
+                        ),
                         selected: isSelected,
                       );
                     },
@@ -177,7 +185,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          selectedCountries.length==0
+                          selectedCountries.length == 0
                               ? getTranslated(context, 'country')
                               : selectedCountries[0].name,
                           style: TextStyle(
@@ -185,14 +193,17 @@ class _SearchScreenState extends State<SearchScreen> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
-                        Icon(CupertinoIcons.chevron_down,size: 16,)
+                        Icon(
+                          CupertinoIcons.chevron_down,
+                          size: 16,
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 10,
+                height:8,
               ),
               Text(
                 getTranslated(context, 'month'),
@@ -201,9 +212,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     fontSize: 20.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
-              SizedBox(
-                height: 2,
-              ),
+              SizedBox(),
               GestureDetector(
                 onTap: () {
                   showMonthPicker(
@@ -230,21 +239,31 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Theme.of(context).colorScheme.secondary)),
                   margin: EdgeInsets.symmetric(vertical: 10),
                   child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      selectedDate == null
-                          ? getTranslated(context, 'month')
-                          : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    alignment:
+                        isAr ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          selectedDate == null
+                              ? getTranslated(context, 'month')
+                              : '${DateFormat.yMd().format(DateTime.parse(selectedDate.toString()))}',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Icon(
+                          CupertinoIcons.chevron_down,
+                          size: 16,
+                        )
+                      ],
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 10,
+                height:8,
               ),
               Text(
                 getTranslated(context, 'trip_type'),
@@ -253,9 +272,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     fontSize: 20.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
-              SizedBox(
-                height: 2,
-              ),
+              SizedBox(),
               GestureDetector(
                 //trip_type
                 onTap: () {
@@ -264,6 +281,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     label: getTranslated(context, 'trip_type'),
                     items: categoryList,
                     selectedValue: selectedCategory,
+                    showSearchBox: false,
                     itemBuilder:
                         (BuildContext context, Category item, bool isSelected) {
                       return ListTile(
@@ -279,7 +297,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                     .secondary
                                     .withOpacity(.3),
                               ),
-                        title: Text(item.name),
+                        title: Text(
+                          isAr ? item.name_ar : item.name,
+                          style: TextStyle(fontSize: 20),
+                        ),
                         selected: isSelected,
                       );
                     },
@@ -314,14 +335,17 @@ class _SearchScreenState extends State<SearchScreen> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
-                        Icon(CupertinoIcons.chevron_down,size: 16,)
+                        Icon(
+                          CupertinoIcons.chevron_down,
+                          size: 16,
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 10,
+                height:8,
               ),
               Text(
                 getTranslated(context, 'price'),
@@ -330,9 +354,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     fontSize: 20.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
-              SizedBox(
-                height: 2,
-              ),
+              SizedBox(),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

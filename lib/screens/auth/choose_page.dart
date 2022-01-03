@@ -22,7 +22,7 @@ class ChoosePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => LoginScreen(company: false)));
+                            builder: (context) => LoginScreen()));
                   },
                   child: Column(
                     children: [
@@ -60,7 +60,7 @@ class ChoosePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  LoginScreen(company: true)));
+                                  LoginScreen()));
                     },
                     child: Column(
                       children: [

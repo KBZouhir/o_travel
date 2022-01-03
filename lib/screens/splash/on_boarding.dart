@@ -4,6 +4,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:o_travel/constants.dart';
 import 'package:o_travel/main.dart';
 import 'package:o_travel/screens/auth/choose_page.dart';
+import 'package:o_travel/screens/auth/login_screen.dart';
 import 'package:o_travel/screens/localization/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,7 +24,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     SharedPreferences.getInstance().then((value) => value.setBool('isFirstTime', false));
     Navigator.of(context).pop();
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => ChoosePage()),
+      MaterialPageRoute(builder: (_) => LoginScreen()),
     );
   }
 

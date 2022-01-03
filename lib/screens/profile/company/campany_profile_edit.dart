@@ -46,7 +46,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
   late String countryCode;
   List<City> cityList = [];
  late City selectedCity;
-
+bool isAr=false;
   List<Domain> domainList = [];
   late Domain selectedDomain;
 
@@ -63,6 +63,11 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
         cityList = value;
        // if(value.length>0)selectedCity=widget.company.city;
 
+      });
+      getLocale().then((locale) {
+        setState(() {
+          if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+        });
       });
     });
   }
@@ -191,7 +196,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextFormField(
                       controller: usernameController,
                       style: TextStyle(
@@ -218,7 +223,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: aboutController,
                       onChanged: (val) {
@@ -248,7 +253,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: emailController,
                       style: TextStyle(
@@ -274,9 +279,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
+
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
@@ -312,7 +315,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: addressController,
                       style: TextStyle(
@@ -336,7 +339,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: gpsController,
                       style: TextStyle(
@@ -363,9 +366,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
+
                     GestureDetector(
                       onTap: () {
                         SelectDialog.showModal<City>(
@@ -389,7 +390,10 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                                     .secondary
                                     .withOpacity(.3),
                               ),
-                              title: Text(item.name,style: TextStyle(fontSize: 20),),
+                              title: Text(
+                                isAr ? item.name_ar : item.name,
+                                style: TextStyle(fontSize: 20),
+                              ),
                               selected: isSelected,
                             );
                           },
@@ -419,7 +423,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                             color: Theme.of(context).backgroundColor,
                             border: Border.all(
                                 color: Theme.of(context).colorScheme.secondary)),
-                        margin: EdgeInsets.symmetric(vertical: 10),
+
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Row(
@@ -427,8 +431,8 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                             children: [
                               Text(
                                 selectedCity==null
-                                    ? getTranslated(context, 'country')
-                                    : selectedCity.name,
+                                    ? getTranslated(context, 'area')
+                                    : isAr ? selectedCity.name_ar : selectedCity.name,
                                 style: TextStyle(
                                     color: Theme.of(context).colorScheme.secondary,
                                     fontSize: 20,
@@ -440,6 +444,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                         ),
                       ),
                     ),
+
                     SizedBox(
                       height: 16,
                     ),
@@ -450,9 +455,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
+
                     GestureDetector(
                       onTap: () {
                         SelectDialog.showModal<Domain>(
@@ -506,7 +509,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                             color: Theme.of(context).backgroundColor,
                             border: Border.all(
                                 color: Theme.of(context).colorScheme.secondary)),
-                        margin: EdgeInsets.symmetric(vertical: 10),
+
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Row(
@@ -514,7 +517,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                             children: [
                               Text(
                                 selectedDomain==null
-                                    ? getTranslated(context, 'country')
+                                    ? getTranslated(context, 'field')
                                     : selectedDomain.name,
                                 style: TextStyle(
                                     color: Theme.of(context).colorScheme.secondary,
@@ -535,7 +538,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     Container(
                       height: 60,
                       decoration: BoxDecoration(
@@ -559,7 +562,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: snapController,
                       style: TextStyle(
@@ -583,7 +586,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: instaController,
                       style: TextStyle(
@@ -606,7 +609,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: fbController,
                       style: TextStyle(
@@ -629,7 +632,7 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
                           fontSize: 20.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(),
                     TextField(
                       controller: tweeterController,
                       style: TextStyle(
