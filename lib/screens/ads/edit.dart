@@ -125,7 +125,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   getTranslated(context, 'select_photo'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 15),
@@ -239,7 +239,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   getTranslated(context, 'ad_name'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
@@ -247,7 +247,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   controller: nameController,
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -262,7 +262,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   getTranslated(context, 'details'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
@@ -292,7 +292,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   getTranslated(context, 'country'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -383,7 +383,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   getTranslated(context, 'month'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -443,7 +443,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   getTranslated(context, 'trip_type'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -526,7 +526,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   getTranslated(context, 'price'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
@@ -534,7 +534,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   controller: priceController,
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(

@@ -118,7 +118,7 @@ class _UserProfileState extends State<UserProfile> {
                     getTranslated(context, 'username'),
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(height: 8),
@@ -126,7 +126,7 @@ class _UserProfileState extends State<UserProfile> {
                     controller: usernameController,
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         color: Theme.of(context).colorScheme.secondary),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
@@ -145,7 +145,7 @@ class _UserProfileState extends State<UserProfile> {
                     getTranslated(context, 'email'),
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(height: 8),
@@ -153,7 +153,7 @@ class _UserProfileState extends State<UserProfile> {
                     controller: emailController,
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         color: Theme.of(context).colorScheme.secondary),
                     obscureText: false,
                     decoration: InputDecoration(
@@ -169,7 +169,7 @@ class _UserProfileState extends State<UserProfile> {
                     getTranslated(context, 'phone'),
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         color: Theme.of(context).colorScheme.secondary),
                   ),
                   SizedBox(height: 8),
@@ -177,7 +177,7 @@ class _UserProfileState extends State<UserProfile> {
                     controller: phoneController,
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         color: Theme.of(context).colorScheme.secondary),
                     obscureText: false,
                     decoration: InputDecoration(

@@ -107,7 +107,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   getTranslated(context, 'select_photo'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 15),
@@ -192,7 +192,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   getTranslated(context, 'ad_name'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -200,7 +200,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   controller: nameController,
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -215,7 +215,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   getTranslated(context, 'details'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -245,7 +245,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   getTranslated(context, 'country'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -336,7 +336,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   getTranslated(context, 'month'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -396,7 +396,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   getTranslated(context, 'trip_type'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -479,7 +479,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   getTranslated(context, 'price'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(),
@@ -487,7 +487,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   controller: priceController,
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(

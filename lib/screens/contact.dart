@@ -38,7 +38,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   getTranslated(context, 'subject'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),
@@ -50,7 +50,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   },
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                   decoration: InputDecoration(
                     hintText: getTranslated(context, 'subject'),
@@ -64,7 +64,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   getTranslated(context, 'message'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(height: 8),

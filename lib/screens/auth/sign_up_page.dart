@@ -193,7 +193,7 @@ class _UserPageState extends State<UserPage> {
                             getTranslated(context, 'username'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(),
@@ -201,7 +201,7 @@ class _UserPageState extends State<UserPage> {
                             controller: usernameController,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
@@ -221,7 +221,7 @@ class _UserPageState extends State<UserPage> {
                             getTranslated(context, 'email'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(),
@@ -229,7 +229,7 @@ class _UserPageState extends State<UserPage> {
                             controller: emailController,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
@@ -249,7 +249,7 @@ class _UserPageState extends State<UserPage> {
                             getTranslated(context, 'password'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(),
@@ -257,7 +257,7 @@ class _UserPageState extends State<UserPage> {
                             controller: passwordController,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                             obscureText: showPassword,
                             decoration: InputDecoration(
@@ -280,7 +280,7 @@ class _UserPageState extends State<UserPage> {
                             getTranslated(context, 'confirm_password'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(),
@@ -288,7 +288,7 @@ class _UserPageState extends State<UserPage> {
                             controller: confirmPasswordController,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                             obscureText: showConfirmPassword,
                             decoration: InputDecoration(
@@ -312,7 +312,7 @@ class _UserPageState extends State<UserPage> {
                             getTranslated(context, 'phone'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(),
@@ -556,7 +556,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               getTranslated(context, 'company_name'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),
@@ -565,7 +565,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               controller: nameController,
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                               keyboardType: TextInputType.emailAddress,
@@ -588,7 +588,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               getTranslated(context, 'email'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),
@@ -597,7 +597,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               controller: emailController,
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                               keyboardType: TextInputType.emailAddress,
@@ -619,7 +619,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               getTranslated(context, 'password'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),
@@ -628,7 +628,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               controller: passwordController,
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                               obscureText: showPassword,
@@ -654,7 +654,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               getTranslated(context, 'confirm_password'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),
@@ -663,7 +663,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               controller: confirmPasswordController,
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                               obscureText: showConfirmPassword,
@@ -691,7 +691,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               getTranslated(context, 'phone'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),
@@ -742,7 +742,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               getTranslated(context, 'area'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),
@@ -840,7 +840,7 @@ class _CompanyPageState extends State<CompanyPage> {
                               getTranslated(context, 'field'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),

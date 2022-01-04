@@ -325,27 +325,33 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                    Row(
+                    (widget.company.social_media_visible)
+                        ?  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: () {},
-                          child: Image.asset('assets/images/insta.png'),
-                        ),
+                            onTap: () {},
+                            child: instagramImage),
+                        SizedBox(width: 20,),
                         GestureDetector(
                           onTap: () {},
-                          child: Image.asset('assets/images/wtsp.png'),
+                          child: whatsappImage,
                         ),
+                        SizedBox(width: 20,),
+
                         GestureDetector(
                           onTap: () {},
-                          child: Image.asset('assets/images/snap.png'),
+                          child: snapImage,
                         ),
+                        SizedBox(width: 20,),
+
                         GestureDetector(
                           onTap: () {},
-                          child: Image.asset('assets/images/gmail.png'),
+                          child:gmailImage,
                         ),
                       ],
-                    ),
+                    )
+                        : SizedBox(),
                     SizedBox(
                       height: 16,
                     ),

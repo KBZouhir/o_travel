@@ -79,7 +79,7 @@ class _ResetPageState extends State<ResetPage> {
                             getTranslated(context, 'password'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(
@@ -88,7 +88,7 @@ class _ResetPageState extends State<ResetPage> {
                           TextField(
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                             obscureText: showPassword,
                             decoration: InputDecoration(
@@ -113,7 +113,7 @@ class _ResetPageState extends State<ResetPage> {
                             getTranslated(context, 'confirm_password'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                           ),
                           SizedBox(
@@ -122,7 +122,7 @@ class _ResetPageState extends State<ResetPage> {
                           TextField(
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
+                                fontSize: 18.0,
                                 color: Theme.of(context).colorScheme.secondary),
                             obscureText: showConfirmPassword,
                             decoration: InputDecoration(

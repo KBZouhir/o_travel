@@ -39,14 +39,14 @@ class _CompanyProfileEditState extends State<CompanyProfileEdit> {
   TextEditingController instaController = TextEditingController();
   TextEditingController fbController = TextEditingController();
   TextEditingController tweeterController = TextEditingController();
- File? image;
- File? register;
+  File? image;
+  File? register;
   late String registerName;
   late String phone;
   late String countryCode;
   List<City> cityList = [];
- late City selectedCity;
-bool isAr=false;
+  late City selectedCity;
+  bool isAr = false;
   List<Domain> domainList = [];
   late Domain selectedDomain;
 
@@ -54,23 +54,26 @@ bool isAr=false;
     getAllDomain().then((value) {
       setState(() {
         domainList = value;
-       // if(value.length>0)selectedDomain=widget.company.domain;
+        // if(value.length>0)selectedDomain=widget.company.domain;
       });
     });
 
     getAllCity().then((value) {
       setState(() {
         cityList = value;
-       // if(value.length>0)selectedCity=widget.company.city;
-
+        // if(value.length>0)selectedCity=widget.company.city;
       });
       getLocale().then((locale) {
         setState(() {
-          if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+          if (locale.languageCode == 'ar')
+            this.isAr = true;
+          else
+            isAr = false;
         });
       });
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -78,7 +81,7 @@ bool isAr=false;
     emailController.text = widget.company.email;
     phoneController.text = widget.company.phone;
     aboutController.text = widget.company.description;
-    addressController.text=widget.company.address;
+    addressController.text = widget.company.address;
     gpsController.text =
         '${widget.company.latitude} ${widget.company.latitude}';
 
@@ -86,17 +89,19 @@ bool isAr=false;
     fbController.text = widget.company.facebook;
     tweeterController.text = widget.company.twitter;
     phone = widget.company.phone;
-   countryCode = widget.company.countryCode;
-   registerName = (widget.company.trade_register.length>50)?widget.company.trade_register.substring(0,49):widget.company.trade_register;
-
+    countryCode = widget.company.countryCode;
+    registerName = (widget.company.trade_register.length > 50)
+        ? widget.company.trade_register.substring(0, 49)
+        : widget.company.trade_register;
 
     getResources();
   }
-@override
+
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    usernameController.dispose() ;
+    usernameController.dispose();
     emailController.dispose();
     phoneController.dispose();
     aboutController.dispose();
@@ -107,12 +112,13 @@ bool isAr=false;
     fbController.dispose();
     tweeterController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     setState(() {
-      selectedCity=widget.company.city!;
+      selectedCity = widget.company.city!;
       cityList.add(selectedCity);
-      selectedDomain=widget.company.domain!;
+      selectedDomain = widget.company.domain!;
       domainList.add(selectedDomain);
     });
     return Scaffold(
@@ -162,22 +168,27 @@ bool isAr=false;
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child:(image==null)? CachedNetworkImage(
-                            imageUrl: widget.company.image,
-                            height: 100,
-                            width: 100,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => Container(
-                                width: 50,
-                                height: 50,
-                                child: Center(
-                                    child: CircularProgressIndicator(
-                                  color: Theme.of(context).primaryColor,
-                                ))),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                          ):Image.file(image!,height: 100,
-                            width: 100,),
+                          child: (image == null)
+                              ? CachedNetworkImage(
+                                  imageUrl: widget.company.image,
+                                  height: 100,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => Container(
+                                      width: 50,
+                                      height: 50,
+                                      child: Center(
+                                          child: CircularProgressIndicator(
+                                        color: Theme.of(context).primaryColor,
+                                      ))),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                )
+                              : Image.file(
+                                  image!,
+                                  height: 100,
+                                  width: 100,
+                                ),
                         ),
                       ),
                     ),
@@ -193,7 +204,7 @@ bool isAr=false;
                       getTranslated(context, 'company_name'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -201,7 +212,7 @@ bool isAr=false;
                       controller: usernameController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
@@ -220,7 +231,7 @@ bool isAr=false;
                       getTranslated(context, 'about_company'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -231,7 +242,7 @@ bool isAr=false;
                       },
                       keyboardType: TextInputType.multiline,
                       maxLength: 300,
-                      minLines:5,
+                      minLines: 5,
                       maxLines: 5,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(10),
@@ -250,7 +261,7 @@ bool isAr=false;
                       getTranslated(context, 'email'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -258,14 +269,14 @@ bool isAr=false;
                       controller: emailController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'email'),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(raduice))),
+                                BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.email_outlined),
                       ),
                     ),
@@ -276,19 +287,21 @@ bool isAr=false;
                       getTranslated(context, 'phone'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Theme.of(context).colorScheme.secondary),
-                          borderRadius: BorderRadius.all(Radius.circular(raduice))),
+                          border: Border.all(
+                              color: Theme.of(context).colorScheme.secondary),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(raduice))),
                       child: IntlPhoneField(
                         controller: phoneController,
                         initialCountryCode: countryCode,
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500),
                         decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: getTranslated(context, 'phone'),
@@ -312,7 +325,7 @@ bool isAr=false;
                       getTranslated(context, 'address'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -320,14 +333,14 @@ bool isAr=false;
                       controller: addressController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: getTranslated(context, 'address'),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(raduice))),
+                                BorderRadius.all(Radius.circular(raduice))),
                         prefixIcon: Icon(Icons.map),
                       ),
                     ),
@@ -336,7 +349,7 @@ bool isAr=false;
                       getTranslated(context, 'location_gps'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -344,7 +357,7 @@ bool isAr=false;
                       controller: gpsController,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                       obscureText: false,
@@ -363,10 +376,9 @@ bool isAr=false;
                       getTranslated(context, 'area'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-
                     GestureDetector(
                       onTap: () {
                         SelectDialog.showModal<City>(
@@ -380,16 +392,16 @@ bool isAr=false;
                             return ListTile(
                               leading: isSelected
                                   ? Icon(
-                                Icons.circle,
-                                color: Colors.blue,
-                              )
+                                      Icons.circle,
+                                      color: Colors.blue,
+                                    )
                                   : Icon(
-                                Icons.circle,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .secondary
-                                    .withOpacity(.3),
-                              ),
+                                      Icons.circle,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary
+                                          .withOpacity(.3),
+                                    ),
                               title: Text(
                                 isAr ? item.name_ar : item.name,
                                 style: TextStyle(fontSize: 20),
@@ -422,29 +434,34 @@ bool isAr=false;
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Theme.of(context).backgroundColor,
                             border: Border.all(
-                                color: Theme.of(context).colorScheme.secondary)),
-
+                                color:
+                                    Theme.of(context).colorScheme.secondary)),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                selectedCity==null
+                                selectedCity == null
                                     ? getTranslated(context, 'area')
-                                    : isAr ? selectedCity.name_ar : selectedCity.name,
+                                    : isAr
+                                        ? selectedCity.name_ar
+                                        : selectedCity.name,
                                 style: TextStyle(
-                                    color: Theme.of(context).colorScheme.secondary,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Icon(CupertinoIcons.chevron_down,size: 16,)
+                              Icon(
+                                CupertinoIcons.chevron_down,
+                                size: 16,
+                              )
                             ],
                           ),
                         ),
                       ),
                     ),
-
                     SizedBox(
                       height: 16,
                     ),
@@ -452,10 +469,9 @@ bool isAr=false;
                       getTranslated(context, 'field'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
-
                     GestureDetector(
                       onTap: () {
                         SelectDialog.showModal<Domain>(
@@ -469,17 +485,20 @@ bool isAr=false;
                             return ListTile(
                               leading: isSelected
                                   ? Icon(
-                                Icons.circle,
-                                color: Colors.blue,
-                              )
+                                      Icons.circle,
+                                      color: Colors.blue,
+                                    )
                                   : Icon(
-                                Icons.circle,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .secondary
-                                    .withOpacity(.3),
+                                      Icons.circle,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary
+                                          .withOpacity(.3),
+                                    ),
+                              title: Text(
+                                item.name,
+                                style: TextStyle(fontSize: 20),
                               ),
-                              title: Text(item.name,style: TextStyle(fontSize: 20),),
                               selected: isSelected,
                             );
                           },
@@ -508,23 +527,27 @@ bool isAr=false;
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: Theme.of(context).backgroundColor,
                             border: Border.all(
-                                color: Theme.of(context).colorScheme.secondary)),
-
+                                color:
+                                    Theme.of(context).colorScheme.secondary)),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                selectedDomain==null
+                                selectedDomain == null
                                     ? getTranslated(context, 'field')
                                     : selectedDomain.name,
                                 style: TextStyle(
-                                    color: Theme.of(context).colorScheme.secondary,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Icon(CupertinoIcons.chevron_down,size: 16,)
+                              Icon(
+                                CupertinoIcons.chevron_down,
+                                size: 16,
+                              )
                             ],
                           ),
                         ),
@@ -535,31 +558,46 @@ bool isAr=false;
                       getTranslated(context, 'commercial_register'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
                     Container(
                       height: 60,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(raduice)),
-                        border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.7))
-                      ),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(raduice)),
+                          border: Border.all(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.7))),
                       child: Row(
-                      children: [
-                        IconButton(onPressed: (){
-                          pickImage(false);
-
-                        }, icon: Icon(Icons.add_photo_alternate,color: Theme.of(context).colorScheme.secondary),),
-                      Text((registerName.length!=0)?registerName:getTranslated(context, 'commercial_register'),style: TextStyle(fontSize:20,color: Theme.of(context).colorScheme.secondary),)
-                      ],
-                    ),),
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              pickImage(false);
+                            },
+                            icon: Icon(Icons.add_photo_alternate,
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
+                          Text(
+                            (registerName.length != 0)
+                                ? registerName
+                                : getTranslated(context, 'commercial_register'),
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Theme.of(context).colorScheme.secondary),
+                          )
+                        ],
+                      ),
+                    ),
                     SizedBox(height: 16),
                     Text(
-                      getTranslated(context, 'snapchat'),
+                      getTranslated(context, 'website'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -567,11 +605,35 @@ bool isAr=false;
                       controller: snapController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
-                       // prefixIcon: SvgPicture.asset('assets/icons/snap.svg'),
+                        prefixIcon: websiteIcon,
+                        hintText: getTranslated(context, 'website'),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(raduice))),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      getTranslated(context, 'snapchat'),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18.0,
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
+                    SizedBox(),
+                    TextField(
+                      controller: snapController,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18.0,
+                          color: Theme.of(context).colorScheme.secondary),
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        prefixIcon: snapIcon,
                         hintText: getTranslated(context, 'snapchat'),
                         border: OutlineInputBorder(
                             borderRadius:
@@ -583,7 +645,7 @@ bool isAr=false;
                       getTranslated(context, 'instagram'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -591,14 +653,15 @@ bool isAr=false;
                       controller: instaController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
+                        prefixIcon: instagramIcon,
                         hintText: getTranslated(context, 'instagram'),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(raduice))),
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
                     SizedBox(height: 16),
@@ -606,7 +669,7 @@ bool isAr=false;
                       getTranslated(context, 'facebook'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -614,14 +677,15 @@ bool isAr=false;
                       controller: fbController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
+                        prefixIcon: facebookIcon,
                         hintText: getTranslated(context, 'facebook'),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(raduice))),
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
                     SizedBox(height: 16),
@@ -629,7 +693,7 @@ bool isAr=false;
                       getTranslated(context, 'tweeter'),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(),
@@ -637,14 +701,15 @@ bool isAr=false;
                       controller: tweeterController,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           color: Theme.of(context).colorScheme.secondary),
                       obscureText: false,
                       decoration: InputDecoration(
+                        prefixIcon: tweeterIcon,
                         hintText: getTranslated(context, 'tweeter'),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(raduice))),
+                                BorderRadius.all(Radius.circular(raduice))),
                       ),
                     ),
                     SizedBox(
@@ -695,20 +760,19 @@ bool isAr=false;
       ),
     );
   }
+
   Future pickImage(bool isProfile) async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
     final imgTemp = File(image.path);
     setState(() {
-      if(isProfile){
+      if (isProfile) {
         this.image = imgTemp;
         updateImg(imgTemp);
-      }else{
+      } else {
         this.register = imgTemp;
         this.registerName = image.name;
       }
-
     });
-
   }
 }

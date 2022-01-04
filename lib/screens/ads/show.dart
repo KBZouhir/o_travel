@@ -406,31 +406,31 @@ class _ShowOfferState extends State<ShowOffer> {
                             height: 20,
                           ),
                           (widget.offer.company.social_media_visible)
-                              ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Image.asset(
-                                          'assets/images/insta.png'),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child:
-                                          Image.asset('assets/images/wtsp.png'),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child:
-                                          Image.asset('assets/images/snap.png'),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Image.asset(
-                                          'assets/images/gmail.png'),
-                                    ),
-                                  ],
-                                )
+                              ?  Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                  onTap: () {},
+                                  child: instagramImage),
+                              SizedBox(width: 20,),
+                              GestureDetector(
+                                onTap: () {},
+                                child: whatsappImage,
+                              ),
+                              SizedBox(width: 20,),
+
+                              GestureDetector(
+                                onTap: () {},
+                                child: snapImage,
+                              ),
+                              SizedBox(width: 20,),
+
+                              GestureDetector(
+                                onTap: () {},
+                                child:gmailImage,
+                              ),
+                            ],
+                          )
                               : SizedBox(),
                           SizedBox(
                             height: 20,

@@ -116,7 +116,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 getTranslated(context, 'country'),
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 20.0,
+                    fontSize: 18.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
               SizedBox(),
@@ -207,7 +207,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 getTranslated(context, 'month'),
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 20.0,
+                    fontSize: 18.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
               SizedBox(),
@@ -267,7 +267,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 getTranslated(context, 'trip_type'),
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 20.0,
+                    fontSize: 18.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
               SizedBox(),
@@ -349,7 +349,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 getTranslated(context, 'price'),
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 20.0,
+                    fontSize: 18.0,
                     color: Theme.of(context).colorScheme.secondary),
               ),
               SizedBox(),

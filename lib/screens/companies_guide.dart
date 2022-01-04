@@ -213,8 +213,8 @@ class SelectCard extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                        (company.name.length > 12)
-                            ? company.name.substring(0, 12)
+                        (company.name.length > 10)
+                            ? company.name.substring(0, 9)
                             : company.name,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,

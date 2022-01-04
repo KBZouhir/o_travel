@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       getTranslated(context, 'email'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -200,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   getTranslated(context, 'password'),
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                 ),
                 SizedBox(
@@ -211,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: passwordController,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       color: Theme.of(context).colorScheme.secondary),
                   obscureText: showPassword,
                   decoration: InputDecoration(
@@ -347,8 +347,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          icon: Image.asset(
-                              'assets/images/google-plus.png'),
+                          icon: googleIcon,
                           iconSize: 50,
                           onPressed: () async {
                             AuthMethods().signInWithGoogle(context);
@@ -356,7 +355,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         IconButton(
                           icon:
-                          Image.asset('assets/images/facebook.png'),
+                          facebookImage,
                           iconSize: 50,
                           onPressed: () {},
                         ),
