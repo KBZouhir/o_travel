@@ -621,7 +621,7 @@ bool isAr=false;
       elevation: 0,
       title: Center(
           child: Text(
-        'Otravel',
+        getTranslated(context, 'app_name'),
         style: TextStyle(
             fontSize: 30,
             color: Theme.of(context).primaryColor,
