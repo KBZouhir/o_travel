@@ -68,7 +68,7 @@ class _ConversationItemState extends State<ConversationItem> {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white,
+            color:        Theme.of(context).backgroundColor,
             border: Border(
                 left: BorderSide(
                     color: widget.user.isCompany ? green : blue, width: 8))),

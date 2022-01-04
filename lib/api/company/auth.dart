@@ -11,6 +11,7 @@ import 'package:o_travel/Models/token.dart';
 import 'package:o_travel/Models/type.dart';
 import 'package:o_travel/api/CONFIG.dart';
 import 'package:o_travel/screens/auth/choose_page.dart';
+import 'package:o_travel/screens/auth/login_screen.dart';
 import 'package:o_travel/services/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -264,7 +265,7 @@ void logout(BuildContext context) async {
     AuthMethods().signOut();
     Navigator.of(context).pop();
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ChoosePage()));
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   } else {
     if(EasyLoading.isShow)EasyLoading.dismiss();
     EasyLoading.showError('Error!');

@@ -111,9 +111,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 16),
               Text(
                 getTranslated(context, 'country'),
                 style: TextStyle(
@@ -135,16 +133,16 @@ class _SearchScreenState extends State<SearchScreen> {
                       return ListTile(
                         leading: isSelected
                             ? Icon(
-                                Icons.circle,
-                                color: Colors.blue,
-                              )
+                          Icons.circle,
+                          color: Colors.blue,
+                        )
                             : Icon(
-                                Icons.circle,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .secondary
-                                    .withOpacity(.3),
-                              ),
+                          Icons.circle,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(.3),
+                        ),
                         title: Text(
                           isAr ? item.name_ar : item.name,
                           style: TextStyle(fontSize: 20),
@@ -178,7 +176,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       color: Theme.of(context).backgroundColor,
                       border: Border.all(
                           color: Theme.of(context).colorScheme.secondary)),
-                  margin: EdgeInsets.symmetric(vertical: 10),
+
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Row(
@@ -187,7 +185,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Text(
                           selectedCountries.length == 0
                               ? getTranslated(context, 'country')
-                              : selectedCountries[0].name,
+                              : Country.getCountryNames(selectedCountries, isAr),
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.secondary,
                               fontSize: 20,
@@ -203,7 +201,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               SizedBox(
-                height:8,
+                height:16,
               ),
               Text(
                 getTranslated(context, 'month'),
@@ -237,10 +235,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       color: Theme.of(context).backgroundColor,
                       border: Border.all(
                           color: Theme.of(context).colorScheme.secondary)),
-                  margin: EdgeInsets.symmetric(vertical: 10),
+
                   child: Align(
                     alignment:
-                        isAr ? Alignment.centerRight : Alignment.centerLeft,
+                    isAr ? Alignment.centerRight : Alignment.centerLeft,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -263,7 +261,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               SizedBox(
-                height:8,
+                height:16,
               ),
               Text(
                 getTranslated(context, 'trip_type'),
@@ -287,16 +285,16 @@ class _SearchScreenState extends State<SearchScreen> {
                       return ListTile(
                         leading: isSelected
                             ? Icon(
-                                Icons.circle,
-                                color: Colors.blue,
-                              )
+                          Icons.circle,
+                          color: Colors.blue,
+                        )
                             : Icon(
-                                Icons.circle,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .secondary
-                                    .withOpacity(.3),
-                              ),
+                          Icons.circle,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(.3),
+                        ),
                         title: Text(
                           isAr ? item.name_ar : item.name,
                           style: TextStyle(fontSize: 20),
@@ -320,7 +318,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       color: Theme.of(context).backgroundColor,
                       border: Border.all(
                           color: Theme.of(context).colorScheme.secondary)),
-                  margin: EdgeInsets.symmetric(vertical: 10),
+
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Row(
@@ -329,7 +327,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Text(
                           selectedCategory == null
                               ? getTranslated(context, 'trip_type')
-                              : selectedCategory!.name,
+                              : isAr ? selectedCategory!.name_ar : selectedCategory!.name,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.secondary,
                               fontSize: 20,
@@ -345,7 +343,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               SizedBox(
-                height:8,
+                height:16,
               ),
               Text(
                 getTranslated(context, 'price'),

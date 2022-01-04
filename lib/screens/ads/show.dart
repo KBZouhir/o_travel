@@ -27,8 +27,14 @@ class ShowOffer extends StatefulWidget {
 class _ShowOfferState extends State<ShowOffer> {
   bool show = false;
   List<Offer> offerList = [];
+  bool isAr=false;
 
   getResources() {
+    getLocale().then((locale) {
+      setState(() {
+        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+      });
+    });
     getAllOffers('company', '${widget.offer.company.id}', offerPage)
         .then((value) {
       setState(() {
@@ -196,7 +202,7 @@ class _ShowOfferState extends State<ShowOffer> {
                           ),
                         ),
                         Text(
-                          widget.offer.category.name,
+                          isAr?widget.offer.category.name_ar:widget.offer.category.name,
                           style: TextStyle(
                               color: Theme.of(context)
                                   .colorScheme
@@ -218,7 +224,7 @@ class _ShowOfferState extends State<ShowOffer> {
                             spacing: 5.0,
                             direction: Axis.horizontal,
                             children:
-                                buildTags(widget.offer.countries, context),
+                                buildTags(widget.offer.countries,isAr ,context),
                           ),
                         ),
                         Text(
@@ -479,7 +485,7 @@ class _ShowOfferState extends State<ShowOffer> {
     );
   }
 
-  List<Widget> buildTags(List<Country> countries, context) {
+  List<Widget> buildTags(List<Country> countries,isAr, context) {
     List<Widget> countryTags = <Widget>[];
 
     for (int i = 0; i < countries.length; i++) {
@@ -492,7 +498,7 @@ class _ShowOfferState extends State<ShowOffer> {
           ),
           shadowColor: Colors.grey.shade50,
           backgroundColor: gray228,
-          label: Text(countries[i].name),
+          label: Text(isAr?countries[i].name_ar:countries[i].name),
         ),
       );
     }

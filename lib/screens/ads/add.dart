@@ -39,6 +39,11 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
   bool isAr=false;
 
   getResources() {
+    getLocale().then((locale) {
+      setState(() {
+        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+      });
+    });
     getAllCategory().then((value) {
       setState(() {
         categoryList = value;
@@ -50,11 +55,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
         countryList = value;
       });
     });
-    getLocale().then((locale) {
-      setState(() {
-        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
-      });
-    });
+
   }
 
   DateTime? selectedDate;
@@ -83,6 +84,8 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
       if (index == 3) this.image3 = imgTemp;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -223,8 +226,8 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                   },
                   keyboardType: TextInputType.multiline,
                   maxLength: 500,
-                  minLines: 10,
-                  maxLines: 10,
+                  minLines: 5,
+                  maxLines: 5,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     border: OutlineInputBorder(
@@ -311,7 +314,7 @@ class _AddNewAdScreenState extends State<AddNewAdScreen> {
                           Text(
                             selectedCountries.length == 0
                                 ? getTranslated(context, 'country')
-                                : selectedCountries[0].name,
+                                : Country.getCountryNames(selectedCountries, isAr),
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontSize: 20,

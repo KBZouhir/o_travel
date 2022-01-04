@@ -26,4 +26,16 @@ class Country {
     "name": name,
     "name_ar": name_ar,
   };
+
+
+  static getCountryNames(List<Country>list,bool isAr){
+    String names='';
+    for(Country country in list){
+      if(isAr)
+        names=names+country.name_ar+' , ';
+      else
+        names=names+country.name;
+    }
+    return names.length>35?names.substring(0,34)+'...':names;
+  }
 }

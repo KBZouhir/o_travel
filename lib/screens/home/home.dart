@@ -66,7 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Country> countryList = [];
   Country? selectedCountry;
   List<StoryCompany> storyList = [];
-bool isAr=false;
+  bool isAr = false;
+
   getStories() {
     getAllStoryCompany().then((value) {
       setState(() {
@@ -79,7 +80,10 @@ bool isAr=false;
   getResources() {
     getLocale().then((locale) {
       setState(() {
-        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+        if (locale.languageCode == 'ar')
+          this.isAr = true;
+        else
+          isAr = false;
       });
     });
 
@@ -113,7 +117,6 @@ bool isAr=false;
             //     print('$me');
           });
         });
-
     });
 
     getAllOffers('featured', '1', offerPage).then((value) {
@@ -228,19 +231,22 @@ bool isAr=false;
                                       : SizedBox(),
                                   Expanded(
                                       child: (storyList.length == 0)
-                                          ?(loadingStory)
-                                          ? Container(
-                                        height: 60,
-                                        child: GFLoader(),
-                                      )
-                                          : Container(
-                                        height: 60,
-                                        child: Center(
-                                          child: Text(getTranslated(
-                                              context, 'no_data')),
-                                        ),
-                                      )
-                                          :  StoriesList(storyList: storyList,id:me.id,isCompany:isCompany))
+                                          ? (loadingStory)
+                                              ? Container(
+                                                  height: 60,
+                                                  child: GFLoader(),
+                                                )
+                                              : Container(
+                                                  height: 60,
+                                                  child: Center(
+                                                    child: Text(getTranslated(
+                                                        context, 'no_data')),
+                                                  ),
+                                                )
+                                          : StoriesList(
+                                              storyList: storyList,
+                                              id: me.id,
+                                              isCompany: isCompany))
                                 ]));
                           }),
                           SizedBox(
@@ -318,7 +324,6 @@ bool isAr=false;
                                                 ),
                                           title: Text(
                                             isAr ? item.name_ar : item.name,
-
                                           ),
                                           selected: isSelected,
                                         );
@@ -363,12 +368,11 @@ bool isAr=false;
                                             selectedCountry == null
                                                 ? getTranslated(
                                                     context, 'country')
-                                                : selectedCountry!
-                                                .name.length >
-                                                8
-                                                ? selectedCountry!.name
-                                                .substring(0, 7)
-                                                : selectedCountry!.name,
+                                                : selectedCountry!.name.length >
+                                                        8
+                                                    ? selectedCountry!.name
+                                                        .substring(0, 7)
+                                                    : selectedCountry!.name,
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme
@@ -417,7 +421,9 @@ bool isAr=false;
                                                       .secondary
                                                       .withOpacity(.3),
                                                 ),
-                                          title: Text(isAr ? item.name_ar : item.name,),
+                                          title: Text(
+                                            isAr ? item.name_ar : item.name,
+                                          ),
                                           selected: isSelected,
                                         );
                                       },
@@ -454,9 +460,17 @@ bool isAr=false;
                                                 : selectedCategory!
                                                             .name.length >
                                                         8
-                                                    ? selectedCategory!.name
-                                                        .substring(0, 7)
-                                                    : selectedCategory!.name,
+                                                    ? isAr
+                                                        ? selectedCategory!
+                                                            .name_ar
+                                                            .substring(0, 7)
+                                                        : selectedCategory!.name
+                                                            .substring(0, 7)
+                                                    : isAr
+                                                        ? selectedCategory!
+                                                            .name_ar
+                                                        : selectedCategory!
+                                                            .name,
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme

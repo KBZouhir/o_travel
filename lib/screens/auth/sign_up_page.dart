@@ -416,7 +416,7 @@ class _UserPageState extends State<UserPage> {
                                   } else {}
                                 } else {
                                   final snackBar = SnackBar(
-                                    content: const Text('You have to agree the term of uses'),
+                                    content: Text(getTranslated(context, 'agree_term_of_use'),style: TextStyle(color: Colors.redAccent),),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
@@ -998,8 +998,7 @@ class _CompanyPageState extends State<CompanyPage> {
                                     } else {}
                                   } else {
                                     final snackBar = SnackBar(
-                                      content: const Text(
-                                          'You have to agree the term of uses'),
+                                      content: Text(getTranslated(context, 'agree_term_of_use'),style: TextStyle(color: Colors.redAccent),),
                                     );
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBar);

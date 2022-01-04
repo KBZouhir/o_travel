@@ -16,6 +16,7 @@ import 'package:o_travel/constants.dart';
 import 'package:o_travel/screens/ads/show.dart';
 import 'package:o_travel/screens/chat2/ChatUser.dart';
 import 'package:o_travel/screens/chat2/Chat_message.dart';
+import 'package:o_travel/screens/localization/const.dart';
 import 'package:o_travel/services/database.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -43,12 +44,20 @@ class _ChatDetailsState extends State<ChatDetails> {
   File? image1;
   final fieldMessageController = TextEditingController();
   final _fbStorage = FirebaseStorage.instance;
+  bool isAr=false;
 
+  getResources() {
+    getLocale().then((locale) {
+      setState(() {
+        if (locale.languageCode == 'ar') this.isAr = true;else isAr=false;
+      });
+    });}
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getAllMessages();
+    getResources();
   }
 
   getAllMessages() async {
@@ -314,24 +323,23 @@ class _ChatDetailsState extends State<ChatDetails> {
       String message, bool sendByMe, String imgUrl, String voice) {
     return Row(
       mainAxisAlignment:
-          sendByMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+          sendByMe ?  MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Flexible(
             child: Container(
                 margin: EdgeInsets.only(
                   top: 4,
                   bottom: 4,
-                  right: sendByMe ? 16 : 50,
-                  left: sendByMe ? 50 : 16,
+                  right: !isAr?(sendByMe ? 16 : 50):(sendByMe ? 50 : 16),
+                  left: isAr?(sendByMe ? 16 : 50):(sendByMe ? 50 : 16),
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(24),
-                    bottomRight:
-                        sendByMe ? Radius.circular(0) : Radius.circular(24),
+                    bottomRight:!isAr?(sendByMe ? Radius.circular(0) : Radius.circular(24)):(sendByMe ? Radius.circular(24) : Radius.circular(0)),
                     topRight: Radius.circular(24),
-                    bottomLeft:
-                        sendByMe ? Radius.circular(24) : Radius.circular(0),
+                    bottomLeft:isAr?(sendByMe ? Radius.circular(0) : Radius.circular(24)):(sendByMe ? Radius.circular(24) : Radius.circular(0))
+                        ,
                   ),
                   color: sendByMe
                       ? Theme.of(context).primaryColor
